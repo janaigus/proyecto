@@ -1,6 +1,6 @@
 # [Help to know](http://helptoknow.esy.es/)
 
- [Help to know](http://helptoknow.esy.es/) es un proyecto creado para poner en conjunto a creadores de actividades y cursos
+ [Help to know](http://helptoknow.esy.es/) es un proyecto creado para poner en conjunto a creadores de actividades y cursos con el mundo en general.
  
 
 ## Creator
