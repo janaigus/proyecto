@@ -12,4 +12,4 @@ Help to know was created by and is maintained by **Janai Expósito**.
 
 ## Copyright and License
 
-Copyright 2013-2015 Janai Expósito.
+Copyright 2015 Janai Expósito.
