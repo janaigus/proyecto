@@ -50,10 +50,17 @@
                 <a href="#recientes" onclick = $("#menu-close").click(); >Más Recientes</a>
             </li>
             <li>
-                <a href="#portfolio" onclick = $("#menu-close").click(); >Portfolio</a>
+                <a href="#islas" onclick = $("#menu-close").click(); >Nuestras Islas</a>
             </li>
             <li>
-                <a href="#contact" onclick = $("#menu-close").click(); >Contact</a>
+                <a href="#contact" oonclick = $("#menu-close").click(); >Contact</a>
+            </li>
+            <hr>
+            <li>
+                <a href="#entrar" data-toggle="modal" data-target="#entrar" onclick = '$("#entrar").modal("show"); $("#menu-close").click();' >Iniciar Sesión</a>
+            </li>
+            <li>
+                <a href="#registrarse" data-toggle="modal" data-target="#registrarse" onclick = '$("#registrarse").modal("show"); $("#menu-close").click();' >Registrarse</a>
             </li>
         </ul>
     </nav>
@@ -282,44 +289,134 @@
     </section>
 
     <!-- Portfolio -->
-    <section id="portfolio" class="portfolio">
+    <section id="islas" class="portfolio">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h2>Our Work</h2>
+                    <h2>Islas</h2>
                     <hr class="small">
+                    
                     <div class="row">
                         <div class="col-md-6">
                             <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg">
+                                <a href="#" class="portfolio-box">
+                                    <img src="img/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <div class="portfolio-box-caption">
+                                        <div class="portfolio-box-caption-content">
+                                            <div class="project-category text-faded">
+                                                Isla
+                                            </div>
+                                            <div class="project-name">
+                                                Tenerife
+                                            </div>
+                                        </div>
+                                    </div>
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="img/portfolio-2.jpg">
+                                <a href="#" class="portfolio-box">
+                                    <img src="img/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <div class="portfolio-box-caption">
+                                        <div class="portfolio-box-caption-content">
+                                            <div class="project-category text-faded">
+                                                Isla
+                                            </div>
+                                            <div class="project-name">
+                                                Gran Canaria
+                                            </div>
+                                        </div>
+                                    </div>
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="img/portfolio-3.jpg">
+                                <a href="#" class="portfolio-box">
+                                    <img src="img/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <div class="portfolio-box-caption">
+                                        <div class="portfolio-box-caption-content">
+                                            <div class="project-category text-faded">
+                                                Isla
+                                            </div>
+                                            <div class="project-name">
+                                                La Palma
+                                            </div>
+                                        </div>
+                                    </div>
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="img/portfolio-4.jpg">
+                                <a href="#" class="portfolio-box">
+                                    <img src="img/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <div class="portfolio-box-caption">
+                                        <div class="portfolio-box-caption-content">
+                                            <div class="project-category text-faded">
+                                                Isla
+                                            </div>
+                                            <div class="project-name">
+                                                Fuerteventura
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="portfolio-item">
+                                <a href="#" class="portfolio-box">
+                                    <img src="img/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <div class="portfolio-box-caption">
+                                        <div class="portfolio-box-caption-content">
+                                            <div class="project-category text-faded">
+                                                Isla
+                                            </div>
+                                            <div class="project-name">
+                                                El hierro
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="portfolio-item">
+                                <a href="#" class="portfolio-box">
+                                    <img src="img/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <div class="portfolio-box-caption">
+                                        <div class="portfolio-box-caption-content">
+                                            <div class="project-category text-faded">
+                                                Isla
+                                            </div>
+                                            <div class="project-name">
+                                                Lanzarote
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="portfolio-item">
+                                <a href="#" class="portfolio-box">
+                                    <img src="img/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <div class="portfolio-box-caption">
+                                        <div class="portfolio-box-caption-content">
+                                            <div class="project-category text-faded">
+                                                Isla
+                                            </div>
+                                            <div class="project-name">
+                                                La Gomera
+                                            </div>
+                                        </div>
+                                    </div>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <!-- /.row (nested) -->
-                    <a href="#" class="btn btn-dark">View More Items</a>
                 </div>
                 <!-- /.col-lg-10 -->
             </div>
@@ -328,6 +425,7 @@
         <!-- /.container -->
     </section>
 
+        
     <!-- Call to Action -->
     <aside class="call-to-action bg-primary">
         <div class="container">
@@ -345,7 +443,7 @@
 
     <!-- Footer -->
     <footer>
-        <div class="container">
+        <div id="contact" class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
                     <h4><strong>Help to know</strong>
@@ -375,6 +473,48 @@
         </div>
     </footer>
 
+    <!-- Modal -->
+    <div class="modal fade" id="entrar" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Iniciar sesión</h4>
+            </div>
+            <div class="modal-body">
+              <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+    </div>
+        
+    <!-- Modal -->
+    <div class="modal fade" id="registrarse" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Registrarse</h4>
+            </div>
+            <div class="modal-body">
+              <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+    </div>
+        
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
