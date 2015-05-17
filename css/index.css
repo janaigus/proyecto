@@ -352,7 +352,15 @@ a {
 }
 
 /* REGLAS PERSONALIZADAS */
+a {
+    color: rgb(0, 122, 135);
+}
+
 .input-lg {
+    border-radius: 0px;
+}
+
+.input-sm {
     border-radius: 0px;
 }
 
@@ -389,3 +397,25 @@ a {
     color: #00aced;
     background-color: #d9d9d9;
 }
+
+/* INPUT ICONO */
+/* enable absolute positioning */
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 15px 6px 15px 10px;
+  pointer-events: none;
+  color: rgb(0, 122, 135);
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }

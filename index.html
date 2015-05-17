@@ -491,16 +491,22 @@
             <div class="modal-body">
                   <form class="form">
                     <div class="form-group">
-                      <input type="text" class="form-control input-lg" placeholder="Email">
+                        <div class="inner-addon left-addon">
+                            <i class="glyphicon glyphicon-user"></i>
+                            <input type="text" id="emailinicio" class="form-control input-lg" placeholder="Email"/>
+                        </div>
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control input-lg" placeholder="Password">
+                        <div class="inner-addon left-addon">
+                            <i class="glyphicon glyphicon-lock"></i>
+                            <input type="password" class="form-control input-lg" placeholder="Password"/>
+                        </div>
                     </div>
                     <div class="form-group">
                       <button class="btn btn-lg btn-light btn-block">Iniciar sesión</button>
                       <span class="pull-right"><a href="#">Registrarse</a></span><span><a href="#">Ayuda</a></span>
                     </div>
-                    <hr class="small">
+                    <hr>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-4  text-center" style="padding: 6px 0px 6px 0px">
@@ -540,32 +546,39 @@
               </div>
             </div>
             <div class="modal-body">
-              <form class="form">
-                    <div class="form-group">
-                      <input type="text" class="form-control input-lg" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                      <input type="password" class="form-control input-lg" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                      <button class="btn btn-lg btn-light btn-block">Iniciar sesión</button>
-                      <span class="pull-right"><a href="#">Registrarse</a></span><span><a href="#">Ayuda</a></span>
-                    </div>
-                    <hr class="small">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-4  text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='#' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
+                <form role="form">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                    <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
                             </div>
-                            <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='#' class="btn btn-light twitter"> <i class="fa fa-twitter modal-icons"></i> Entrar con Twitter </a>
-                            </div>
-                            <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='#' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
                             </div>
                         </div>
                     </div>
-                  </form>
+
+                    <div class="form-group">
+                        <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Registrarse" class="btn btn-lg btn-light btn-block">
+                </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cancelar</button>
