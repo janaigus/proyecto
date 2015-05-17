@@ -47,14 +47,14 @@ body {
 .btn-light {
     border-radius: 0;
     color: #333;
-    background-color: rgb(255,255,255);
+    background-color: rgb(120,218,175);
 }
 
 .btn-light:hover,
 .btn-light:focus,
 .btn-light:active {
     color: #333;
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgb(220, 246, 216);
 }
 
 /* Custom Horizontal Rule */
@@ -352,4 +352,40 @@ a {
 }
 
 /* REGLAS PERSONALIZADAS */
+.input-lg {
+    border-radius: 0px;
+}
 
+.modal {
+    border-radius: 0px;
+}
+
+.google {
+    color: #fff;
+    background-color: #dd4b39;
+}
+
+.google:hover {
+    color: #dd4b39;
+    background-color: #d9d9d9;
+}
+
+.facebook {
+    color: #fff;
+    background-color: #3b5999;
+}
+
+.facebook:hover {
+    color: #3b5999;
+    background-color: #d9d9d9;
+}
+
+.twitter {
+    color: #fff;
+    background-color: #00aced;
+}
+
+.twitter:hover {
+    color: #00aced;
+    background-color: #d9d9d9;
+}
