@@ -81,7 +81,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Ayudando a personas para aprender. <h1><b>Help to Know!</b></h1></h2>
-                    <p class="lead">Aqui podrás encontrar desde una clase de costura en casa de Juana, </br>hasta un curso profesional de desarrollo web </br>con certificación internaciona importido por Jose Miguel</p>
+                    <p class="lead">Aqui podrás encontrar desde una clase de costura, </br>hasta un curso profesional de desarrollo web </br>con certificación internacional</p>
                 </div>
             </div>
             <!-- /.row -->
@@ -132,7 +132,7 @@
                                                         <span class="glyphicon glyphicon-star-empty"></span>
                                                     </p>
                                                 </div>
-                                                <a href="#" class="btn btn-lg btn-dark">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>
+                                                <a href="#" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>
                                             </div>
                                         </div>
                                         <!--/row-fluid-->
@@ -235,7 +235,7 @@
                                                         <span class="glyphicon glyphicon-star-empty"></span>
                                                     </p>
                                                 </div>
-                                                <a href="#" class="btn btn-lg btn-dark">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>
+                                                <a href="#" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>
                                             </div>
                                         </div>
                                         <!--/row-fluid-->
@@ -550,36 +550,48 @@
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                    <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
-                                </div>
+                                <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="Nombre">  
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+                                <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Apellidos">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                        <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email">
                     </div>
 
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                                <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Contraseña">
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+                                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Repetir Contraseña">
                             </div>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <select id="registroIslas" class="form-control">
+                                  <option>Seleccione isla</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <select id="resgistroMunicipios" class="form-control" disabled>
+                                  <option>Seleccione municipio</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <input type="submit" value="Registrarse" class="btn btn-lg btn-light btn-block">
                 </form>
             </div>
