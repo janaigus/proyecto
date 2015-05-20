@@ -18,8 +18,6 @@ $mensaje = '
   <title>Solicitud de información</title>
 </head>
 <body>
-  <img src="./img/logo.png" alt="Logo" width="180" height="95">
-  <h3 class="modal-title"><b>Información</b></h3>
   <h1>Mensaje enviado: <h1>
   <p>'.$texto.'</p>
 </body>
