@@ -32,7 +32,6 @@ body {
 /* Custom Button Styles */
 
 .btn-dark {
-    border-radius: 0;
     color: #fff;
     background-color: rgb(255,144,0);
 }
@@ -45,7 +44,6 @@ body {
 }
 
 .btn-light {
-    border-radius: 0;
     color: #333;
     background-color: rgb(120,218,175);
 }
@@ -287,7 +285,7 @@ a {
 .ratings {
     padding-right: 10px;
     padding-left: 10px;
-    color: #d17581;
+    color: rgb(255, 144, 0);
 }
 
 /* PORTFOLIO BOX */
@@ -356,18 +354,7 @@ a {
     color: rgb(0, 122, 135);
 }
 
-.input-lg {
-    border-radius: 0px;
-}
-
-.input-sm {
-    border-radius: 0px;
-}
-
-.modal {
-    border-radius: 0px;
-}
-
+/* Eliminar los border radius necesarios */
 .google {
     color: #fff;
     background-color: #dd4b39;

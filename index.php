@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -12,15 +11,15 @@
     <title>H2K</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/index.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
+    <!-- Custom CSS -->
+    <link href="css/index.css" rel="stylesheet">
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -57,10 +56,10 @@
             </li>
             <hr>
             <li>
-                <a href="#entrar" data-toggle="modal" data-target="#entrar" onclick = '$("#entrar").modal("show"); $("#menu-close").click();' >Iniciar Sesión</a>
+                <a id="btnEntrar" href="#modalEntrar">Iniciar Sesión</a>
             </li>
             <li>
-                <a href="#registrarse" data-toggle="modal" data-target="#registrarse" onclick = '$("#registrarse").modal("show"); $("#menu-close").click();' >Registrarse</a>
+                <a id="btnLateralRegistrarse" href="#modalRegistrarse">Registrarse</a>
             </li>
         </ul>
     </nav>
@@ -123,9 +122,9 @@
                                                 <h4>Subheading</h4>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
                                                 <div class="ratings">
-                                                    <p class="pull-right">11 reviews</p>
+                                                    <p class="pull-right" style="color:#fff">11 reviews</p>
                                                     <p>
-                                                        <span class="glyphicon glyphicon-star"></span>
+                                                        <span class="fa fa-star-o"></span>
                                                         <span class="glyphicon glyphicon-star"></span>
                                                         <span class="glyphicon glyphicon-star"></span>
                                                         <span class="glyphicon glyphicon-star-empty"></span>
@@ -149,7 +148,7 @@
                                                 <h4>Subheading</h4>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
                                                 <div class="ratings">
-                                                    <p class="pull-right">10 reviews</p>
+                                                    <p class="pull-right" style="color:#fff">10 reviews</p>
                                                     <p>
                                                         <span class="glyphicon glyphicon-star"></span>
                                                         <span class="glyphicon glyphicon-star"></span>
@@ -226,7 +225,7 @@
                                                 <h4>Subheading</h4>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
                                                 <div class="ratings">
-                                                    <p class="pull-right">6 reviews</p>
+                                                    <p class="pull-right" style="color:#fff">6 reviews</p>
                                                     <p>
                                                         <span class="glyphicon glyphicon-star"></span>
                                                         <span class="glyphicon glyphicon-star"></span>
@@ -252,7 +251,7 @@
                                                 <h4>Subheading</h4>
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
                                                 <div class="ratings">
-                                                    <p class="pull-right">7 reviews</p>
+                                                    <p class="pull-right" style="color:#fff">7 reviews</p>
                                                     <p>
                                                         <span class="glyphicon glyphicon-star"></span>
                                                         <span class="glyphicon glyphicon-star"></span>
@@ -451,7 +450,7 @@
                     <p>P. SHERMAN, CALLE WALLABY 42,<br>SYDNEY, AU 90210</p>
                     <ul class="list-unstyled">
                         <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
-                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:name@example.com">name@example.com</a>
+                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="#modalContacto" id="btnContacto">info@helptoknow.esy.es</a>
                         </li>
                     </ul>
                     <br>
@@ -473,10 +472,9 @@
         </div>
     </footer>
 
-    <!-- Modal -->
-    <div class="modal fade" id="entrar" role="dialog">
+    <!-- Modal Inicio Sesión-->
+    <div class="modal fade" id="modalEntrar" role="dialog">
         <div class="modal-dialog">
-
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
@@ -526,14 +524,12 @@
               <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cancelar</button>
             </div>
           </div>
-
         </div>
     </div>
         
-    <!-- Modal -->
-    <div class="modal fade" id="registrarse" role="dialog">
+    <!-- Modal Registro-->
+    <div class="modal fade" id="modalRegistrarse" role="dialog">
         <div class="modal-dialog">
-
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
@@ -593,13 +589,94 @@
                         </div>
                     </div>
                     <input type="submit" value="Registrarse" class="btn btn-lg btn-light btn-block">
+                    <hr>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-4  text-center" style="padding: 6px 0px 6px 0px">
+                                <a href='#' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
+                            </div>
+                            <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
+                                <a href='#' class="btn btn-light twitter"> <i class="fa fa-twitter modal-icons"></i> Entrar con Twitter </a>
+                            </div>
+                            <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
+                                <a href='#' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cancelar</button>
             </div>
           </div>
-
+        </div>
+    </div>
+        
+    <!-- Modal Contacto-->
+    <div class="modal fade" id="modalContacto" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <div class="row">
+                  <div class="col-lg-4 col-lg-offset-4 text-center">
+                    <img src="img/logo.png" alt="Logo" width="180" height="95">
+                    <h3 class="modal-title"><b>Contacto</b></h3>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-body">
+                  <form class="form" action="php/contacto.php" method="POST" id="formularioContacto">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6" id="cajaNombreContacto">
+                                <input name="nombreContacto" type="text" id="nombreContacto" class="form-control input-lg" placeholder="Nombre"/>
+                            </div>
+                            <div class="col-lg-6" id="cajaEmailContacto">
+                                <input name="emailContacto" type="text" id="emailContacto" class="form-control input-lg" placeholder="Email"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="cajaAsuntoContacto">
+                        <input name="asuntoContacto" type="text" id="asuntoContacto" class="form-control input-lg" placeholder="Asunto"/>
+                    </div>
+                    <div class="form-group" id="cajaMensajeContacto">
+                        <textarea name="mensajeContacto" class="form-control" id="mensajeContacto"rows="3" placeholder="Mensaje..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button id="enviarFormularioContacto" class="btn btn-lg btn-light btn-block">Enviar</button>
+                    </div>
+                  </form>
+            </div>
+            <div class="modal-footer">
+              <button id="cancelarContacto" type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+        </div>
+    </div>
+        
+    <!-- Modal Inicio Sesión-->
+    <div class="modal fade" id="modalInfo" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <div class="row">
+                  <div class="col-lg-4 col-lg-offset-4 text-center">
+                    <img src="img/logo.png" alt="Logo" width="180" height="95">
+                    <h3 class="modal-title"><b>Información</b></h3>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-body">
+                  <div id="mensajeInfo"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
         </div>
     </div>
         
@@ -610,7 +687,7 @@
     <script src="js/bootstrap.min.js"></script>
     
     <!-- Mis archivos JavaScript -->
-    <script type="text/javascript" src="js/proyecto.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
     <!-- Custom Theme JavaScript -->
     <script>
     // Closes the sidebar menu
