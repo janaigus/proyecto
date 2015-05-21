@@ -103,7 +103,7 @@ $(document).ready(function () {
     
     $('#entrarRegistrarse').on('click', function (ev) {
         ev.preventDefault();
-        $("#entrarcancelar").click();
+        $("#entrarCancelar").click();
         $("#modalRegistrarse").modal("show"); 
     });
 });
