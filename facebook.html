@@ -40,7 +40,7 @@
 
   window.fbAsyncInit = function() {
   FB.init({
-    appId      : '104169863251913',
+    appId      : '1114829315199633',
     cookie     : true,  // enable cookies to allow the server to access 
                         // the session
     xfbml      : true,  // parse social plugins on this page
@@ -80,6 +80,7 @@
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.name);
+      console.log('Successful login for: ' + response.email);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
     });
