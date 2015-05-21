@@ -52,7 +52,7 @@
                 <a href="#islas" onclick = $("#menu-close").click(); >Nuestras Islas</a>
             </li>
             <li>
-                <a href="#contacto" oonclick = $("#menu-close").click(); >Contacto</a>
+                <a href="#contacto" onclick = $("#menu-close").click(); >Contacto</a>
             </li>
             <hr>
             <li>
@@ -502,7 +502,7 @@
                     </div>
                     <div class="form-group">
                       <button class="btn btn-lg btn-light btn-block">Iniciar sesión</button>
-                      <span class="pull-right"><a href="#">Registrarse</a></span><span><a href="#">Ayuda</a></span>
+                      <span class="pull-right"><a href="" id="entrarRegistrarse">Registrarse</a></span><span><a href="#">Ayuda</a></span>
                     </div>
                     <hr>
                     <div class="form-group">
@@ -521,7 +521,7 @@
                   </form>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal" id="entrarCancelar">Cancelar</button>
             </div>
           </div>
         </div>

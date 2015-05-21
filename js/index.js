@@ -101,6 +101,11 @@ $(document).ready(function () {
         $("#cajaMensajeContacto").popover('destroy');
     });
     
+    $('#entrarRegistrarse').on('click', function (ev) {
+        ev.preventDefault();
+        $("#entrarcancelar").click();
+        $("#modalRegistrarse").modal("show"); 
+    });
 });
     
 function cambiarEstadoCaja(nombreCaja, mal, mensaje){
