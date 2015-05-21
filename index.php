@@ -450,7 +450,7 @@
                     <p>P. SHERMAN, CALLE WALLABY 42,<br>SYDNEY, AU 90210</p>
                     <ul class="list-unstyled">
                         <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
-                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="#modalContacto" id="btnContacto">info@helptoknow.esy.es</a>
+                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="#modalContacto" id="btnContacto">info@helptoknow.hol.es</a>
                         </li>
                     </ul>
                     <br>
