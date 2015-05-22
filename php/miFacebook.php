@@ -10,7 +10,7 @@ use Facebook\FacebookSession;
 // use Facebook\GraphUser;
 // use Facebook\FacebookRequestException;
 
-FacebookSession::setDefaultApplication('YOUR_APP_ID', 'YOUR_APP_SECRET');
+FacebookSession::setDefaultApplication('1114829315199633', '15bb057040dc852580e2aa07e1036dce');
 
 
 ?>
