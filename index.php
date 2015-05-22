@@ -508,13 +508,13 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-4 col-lg-offset-2 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='#' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
+                                <a href='./php/miFacebook.php' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
                             </div>
                             <!--<div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
                                 <a href='#' class="btn btn-light twitter"> <i class="fa fa-twitter modal-icons"></i> Entrar con Twitter </a>
                             </div>-->
                             <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='#' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
+                                <a href='./php/miGoogle.php' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
                             </div>
                         </div>
                     </div>
@@ -593,13 +593,13 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-4 col-lg-offset-2 col- text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='#' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
+                                <a href='./php/miFacebook.php' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
                             </div>
                             <!--<div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
                                 <a href='#' class="btn btn-light twitter"> <i class="fa fa-twitter modal-icons"></i> Entrar con Twitter </a>
                             </div>-->
                             <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='#' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
+                                <a href='./php/miGoogle.php' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
                             </div>
                         </div>
                     </div>
