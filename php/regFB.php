@@ -42,9 +42,9 @@
 	 }
 	
 	//CREAMOS LAS VARIABLES CON LOS DATOS QUE NOS DA LA WEB DE FB DEVELOPERS
-	$app_id = '619275001551926';
-	$app_secret = 'b6ff9dc1c622a8834a26bafaa1550f4a';
-	$redirect_url='http://rmwebconsulting.com/apps/loginFB/';
+	$app_id = '1114829315199633';
+	$app_secret = '15bb057040dc852580e2aa07e1036dce';
+	$redirect_url='http://helptoknow.hol.es';
 
 	//INICIALIZAMOS LA APLICACION, PARA ELLO CREAMOS EL OBJ HELPER Y OBTENEMOS LA VARIABLE SESSION
 	 FacebookSession::setDefaultApplication($app_id,$app_secret);
@@ -65,7 +65,7 @@
 	$login_url = $helper->getLoginUrl(array('email'));
 
 	//lCERRAMOS SESION
-	$logout = 'http://rmwebconsulting.com/apps/loginFB/index.php?logout=true';
+	$logout = 'http://helptoknow.hol.es/index.php?logout=true';
 
 	//SI LA VARIABLE SESSION EXISTE MOSTRAMOS EL NOMBRE
  	if(isset($sess)){
@@ -78,6 +78,7 @@
 		$name= $graph->getName();
 		$image = 'https://graph.facebook.com/'.$id.'/picture?width=300';
 		$loggedin  = true;
+        echo 
 	}
 	
 ?>
