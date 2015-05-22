@@ -683,7 +683,7 @@
     
     <!-- Mis archivos JavaScript -->
     <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript" src="js/facebook.js"></script>
+        
     <!-- Custom Theme JavaScript -->
     <script>
     // Closes the sidebar menu
