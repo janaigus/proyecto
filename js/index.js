@@ -244,23 +244,20 @@ $(document).ready(function () {
         // Captcha
         var respuestaC = $('[name=g-recaptcha-response]').val();
         $.post('php/obtenerRecursos/comprobarCaptcha.php', {respuesta: respuestaC}, 
-            function(respuesta)
-            {
-                if(humanoRegistro == false){
-                    alert(respuesta.success);
-                    if(respuesta.success == true){
-                        humanoRegistro = true;
-                    }else{
-                        correcto = false;
-                        cambiarEstadoCaja("registrarseBoton", true, "Rellene el captcha");
-                    }
+                function(respuesta)
+                {
+                    humaroRegistro = respuesta.success;
+                if(!respuesta.success){
+                    grecaptcha.reset();
+                    correcto = false;
+                    cambiarEstadoCaja("registrarseBoton", true, "Rellene el captcha");
+                }else{
+                    cambiarEstadoCaja("registrarseBoton", false, "");
                 }
             }, "json"
         );
         
-        
-        // Comenzar a enviar el registro si todo es correcto
-        if(correcto == true && humanoRegistro == true){
+        if(correcto == true){
             $.post('./php/sesion/registro.php', $('#formularioRegistrarse').serialize(), 
                 function(respuesta)
                 {
