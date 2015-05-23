@@ -1,6 +1,5 @@
 <?php
     session_start();
-    echo $_SESSION['h2k'] ." Nombre: ".$_SESSION['nombre']
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +70,7 @@
     <!-- Header -->
     <header id="top" class="header">
         <div class="text-vertical-center">
-            <h1><img src="img/logo.png" height="200" width="350"></h1>
+            <h1><img src="img/img_pagina/logo.png" height="200" width="350"></h1>
             <h3>¿No encuentras esa actividad que siempre deseaste hacer?</br>Aquí la encontrarás</h3>
             <br>
             <a href="#about" class="btn btn-dark btn-lg">Saber más</a>
@@ -118,7 +117,7 @@
                                     <div class="item active">
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-12 col-md-6">
-                                                <a href=" "> <img src="img/logo.png" class="thumbnail"
+                                                <a href=" "> <img src="img/img_pagina/logo.png" class="thumbnail"
                                                     alt="Image" height="100%" width="100%" /></a>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">
@@ -144,7 +143,7 @@
                                     <div class="item ">
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-12 col-md-6">
-                                                <a href=" "> <img src="img/logo.png" class="thumbnail"
+                                                <a href=" "> <img src="img/img_pagina/logo.png" class="thumbnail"
                                                     alt="Image" height="100%" width="100%" /></a>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">
@@ -221,7 +220,7 @@
                                     <div class="item active">
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-12 col-md-6">
-                                                <a href=" "> <img src="img/logo.png" class="thumbnail"
+                                                <a href=" "> <img src="img/img_pagina/logo.png" class="thumbnail"
                                                     alt="Image" height="100%" width="100%" /></a>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">
@@ -247,7 +246,7 @@
                                     <div class="item ">
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-12 col-md-6">
-                                                <a href=" "> <img src="img/logo.png" class="thumbnail"
+                                                <a href=" "> <img src="img/img_pagina/logo.png" class="thumbnail"
                                                     alt="Image" height="100%" width="100%" /></a>
                                             </div>
                                             <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">
@@ -485,7 +484,7 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <div class="row">
                   <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="img/logo.png" alt="Logo" width="180" height="95">
+                    <img src="img/img_pagina/logo.png" alt="Logo" width="180" height="95">
                     <h3 class="modal-title"><b>Iniciar sesión</b></h3>
                   </div>
               </div>
@@ -540,13 +539,13 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <div class="row">
                   <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="img/logo.png" alt="Logo" width="180" height="95">
+                    <img src="img/img_pagina/logo.png" alt="Logo" width="180" height="95">
                     <h3 class="modal-title"><b>Registrarse</b></h3>
                   </div>
               </div>
             </div>
             <div class="modal-body">
-                <form role="form" action="./php/sesion/registrarse.php" method="POST" id="formularioRegistrarse">
+                <form role="form" >
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
@@ -592,7 +591,7 @@
                             </div>
                         </div>
                     </div>
-                    <input id="registrarseBoton" type="submit" value="Registrarse" class="btn btn-lg btn-light btn-block">
+                    <input type="submit" value="Registrarse" class="btn btn-lg btn-light btn-block">
                     <hr>
                     <div class="form-group">
                         <div class="row">
@@ -625,7 +624,7 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <div class="row">
                   <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="img/logo.png" alt="Logo" width="180" height="95">
+                    <img src="img/img_pagina/logo.png" alt="Logo" width="180" height="95">
                     <h3 class="modal-title"><b>Contacto</b></h3>
                   </div>
               </div>
@@ -665,7 +664,7 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <div class="row">
                   <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="img/logo.png" alt="Logo" width="180" height="95">
+                    <img src="img/img_pagina/logo.png" alt="Logo" width="180" height="95">
                   </div>
               </div>
             </div>
