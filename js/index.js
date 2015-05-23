@@ -7,11 +7,11 @@ $(document).ready(function () {
     $.post('./php/obtenerRecursos/obtenerIslas.php',
         function(respuesta)
         {
-            cadena = '';
+            cadena = '<option value="0">Seleccione isla</option>';
             $.each(respuesta, function(i, tupla){
                 cadena += '<option value="'+tupla.id+'">'+tupla.nombre+'</option>';
             });
-            $("#registroIslas").html($("#registroIslas").html() + cadena);
+            $("#registroIslas").html(cadena);
         }
        , "json"
     );
@@ -25,11 +25,11 @@ $(document).ready(function () {
             $.post('./php/obtenerRecursos/obtenerMunicipios.php', { islaSeleccionada: $('#registroIslas').val() },
                 function(respuesta)
                 {
-                    cadena = '';
+                    cadena = '<option value="0">Seleccione municipio</option>';
                     $.each(respuesta, function(i, tupla){
                         cadena += '<option value="'+tupla.id+'">'+tupla.nombre+'</option>';
                     });
-                    $("#registroMunicipios").html( $("#registroMunicipios").html() + cadena );
+                    $("#registroMunicipios").html(cadena );
                     // Habilitar el input de isla
                     $("#registroMunicipios").attr('disabled', false);
                 }

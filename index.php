@@ -580,14 +580,13 @@
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group" id="cajaRegistroIsla">
                                 <select id="registroIslas" name="registroIslas" class="form-control">
-                                    <option value="0">Seleccione isla</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group" id="cajaRegistroMunicipio">
                                 <select id="registroMunicipios" name="registroMunicipios" class="form-control" disabled>
-                                  <option value="0">Seleccione municipio</option>
+                                    <option value="0">Seleccione municipio</option>
                                 </select>
                             </div>
                         </div>
