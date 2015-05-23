@@ -1,4 +1,5 @@
 expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
+var humanoRegistro = false;
 
 $(document).ready(function () {
     // ISLAS Y MUNICIPIOS
@@ -145,7 +146,7 @@ $(document).ready(function () {
     // Gestion del boton de login
     $('#entrarBoton').on('click', function (ev) {
         ev.preventDefault();
-        correcto = true;
+        var correcto = true;
         emailEncontrado = $("#entrarEmail").val().match(expresionEmail);
         if(emailEncontrado == null){
             cambiarEstadoCaja("cajaEmailEntrar", true, "Introduzca un email correcto");
@@ -183,7 +184,7 @@ $(document).ready(function () {
     // Gestion del submit del formulario de registro
     $('#formularioRegistrarse').on('submit', function (ev) {
         ev.preventDefault();
-        correcto = true;
+        var correcto = true;
         // Email
         emailEncontrado = $("#registroEmail").val().match(expresionEmail);
         if(emailEncontrado == null){
@@ -227,41 +228,54 @@ $(document).ready(function () {
             cambiarEstadoCaja("cajaRegistroPass", false, "");
         }
         // Isla
-        if($('#entrarPass').val() == ""){
-            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
+        if($('#registroIslas').val() == 0){
+            cambiarEstadoCaja("cajaRegistroIsla", true, "Seleccione una isla");
             correcto = false;
         }else{
-            cambiarEstadoCaja("cajaPassEntrar", false, "");
+            cambiarEstadoCaja("cajaRegistroIsla", false, "");
         }
         // Municipio
-        if($('#entrarPass').val() == ""){
-            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
+        if($('#registroMunicipios').val() == 0){
+            cambiarEstadoCaja("cajaRegistroMunicipio", true, "Seleccione un municipio");
             correcto = false;
         }else{
-            cambiarEstadoCaja("cajaPassEntrar", false, "");
+            cambiarEstadoCaja("cajaRegistroMunicipio", false, "");
         }
         // Captcha
-        if($('#entrarPass').val() == ""){
-            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
-            correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaPassEntrar", false, "");
-        }
+        var respuestaC = $('[name=g-recaptcha-response]').val();
+        $.post('php/obtenerRecursos/comprobarCaptcha.php', {respuesta: respuestaC}, 
+            function(respuesta)
+            {
+                if(!humanoRegistro){
+                    if(respuesta.success){
+                        alert(humanoRegistro);
+                        humanoRegistro = true;
+                        alert(humanoRegistro);
+                    }else{
+                        correcto = false;
+                        cambiarEstadoCaja("registrarseBoton", true, "Rellene el captcha");
+                    }
+                }
+            }, "json"
+        );
         
+        
+        // Comenzar a enviar el registro si todo es correcto
         if(correcto){
             $.post('./php/sesion/registro.php', $('#formularioRegistrarse').serialize(), 
                 function(respuesta)
                 {
                     switch(respuesta){
                         case "OK":
-                            // Redireccionar a la pagina principal del usuario, las sesiones ya se habrán creado desde php
+                            // Redireccionar a la pagina principal del usuario, las sesiones 
+                            // ya se habrán creado desde php se inicia sesión automaticamente
                             alert("alles klar");
                             break;
                         case "BADPASS":
                             cambiarEstadoCaja("cajaPassEntrar", true, "Contraseña incorrecta.");
                             break;
                         case "REGISTEREDUSER":
-                            cambiarEstadoCaja("cajaEmailEntrar", true, "Email no registrado.");
+                            cambiarEstadoCaja("cajaEmailEntrar", true, "Email ya registrado.");
                             break;
                     }
                 }
@@ -271,10 +285,11 @@ $(document).ready(function () {
 });
     
 function cambiarEstadoCaja(nombreCaja, mal, mensaje){
-    $('#'+nombreCaja).popover('destroy');
     if(mal){
         $('#'+nombreCaja).popover({ trigger: 'focus', placement: 'bottom', content: mensaje });
         $('#'+nombreCaja).popover('show');
         correcto = false;
+    }else{
+        $('#'+nombreCaja).popover('destroy');
     }
 }

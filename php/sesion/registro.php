@@ -6,13 +6,27 @@
     $db = conectaDb();
     $consulta = "SELECT * FROM usuarios where email=:email";
     $result = $db->prepare($consulta);
-    $result->execute(array(":email" => $_POST['entrarEmail']));
-    //Cuando haya un resultado segun el correo electronico el usuario ya estará registrado
-    if(!$result->rowCount() > 0){
-        
-        echo "REGISTRANDO USUARIO";
+    $result->execute(array(":email" => $_POST['registroEmail']));
+
+    // Si no hay resultados continuar con el insert
+    if($result->rowCount() != 0){
+        $consulta = "INSERT INTO usuarios(email, nick, nombre, apellidos, password, idrol, idmunicipio)
+            VALUES(:mail, :alias, :name, :sname, :pass, :rol, :mun)";
+        $result  = $db->prepare($consulta);
+        $resultado = $result->execute(array(
+            "mail" => $_POST['registroEmail'],
+            "alias" => strtolower(substr($_POST['registroNombre'], 0, 2).substr($_POST['registroApellidos'], 0, 2)),
+            "name" => $_POST['registroNombre'],
+            "sname" => $_POST['registroApellidos'],
+            "pass" => $_POST['registroPassword'],
+            "rol" => 2,
+            "mun" => $_POST['registroMunicipios']
+        ));
+        if($resultado){
+            echo "OK";
+        }
     }else{
-        // El email ya está registrado y puede ser insertado, en el cliente se comprueba que esté bien formado
+        // El email ya está registrado y NO puede ser insertado
         echo "REGISTEREDUSER";
         
     }
