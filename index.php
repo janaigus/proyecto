@@ -29,7 +29,8 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <!-- Api de google para recaptcha -->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body>
@@ -548,46 +549,53 @@
                 <form role="form" action="./php/sesion/registro.php" method="POST" id="formularioRegistrarse">
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group">
+                            <div class="form-group" id="cajaRegistroNombre">
                                 <input type="text" name="registroNombre" id="registroNombre" class="form-control input-sm" placeholder="Nombre">  
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group">
+                            <div class="form-group" id="cajaRegistroApellidos">
                                 <input type="text" name="registroApellidos" id="registroApellidos" class="form-control input-sm" placeholder="Apellidos">
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" id="cajaRegistroEmail">
                         <input type="email" name="registroEmail" id="registroEmail" class="form-control input-sm" placeholder="Email">
                     </div>
 
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group">
+                            <div class="form-group" id="cajaRegistroPass">
                                 <input type="password" name="registroPassword" id="registroPassword" class="form-control input-sm" placeholder="Contraseña">
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group">
+                            <div class="form-group" id="cajaRegistroCon">
                                 <input type="password" name="registroPass_con" id="registroPass_con" class="form-control input-sm" placeholder="Repetir Contraseña">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group">
+                            <div class="form-group" id="cajaRegistroIsla">
                                 <select id="registroIslas" name="registroIslas" class="form-control">
                                     <option value="0">Seleccione isla</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group">
+                            <div class="form-group" id="cajaRegistroMunicipio">
                                 <select id="registroMunicipios" name="registroMunicipios" class="form-control" disabled>
                                   <option value="0">Seleccione municipio</option>
                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12" align="center">
+                            <div class="form-group" id="cajaRegistroCaptcha">
+                                <div class="g-recaptcha" data-sitekey="6LecTAcTAAAAAFKmIACHrD4FhxgRTtNSdcVXUMss"></div>
                             </div>
                         </div>
                     </div>

@@ -180,11 +180,12 @@ $(document).ready(function () {
         }
     });
     
-    // Gestion del boton de registro en la ventana modal de registro
-    $('#registrarseBoton').on('click', function (ev) {
+    // Gestion del submit del formulario de registro
+    $('#formularioRegistrarse').on('submit', function (ev) {
         ev.preventDefault();
         correcto = true;
-        emailEncontrado = $("#entrarEmail").val().match(expresionEmail);
+        // Email
+        emailEncontrado = $("#registroEmail").val().match(expresionEmail);
         if(emailEncontrado == null){
             cambiarEstadoCaja("cajaEmailEntrar", true, "Introduzca un email correcto");
             correcto = false;
@@ -193,47 +194,53 @@ $(document).ready(function () {
         }
         // Nombre
         if($('#registroNombre').val() == ""){
-            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
+            cambiarEstadoCaja("cajaRegistroNombre", true, "Introduzca un nombre");
             correcto = false;
         }else{
-            cambiarEstadoCaja("cajaPassEntrar", false, "");
+            cambiarEstadoCaja("cajaRegistroNombre", false, "");
         }
         // Apellidos
         if($('#registroApellidos').val() == ""){
-            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
+            cambiarEstadoCaja("cajaRegistroApellidos", true, "Introduzca unos apellidos");
             correcto = false;
         }else{
-            cambiarEstadoCaja("cajaPassEntrar", false, "");
+            cambiarEstadoCaja("cajaRegistroApellidos", false, "");
         }
-        // Comprobar que se ha introducido una contraseña y que la segunda coincide en el caso de que se haya hecho
-        if($('#entrarPass').val() == ""){
-            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
+        // Comprobar contraseña introducida y que la segunda coincide
+        if($('#registroPassword').val() == ""){
+            cambiarEstadoCaja("cajaRegistroPass", true, "Introduzca una contraseña");
             correcto = false;
         }else{
-            if($('#entrarPass').val() == ""){
-            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
-            correcto = false;
+            // Comprobar si el segundo campo está vacio
+            if($('#registroPass_con').val() == ""){
+                cambiarEstadoCaja("cajaRegistroCon", true, "Debe volver a introducir la contraseña");
+                correcto = false;
             }else{
-                cambiarEstadoCaja("cajaPassEntrar", false, "");
+                // Comprobar que las contraseñas coinciden
+                if($('#registroPassword').val() == $('#registroPass_con').val()){
+                    cambiarEstadoCaja("cajaRegistroCon", false, "");
+                }else{
+                    cambiarEstadoCaja("cajaRegistroCon", true, "Las contraseñas no coinciden");
+                    correcto = false;
+                }
             }
-            cambiarEstadoCaja("cajaPassEntrar", false, "");
+            cambiarEstadoCaja("cajaRegistroPass", false, "");
         }
-        
-        
+        // Isla
         if($('#entrarPass').val() == ""){
             cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
             correcto = false;
         }else{
             cambiarEstadoCaja("cajaPassEntrar", false, "");
         }
-        
+        // Municipio
         if($('#entrarPass').val() == ""){
             cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
             correcto = false;
         }else{
             cambiarEstadoCaja("cajaPassEntrar", false, "");
         }
-        
+        // Captcha
         if($('#entrarPass').val() == ""){
             cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
             correcto = false;
