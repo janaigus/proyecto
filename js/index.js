@@ -1,8 +1,41 @@
 expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 
 $(document).ready(function () {
+    // ISLAS Y MUNICIPIOS
     // Cargar las islas en select de islas de la ventana de registro
+    $.post('./php/obtenerRecursos/obtenerIslas.php',
+        function(respuesta)
+        {
+            cadena = '';
+            $.each(respuesta, function(i, tupla){
+                cadena += '<option value="'+tupla.id+'">'+tupla.nombre+'</option>';
+            });
+            $("#registroIslas").html($("#registroIslas").html() + cadena);
+        }
+       , "json"
+    );
     
+    // Evento onchange cuando se selccione una isla
+    $('#registroIslas').on('change', function (ev) {
+        if($('#registroIslas').val() == 0){
+            $("#registroMunicipios").attr('disabled', true);
+            $("#registroMunicipios").html('<option value="0">Seleccione municipio</option>');
+        }else{
+            $.post('./php/obtenerRecursos/obtenerMunicipios.php', { islaSeleccionada: $('#registroIslas').val() },
+                function(respuesta)
+                {
+                    cadena = '';
+                    $.each(respuesta, function(i, tupla){
+                        cadena += '<option value="'+tupla.id+'">'+tupla.nombre+'</option>';
+                    });
+                    $("#registroMunicipios").html( $("#registroMunicipios").html() + cadena );
+                    // Habilitar el input de isla
+                    $("#registroMunicipios").attr('disabled', false);
+                }
+                , "json"
+            );
+        }
+    });
     
     /* Controlar los botones de slider de los "sliders" */
     $('.btn-vertical-slider').on('click', function (ev) {
@@ -217,11 +250,10 @@ $(document).ready(function () {
 });
     
 function cambiarEstadoCaja(nombreCaja, mal, mensaje){
+    $('#'+nombreCaja).popover('destroy');
     if(mal){
         $('#'+nombreCaja).popover({ trigger: 'focus', placement: 'bottom', content: mensaje });
         $('#'+nombreCaja).popover('show');
         correcto = false;
-    }else{
-        $('#'+nombreCaja).popover('destroy');
     }
 }

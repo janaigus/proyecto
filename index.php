@@ -302,7 +302,7 @@
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#" class="portfolio-box">
-                                    <img src="img/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <img src="img/img_pagina/principal/portfolio-2.jpg" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
                                             <div class="project-category text-faded">
@@ -319,7 +319,7 @@
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#" class="portfolio-box">
-                                    <img src="img/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <img src="img/img_pagina/principal/portfolio-2.jpg" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
                                             <div class="project-category text-faded">
@@ -336,7 +336,7 @@
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#" class="portfolio-box">
-                                    <img src="img/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <img src="img/img_pagina/principal/portfolio-2.jpg" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
                                             <div class="project-category text-faded">
@@ -353,7 +353,7 @@
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#" class="portfolio-box">
-                                    <img src="img/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <img src="img/img_pagina/principal/portfolio-2.jpg" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
                                             <div class="project-category text-faded">
@@ -370,7 +370,7 @@
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#" class="portfolio-box">
-                                    <img src="img/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <img src="img/img_pagina/principal/portfolio-2.jpg" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
                                             <div class="project-category text-faded">
@@ -387,7 +387,7 @@
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#" class="portfolio-box">
-                                    <img src="img/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <img src="img/img_pagina/principal/portfolio-2.jpg" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
                                             <div class="project-category text-faded">
@@ -404,7 +404,7 @@
                         <div class="col-md-6 col-md-offset-3">
                             <div class="portfolio-item">
                                 <a href="#" class="portfolio-box">
-                                    <img src="img/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <img src="img/img_pagina/principal/portfolio-2.jpg" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
                                             <div class="project-category text-faded">
@@ -545,7 +545,7 @@
               </div>
             </div>
             <div class="modal-body">
-                <form role="form" >
+                <form role="form" action="./php/sesion/registro.php" method="POST" id="formularioRegistrarse">
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
@@ -579,19 +579,19 @@
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <select id="registroIslas" class="form-control">
-                                  <option>Seleccione isla</option>
+                                    <option value="0">Seleccione isla</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <select id="resgistroMunicipios" class="form-control" disabled>
-                                  <option>Seleccione municipio</option>
+                                <select id="registroMunicipios" class="form-control" disabled>
+                                  <option value="0">Seleccione municipio</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <input type="submit" value="Registrarse" class="btn btn-lg btn-light btn-block">
+                    <input id="registrarseBoton" type="submit" value="Registrarse" class="btn btn-lg btn-light btn-block">
                     <hr>
                     <div class="form-group">
                         <div class="row">
