@@ -1,6 +1,9 @@
 expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 
 $(document).ready(function () {
+    // Cargar las islas en select de islas de la ventana de registro
+    
+    
     /* Controlar los botones de slider de los "sliders" */
     $('.btn-vertical-slider').on('click', function (ev) {
         if ($(this).attr('data-slide') == 'next') {
@@ -127,7 +130,6 @@ $(document).ready(function () {
             $.post('./php/sesion/login.php', $('#formularioEntrar').serialize(), 
                 function(respuesta)
                 {
-                    alert(respuesta);
                     switch(respuesta){
                         case "OK":
                             // Redireccionar a la pagina principal del usuario, las sesiones ya se habrán creado desde php
@@ -137,6 +139,74 @@ $(document).ready(function () {
                             cambiarEstadoCaja("cajaPassEntrar", true, "Contraseña incorrecta.");
                             break;
                         case "BADEMAIL":
+                            cambiarEstadoCaja("cajaEmailEntrar", true, "Email no registrado.");
+                            break;
+                    }
+                }
+            );
+        }
+    });
+    
+    // Gestion del boton de registro en la ventana modal de registro
+    $('#registrarseBoton').on('click', function (ev) {
+        ev.preventDefault();
+        correcto = true;
+        emailEncontrado = $("#entrarEmail").val().match(expresionEmail);
+        if(emailEncontrado == null){
+            cambiarEstadoCaja("cajaEmailEntrar", true, "Introduzca un email correcto");
+            correcto = false;
+        }else{
+            cambiarEstadoCaja("cajaEmailEntrar", false, "");
+        }
+        
+        if($('#entrarPass').val() == ""){
+            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
+            correcto = false;
+        }else{
+            cambiarEstadoCaja("cajaPassEntrar", false, "");
+        }
+        
+        if($('#entrarPass').val() == ""){
+            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
+            correcto = false;
+        }else{
+            cambiarEstadoCaja("cajaPassEntrar", false, "");
+        }
+        
+        if($('#entrarPass').val() == ""){
+            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
+            correcto = false;
+        }else{
+            cambiarEstadoCaja("cajaPassEntrar", false, "");
+        }
+        
+        if($('#entrarPass').val() == ""){
+            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
+            correcto = false;
+        }else{
+            cambiarEstadoCaja("cajaPassEntrar", false, "");
+        }
+        
+        if($('#entrarPass').val() == ""){
+            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
+            correcto = false;
+        }else{
+            cambiarEstadoCaja("cajaPassEntrar", false, "");
+        }
+        
+        if(correcto){
+            $.post('./php/sesion/registro.php', $('#formularioRegistrarse').serialize(), 
+                function(respuesta)
+                {
+                    switch(respuesta){
+                        case "OK":
+                            // Redireccionar a la pagina principal del usuario, las sesiones ya se habrán creado desde php
+                            alert("alles klar");
+                            break;
+                        case "BADPASS":
+                            cambiarEstadoCaja("cajaPassEntrar", true, "Contraseña incorrecta.");
+                            break;
+                        case "REGISTEREDUSER":
                             cambiarEstadoCaja("cajaEmailEntrar", true, "Email no registrado.");
                             break;
                     }

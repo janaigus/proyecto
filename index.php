@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    echo $_SESSION['h2k'] ." Nombre: ".$_SESSION['nombre']
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -541,7 +546,7 @@
               </div>
             </div>
             <div class="modal-body">
-                <form role="form">
+                <form role="form" action="./php/sesion/registrarse.php" method="POST" id="formularioRegistrarse">
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
@@ -587,7 +592,7 @@
                             </div>
                         </div>
                     </div>
-                    <input type="submit" value="Registrarse" class="btn btn-lg btn-light btn-block">
+                    <input id="registrarseBoton" type="submit" value="Registrarse" class="btn btn-lg btn-light btn-block">
                     <hr>
                     <div class="form-group">
                         <div class="row">

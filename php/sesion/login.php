@@ -1,8 +1,6 @@
 <?php
     // Requerir el fichero para la conexion con la base de datos 
     // IMPORTANTE CAMBIAR el fichero de la BD local por el de la BD del hosting
-    $_SESSION = array();
-    session_destroy();
     session_start();
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
