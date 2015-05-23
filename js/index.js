@@ -191,20 +191,34 @@ $(document).ready(function () {
         }else{
             cambiarEstadoCaja("cajaEmailEntrar", false, "");
         }
-        
-        if($('#entrarPass').val() == ""){
+        // Nombre
+        if($('#registroNombre').val() == ""){
             cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
             correcto = false;
         }else{
             cambiarEstadoCaja("cajaPassEntrar", false, "");
         }
-        
-        if($('#entrarPass').val() == ""){
+        // Apellidos
+        if($('#registroApellidos').val() == ""){
             cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
             correcto = false;
         }else{
             cambiarEstadoCaja("cajaPassEntrar", false, "");
         }
+        // Comprobar que se ha introducido una contraseña y que la segunda coincide en el caso de que se haya hecho
+        if($('#entrarPass').val() == ""){
+            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
+            correcto = false;
+        }else{
+            if($('#entrarPass').val() == ""){
+            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
+            correcto = false;
+            }else{
+                cambiarEstadoCaja("cajaPassEntrar", false, "");
+            }
+            cambiarEstadoCaja("cajaPassEntrar", false, "");
+        }
+        
         
         if($('#entrarPass').val() == ""){
             cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");

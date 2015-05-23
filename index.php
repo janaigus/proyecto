@@ -549,43 +549,43 @@
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="Nombre">  
+                                <input type="text" name="registroNombre" id="registroNombre" class="form-control input-sm" placeholder="Nombre">  
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Apellidos">
+                                <input type="text" name="registroApellidos" id="registroApellidos" class="form-control input-sm" placeholder="Apellidos">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email">
+                        <input type="email" name="registroEmail" id="registroEmail" class="form-control input-sm" placeholder="Email">
                     </div>
 
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Contraseña">
+                                <input type="password" name="registroPassword" id="registroPassword" class="form-control input-sm" placeholder="Contraseña">
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Repetir Contraseña">
+                                <input type="password" name="registroPass_con" id="registroPass_con" class="form-control input-sm" placeholder="Repetir Contraseña">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <select id="registroIslas" class="form-control">
+                                <select id="registroIslas" name="registroIslas" class="form-control">
                                     <option value="0">Seleccione isla</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <select id="registroMunicipios" class="form-control" disabled>
+                                <select id="registroMunicipios" name="registroMunicipios" class="form-control" disabled>
                                   <option value="0">Seleccione municipio</option>
                                 </select>
                             </div>
