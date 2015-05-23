@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 23-05-2015 a las 23:26:49
+-- Tiempo de generación: 24-05-2015 a las 00:19:09
 -- Versión del servidor: 5.5.43-MariaDB-1ubuntu0.14.04.2
 -- Versión de PHP: 5.5.9-1ubuntu4.9
 
@@ -54,10 +54,10 @@ INSERT INTO `actividades` (`id`, `idusuario`, `idcategoria`, `titulo`, `created`
 (4, 3, 4, 'Clases de pintura moderna.', '2015-05-23 21:12:31', 'Te enseño las mejores técnicas de la pintura moderna. 25€/por clase. Antiguo pintor de paredes.', 35004),
 (5, 3, 5, 'Clases After Efects', '2015-05-23 21:16:28', 'Doy clases de after effects en mi casa desde 15€/hora conceptos básicos y avanzados.', 35011),
 (6, 1, 6, 'Clases de DJ', '2015-05-23 21:16:28', 'Aprende a ser uno de los mejores DJ de la historia con mis clases. 24€/hora', 38038),
-(9, 1, 7, 'Clases de piano.', '2015-05-23 21:22:05', 'Doy clases de piano para adultos. De 30 años hasta 99. Máximo 2 personas por hora. 20€/hora. Teléfono: 922380345', 38045),
-(10, 2, 8, 'Clases de matemáticas.', '2015-05-23 21:22:05', 'Si tienes dificultades con las matemáticas te puedo ayudar, doy clases en el salón de mi casa a 10€/hora. Todos los niveles menos universidad. también doy clases a domicilio. Preguntar precio Tel: 666645123', 38041),
-(11, 2, 9, 'Clases de cocina creativa.', '2015-05-23 21:26:27', 'Aprende a hacer platos que dejarán boquiabiertos a tus comensales, con la ayuda del Chef Pepe, en las maravillosas instalaciones del hotel la quinta. Precio 100€/clase, de gustación incluida', 38041),
-(12, 3, 10, 'Curso de origami', '2015-05-23 21:26:27', 'Aprende a hacer 500 figuras de Origami en mi curso online intensivo de 3 mese.\r\nContacto origamifirend@juanas.com', 35004);
+(7, 1, 7, 'Clases de piano.', '2015-05-23 21:22:05', 'Doy clases de piano para adultos. De 30 años hasta 99. Máximo 2 personas por hora. 20€/hora. Teléfono: 922380345', 38045),
+(8, 2, 8, 'Clases de matemáticas.', '2015-05-23 21:22:05', 'Si tienes dificultades con las matemáticas te puedo ayudar, doy clases en el salón de mi casa a 10€/hora. Todos los niveles menos universidad. también doy clases a domicilio. Preguntar precio Tel: 666645123', 38041),
+(9, 2, 9, 'Clases de cocina creativa.', '2015-05-23 21:26:27', 'Aprende a hacer platos que dejarán boquiabiertos a tus comensales, con la ayuda del Chef Pepe, en las maravillosas instalaciones del hotel la quinta. Precio 100€/clase, de gustación incluida', 38041),
+(10, 3, 10, 'Curso de origami', '2015-05-23 21:26:27', 'Aprende a hacer 500 figuras de Origami en mi curso online intensivo de 3 mese.\r\nContacto origamifirend@juanas.com', 35004);
 
 -- --------------------------------------------------------
 
@@ -278,7 +278,23 @@ CREATE TABLE IF NOT EXISTS `recursos` (
   PRIMARY KEY (`id`),
   KEY `idactividad` (`idactividad`),
   KEY `idactividad_2` (`idactividad`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=11 ;
+
+--
+-- Volcado de datos para la tabla `recursos`
+--
+
+INSERT INTO `recursos` (`id`, `idactividad`, `ruta`, `created`) VALUES
+(1, 1, 'img/img_actividades/clasesdesarrollo.jpg', '2015-05-23 21:30:15'),
+(2, 2, 'img/img_actividades/clasespadel.jpg', '2015-05-23 21:30:15'),
+(3, 3, 'img/img_actividades/cuentacuentos.jpg', '2015-05-23 21:50:28'),
+(4, 4, 'img/img_actividades/clasepintura.jpg', '2015-05-23 21:50:28'),
+(5, 5, 'img/img_actividades/\0cursoafterefects.png', '2015-05-23 21:51:40'),
+(6, 6, 'img/img_actividades/\0clasesdj.jpg', '2015-05-23 21:51:40'),
+(7, 7, 'img/img_actividades/\0clasespiano.jpg', '2015-05-23 21:52:36'),
+(8, 8, 'img/img_actividades/\0clasesmatematicas.jpg', '2015-05-23 21:52:36'),
+(9, 9, 'img/img_actividades/\0cocinacreativa.jpg', '2015-05-23 21:53:29'),
+(10, 10, 'img/img_actividades/\0cursoorigami.jpg', '2015-05-23 21:53:29');
 
 -- --------------------------------------------------------
 
@@ -300,7 +316,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   PRIMARY KEY (`id`),
   KEY `idmunicipio` (`idmunicipio`),
   KEY `idrol` (`idrol`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -310,7 +326,11 @@ INSERT INTO `usuarios` (`id`, `email`, `nick`, `nombre`, `apellidos`, `password`
 (1, 'janaigus@gmail.com', 'janai', 'Janai Gustavo', 'Expósito Bethencourt', '123456789', 1, 38031, '2015-05-15 21:39:36'),
 (2, 'jonaigus@gmail.com', 'admin', 'Administrador', 'Administrador', '123456789', 1, 38041, '2015-05-15 21:39:36'),
 (3, 'janai_exposito@outlook.com', 'Usuario', 'Usuario', 'Usuario', '123456789', 2, 35004, '2015-05-15 21:40:41'),
-(4, 'otrouser@otrouser.es', 'Otrouser', 'Otrouser', 'Otrouser', '123456789', 2, 35015, '2015-05-15 21:40:41');
+(4, 'otrouser@otrouser.es', 'Otrouser', 'Otrouser', 'Otrouser', '123456789', 2, 35015, '2015-05-15 21:40:41'),
+(5, 'pepe@benavente.com', 'pebe', 'Pepe', 'Benavente', '1234567', 2, 38028, '2015-05-23 21:58:05'),
+(6, 'hely@clak.com', 'hecl', 'Hely', 'Clarckson', '1234', 2, 35016, '2015-05-23 22:00:18'),
+(7, 'metal@lovers.com', 'melo', 'Metal', 'Lovers', '1234', 2, 38901, '2015-05-23 22:04:03'),
+(8, 'datos@prueba.com', 'dapr', 'Datos', 'Prueba', '1234', 2, 35007, '2015-05-23 22:05:41');
 
 -- --------------------------------------------------------
 
@@ -324,11 +344,44 @@ CREATE TABLE IF NOT EXISTS `votos` (
   `idactividad` int(11) NOT NULL,
   `idusuario` int(11) NOT NULL,
   `valoracion` int(11) NOT NULL,
-  `created` int(11) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idactividad` (`idactividad`),
   KEY `idusuario` (`idusuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=38 ;
+
+--
+-- Volcado de datos para la tabla `votos`
+--
+
+INSERT INTO `votos` (`id`, `idactividad`, `idusuario`, `valoracion`, `created`) VALUES
+(11, 7, 1, 0, '2015-05-23 22:18:11'),
+(12, 1, 5, 0, '2015-05-23 22:18:11'),
+(13, 4, 5, 0, '2015-05-23 22:18:11'),
+(14, 9, 8, 0, '2015-05-23 22:18:11'),
+(15, 7, 4, 0, '2015-05-23 22:18:11'),
+(16, 7, 3, 0, '2015-05-23 22:18:11'),
+(17, 7, 2, 0, '2015-05-23 22:18:11'),
+(18, 4, 6, 0, '2015-05-23 22:18:11'),
+(19, 7, 2, 0, '2015-05-23 22:18:11'),
+(20, 10, 2, 0, '2015-05-23 22:18:11'),
+(21, 9, 2, 0, '2015-05-23 22:18:11'),
+(22, 7, 1, 0, '2015-05-23 22:18:11'),
+(23, 9, 2, 0, '2015-05-23 22:18:11'),
+(24, 7, 2, 0, '2015-05-23 22:18:11'),
+(25, 1, 3, 0, '2015-05-23 22:18:11'),
+(26, 1, 3, 0, '2015-05-23 22:18:11'),
+(27, 1, 4, 0, '2015-05-23 22:18:11'),
+(28, 1, 4, 0, '2015-05-23 22:18:11'),
+(29, 8, 2, 0, '2015-05-23 22:18:11'),
+(30, 4, 6, 0, '2015-05-23 22:18:11'),
+(31, 1, 3, 0, '2015-05-23 22:18:11'),
+(32, 9, 4, 0, '2015-05-23 22:18:11'),
+(33, 2, 5, 0, '2015-05-23 22:18:11'),
+(34, 9, 4, 0, '2015-05-23 22:18:11'),
+(35, 3, 6, 0, '2015-05-23 22:18:11'),
+(36, 6, 4, 0, '2015-05-23 22:18:11'),
+(37, 5, 3, 0, '2015-05-23 22:18:11');
 
 --
 -- Restricciones para tablas volcadas
