@@ -9,7 +9,7 @@
     $result->execute(array(":email" => $_POST['registroEmail']));
 
     // Si no hay resultados continuar con el insert
-    if($result->rowCount() != 0){
+    if(!$result->rowCount() > 0){
         $consulta = "INSERT INTO usuarios(email, nick, nombre, apellidos, password, idrol, idmunicipio)
             VALUES(:mail, :alias, :name, :sname, :pass, :rol, :mun)";
         $result  = $db->prepare($consulta);

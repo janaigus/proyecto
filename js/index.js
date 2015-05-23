@@ -246,11 +246,10 @@ $(document).ready(function () {
         $.post('php/obtenerRecursos/comprobarCaptcha.php', {respuesta: respuestaC}, 
             function(respuesta)
             {
-                if(!humanoRegistro){
-                    if(respuesta.success){
-                        alert(humanoRegistro);
+                if(humanoRegistro == false){
+                    alert(respuesta.success);
+                    if(respuesta.success == true){
                         humanoRegistro = true;
-                        alert(humanoRegistro);
                     }else{
                         correcto = false;
                         cambiarEstadoCaja("registrarseBoton", true, "Rellene el captcha");
@@ -261,7 +260,7 @@ $(document).ready(function () {
         
         
         // Comenzar a enviar el registro si todo es correcto
-        if(correcto){
+        if(correcto == true && humanoRegistro == true){
             $.post('./php/sesion/registro.php', $('#formularioRegistrarse').serialize(), 
                 function(respuesta)
                 {
@@ -271,11 +270,8 @@ $(document).ready(function () {
                             // ya se habrán creado desde php se inicia sesión automaticamente
                             alert("alles klar");
                             break;
-                        case "BADPASS":
-                            cambiarEstadoCaja("cajaPassEntrar", true, "Contraseña incorrecta.");
-                            break;
                         case "REGISTEREDUSER":
-                            cambiarEstadoCaja("cajaEmailEntrar", true, "Email ya registrado.");
+                            cambiarEstadoCaja("cajaRegistroEmail", true, "Email ya registrado.");
                             break;
                     }
                 }
