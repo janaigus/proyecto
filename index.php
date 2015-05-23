@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -487,21 +486,21 @@
               </div>
             </div>
             <div class="modal-body">
-                  <form class="form">
-                    <div class="form-group">
+                  <form class="form" action="./php/sesion/login.php" method="POST" id="formularioEntrar">
+                    <div class="form-group" id="cajaEmailEntrar">
                         <div class="inner-addon left-addon">
                             <i class="glyphicon glyphicon-user"></i>
-                            <input type="text" id="emailinicio" class="form-control input-lg" placeholder="Email"/>
+                            <input type="text" id="entrarEmail" name="entrarEmail" class="form-control input-lg" placeholder="Email"/>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="cajaPassEntrar">
                         <div class="inner-addon left-addon">
                             <i class="glyphicon glyphicon-lock"></i>
-                            <input type="password" class="form-control input-lg" placeholder="Password"/>
+                            <input id="entrarPass" name="entrarPass" type="password" class="form-control input-lg" placeholder="Password"/>
                         </div>
                     </div>
                     <div class="form-group">
-                      <button class="btn btn-lg btn-light btn-block">Iniciar sesión</button>
+                      <button id="entrarBoton" class="btn btn-lg btn-light btn-block">Iniciar sesión</button>
                       <span class="pull-right"><a href="" id="entrarRegistrarse">Registrarse</a></span><span><a href="#">Ayuda</a></span>
                     </div>
                     <hr>
@@ -593,13 +592,13 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-4 col-lg-offset-2 col- text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='./php/miFacebook.php' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
+                                <a href='php/miFacebook.php' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
                             </div>
                             <!--<div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
                                 <a href='#' class="btn btn-light twitter"> <i class="fa fa-twitter modal-icons"></i> Entrar con Twitter </a>
                             </div>-->
                             <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='./php/miGoogle.php' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
+                                <a href='php/miGoogle.php' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
                             </div>
                         </div>
                     </div>

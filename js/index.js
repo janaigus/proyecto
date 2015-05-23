@@ -22,6 +22,7 @@ $(document).ready(function () {
     });
     
     /* Manejar eventos ON click */
+    // Gestión del envio del formulario de contacto
     $('#enviarFormularioContacto').on('click', function (ev) {
         ev.preventDefault();
         correcto = true;
@@ -55,7 +56,7 @@ $(document).ready(function () {
             cambiarEstadoCaja("cajaMensajeContacto", false);
         }
                                     
-        // Peticion ajax y mostrar el mensaje si el correo se ha enviado correctamente
+        // Peticion ajax, mostrar el mensaje si el correo se ha enviado correctamente
         if(correcto){
             $.post('./php/contacto.php', $('#formularioContacto').serialize(), 
                 function(respuesta)
@@ -72,8 +73,6 @@ $(document).ready(function () {
                             $("#modalInfo").modal("show"); 
                             break;
                         default:
-                            
-                            
                     }
                 }
             );
@@ -105,6 +104,45 @@ $(document).ready(function () {
         ev.preventDefault();
         $("#entrarCancelar").click();
         $("#modalRegistrarse").modal("show"); 
+    });
+    
+    // Gestion del boton de login
+    $('#entrarBoton').on('click', function (ev) {
+        ev.preventDefault();
+        correcto = true;
+        emailEncontrado = $("#entrarEmail").val().match(expresionEmail);
+        if(emailEncontrado == null){
+            cambiarEstadoCaja("cajaEmailEntrar", true, "Introduzca un email correcto");
+            correcto = false;
+        }else{
+            cambiarEstadoCaja("cajaEmailEntrar", false, "");
+        }
+        if($('#entrarPass').val() == ""){
+            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
+            correcto = false;
+        }else{
+            cambiarEstadoCaja("cajaPassEntrar", false, "");
+        }
+        if(correcto){
+            $.post('./php/sesion/login.php', $('#formularioEntrar').serialize(), 
+                function(respuesta)
+                {
+                    alert(respuesta);
+                    switch(respuesta){
+                        case "OK":
+                            // Redireccionar a la pagina principal del usuario, las sesiones ya se habrán creado desde php
+                            alert("alles klar");
+                            break;
+                        case "BADPASS":
+                            cambiarEstadoCaja("cajaPassEntrar", true, "Contraseña incorrecta.");
+                            break;
+                        case "BADEMAIL":
+                            cambiarEstadoCaja("cajaEmailEntrar", true, "Email no registrado.");
+                            break;
+                    }
+                }
+            );
+        }
     });
 });
     
