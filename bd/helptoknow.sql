@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 23-05-2015 a las 22:51:15
+-- Tiempo de generación: 23-05-2015 a las 23:26:49
 -- Versión del servidor: 5.5.43-MariaDB-1ubuntu0.14.04.2
 -- Versión de PHP: 5.5.9-1ubuntu4.9
 
@@ -37,12 +37,27 @@ CREATE TABLE IF NOT EXISTS `actividades` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `descripcion` varchar(5000) COLLATE utf8_spanish_ci NOT NULL,
   `idmunicipio` int(11) NOT NULL,
-  `direccion` varchar(300) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idusuario_2` (`idusuario`),
   KEY `idcategoria` (`idcategoria`),
   KEY `idmunicipio` (`idmunicipio`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=13 ;
+
+--
+-- Volcado de datos para la tabla `actividades`
+--
+
+INSERT INTO `actividades` (`id`, `idusuario`, `idcategoria`, `titulo`, `created`, `descripcion`, `idmunicipio`) VALUES
+(1, 1, 1, 'Curso básico de desarrollo web.', '2015-05-23 20:59:54', 'Aprende las bases del desarrollo web con este curso. Duración de 18 meses. Precio total: 3500€', 38031),
+(2, 1, 2, 'Clases de padel.', '2015-05-23 20:59:54', 'Clases de padel en el gimnasio de santa Ursula los Martes y los Jueves de 17:00 a 18:00. Precio 18€ la clase, alquiler de cancha no incluido.', 38039),
+(3, 4, 3, 'Cuenta cuentos.', '2015-05-23 21:12:31', 'Actividad de cuenta cuentos al aire libre en el Centro Municipal de deportes. Totalmente gratis. Apuntate.', 35015),
+(4, 3, 4, 'Clases de pintura moderna.', '2015-05-23 21:12:31', 'Te enseño las mejores técnicas de la pintura moderna. 25€/por clase. Antiguo pintor de paredes.', 35004),
+(5, 3, 5, 'Clases After Efects', '2015-05-23 21:16:28', 'Doy clases de after effects en mi casa desde 15€/hora conceptos básicos y avanzados.', 35011),
+(6, 1, 6, 'Clases de DJ', '2015-05-23 21:16:28', 'Aprende a ser uno de los mejores DJ de la historia con mis clases. 24€/hora', 38038),
+(9, 1, 7, 'Clases de piano.', '2015-05-23 21:22:05', 'Doy clases de piano para adultos. De 30 años hasta 99. Máximo 2 personas por hora. 20€/hora. Teléfono: 922380345', 38045),
+(10, 2, 8, 'Clases de matemáticas.', '2015-05-23 21:22:05', 'Si tienes dificultades con las matemáticas te puedo ayudar, doy clases en el salón de mi casa a 10€/hora. Todos los niveles menos universidad. también doy clases a domicilio. Preguntar precio Tel: 666645123', 38041),
+(11, 2, 9, 'Clases de cocina creativa.', '2015-05-23 21:26:27', 'Aprende a hacer platos que dejarán boquiabiertos a tus comensales, con la ayuda del Chef Pepe, en las maravillosas instalaciones del hotel la quinta. Precio 100€/clase, de gustación incluida', 38041),
+(12, 3, 10, 'Curso de origami', '2015-05-23 21:26:27', 'Aprende a hacer 500 figuras de Origami en mi curso online intensivo de 3 mese.\r\nContacto origamifirend@juanas.com', 35004);
 
 -- --------------------------------------------------------
 
@@ -228,31 +243,7 @@ CREATE TABLE IF NOT EXISTS `auxroles` (
 
 INSERT INTO `auxroles` (`id`, `nombre`) VALUES
 (1, 'Administrador'),
-(2, 'Usuario'),
-(3, 'Invitado');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `auxtiposrecursos`
---
-
-DROP TABLE IF EXISTS `auxtiposrecursos`;
-CREATE TABLE IF NOT EXISTS `auxtiposrecursos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tipo` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `idcategoriatipo` (`tipo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
-
---
--- Volcado de datos para la tabla `auxtiposrecursos`
---
-
-INSERT INTO `auxtiposrecursos` (`id`, `tipo`) VALUES
-(2, 'audio'),
-(1, 'imagen'),
-(3, 'video');
+(2, 'Usuario');
 
 -- --------------------------------------------------------
 
@@ -282,13 +273,10 @@ DROP TABLE IF EXISTS `recursos`;
 CREATE TABLE IF NOT EXISTS `recursos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idactividad` int(11) NOT NULL,
-  `idtipo` int(11) NOT NULL,
   `ruta` varchar(500) COLLATE utf8_spanish_ci NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `idtipo` (`idtipo`),
   KEY `idactividad` (`idactividad`),
-  KEY `idtipo_2` (`idtipo`),
   KEY `idactividad_2` (`idactividad`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
 
@@ -322,7 +310,7 @@ INSERT INTO `usuarios` (`id`, `email`, `nick`, `nombre`, `apellidos`, `password`
 (1, 'janaigus@gmail.com', 'janai', 'Janai Gustavo', 'Expósito Bethencourt', '123456789', 1, 38031, '2015-05-15 21:39:36'),
 (2, 'jonaigus@gmail.com', 'admin', 'Administrador', 'Administrador', '123456789', 1, 38041, '2015-05-15 21:39:36'),
 (3, 'janai_exposito@outlook.com', 'Usuario', 'Usuario', 'Usuario', '123456789', 2, 35004, '2015-05-15 21:40:41'),
-(4, 'invitado@invitado.es', 'Invitado', 'Invitado', 'Invitado', '123456789', 3, 35015, '2015-05-15 21:40:41');
+(4, 'otrouser@otrouser.es', 'Otrouser', 'Otrouser', 'Otrouser', '123456789', 2, 35015, '2015-05-15 21:40:41');
 
 -- --------------------------------------------------------
 
@@ -371,8 +359,7 @@ ALTER TABLE `comentarios`
 -- Filtros para la tabla `recursos`
 --
 ALTER TABLE `recursos`
-  ADD CONSTRAINT `recursos_ibfk_1` FOREIGN KEY (`idactividad`) REFERENCES `actividades` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `recursos_ibfk_2` FOREIGN KEY (`idtipo`) REFERENCES `auxtiposrecursos` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `recursos_ibfk_1` FOREIGN KEY (`idactividad`) REFERENCES `actividades` (`id`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuarios`
