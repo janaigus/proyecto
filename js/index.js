@@ -111,6 +111,7 @@ $(document).ready(function () {
             );
         }
     });
+    
     // Campos de busqueda
     $('#busquedaIslas').on('change', function (ev) {
         if($('#busquedaIslas').val() == 0){

@@ -57,6 +57,9 @@
                 <a href="#islas" onclick = $("#menu-close").click(); >Nuestras Islas</a>
             </li>
             <li>
+                <a href="#busqueda" onclick = $("#menu-close").click(); >Buscar actividad</a>
+            </li>
+            <li>
                 <a href="#contacto" onclick = $("#menu-close").click(); >Contacto</a>
             </li>
             <hr>
