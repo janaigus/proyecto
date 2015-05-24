@@ -2,7 +2,7 @@
     session_start();
 
     // Obtener la isla sobre la que se va a maquetar la imagen
-
+    $isla = (isset($_POST['islaSeleccionada'])) ? $_POST['islaSeleccionada'] : 1;
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +69,9 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Ayudando a personas para aprender. <h1><b>Help to Know!</b></h1></h2>
-                    <p class="lead">Aqui podrás encontrar desde una clase de costura, </br>hasta un curso profesional de desarrollo web </br>con certificación internacional</p>
+                    <p class="lead">Tenerife es una isla del océano Atlántico, perteneciente a la Comunidad Autónoma de Canarias (España). Junto a La Palma, </br>
+La Gomera y El Hierro conforma la provincia de Santa Cruz de Tenerife. Con una superficie de 2.034,38 km² y una población de 898.680 habitantes (2012),</br>
+es la isla más extensa del Archipiélago Canario y la más poblada de España.</p>
                 </div>
             </div>
             <!-- /.row -->
