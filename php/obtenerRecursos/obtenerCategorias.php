@@ -1,6 +1,5 @@
 <?php
     // Requerir el fichero para la conexion con la base de datos 
-    // IMPORTANTE CAMBIAR el fichero de la BD local por el de la BD del hosting
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
     $consulta = "SELECT * FROM auxcategorias ORDER BY nombre";
