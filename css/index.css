@@ -353,7 +353,18 @@ a {
 a {
     color: rgb(0, 122, 135);
 }
+.pagination>li>a{
+    color: rgb(0,122,135);
+}
 
+.pagination>.active>a {
+    background-color: rgb(255, 144, 0);
+}
+
+.pagination>.active>a:hover{
+    color: rgb(0,122,135);
+    background-color: rgb(249, 213, 130);
+}
 /* Eliminar los border radius necesarios */
 .google {
     color: #fff;

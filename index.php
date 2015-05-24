@@ -119,6 +119,7 @@
                                 
                                 <!-- Carousel items -->
                                 <div class="carousel-inner" id="itemsCarouselMejorValoradas">
+                                    
                                 </div>
                                 
                                 <div class="row">
