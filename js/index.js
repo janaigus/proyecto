@@ -2,9 +2,49 @@ expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 var humanoRegistro = false;
 
 $(document).ready(function () {
+    //RELLENAR LAS ACTIVIDADES MAS RECIENTES
+    $.getJSON('./php/obtenerRecursos/obtenerMejorValoradas.php',
+        function(respuesta)
+        {
+            var cadena = '';
+            alert(respuesta);
+            
+            $.each(respuesta, function(i, tupla){
+                var activo = ( i == 0 ) ? ' active ' : '';
+                cadena += '<div class="item'+activo+'">';
+                cadena += '    <div class="row">';
+                cadena += '       <div class="col-xs-12 col-sm-12 col-md-6">';
+                cadena +=             <a href=" "> <img src="img/img_pagina/logo.png" class="thumbnail"
+                                alt="Image" height="100%" width="100%" /></a>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">
+                            <h3>Titulo actividad 1</h3>
+                            <h4>Subheading</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
+                            <div class="ratings">
+                                <p class="pull-right" style="color:#fff">6 reviews</p>
+                                <p>
+                                    
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                    
+                                </p>
+                            </div>
+                            <a href="#" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>
+                        </div>
+                    </div>
+                    <!--/row-fluid-->
+                </div>
+            });
+            $("#registroIslas").html(cadena);
+        }
+    );
     // ISLAS Y MUNICIPIOS
     // Cargar las islas en select de islas de la ventana de registro
-    $.post('./php/obtenerRecursos/obtenerIslas.php',
+    $.getJSON('./php/obtenerRecursos/obtenerIslas.php',
         function(respuesta)
         {
             cadena = '<option value="0">Seleccione isla</option>';
@@ -13,7 +53,6 @@ $(document).ready(function () {
             });
             $("#registroIslas").html(cadena);
         }
-       , "json"
     );
     
     // Evento onchange cuando se selccione una isla

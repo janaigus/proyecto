@@ -114,7 +114,7 @@
                                 </div>
                                 <br />
                                 <!-- Carousel items -->
-                                <div class="carousel-inner">
+                                <div class="carousel-inner" id="itemsCarouselMejorValoradas">
                                     <div class="item active">
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-12 col-md-6">
@@ -217,7 +217,7 @@
                                 </div>
                                 <br />
                                 <!-- Carousel items -->
-                                <div class="carousel-inner">
+                                <div class="carousel-inner" id="itemsCarouselMasRecientes">
                                     <div class="item active">
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-12 col-md-6">
