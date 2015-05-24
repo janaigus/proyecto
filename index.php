@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -113,61 +114,11 @@
                                     </div>
                                 </div>
                                 <br />
+                                
                                 <!-- Carousel items -->
                                 <div class="carousel-inner" id="itemsCarouselMejorValoradas">
-                                    <div class="item active">
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-12 col-md-6">
-                                                <a href=" "> <img src="img/img_pagina/logo.png" class="thumbnail"
-                                                    alt="Image" height="100%" width="100%" /></a>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">
-                                                <h3>Titulo actividad 1</h3>
-                                                <h4>Subheading</h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
-                                                <div class="ratings">
-                                                    <p class="pull-right" style="color:#fff">11 reviews</p>
-                                                    <p>
-                                                        <span class="fa fa-star-o"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star-empty"></span>
-                                                        <span class="glyphicon glyphicon-star-empty"></span>
-                                                    </p>
-                                                </div>
-                                                <a href="#" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>
-                                            </div>
-                                        </div>
-                                        <!--/row-fluid-->
-                                    </div>
-                                    <!--/item-->
-                                    <div class="item ">
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-12 col-md-6">
-                                                <a href=" "> <img src="img/img_pagina/logo.png" class="thumbnail"
-                                                    alt="Image" height="100%" width="100%" /></a>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">
-                                                <h3>Titulo actividad 2</h3>
-                                                <h4>Subheading</h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
-                                                <div class="ratings">
-                                                    <p class="pull-right" style="color:#fff">10 reviews</p>
-                                                    <p>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star-empty"></span>
-                                                    </p>
-                                                </div>
-                                                <a href="#" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>
-                                            </div>
-                                        </div>
-                                        <!--/row-fluid-->
-                                    </div>
-                                    <!--/item-->
                                 </div>
+                                
                                 <div class="row">
                                     <div class="col-md-4">
                                         <span data-slide="next" class="btn-vertical-slider glyphicon glyphicon-circle-arrow-down"
@@ -216,61 +167,11 @@
                                     </div>
                                 </div>
                                 <br />
+                                
                                 <!-- Carousel items -->
                                 <div class="carousel-inner" id="itemsCarouselMasRecientes">
-                                    <div class="item active">
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-12 col-md-6">
-                                                <a href=" "> <img src="img/img_pagina/logo.png" class="thumbnail"
-                                                    alt="Image" height="100%" width="100%" /></a>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">
-                                                <h3>Titulo actividad 1</h3>
-                                                <h4>Subheading</h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
-                                                <div class="ratings">
-                                                    <p class="pull-right" style="color:#fff">6 reviews</p>
-                                                    <p>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star-empty"></span>
-                                                    </p>
-                                                </div>
-                                                <a href="#" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>
-                                            </div>
-                                        </div>
-                                        <!--/row-fluid-->
-                                    </div>
-                                    <!--/item-->
-                                    <div class="item ">
-                                        <div class="row">
-                                            <div class="col-xs-12 col-sm-12 col-md-6">
-                                                <a href=" "> <img src="img/img_pagina/logo.png" class="thumbnail"
-                                                    alt="Image" height="100%" width="100%" /></a>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">
-                                                <h3>Titulo actividad 2</h3>
-                                                <h4>Subheading</h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.</p>
-                                                <div class="ratings">
-                                                    <p class="pull-right" style="color:#fff">7 reviews</p>
-                                                    <p>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star"></span>
-                                                        <span class="glyphicon glyphicon-star-empty"></span>
-                                                    </p>
-                                                </div>
-                                                <a href="#" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>
-                                            </div>
-                                        </div>
-                                        <!--/row-fluid-->
-                                    </div>
-                                    <!--/item-->
                                 </div>
+                                
                                 <div class="row">
                                     <div class="col-md-4">
                                         <span data-slide="next" class="btn-vertical-slider glyphicon glyphicon-circle-arrow-down"

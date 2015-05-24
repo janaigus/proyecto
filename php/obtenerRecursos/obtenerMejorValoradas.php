@@ -1,5 +1,4 @@
 <?php
-    header('Content-type: text/html; charset=utf-8');
     // Requerir el fichero para la conexion con la base de datos 
     // IMPORTANTE CAMBIAR el fichero de la BD local por el de la BD del hosting
     require('../bd/conexionBDlocal.php');
