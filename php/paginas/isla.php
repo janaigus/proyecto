@@ -1,17 +1,26 @@
 <?php
     session_start();
-    // Obtener la isla sobre la que se va a maquetar la imagen
+    // Obtener la isla sobre la que se va a maquetar la imagen y la pagina actual
     $isla = (isset($_GET['islaSeleccionada'])) ? $_POST['islaSeleccionada'] : "7";
+    
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
+    // Saber el nombre de los campos de las islas 
     $consulta = "SELECT * FROM auxislas where id = :isla ORDER BY nombre";
     $result = $db->prepare($consulta);
     $result->execute(array(':isla' => $isla));
     $arrayResult = $result->fetchAll();
     $idIsla = $arrayResult[0]['id'];
     $nombreIsla = $arrayResult[0]['nombre'];
-    
+    // Saber el numero total de actividades que hay
+    $consulta = "SELECT COUNT(id) as total FROM actividades WHERE idisla = :isla";
+    $result = $db->prepare($consulta);
+    $result->execute(array(':isla' => $idIsla));
+    $arrayResult = $result->fetchAll();
+    $totalActividades = $arrayResult[0]['total'];
+    $paginas =  $totalActividades / 3;
+    // Devolver los resultados de las islas con los datos necesario para maquetarlos
     $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
     $consulta .= "cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media ";
     $consulta .= "FROM actividades act ";
@@ -112,7 +121,7 @@
                         echo '            <a href=""> <img src="../../'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
                         echo '       </div>';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
-                        echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
+                        echo '            <h3>'.$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
                         echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
                         echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
                         echo '            <div class="ratings">';
@@ -142,21 +151,13 @@
                                 <li>
                                     <a href="#">&laquo;</a>
                                 </li>
-                                <li class="active">
-                                    <a href="#">1</a>
-                                </li>
-                                <li>
-                                    <a href="#">2</a>
-                                </li>
-                                <li>
-                                    <a href="#">3</a>
-                                </li>
-                                <li>
-                                    <a href="#">4</a>
-                                </li>
-                                <li>
-                                    <a href="#">5</a>
-                                </li>
+                                <?php 
+                                    for($i=1;$i<=$paginas;$i++){
+                                        echo '<li class="active">';
+                                        echo '  <a href="#">'.$i.'</a>';
+                                        echo '</li>';
+                                    }
+                                ?>
                                 <li>
                                     <a href="#">&raquo;</a>
                                 </li>
