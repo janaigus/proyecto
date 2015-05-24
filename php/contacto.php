@@ -5,7 +5,7 @@ $asunto = $_POST['asuntoContacto'];
 $texto = $_POST["mensajeContacto"];
 
 $para      = 'janaigus@gmail.com, info@helptoknow.esy.es,'.$email;
-$titulo    = 'Solicitud de contacto Help To Know "'.$asunto.'"';
+$titulo    = 'Solicitud de contacto Help To Know. Asunto:"'.$asunto.'"';
 $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
 $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 $cabeceras .= 'From: '.$email.'' . "\r\n" .

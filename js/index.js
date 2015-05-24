@@ -277,12 +277,6 @@ $(document).ready(function () {
         $("#cajaMensajeContacto").popover('destroy');
     });
     
-    $('#entrarRegistrarse').on('click', function (ev) {
-        ev.preventDefault();
-        $("#entrarCancelar").click();
-        $("#modalRegistrarse").modal("show"); 
-    });
-    
     // Gestion del boton de login
     $('#entrarBoton').on('click', function (ev) {
         ev.preventDefault();

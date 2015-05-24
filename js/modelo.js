@@ -19,49 +19,7 @@ $(document).ready(function () {
         }
     });
     
-    // Gestion del boton de login
-    $('#entrarBoton').on('click', function (ev) {
-        ev.preventDefault();
-        var correcto = true;
-        emailEncontrado = $("#entrarEmail").val().match(expresionEmail);
-        if(emailEncontrado == null){
-            cambiarEstadoCaja("cajaEmailEntrar", true, "Introduzca un email correcto");
-            correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaEmailEntrar", false, "");
-        }
-        if($('#entrarPass').val() == ""){
-            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
-            correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaPassEntrar", false, "");
-        }
-        if(correcto){
-            $.post('./php/sesion/login.php', $('#formularioEntrar').serialize(), 
-                function(respuesta)
-                {
-                    switch(respuesta){
-                        case "OK":
-                            // Redireccionar a la pagina principal del usuario, las sesiones ya se habrán creado desde php
-                            alert("alles klar");
-                            break;
-                        case "BADPASS":
-                            cambiarEstadoCaja("cajaPassEntrar", true, "Contraseña incorrecta.");
-                            break;
-                        case "BADEMAIL":
-                            cambiarEstadoCaja("cajaEmailEntrar", true, "Email no registrado.");
-                            break;
-                    }
-                }
-            );
-        }
-    });
-    
-    $('#btnEntrar').on('click', function (ev) {
-        $("#menu-close").click();
-        $("#modalEntrar").modal("show"); 
-    });
-    
+        
     // Gestión del envio del formulario de contacto
     $('#enviarFormularioContacto').on('click', function (ev) {
         ev.preventDefault();
