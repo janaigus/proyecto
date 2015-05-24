@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-05-2015 a las 14:34:01
+-- Tiempo de generación: 24-05-2015 a las 16:40:15
 -- Versión del servidor: 5.5.43-MariaDB-1ubuntu0.14.04.2
 -- Versión de PHP: 5.5.9-1ubuntu4.9
 
@@ -17,10 +17,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `helptoknow`
+-- Base de datos: `u135108308_h2k`
 --
-CREATE DATABASE IF NOT EXISTS `helptoknow` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
-USE `helptoknow`;
 
 -- --------------------------------------------------------
 
@@ -28,7 +26,6 @@ USE `helptoknow`;
 -- Estructura de tabla para la tabla `actividades`
 --
 
-DROP TABLE IF EXISTS `actividades`;
 CREATE TABLE IF NOT EXISTS `actividades` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idusuario` int(11) NOT NULL,
@@ -65,7 +62,6 @@ INSERT INTO `actividades` (`id`, `idusuario`, `idcategoria`, `titulo`, `created`
 -- Estructura de tabla para la tabla `auxcategorias`
 --
 
-DROP TABLE IF EXISTS `auxcategorias`;
 CREATE TABLE IF NOT EXISTS `auxcategorias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
@@ -95,10 +91,10 @@ INSERT INTO `auxcategorias` (`id`, `nombre`, `created`) VALUES
 -- Estructura de tabla para la tabla `auxislas`
 --
 
-DROP TABLE IF EXISTS `auxislas`;
 CREATE TABLE IF NOT EXISTS `auxislas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(140) COLLATE utf8_spanish_ci NOT NULL,
+  `avatar` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
 
@@ -106,14 +102,14 @@ CREATE TABLE IF NOT EXISTS `auxislas` (
 -- Volcado de datos para la tabla `auxislas`
 --
 
-INSERT INTO `auxislas` (`id`, `nombre`) VALUES
-(1, 'Fuerteventura'),
-(2, 'Gran Canaria'),
-(3, 'Lanzarote'),
-(4, 'La Gomera'),
-(5, 'El Hierro'),
-(6, 'La Palma'),
-(7, 'Tenerife');
+INSERT INTO `auxislas` (`id`, `nombre`, `avatar`) VALUES
+(1, 'Fuerteventura', ''),
+(2, 'Gran Canaria', ''),
+(3, 'Lanzarote', ''),
+(4, 'La Gomera', ''),
+(5, 'El Hierro', ''),
+(6, 'La Palma', ''),
+(7, 'Tenerife', '');
 
 -- --------------------------------------------------------
 
@@ -121,7 +117,6 @@ INSERT INTO `auxislas` (`id`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `auxmunicipios`
 --
 
-DROP TABLE IF EXISTS `auxmunicipios`;
 CREATE TABLE IF NOT EXISTS `auxmunicipios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(140) COLLATE utf8_spanish_ci NOT NULL,
@@ -230,7 +225,6 @@ INSERT INTO `auxmunicipios` (`id`, `nombre`, `idisla`) VALUES
 -- Estructura de tabla para la tabla `auxroles`
 --
 
-DROP TABLE IF EXISTS `auxroles`;
 CREATE TABLE IF NOT EXISTS `auxroles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -251,7 +245,6 @@ INSERT INTO `auxroles` (`id`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `comentarios`
 --
 
-DROP TABLE IF EXISTS `comentarios`;
 CREATE TABLE IF NOT EXISTS `comentarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idactividad` int(11) NOT NULL,
@@ -269,7 +262,6 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
 -- Estructura de tabla para la tabla `recursos`
 --
 
-DROP TABLE IF EXISTS `recursos`;
 CREATE TABLE IF NOT EXISTS `recursos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idactividad` int(11) NOT NULL,
@@ -302,7 +294,6 @@ INSERT INTO `recursos` (`id`, `idactividad`, `ruta`, `created`) VALUES
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
@@ -338,7 +329,6 @@ INSERT INTO `usuarios` (`id`, `email`, `nick`, `nombre`, `apellidos`, `password`
 -- Estructura de tabla para la tabla `votos`
 --
 
-DROP TABLE IF EXISTS `votos`;
 CREATE TABLE IF NOT EXISTS `votos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idactividad` int(11) NOT NULL,
