@@ -19,7 +19,7 @@ $(document).ready(function () {
                 cadena += '            <h4>'+tupla.categoria+'</h4>';
                 cadena += '            <p>'+tupla.descripcion+'</p>';
                 cadena += '            <div class="ratings">';
-                cadena += '                <p class="pull-right" style="color:#fff">'+tupla.veces+' valorado</p>';
+                cadena += '                <p class="pull-right" style="color:#fff">'+tupla.veces+' veces valorado</p>';
                 cadena += '                <p>';
                 for(var i = 0;i < 5;i++){
                     if(i < tupla.media){
@@ -56,7 +56,7 @@ $(document).ready(function () {
                 cadena += '            <h4>'+tupla.categoria+'</h4>';
                 cadena += '            <p>'+tupla.descripcion+'</p>';
                 cadena += '            <div class="ratings">';
-                cadena += '                <p class="pull-right" style="color:#fff">'+tupla.veces+' valorado</p>';
+                cadena += '                <p class="pull-right" style="color:#fff">'+tupla.veces+' veces valorado</p>';
                 cadena += '                <p>';
                 for(var i = 0;i < 5;i++){
                     if(i < tupla.media){
@@ -75,6 +75,7 @@ $(document).ready(function () {
             $("#itemsCarouselMasRecientes").html(cadena);
         }
     );
+    
     // ISLAS Y MUNICIPIOS
     // Cargar las islas en select de islas de la ventana de registro
     $.getJSON('./php/obtenerRecursos/obtenerIslas.php',
@@ -85,6 +86,7 @@ $(document).ready(function () {
                 cadena += '<option value="'+tupla.id+'">'+tupla.nombre+'</option>';
             });
             $("#registroIslas").html(cadena);
+            $("#busquedaIslas").html(cadena);
         }
     );
     
@@ -109,6 +111,39 @@ $(document).ready(function () {
             );
         }
     });
+    // Campos de busqueda
+    $('#busquedaIslas').on('change', function (ev) {
+        if($('#busquedaIslas').val() == 0){
+            $("#busquedaMunicipios").attr('disabled', true);
+            $("#busquedaMunicipios").html('<option value="0">Seleccione municipio</option>');
+        }else{
+            $.post('./php/obtenerRecursos/obtenerMunicipios.php', { islaSeleccionada: $('#busquedaIslas').val() },
+                function(respuesta)
+                {
+                    cadena = '<option value="0">Seleccione municipio</option>';
+                    $.each(respuesta, function(i, tupla){
+                        cadena += '<option value="'+tupla.id+'">'+tupla.nombre+'</option>';
+                    });
+                    $("#busquedaMunicipios").html(cadena );
+                    // Habilitar el input de isla
+                    $("#busquedaMunicipios").attr('disabled', false);
+                }
+                , "json"
+            );
+        }
+    });
+    
+    $.getJSON('./php/obtenerRecursos/obtenerCategorias.php',
+        function(respuesta)
+        {
+            cadena = '<option value="0">Seleccione categoria</option>';
+            $.each(respuesta, function(i, tupla){
+                cadena += '<option value="'+tupla.id+'">'+tupla.nombre+'</option>';
+            });
+            $("#busquedaCategorias").html(cadena);
+        }
+    );
+    
     
     /* Controlar los botones de slider de los "sliders" */
     $('.btn-vertical-slider').on('click', function (ev) {
@@ -131,6 +166,38 @@ $(document).ready(function () {
     });
     
     /* Manejar eventos ON click */
+    // Gestión del envio del formulario de contacto
+    $('#enviarFormularioBusqueda').on('click', function (ev) {
+        ev.preventDefault();
+        var correcto = true;
+        var mensajeBusqueda = "Compruebe los datos de la busqueda: </br>";
+        // Comprobar email
+        // Isla
+        if($('#busquedaIslas').val() == 0){
+            mensajeBusqueda += "Seleccione una isla</br>";
+            correcto = false;
+        }
+        // Municipio
+        if($('#busquedaMunicipios').val() == 0){
+            mensajeBusqueda += "Seleccione un municipio</br>";
+            correcto = false;
+        }
+        //Categoria
+        if($('#busquedaCategorias').val() == 0){
+            mensajeBusqueda += "Seleccione una categoria</br>";
+            correcto = false;
+        }
+                                    
+        // Peticion ajax, mostrar el mensaje si el correo se ha enviado correctamente
+        if(correcto){
+            // hacer un submit del formulario
+            $('#formularioBusqueda').submit();
+        }else{
+            $("#mensajeInfo").html(mensajeBusqueda);
+            $("#modalInfo").modal("show"); 
+        }
+    });
+    
     // Gestión del envio del formulario de contacto
     $('#enviarFormularioContacto').on('click', function (ev) {
         ev.preventDefault();

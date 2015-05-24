@@ -328,22 +328,51 @@
         </div>
         <!-- /.container -->
     </section>
-
         
-    <!-- Call to Action -->
-    <aside class="call-to-action bg-primary" style="background-color:rgb(0,122,135);">
+    <!-- Seccion de busqueda -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+    <section id="busqueda" class="services bg-primary">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h3>Buscar actividades:</h3>
-                    <a href="#" class="btn btn-lg btn-light">Click Me!</a>
-                    <a href="#" class="btn btn-lg btn-dark">Look at Me!</a>
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <h2>Busqueda de actividades</h2>
+                    <hr class="small">
+                    <div class="row">
+                       <!-- Principio del carrousel -->
+                       <div class="col-xs-12 col-sm-12 col-md-12">
+                            <form class="form" action="php/paginas/busqueda.php" method="POST" id="formularioBusqueda">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <select id="busquedaIslas" name="busquedaIslas" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <select id="busquedaMunicipios" name="busquedaMunicipios" class="form-control" disabled>
+                                            <option value="0">Seleccione municipio</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <select id="busquedaCategorias" name="busquedaCategorias" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="enviarFormularioBusqueda" type="button" class="btn btn-lg btn-dark">Buscar actividades</button>
+                            </form>
+                       </div>
+                    </div>
+                    <!-- /.row (nested) -->
                 </div>
+                <!-- /.col-lg-10 -->
             </div>
+            <!-- /.row -->
         </div>
-    </aside>
-
-    <!-- Map -->
+        <!-- /.container -->
+    </section>
 
     <!-- Footer -->
     <footer>
