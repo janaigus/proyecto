@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-05-2015 a las 00:19:09
+-- Tiempo de generación: 24-05-2015 a las 11:23:04
 -- Versión del servidor: 5.5.43-MariaDB-1ubuntu0.14.04.2
 -- Versión de PHP: 5.5.9-1ubuntu4.9
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `actividades` (
   KEY `idusuario_2` (`idusuario`),
   KEY `idcategoria` (`idcategoria`),
   KEY `idmunicipio` (`idmunicipio`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `actividades`
@@ -235,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `auxroles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `auxroles`
@@ -348,40 +348,33 @@ CREATE TABLE IF NOT EXISTS `votos` (
   PRIMARY KEY (`id`),
   KEY `idactividad` (`idactividad`),
   KEY `idusuario` (`idusuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=98 ;
 
 --
 -- Volcado de datos para la tabla `votos`
 --
 
 INSERT INTO `votos` (`id`, `idactividad`, `idusuario`, `valoracion`, `created`) VALUES
-(11, 7, 1, 0, '2015-05-23 22:18:11'),
-(12, 1, 5, 0, '2015-05-23 22:18:11'),
-(13, 4, 5, 0, '2015-05-23 22:18:11'),
-(14, 9, 8, 0, '2015-05-23 22:18:11'),
-(15, 7, 4, 0, '2015-05-23 22:18:11'),
-(16, 7, 3, 0, '2015-05-23 22:18:11'),
-(17, 7, 2, 0, '2015-05-23 22:18:11'),
-(18, 4, 6, 0, '2015-05-23 22:18:11'),
-(19, 7, 2, 0, '2015-05-23 22:18:11'),
-(20, 10, 2, 0, '2015-05-23 22:18:11'),
-(21, 9, 2, 0, '2015-05-23 22:18:11'),
-(22, 7, 1, 0, '2015-05-23 22:18:11'),
-(23, 9, 2, 0, '2015-05-23 22:18:11'),
-(24, 7, 2, 0, '2015-05-23 22:18:11'),
-(25, 1, 3, 0, '2015-05-23 22:18:11'),
-(26, 1, 3, 0, '2015-05-23 22:18:11'),
-(27, 1, 4, 0, '2015-05-23 22:18:11'),
-(28, 1, 4, 0, '2015-05-23 22:18:11'),
-(29, 8, 2, 0, '2015-05-23 22:18:11'),
-(30, 4, 6, 0, '2015-05-23 22:18:11'),
-(31, 1, 3, 0, '2015-05-23 22:18:11'),
-(32, 9, 4, 0, '2015-05-23 22:18:11'),
-(33, 2, 5, 0, '2015-05-23 22:18:11'),
-(34, 9, 4, 0, '2015-05-23 22:18:11'),
-(35, 3, 6, 0, '2015-05-23 22:18:11'),
-(36, 6, 4, 0, '2015-05-23 22:18:11'),
-(37, 5, 3, 0, '2015-05-23 22:18:11');
+(78, 5, 3, 5, '2015-05-24 09:21:57'),
+(79, 5, 3, 4, '2015-05-24 09:21:57'),
+(80, 2, 2, 3, '2015-05-24 09:21:57'),
+(81, 2, 3, 3, '2015-05-24 09:21:57'),
+(82, 9, 8, 4, '2015-05-24 09:21:57'),
+(83, 7, 3, 2, '2015-05-24 09:21:57'),
+(84, 4, 7, 1, '2015-05-24 09:21:57'),
+(85, 2, 3, 2, '2015-05-24 09:21:57'),
+(86, 1, 7, 3, '2015-05-24 09:21:57'),
+(87, 3, 5, 3, '2015-05-24 09:21:57'),
+(88, 4, 6, 4, '2015-05-24 09:21:57'),
+(89, 10, 6, 6, '2015-05-24 09:21:57'),
+(90, 3, 3, 2, '2015-05-24 09:21:57'),
+(91, 2, 6, 3, '2015-05-24 09:21:57'),
+(92, 2, 3, 5, '2015-05-24 09:21:57'),
+(93, 6, 6, 3, '2015-05-24 09:21:57'),
+(94, 10, 4, 4, '2015-05-24 09:21:57'),
+(95, 5, 3, 4, '2015-05-24 09:21:57'),
+(96, 4, 7, 2, '2015-05-24 09:21:57'),
+(97, 8, 6, 5, '2015-05-24 09:21:57');
 
 --
 -- Restricciones para tablas volcadas
