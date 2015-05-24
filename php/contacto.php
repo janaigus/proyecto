@@ -15,7 +15,7 @@ $cabeceras .= 'From: '.$email.'' . "\r\n" .
 $mensaje = '
 <html>
 <head>
-  <title>Solicitud de información</title>
+  <meta charset="utf-8">
 </head>
 <body>
   <h1>Mensaje enviado: </h1>
