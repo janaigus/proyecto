@@ -199,12 +199,11 @@
                 <div class="col-lg-10 col-lg-offset-1 text-center">
                     <h2>Islas</h2>
                     <hr class="small">
-                    
                     <div class="row">
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#" class="portfolio-box">
-                                    <img src="img/img_pagina/principal/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <img src="img/img_pagina/islas/tenerife.png" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
                                             <div class="project-category text-faded">
@@ -221,7 +220,7 @@
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#" class="portfolio-box">
-                                    <img src="img/img_pagina/principal/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <img src="img/img_pagina/islas/gran-canaria.png" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
                                             <div class="project-category text-faded">
@@ -238,7 +237,7 @@
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#" class="portfolio-box">
-                                    <img src="img/img_pagina/principal/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <img src="img/img_pagina/islas/la-palma.png" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
                                             <div class="project-category text-faded">
@@ -255,7 +254,7 @@
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#" class="portfolio-box">
-                                    <img src="img/img_pagina/principal/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <img src="img/img_pagina/islas/fuerteventura.png" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
                                             <div class="project-category text-faded">
@@ -272,7 +271,7 @@
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#" class="portfolio-box">
-                                    <img src="img/img_pagina/principal/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <img src="img/img_pagina/islas/el-hierro.png" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
                                             <div class="project-category text-faded">
@@ -289,7 +288,7 @@
                         <div class="col-md-6">
                             <div class="portfolio-item">
                                 <a href="#" class="portfolio-box">
-                                    <img src="img/img_pagina/principal/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <img src="img/img_pagina/islas/lanzarote.png" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
                                             <div class="project-category text-faded">
@@ -306,7 +305,7 @@
                         <div class="col-md-6 col-md-offset-3">
                             <div class="portfolio-item">
                                 <a href="#" class="portfolio-box">
-                                    <img src="img/img_pagina/principal/portfolio-2.jpg" class="img-responsive" alt="">
+                                    <img src="img/img_pagina/islas/la-gomera.png" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
                                             <div class="project-category text-faded">

@@ -191,7 +191,7 @@ $(document).ready(function () {
         // Peticion ajax, mostrar el mensaje si el correo se ha enviado correctamente
         if(correcto){
             // hacer un submit del formulario
-            $('#formularioBusqueda').submit();
+            $('#formularioBusqueda').submit
         }else{
             $("#mensajeInfo").html(mensajeBusqueda);
             $("#modalInfo").modal("show"); 
