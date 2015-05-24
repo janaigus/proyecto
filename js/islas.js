@@ -1,3 +1,5 @@
+expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
+
 $(document).ready(function () {
     /* Controlar los botones de slider de los "sliders" */
     $('.btn-vertical-slider').on('click', function (ev) {
@@ -37,7 +39,7 @@ $(document).ready(function () {
             cambiarEstadoCaja("cajaPassEntrar", false, "");
         }
         if(correcto){
-            $.post('./php/sesion/login.php', $('#formularioEntrar').serialize(), 
+            $.post('../sesion/login.php', $('#formularioEntrar').serialize(), 
                 function(respuesta)
                 {
                     switch(respuesta){
