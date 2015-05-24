@@ -5,7 +5,7 @@
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
     $consulta .= "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
-    $consulta .= "cat.nombre AS categoria, SUM( v.valoracion ) AS total, ROUND( AVG( v.valoracion ) ) AS media ";
+    $consulta .= "cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media ";
     $consulta .= "FROM actividades act ";
     $consulta .= "INNER JOIN votos v ON act.id = v.idactividad ";
     $consulta .= "INNER JOIN recursos r ON act.id = r.idactividad ";
