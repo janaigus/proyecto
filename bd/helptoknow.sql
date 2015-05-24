@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-05-2015 a las 11:23:04
+-- Tiempo de generación: 24-05-2015 a las 14:34:01
 -- Versión del servidor: 5.5.43-MariaDB-1ubuntu0.14.04.2
 -- Versión de PHP: 5.5.9-1ubuntu4.9
 
@@ -57,7 +57,7 @@ INSERT INTO `actividades` (`id`, `idusuario`, `idcategoria`, `titulo`, `created`
 (7, 1, 7, 'Clases de piano.', '2015-05-23 21:22:05', 'Doy clases de piano para adultos. De 30 años hasta 99. Máximo 2 personas por hora. 20€/hora. Teléfono: 922380345', 38045),
 (8, 2, 8, 'Clases de matemáticas.', '2015-05-23 21:22:05', 'Si tienes dificultades con las matemáticas te puedo ayudar, doy clases en el salón de mi casa a 10€/hora. Todos los niveles menos universidad. también doy clases a domicilio. Preguntar precio Tel: 666645123', 38041),
 (9, 2, 9, 'Clases de cocina creativa.', '2015-05-23 21:26:27', 'Aprende a hacer platos que dejarán boquiabiertos a tus comensales, con la ayuda del Chef Pepe, en las maravillosas instalaciones del hotel la quinta. Precio 100€/clase, de gustación incluida', 38041),
-(10, 3, 10, 'Curso de origami', '2015-05-23 21:26:27', 'Aprende a hacer 500 figuras de Origami en mi curso online intensivo de 3 mese.\r\nContacto origamifirend@juanas.com', 35004);
+(10, 3, 10, 'Curso de origami', '2015-05-23 21:26:27', 'Aprende a hacer 500 figuras de Origami en mi curso online intensivo de 3 meses.\r\nContacto origamifirend@juanas.com', 35004);
 
 -- --------------------------------------------------------
 
@@ -289,12 +289,12 @@ INSERT INTO `recursos` (`id`, `idactividad`, `ruta`, `created`) VALUES
 (2, 2, 'img/img_actividades/clasespadel.jpg', '2015-05-23 21:30:15'),
 (3, 3, 'img/img_actividades/cuentacuentos.jpg', '2015-05-23 21:50:28'),
 (4, 4, 'img/img_actividades/clasepintura.jpg', '2015-05-23 21:50:28'),
-(5, 5, 'img/img_actividades/\0cursoafterefects.png', '2015-05-23 21:51:40'),
-(6, 6, 'img/img_actividades/\0clasesdj.jpg', '2015-05-23 21:51:40'),
-(7, 7, 'img/img_actividades/\0clasespiano.jpg', '2015-05-23 21:52:36'),
-(8, 8, 'img/img_actividades/\0clasesmatematicas.jpg', '2015-05-23 21:52:36'),
-(9, 9, 'img/img_actividades/\0cocinacreativa.jpg', '2015-05-23 21:53:29'),
-(10, 10, 'img/img_actividades/\0cursoorigami.jpg', '2015-05-23 21:53:29');
+(5, 5, 'img/img_actividades/cursoafterefects.png', '2015-05-23 21:51:40'),
+(6, 6, 'img/img_actividades/clasesdj.jpg', '2015-05-23 21:51:40'),
+(7, 7, 'img/img_actividades/clasespiano.jpg', '2015-05-23 21:52:36'),
+(8, 8, 'img/img_actividades/clasesmatematicas.jpg', '2015-05-23 21:52:36'),
+(9, 9, 'img/img_actividades/cocinacreativa.jpg', '2015-05-23 21:53:29'),
+(10, 10, 'img/img_actividades/cursoorigami.jpg', '2015-05-23 21:53:29');
 
 -- --------------------------------------------------------
 

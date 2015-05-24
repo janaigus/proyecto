@@ -15,7 +15,7 @@ $(document).ready(function () {
                 cadena += '            <a href=""> <img src="'+tupla.ruta+'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
                 cadena += '       </div>';
                 cadena += '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
-                cadena += '            <h3>'+tupla.titulo+'<h5>'+tupla.creada+'</h5></h3>';
+                cadena += '            <h3>'+(i+1)+". "+tupla.titulo+'<h5>'+tupla.creada+'</h5></h3>';
                 cadena += '            <h4>'+tupla.categoria+'</h4>';
                 cadena += '            <p>'+tupla.descripcion+'</p>';
                 cadena += '            <div class="ratings">';
