@@ -10,7 +10,7 @@
     $consulta .= "INNER JOIN recursos r ON act.id = r.idactividad ";
     $consulta .= "INNER JOIN auxcategorias cat ON act.idcategoria = cat.id ";
     $consulta .= "GROUP BY act.id ";
-    $consulta .= "ORDER BY media DESC ";
+    $consulta .= "ORDER BY AVG( v.valoracion ) DESC ";
     $consulta .= "LIMIT 3";
     $result = $db->prepare($consulta);
     $result->execute();
