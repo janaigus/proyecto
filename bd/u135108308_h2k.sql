@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-05-2015 a las 16:40:15
+-- Tiempo de generación: 24-05-2015 a las 21:22:32
 -- Versión del servidor: 5.5.43-MariaDB-1ubuntu0.14.04.2
 -- Versión de PHP: 5.5.9-1ubuntu4.9
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `u135108308_h2k`
 --
+CREATE DATABASE IF NOT EXISTS `u135108308_h2k` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+USE `u135108308_h2k`;
 
 -- --------------------------------------------------------
 
@@ -26,6 +28,7 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `actividades`
 --
 
+DROP TABLE IF EXISTS `actividades`;
 CREATE TABLE IF NOT EXISTS `actividades` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idusuario` int(11) NOT NULL,
@@ -34,27 +37,29 @@ CREATE TABLE IF NOT EXISTS `actividades` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `descripcion` varchar(5000) COLLATE utf8_spanish_ci NOT NULL,
   `idmunicipio` int(11) NOT NULL,
+  `idisla` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idusuario_2` (`idusuario`),
   KEY `idcategoria` (`idcategoria`),
-  KEY `idmunicipio` (`idmunicipio`)
+  KEY `idmunicipio` (`idmunicipio`),
+  KEY `idisla` (`idisla`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `actividades`
 --
 
-INSERT INTO `actividades` (`id`, `idusuario`, `idcategoria`, `titulo`, `created`, `descripcion`, `idmunicipio`) VALUES
-(1, 1, 1, 'Curso básico de desarrollo web.', '2015-05-23 20:59:54', 'Aprende las bases del desarrollo web con este curso. Duración de 18 meses. Precio total: 3500€', 38031),
-(2, 1, 2, 'Clases de padel.', '2015-05-23 20:59:54', 'Clases de padel en el gimnasio de santa Ursula los Martes y los Jueves de 17:00 a 18:00. Precio 18€ la clase, alquiler de cancha no incluido.', 38039),
-(3, 4, 3, 'Cuenta cuentos.', '2015-05-23 21:12:31', 'Actividad de cuenta cuentos al aire libre en el Centro Municipal de deportes. Totalmente gratis. Apuntate.', 35015),
-(4, 3, 4, 'Clases de pintura moderna.', '2015-05-23 21:12:31', 'Te enseño las mejores técnicas de la pintura moderna. 25€/por clase. Antiguo pintor de paredes.', 35004),
-(5, 3, 5, 'Clases After Efects', '2015-05-23 21:16:28', 'Doy clases de after effects en mi casa desde 15€/hora conceptos básicos y avanzados.', 35011),
-(6, 1, 6, 'Clases de DJ', '2015-05-23 21:16:28', 'Aprende a ser uno de los mejores DJ de la historia con mis clases. 24€/hora', 38038),
-(7, 1, 7, 'Clases de piano.', '2015-05-23 21:22:05', 'Doy clases de piano para adultos. De 30 años hasta 99. Máximo 2 personas por hora. 20€/hora. Teléfono: 922380345', 38045),
-(8, 2, 8, 'Clases de matemáticas.', '2015-05-23 21:22:05', 'Si tienes dificultades con las matemáticas te puedo ayudar, doy clases en el salón de mi casa a 10€/hora. Todos los niveles menos universidad. también doy clases a domicilio. Preguntar precio Tel: 666645123', 38041),
-(9, 2, 9, 'Clases de cocina creativa.', '2015-05-23 21:26:27', 'Aprende a hacer platos que dejarán boquiabiertos a tus comensales, con la ayuda del Chef Pepe, en las maravillosas instalaciones del hotel la quinta. Precio 100€/clase, de gustación incluida', 38041),
-(10, 3, 10, 'Curso de origami', '2015-05-23 21:26:27', 'Aprende a hacer 500 figuras de Origami en mi curso online intensivo de 3 meses.\r\nContacto origamifirend@juanas.com', 35004);
+INSERT INTO `actividades` (`id`, `idusuario`, `idcategoria`, `titulo`, `created`, `descripcion`, `idmunicipio`, `idisla`) VALUES
+(1, 1, 1, 'Curso básico de desarrollo web.', '2015-05-23 20:59:54', 'Aprende las bases del desarrollo web con este curso. Duración de 18 meses. Precio total: 3500€', 38031, 7),
+(2, 1, 2, 'Clases de padel.', '2015-05-23 20:59:54', 'Clases de padel en el gimnasio de santa Ursula los Martes y los Jueves de 17:00 a 18:00. Precio 18€ la clase, alquiler de cancha no incluido.', 38039, 7),
+(3, 4, 3, 'Cuenta cuentos.', '2015-05-23 21:12:31', 'Actividad de cuenta cuentos al aire libre en el Centro Municipal de deportes. Totalmente gratis. Apuntate.', 35015, 1),
+(4, 3, 4, 'Clases de pintura moderna.', '2015-05-23 21:12:31', 'Te enseño las mejores técnicas de la pintura moderna. 25€/por clase. Antiguo pintor de paredes.', 35004, 3),
+(5, 3, 5, 'Clases After Efects', '2015-05-23 21:16:28', 'Doy clases de after effects en mi casa desde 15€/hora conceptos básicos y avanzados.', 35004, 3),
+(6, 1, 6, 'Clases de DJ', '2015-05-23 21:16:28', 'Aprende a ser uno de los mejores DJ de la historia con mis clases. 24€/hora', 38038, 7),
+(7, 1, 7, 'Clases de piano.', '2015-05-23 21:22:05', 'Doy clases de piano para adultos. De 30 años hasta 99. Máximo 2 personas por hora. 20€/hora. Teléfono: 922380345', 38038, 7),
+(8, 2, 8, 'Clases de matemáticas.', '2015-05-23 21:22:05', 'Si tienes dificultades con las matemáticas te puedo ayudar, doy clases en el salón de mi casa a 10€/hora. Todos los niveles menos universidad. también doy clases a domicilio. Preguntar precio Tel: 666645123', 38041, 7),
+(9, 2, 9, 'Clases de cocina creativa.', '2015-05-23 21:26:27', 'Aprende a hacer platos que dejarán boquiabiertos a tus comensales, con la ayuda del Chef Pepe, en las maravillosas instalaciones del hotel la quinta. Precio 100€/clase, de gustación incluida', 38041, 7),
+(10, 3, 10, 'Curso de origami', '2015-05-23 21:26:27', 'Aprende a hacer 500 figuras de Origami en mi curso online intensivo de 3 meses.\r\nContacto origamifirend@juanas.com', 35004, 3);
 
 -- --------------------------------------------------------
 
@@ -62,6 +67,7 @@ INSERT INTO `actividades` (`id`, `idusuario`, `idcategoria`, `titulo`, `created`
 -- Estructura de tabla para la tabla `auxcategorias`
 --
 
+DROP TABLE IF EXISTS `auxcategorias`;
 CREATE TABLE IF NOT EXISTS `auxcategorias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
@@ -91,6 +97,7 @@ INSERT INTO `auxcategorias` (`id`, `nombre`, `created`) VALUES
 -- Estructura de tabla para la tabla `auxislas`
 --
 
+DROP TABLE IF EXISTS `auxislas`;
 CREATE TABLE IF NOT EXISTS `auxislas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(140) COLLATE utf8_spanish_ci NOT NULL,
@@ -103,13 +110,13 @@ CREATE TABLE IF NOT EXISTS `auxislas` (
 --
 
 INSERT INTO `auxislas` (`id`, `nombre`, `avatar`) VALUES
-(1, 'Fuerteventura', ''),
-(2, 'Gran Canaria', ''),
-(3, 'Lanzarote', ''),
-(4, 'La Gomera', ''),
-(5, 'El Hierro', ''),
-(6, 'La Palma', ''),
-(7, 'Tenerife', '');
+(1, 'Fuerteventura', 'img/img_pagina/islas/fuerteventura.png'),
+(2, 'Gran Canaria', 'img/img_pagina/islas/gran-canaria.png'),
+(3, 'Lanzarote', 'img/img_pagina/islas/lanzarote.png'),
+(4, 'La Gomera', 'img/img_pagina/islas/la-gomera.png'),
+(5, 'El Hierro', 'img/img_pagina/islas/el-hierro.png'),
+(6, 'La Palma', 'img/img_pagina/islas/la-palma.png'),
+(7, 'Tenerife', 'img/img_pagina/islas/tenerife.png');
 
 -- --------------------------------------------------------
 
@@ -117,6 +124,7 @@ INSERT INTO `auxislas` (`id`, `nombre`, `avatar`) VALUES
 -- Estructura de tabla para la tabla `auxmunicipios`
 --
 
+DROP TABLE IF EXISTS `auxmunicipios`;
 CREATE TABLE IF NOT EXISTS `auxmunicipios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(140) COLLATE utf8_spanish_ci NOT NULL,
@@ -225,6 +233,7 @@ INSERT INTO `auxmunicipios` (`id`, `nombre`, `idisla`) VALUES
 -- Estructura de tabla para la tabla `auxroles`
 --
 
+DROP TABLE IF EXISTS `auxroles`;
 CREATE TABLE IF NOT EXISTS `auxroles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -245,6 +254,7 @@ INSERT INTO `auxroles` (`id`, `nombre`) VALUES
 -- Estructura de tabla para la tabla `comentarios`
 --
 
+DROP TABLE IF EXISTS `comentarios`;
 CREATE TABLE IF NOT EXISTS `comentarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idactividad` int(11) NOT NULL,
@@ -262,6 +272,7 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
 -- Estructura de tabla para la tabla `recursos`
 --
 
+DROP TABLE IF EXISTS `recursos`;
 CREATE TABLE IF NOT EXISTS `recursos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idactividad` int(11) NOT NULL,
@@ -294,6 +305,7 @@ INSERT INTO `recursos` (`id`, `idactividad`, `ruta`, `created`) VALUES
 -- Estructura de tabla para la tabla `usuarios`
 --
 
+DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
@@ -303,25 +315,27 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `password` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
   `idrol` int(11) NOT NULL,
   `idmunicipio` int(11) NOT NULL,
+  `idisla` int(11) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idmunicipio` (`idmunicipio`),
-  KEY `idrol` (`idrol`)
+  KEY `idrol` (`idrol`),
+  KEY `idisla` (`idisla`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `email`, `nick`, `nombre`, `apellidos`, `password`, `idrol`, `idmunicipio`, `created`) VALUES
-(1, 'janaigus@gmail.com', 'janai', 'Janai Gustavo', 'Expósito Bethencourt', '123456789', 1, 38031, '2015-05-15 21:39:36'),
-(2, 'jonaigus@gmail.com', 'admin', 'Administrador', 'Administrador', '123456789', 1, 38041, '2015-05-15 21:39:36'),
-(3, 'janai_exposito@outlook.com', 'Usuario', 'Usuario', 'Usuario', '123456789', 2, 35004, '2015-05-15 21:40:41'),
-(4, 'otrouser@otrouser.es', 'Otrouser', 'Otrouser', 'Otrouser', '123456789', 2, 35015, '2015-05-15 21:40:41'),
-(5, 'pepe@benavente.com', 'pebe', 'Pepe', 'Benavente', '1234567', 2, 38028, '2015-05-23 21:58:05'),
-(6, 'hely@clak.com', 'hecl', 'Hely', 'Clarckson', '1234', 2, 35016, '2015-05-23 22:00:18'),
-(7, 'metal@lovers.com', 'melo', 'Metal', 'Lovers', '1234', 2, 38901, '2015-05-23 22:04:03'),
-(8, 'datos@prueba.com', 'dapr', 'Datos', 'Prueba', '1234', 2, 35007, '2015-05-23 22:05:41');
+INSERT INTO `usuarios` (`id`, `email`, `nick`, `nombre`, `apellidos`, `password`, `idrol`, `idmunicipio`, `idisla`, `created`) VALUES
+(1, 'janaigus@gmail.com', 'janai', 'Janai Gustavo', 'Expósito Bethencourt', '123456789', 1, 38031, 7, '2015-05-15 21:39:36'),
+(2, 'jonaigus@gmail.com', 'admin', 'Administrador', 'Administrador', '123456789', 1, 38041, 7, '2015-05-15 21:39:36'),
+(3, 'janai_exposito@outlook.com', 'Usuario', 'Usuario', 'Usuario', '123456789', 2, 35004, 3, '2015-05-15 21:40:41'),
+(4, 'otrouser@otrouser.es', 'Otrouser', 'Otrouser', 'Otrouser', '123456789', 2, 35015, 1, '2015-05-15 21:40:41'),
+(5, 'pepe@benavente.com', 'pebe', 'Pepe', 'Benavente', '1234567', 2, 38028, 7, '2015-05-23 21:58:05'),
+(6, 'hely@clak.com', 'hecl', 'Hely', 'Clarckson', '1234', 2, 35016, 2, '2015-05-23 22:00:18'),
+(7, 'metal@lovers.com', 'melo', 'Metal', 'Lovers', '1234', 2, 38901, 5, '2015-05-23 22:04:03'),
+(8, 'datos@prueba.com', 'dapr', 'Datos', 'Prueba', '1234', 2, 35007, 1, '2015-05-23 22:05:41');
 
 -- --------------------------------------------------------
 
@@ -329,6 +343,7 @@ INSERT INTO `usuarios` (`id`, `email`, `nick`, `nombre`, `apellidos`, `password`
 -- Estructura de tabla para la tabla `votos`
 --
 
+DROP TABLE IF EXISTS `votos`;
 CREATE TABLE IF NOT EXISTS `votos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idactividad` int(11) NOT NULL,
@@ -374,6 +389,7 @@ INSERT INTO `votos` (`id`, `idactividad`, `idusuario`, `valoracion`, `created`) 
 -- Filtros para la tabla `actividades`
 --
 ALTER TABLE `actividades`
+  ADD CONSTRAINT `actividades_ibfk_4` FOREIGN KEY (`idisla`) REFERENCES `auxislas` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `actividades_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `actividades_ibfk_2` FOREIGN KEY (`idcategoria`) REFERENCES `auxcategorias` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `actividades_ibfk_3` FOREIGN KEY (`idmunicipio`) REFERENCES `auxmunicipios` (`id`) ON UPDATE CASCADE;
@@ -401,6 +417,7 @@ ALTER TABLE `recursos`
 -- Filtros para la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
+  ADD CONSTRAINT `usuarios_ibfk_3` FOREIGN KEY (`idisla`) REFERENCES `auxislas` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`idmunicipio`) REFERENCES `auxmunicipios` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`idrol`) REFERENCES `auxroles` (`id`) ON UPDATE CASCADE;
 

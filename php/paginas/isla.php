@@ -1,5 +1,8 @@
 <?php
     session_start();
+
+    // Obtener la isla sobre la que se va a maquetar la imagen
+
 ?>
 
 <!DOCTYPE html>
