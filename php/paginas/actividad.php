@@ -343,7 +343,7 @@
     <script src="../../js/bootstrap.min.js"></script>
     
     <!-- Mis archivos JavaScript -->
-    <script type="text/javascript" src="../../js/islas.js"></script>
+    <script type="text/javascript" src="../../js/actividad.js"></script>
         
     <!-- Custom Theme JavaScript -->
     <script>
