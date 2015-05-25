@@ -168,11 +168,17 @@
         $result = $db->prepare($consulta);
         $result->execute(array(':actividad' => $idActividad));
         $arrayResult = $result->fetchAll();
-        for($i = 0;$i < $result->rowCount();$i++){
+        if($result->rowCount() != 0){
+            for($i = 0;$i < $result->rowCount();$i++){
+                echo '<div class="well" style="background-color: rgb(220, 246, 216);">';
+                echo '<h3><img src="../../'.$arrayResult[$i]['avatar'].'" alt="..." class="img-circle" height="30px" width="35px">'.$arrayResult[$i]['nombre'].' '.$arrayResult[$i]['apellidos'].'</h3>';
+                echo '<span class="pull-right">'.$arrayResult[$i]['fecha'].'</span>';
+                echo '<p>'.$arrayResult[$i]['texto'].'</p>';
+                echo '</div>';
+            }
+        }else{
             echo '<div class="well" style="background-color: rgb(220, 246, 216);">';
-            echo '<h3><img src="../../'.$arrayResult[$i]['avatar'].'" alt="..." class="img-circle" height="30px" width="35px">'.$arrayResult[$i]['nombre'].' '.$arrayResult[$i]['apellidos'].'</h3>';
-            echo '<span class="pull-right">'.$arrayResult[$i]['fecha'].'</span>';
-            echo '<p>'.$arrayResult[$i]['texto'].'</p>';
+            echo '<h3>No hay comentarios en la actividad.</h3>';
             echo '</div>';
         }
         ?>

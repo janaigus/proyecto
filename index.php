@@ -143,7 +143,7 @@
                         }
                         echo '    <div class="row">';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6">';
-                        echo '            <a href=""> <img src="'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
+                        echo '            <a href="./php/paginas/actividad.php?actividad='.$arrayResult[$z]['id'].'"> <img src="'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
                         echo '       </div>';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
                         echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
@@ -161,7 +161,7 @@
                         }                 
                         echo '               </p>';
                         echo '           </div>';
-                        echo '       <a href="#" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>';
+                        echo '       <a href="./php/paginas/actividad.php?actividad='.$arrayResult[$z]['id'].'" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>';
                         echo '       </div>';
                         echo '    </div>';
                         echo '</div>';
@@ -243,7 +243,7 @@
                         }
                         echo '    <div class="row">';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6">';
-                        echo '            <a href=""> <img src="'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
+                        echo '            <a href="./php/paginas/actividad.php?actividad='.$arrayResult[$z]['id'].'"> <img src="'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
                         echo '       </div>';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
                         echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
@@ -261,7 +261,7 @@
                         }                 
                         echo '               </p>';
                         echo '           </div>';
-                        echo '       <a href="#" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>';
+                        echo '       <a href="./php/paginas/actividad.php?actividad='.$arrayResult[$z]['id'].'" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>';
                         echo '       </div>';
                         echo '    </div>';
                         echo '</div>';
@@ -298,7 +298,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="portfolio-item">
-                                <a href="#" class="portfolio-box">
+                                <a href="./php/paginas/isla.php?isla=7" class="portfolio-box">
                                     <img src="img/img_pagina/islas/tenerife.png" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
@@ -315,7 +315,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="portfolio-item">
-                                <a href="#" class="portfolio-box">
+                                <a href="./php/paginas/isla.php?isla=2" class="portfolio-box">
                                     <img src="img/img_pagina/islas/gran-canaria.png" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
@@ -332,7 +332,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="portfolio-item">
-                                <a href="#" class="portfolio-box">
+                                <a href="./php/paginas/isla.php?isla=6" class="portfolio-box">
                                     <img src="img/img_pagina/islas/la-palma.png" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
@@ -349,7 +349,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="portfolio-item">
-                                <a href="#" class="portfolio-box">
+                                <a href="./php/paginas/isla.php?isla=1" class="portfolio-box">
                                     <img src="img/img_pagina/islas/fuerteventura.png" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
@@ -366,7 +366,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="portfolio-item">
-                                <a href="#" class="portfolio-box">
+                                <a href="./php/paginas/isla.php?isla=5" class="portfolio-box">
                                     <img src="img/img_pagina/islas/el-hierro.png" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
@@ -383,7 +383,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="portfolio-item">
-                                <a href="#" class="portfolio-box">
+                                <a href="./php/paginas/isla.php?isla=3" class="portfolio-box">
                                     <img src="img/img_pagina/islas/lanzarote.png" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
@@ -400,7 +400,7 @@
                         </div>
                         <div class="col-md-6 col-md-offset-3">
                             <div class="portfolio-item">
-                                <a href="#" class="portfolio-box">
+                                <a href="./php/paginas/isla.php?isla=4" class="portfolio-box">
                                     <img src="img/img_pagina/islas/la-gomera.png" class="img-responsive" alt="">
                                     <div class="portfolio-box-caption">
                                         <div class="portfolio-box-caption-content">
