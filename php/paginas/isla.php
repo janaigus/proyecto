@@ -2,7 +2,7 @@
     session_start();
     // Obtener la isla sobre la que se va a maquetar la imagen y la pagina actual
     $isla = (isset($_GET['islaSeleccionada'])) ? $_POST['islaSeleccionada'] : "7";
-    
+    $paginaSeleccionada = (isset($_GET['paginaSeleccionada'])) ? $_POST['paginaSeleccionada'] : "1";
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
