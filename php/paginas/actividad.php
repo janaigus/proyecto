@@ -159,23 +159,24 @@
                 </div>
 
                 <hr>
-                <?php 
-                    $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
-                    $consulta .= "cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media ";
-                    $consulta .= "FROM actividades act ";
-                    $consulta .= "INNER JOIN votos v ON act.id = v.idactividad ";
-                    $consulta .= "INNER JOIN recursos r ON act.id = r.idactividad ";
-                    $consulta .= "INNER JOIN auxcategorias cat ON act.idcategoria = cat.id ";
-                    $consulta .= "WHERE act.id = :actividad ";
-                    $result = $db->prepare($consulta);
-                    $result->execute(array(':actividad' => $idActividad));
-                    $arrayResult = $result->fetchAll();
-                ?>
-                <div class="well" style="background-color: rgb(220, 246, 216);">
-                        <h3><img src="../../img/img_usuarios/avatares/default.png" alt="..." class="img-circle" height="30px" width="35px"> Anonymous</h3>
-                        <span class="pull-right">10 days ago</span>
-                        <p>This product was great in terms of quality. I would definitely buy another!</p>
-                </div>
+        <?php 
+        $consulta =  "SELECT com.texto, DATE_FORMAT( com.created,  '%d-%m-%Y a las %k:%i' ) AS fecha, usr.nombre, usr.apellidos, usr.avatar ";
+        $consulta .= "FROM comentarios com ";
+        $consulta .= "INNER JOIN usuarios usr ON com.idusuario = usr.id ";
+        $consulta .= "WHERE com.idactividad = :actividad ";
+        $consulta .= "ORDER BY com.created DESC ";
+        $result = $db->prepare($consulta);
+        $result->execute(array(':actividad' => $idActividad));
+        $arrayResult = $result->fetchAll();
+        for($i = 0;$i < $result->rowCount();$i++){
+            echo '<div class="well" style="background-color: rgb(220, 246, 216);">';
+            echo '<h3><img src="../../'.$arrayResult[$i]['avatar'].'img/img_usuarios/avatares/default.png" alt="..." class="img-circle" height="30px" width="35px"> Anonymous</h3>';
+            echo '<span class="pull-right">10 days ago</span>';
+            echo '<p>This product was great in terms of quality. I would definitely buy another!</p>';
+            echo '</div>';
+        }
+        ?>
+                
 
                 <hr>
             </div>
