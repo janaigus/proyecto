@@ -3,6 +3,8 @@
     // Obtener la isla sobre la que se va a maquetar la imagen y la pagina actual
     $isla = (isset($_GET['islaSeleccionada'])) ? $_POST['islaSeleccionada'] : "7";
     $paginaSeleccionada = (isset($_GET['paginaSeleccionada'])) ? $_POST['paginaSeleccionada'] : "1";
+    $municipioSeleccionado = (isset($_GET['municipioSeleccionado'])) ? $_POST['municipioSeleccionado'] : "0";
+    $categoriaSeleccionada = (isset($_GET['categoriaSeleccionada'])) ? $_POST['categoriaSeleccionada'] : "1";
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
@@ -105,12 +107,41 @@
         </div>
         <!-- /.container -->
     </section>
+    
     <!-- Seccion principal donde estarán todas las actividades -->
     <section id="actividades" class="services bg-primary">
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <h2>Actividades de <?php echo $nombreIsla; ?></h2>
+                    <h1>Actividades de <?php echo $nombreIsla; ?></h1>
+                    <hr class="small">
+                    <div class="row">
+                   <!-- Principio del carrousel -->
+                   <div class="col-xs-12 col-sm-12 col-md-12">
+                        <form class="form" action="php/paginas/busqueda.php" method="POST" id="formularioBusqueda">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <select id="busquedaIslas" name="busquedaIslas" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <select id="busquedaMunicipios" name="busquedaMunicipios" class="form-control" disabled>
+                                        <option value="0">Seleccione municipio</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <select id="busquedaCategorias" name="busquedaCategorias" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="enviarFormularioBusqueda" type="button" class="btn btn-lg btn-dark">Filtrar actividades</button>
+                        </form>
+                   </div>
                     <hr class="small">
                     <div class="row">
                     <?php
