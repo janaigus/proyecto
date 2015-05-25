@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-05-2015 a las 16:12:54
+-- Tiempo de generación: 25-05-2015 a las 19:10:54
 -- Versión del servidor: 5.5.43-MariaDB-1ubuntu0.14.04.2
 -- Versión de PHP: 5.5.9-1ubuntu4.9
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `actividades` (
   KEY `idcategoria` (`idcategoria`),
   KEY `idmunicipio` (`idmunicipio`),
   KEY `idisla` (`idisla`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=20 ;
 
 --
 -- Volcado de datos para la tabla `actividades`
@@ -56,7 +56,13 @@ INSERT INTO `actividades` (`id`, `idusuario`, `idcategoria`, `titulo`, `created`
 (7, 1, 7, 'Clases de piano.', '2015-05-23 21:22:05', 'Doy clases de piano para adultos. De 30 años hasta 99. Máximo 2 personas por hora. 20€/hora. Teléfono: 922380345', 38038, 7),
 (8, 2, 8, 'Clases de matemáticas.', '2015-05-23 21:22:05', 'Si tienes dificultades con las matemáticas te puedo ayudar, doy clases en el salón de mi casa a 10€/hora. Todos los niveles menos universidad. también doy clases a domicilio. Preguntar precio Tel: 666645123', 38041, 7),
 (9, 2, 9, 'Clases de cocina creativa.', '2015-05-23 21:26:27', 'Aprende a hacer platos que dejarán boquiabiertos a tus comensales, con la ayuda del Chef Pepe, en las maravillosas instalaciones del hotel la quinta. Precio 100€/clase, de gustación incluida', 38041, 7),
-(10, 3, 10, 'Curso de origami', '2015-05-23 21:26:27', 'Aprende a hacer 500 figuras de Origami en mi curso online intensivo de 3 meses.\r\nContacto origamifirend@juanas.com', 35004, 3);
+(10, 3, 10, 'Curso de origami', '2015-05-23 21:26:27', 'Aprende a hacer 500 figuras de Origami en mi curso online intensivo de 3 meses.\r\nContacto origamifirend@juanas.com', 35004, 3),
+(11, 1, 1, 'Aprende a desmontar tu ordenador.', '2015-05-25 16:52:06', 'Pequeño curso gratuito en la asociación de vecinos del barrio. Tel:922323232', 38031, 7),
+(12, 1, 1, 'Curso de informática para mayores.', '2015-05-25 16:52:06', 'Despídete de tu miedo a los ratones con el curso de informática para mayores de 55 años, en donde te explicamos todo paso a paso. Email: noexiste@ironia.com', 38031, 7),
+(13, 1, 1, 'Desarrollo para android', '2015-05-25 16:54:01', 'Aprende desarrollo en android con mi curso de 2 años en la escuela privada. Tel: 922922922', 38031, 7),
+(14, 1, 1, 'Clases de php', '2015-05-25 17:04:47', 'Tienes problemas con php en los estudios. Te puedo ayudar tanto telematicamente como en persona. Contacta conmigo en el 656565655 o en el email elphpepe@pepe.com', 38031, 7),
+(15, 1, 1, 'Creemos nuestro propio videojuego', '2015-05-25 17:04:47', 'Estoy empezando a crear mi propio MMO y me gustaría crear un grupo de trabajo para aprender y que lo pasemos genial. Más Info: 666555444', 38031, 7),
+(16, 1, 1, 'Blender 3D designer', '2015-05-25 17:04:47', 'Estoy buscando a alguien que sepa de blender en 3D. Email: miemail@email.com', 38031, 7);
 
 -- --------------------------------------------------------
 
@@ -256,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   PRIMARY KEY (`id`),
   KEY `idactividad` (`idactividad`),
   KEY `idusuario` (`idusuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=17 ;
 
 --
 -- Volcado de datos para la tabla `comentarios`
@@ -277,7 +283,8 @@ INSERT INTO `comentarios` (`id`, `idactividad`, `idusuario`, `texto`, `created`)
 (12, 2, 4, 'Comentario de prueba', '2015-05-25 13:31:47'),
 (13, 6, 8, 'Comentario de prueba', '2015-05-25 13:31:47'),
 (14, 6, 5, 'Comentario de prueba', '2015-05-25 13:31:47'),
-(15, 10, 7, 'Comentario de prueba', '2015-05-25 13:31:47');
+(15, 10, 7, 'Comentario de prueba', '2015-05-25 13:31:47'),
+(16, 2, 5, 'Comentario de prueba con hora distinta', '2015-05-25 14:31:56');
 
 -- --------------------------------------------------------
 
@@ -293,7 +300,7 @@ CREATE TABLE IF NOT EXISTS `recursos` (
   PRIMARY KEY (`id`),
   KEY `idactividad` (`idactividad`),
   KEY `idactividad_2` (`idactividad`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=17 ;
 
 --
 -- Volcado de datos para la tabla `recursos`
@@ -309,7 +316,13 @@ INSERT INTO `recursos` (`id`, `idactividad`, `ruta`, `created`) VALUES
 (7, 7, 'img/img_actividades/clasespiano.jpg', '2015-05-23 21:52:36'),
 (8, 8, 'img/img_actividades/clasesmatematicas.jpg', '2015-05-23 21:52:36'),
 (9, 9, 'img/img_actividades/cocinacreativa.jpg', '2015-05-23 21:53:29'),
-(10, 10, 'img/img_actividades/cursoorigami.jpg', '2015-05-23 21:53:29');
+(10, 10, 'img/img_actividades/cursoorigami.jpg', '2015-05-23 21:53:29'),
+(11, 11, 'img/img_actividades/cursodesmontar.jpg', '2015-05-25 17:09:59'),
+(12, 12, 'img/img_actividades/clasesinformaticaadultos.jpg', '2015-05-25 17:09:59'),
+(13, 13, 'img/img_actividades/calsesandroid.jpg', '2015-05-25 17:09:59'),
+(14, 14, 'img/img_actividades/ayudaconphp.png', '2015-05-25 17:09:59'),
+(15, 15, 'img/img_actividades/crearvideojuego.jpg', '2015-05-25 17:09:59'),
+(16, 16, 'img/img_actividades/blenderdesign.png', '2015-05-25 17:09:59');
 
 -- --------------------------------------------------------
 

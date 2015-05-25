@@ -1,5 +1,24 @@
 <?php
     session_start();
+    // Obtener la isla sobre la que se va a maquetar la imagen y la pagina actual
+    $isla = (isset($_GET['isla'])) ? $_GET['isla'] : "7";
+    // Traer elementos de la base de datos
+    require('../bd/conexionBDlocal.php');
+    $db = conectaDb();
+
+    // Saber el nombre de los campos de las islas 
+    $consulta = "SELECT * FROM auxislas where id = :isla ORDER BY nombre";
+    $result = $db->prepare($consulta);
+    $result->execute(array(':isla' => $isla));
+    $arrayResult = $result->fetchAll();
+    $idIsla = $arrayResult[0]['id'];
+    $nombreIsla = $arrayResult[0]['nombre'];
+
+    $consulta = "SELECT COUNT(id) as total FROM actividades where idisla = :isla";
+    $result = $db->prepare($consulta);
+    $result->execute(array(':isla' => $isla));
+    $arrayResult = $result->fetchAll();
+    $totalActividades = $arrayResult[0]['total'];
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +92,102 @@
         </div>
         <!-- /.container -->
     </section>
+    <!-- Mejor valoradas -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+    <section id="valoradas" class="services bg-primary">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <h1>Categoria</h1>
+                    
+                    <div class="row">
+                        <hr>
+                        <?php
+                        $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
+                        $consulta .= "cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media ";
+                        $consulta .= "FROM actividades act ";
+                        $consulta .= "LEFT JOIN votos v ON act.id = v.idactividad ";
+                        $consulta .= "LEFT JOIN recursos r ON act.id = r.idactividad ";
+                        $consulta .= "LEFT JOIN auxcategorias cat ON act.idcategoria = cat.id ";
+                        $consulta .= "GROUP BY act.id ";
+                        $consulta .= "ORDER BY AVG( v.valoracion ) DESC ";
+                        $consulta .= "LIMIT 3";
+                        $result = $db->prepare($consulta);
+                        $result->execute();
+                        $arrayResult = $result->fetchAll();
+                        // Más Recientes 
+                        for($z=0;$z<$result->rowCount();$z++){
+                            if($z == 0){
+                                echo '<div class="item active">';
+                            }else{
+                                echo '<div class="item">';
+                            }
+                            echo '    <div class="row">';
+                            echo '       <div class="col-xs-12 col-sm-12 col-md-6">';
+                            echo '            <a href="./actividad.php?actividad='.$arrayResult[$z]['id'].'"> <img src="../../'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
+                            echo '       </div>';
+                            echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
+                            echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
+                            echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
+                            echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
+                            echo '            <div class="ratings">';
+                            echo '                <p class="pull-right" style="color:#fff">'.$arrayResult[$z]['veces'].' veces valorado</p>';
+                            echo '                <p>';
+                            for($i = 0;$i < 5;$i++){
+                                if($i < $arrayResult[$z]['media']){
+                                    echo '<span class="glyphicon glyphicon-star"></span>';
+                                }else{
+                                    echo '<span class="glyphicon glyphicon-star-empty"></span>';
+                                }
+                            }                 
+                            echo '               </p>';
+                            echo '           </div>';
+                            echo '       <a href="./php/paginas/actividad.php?actividad='.$arrayResult[$z]['id'].'" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>';
+                            echo '       </div>';
+                            echo '    </div>';
+                            echo '</div>';
+                            echo '<hr>';
+                        }
+                        ?>
 
+                        <!-- Pagination -->
+                        <div class="row text-center">
+                            <div class="col-lg-12">
+                                <ul class="pagination">
+                                    <li>
+                                        <a href="#">&laquo;</a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="#">1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">2</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">3</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">4</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">5</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">&raquo;</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
     <!-- Footer -->
     <footer>
         <div id="contacto" class="container">

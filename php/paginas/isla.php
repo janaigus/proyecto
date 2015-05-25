@@ -1,24 +1,5 @@
 <?php
-    session_start();
-    // Obtener la isla sobre la que se va a maquetar la imagen y la pagina actual
-    $isla = (isset($_GET['isla'])) ? $_GET['isla'] : "7";
-    // Traer elementos de la base de datos
-    require('../bd/conexionBDlocal.php');
-    $db = conectaDb();
-
-    // Saber el nombre de los campos de las islas 
-    $consulta = "SELECT * FROM auxislas where id = :isla ORDER BY nombre";
-    $result = $db->prepare($consulta);
-    $result->execute(array(':isla' => $isla));
-    $arrayResult = $result->fetchAll();
-    $idIsla = $arrayResult[0]['id'];
-    $nombreIsla = $arrayResult[0]['nombre'];
-
-    $consulta = "SELECT COUNT(id) as total FROM actividades where idisla = :isla";
-    $result = $db->prepare($consulta);
-    $result->execute(array(':isla' => $isla));
-    $arrayResult = $result->fetchAll();
-    $totalActividades = $arrayResult[0]['total'];
+    session_start();LEFT
 ?>
 
 <!DOCTYPE html>
@@ -290,9 +271,9 @@
                     $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
                     $consulta .= "cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media ";
                     $consulta .= "FROM actividades act ";
-                    $consulta .= "INNER JOIN votos v ON act.id = v.idactividad ";
-                    $consulta .= "INNER JOIN recursos r ON act.id = r.idactividad ";
-                    $consulta .= "INNER JOIN auxcategorias cat ON act.idcategoria = cat.id ";
+                    $consulta .= "LEFT JOIN votos v ON act.id = v.idactividad ";
+                    $consulta .= "LEFT JOIN recursos r ON act.id = r.idactividad ";
+                    $consulta .= "LEFT JOIN auxcategorias cat ON act.idcategoria = cat.id ";
                     $consulta .= "WHERE act.idisla = :isla ";
                     $consulta .= "GROUP BY act.id ";
                     $consulta .= "ORDER BY act.created DESC ";
