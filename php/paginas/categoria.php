@@ -1,24 +1,26 @@
 <?php
     session_start();
     // Obtener la isla sobre la que se va a maquetar la imagen y la pagina actual
-    $isla = (isset($_GET['isla'])) ? $_GET['isla'] : "7";
+    $categoria = (isset($_GET['categoria'])) ? $_GET['categoria'] : "1";
+    $pagina = (isset($_GET['pagina'])) ? $_GET['pagina'] : "1";
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
 
     // Saber el nombre de los campos de las islas 
-    $consulta = "SELECT * FROM auxislas where id = :isla ORDER BY nombre";
+    $consulta = "SELECT * FROM auxcategorias where id = :categoria";
     $result = $db->prepare($consulta);
-    $result->execute(array(':isla' => $isla));
+    $result->execute(array(':categoria' => $categoria));
     $arrayResult = $result->fetchAll();
-    $idIsla = $arrayResult[0]['id'];
-    $nombreIsla = $arrayResult[0]['nombre'];
-
-    $consulta = "SELECT COUNT(id) as total FROM actividades where idisla = :isla";
+    $idCategoria = $arrayResult[0]['id'];
+    $nombreCategoria = $arrayResult[0]['nombre'];
+    
+    $consulta = "SELECT COUNT(id) as total FROM actividades where idcategoria = :categoria";
     $result = $db->prepare($consulta);
-    $result->execute(array(':isla' => $isla));
+    $result->execute(array(':categoria' => $categoria));
     $arrayResult = $result->fetchAll();
     $totalActividades = $arrayResult[0]['total'];
+    echo $totalActividades;
 ?>
 
 <!DOCTYPE html>
@@ -98,7 +100,7 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <h1>Categoria</h1>
+                    <h1><?php echo $nombreCategoria; ?></h1>
                     
                     <div class="row">
                         <hr>
@@ -109,11 +111,12 @@
                         $consulta .= "LEFT JOIN votos v ON act.id = v.idactividad ";
                         $consulta .= "LEFT JOIN recursos r ON act.id = r.idactividad ";
                         $consulta .= "LEFT JOIN auxcategorias cat ON act.idcategoria = cat.id ";
+                        $consulta .= "WHERE act.idcategoria = :categoria ";
                         $consulta .= "GROUP BY act.id ";
-                        $consulta .= "ORDER BY AVG( v.valoracion ) DESC ";
-                        $consulta .= "LIMIT 3";
+                        $consulta .= "ORDER BY act.created DESC ";
+                        $consulta .= "LIMIT 6 OFFSET 3 ";
                         $result = $db->prepare($consulta);
-                        $result->execute();
+                        $result->execute(array(':categoria' => $idCategoria) );
                         $arrayResult = $result->fetchAll();
                         // Más Recientes 
                         for($z=0;$z<$result->rowCount();$z++){
@@ -142,7 +145,7 @@
                             }                 
                             echo '               </p>';
                             echo '           </div>';
-                            echo '       <a href="./php/paginas/actividad.php?actividad='.$arrayResult[$z]['id'].'" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>';
+                            echo '       <a href="./actividad.php?actividad='.$arrayResult[$z]['id'].'" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>';
                             echo '       </div>';
                             echo '    </div>';
                             echo '</div>';
