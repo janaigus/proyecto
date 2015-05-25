@@ -67,7 +67,16 @@
                 <a href="#top" onclick = $("#menu-close").click(); >Home</a>
             </li>
             <li>
-                <a href="#actividades" onclick = $("#menu-close").click(); >Actividades</a>
+                <a href="#valoradas" onclick = $("#menu-close").click(); >Mejor Valoradas</a>
+            </li>
+            <li>
+                <a href="#busqueda" onclick = $("#menu-close").click(); >Buscar actividades en <?php echo $nombreIsla?></a>
+            </li>
+            <li>
+                <a href="#recientes" onclick = $("#menu-close").click(); >Más Recientes</a>
+            </li>
+            <li>
+                <a href="#contacto" onclick = $("#menu-close").click(); >Contacto</a>
             </li>
             <hr>
             <li>
