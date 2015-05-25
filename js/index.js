@@ -2,79 +2,7 @@ expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 var humanoRegistro = false;
 
 $(document).ready(function () {
-    //RELLENAR LAS ACTIVIDADES MAS RECIENTES
-    $.getJSON('./php/obtenerRecursos/obtenerMejorValoradas.php',
-        function(respuesta)
-        {
-            var cadena = '';            
-            $.each(respuesta, function(i, tupla){
-                var activo = ( i == 0 ) ? ' active ' : '';
-                cadena += '<div class="item'+activo+'">';
-                cadena += '    <div class="row">';
-                cadena += '       <div class="col-xs-12 col-sm-12 col-md-6">';
-                cadena += '            <a href=""> <img src="'+tupla.ruta+'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
-                cadena += '       </div>';
-                cadena += '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
-                cadena += '            <h3>'+(i+1)+". "+tupla.titulo+'<h5>'+tupla.creada+'</h5></h3>';
-                cadena += '            <h4>'+tupla.categoria+'</h4>';
-                cadena += '            <p>'+tupla.descripcion+'</p>';
-                cadena += '            <div class="ratings">';
-                cadena += '                <p class="pull-right" style="color:#fff">'+tupla.veces+' veces valorado</p>';
-                cadena += '                <p>';
-                for(var i = 0;i < 5;i++){
-                    if(i < tupla.media){
-                        cadena += '<span class="glyphicon glyphicon-star"></span>';
-                    }else{
-                        cadena += '<span class="glyphicon glyphicon-star-empty"></span>';
-                    }
-                }                 
-                cadena += '               </p>';
-                cadena += '           </div>';
-                cadena += '       <a href="#" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>';
-                cadena += '       </div>';
-                cadena += '    </div>';
-                cadena += '</div>';
-            });
-            $("#itemsCarouselMejorValoradas").html(cadena);
-        }
-    );
     
-    //RELLENAR LAS ACTIVIDADES MEJOR VALORADAS
-    $.getJSON('./php/obtenerRecursos/obtenerMasRecientes.php',
-        function(respuesta)
-        {
-            var cadena = '';            
-            $.each(respuesta, function(i, tupla){
-                var activo = ( i == 0 ) ? ' active ' : '';
-                cadena += '<div class="item'+activo+'">';
-                cadena += '    <div class="row">';
-                cadena += '       <div class="col-xs-12 col-sm-12 col-md-6">';
-                cadena += '            <a href=""> <img src="'+tupla.ruta+'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
-                cadena += '       </div>';
-                cadena += '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
-                cadena += '            <h3>'+tupla.titulo+'<h5>'+tupla.creada+'</h5></h3>';
-                cadena += '            <h4>'+tupla.categoria+'</h4>';
-                cadena += '            <p>'+tupla.descripcion+'</p>';
-                cadena += '            <div class="ratings">';
-                cadena += '                <p class="pull-right" style="color:#fff">'+tupla.veces+' veces valorado</p>';
-                cadena += '                <p>';
-                for(var i = 0;i < 5;i++){
-                    if(i < tupla.media){
-                        cadena += '<span class="glyphicon glyphicon-star"></span>';
-                    }else{
-                        cadena += '<span class="glyphicon glyphicon-star-empty"></span>';
-                    }
-                }                 
-                cadena += '               </p>';
-                cadena += '           </div>';
-                cadena += '       <a href="#" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>';
-                cadena += '       </div>';
-                cadena += '    </div>';
-                cadena += '</div>';
-            });
-            $("#itemsCarouselMasRecientes").html(cadena);
-        }
-    );
     
     // ISLAS Y MUNICIPIOS
     // Cargar las islas en select de islas de la ventana de registro

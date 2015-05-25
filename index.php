@@ -1,5 +1,7 @@
 <?php
     session_start();
+    require('php/bd/conexionBDlocal.php');
+    $db = conectaDb();
 ?>
 
 <!DOCTYPE html>
@@ -119,7 +121,52 @@
                                 
                                 <!-- Carousel items -->
                                 <div class="carousel-inner" id="itemsCarouselMejorValoradas">
-                                    
+                    <?php
+                    $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
+                    $consulta .= "cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media ";
+                    $consulta .= "FROM actividades act ";
+                    $consulta .= "INNER JOIN votos v ON act.id = v.idactividad ";
+                    $consulta .= "INNER JOIN recursos r ON act.id = r.idactividad ";
+                    $consulta .= "INNER JOIN auxcategorias cat ON act.idcategoria = cat.id ";
+                    $consulta .= "GROUP BY act.id ";
+                    $consulta .= "ORDER BY AVG( v.valoracion ) DESC ";
+                    $consulta .= "LIMIT 3";
+                    $result = $db->prepare($consulta);
+                    $result->execute();
+                    $arrayResult = $result->fetchAll();
+                    // Más Recientes 
+                    for($z=0;$z<$result->rowCount();$z++){
+                        if($z == 0){
+                            echo '<div class="item active">';
+                        }else{
+                            echo '<div class="item">';
+                        }
+                        echo '    <div class="row">';
+                        echo '       <div class="col-xs-12 col-sm-12 col-md-6">';
+                        echo '            <a href=""> <img src="'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
+                        echo '       </div>';
+                        echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
+                        echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
+                        echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
+                        echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
+                        echo '            <div class="ratings">';
+                        echo '                <p class="pull-right" style="color:#fff">'.$arrayResult[$z]['veces'].' veces valorado</p>';
+                        echo '                <p>';
+                        for($i = 0;$i < 5;$i++){
+                            if($i < $arrayResult[$z]['media']){
+                                echo '<span class="glyphicon glyphicon-star"></span>';
+                            }else{
+                                echo '<span class="glyphicon glyphicon-star-empty"></span>';
+                            }
+                        }                 
+                        echo '               </p>';
+                        echo '           </div>';
+                        echo '       <a href="#" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>';
+                        echo '       </div>';
+                        echo '    </div>';
+                        echo '</div>';
+                    }
+                    ?>    
                                 </div>
                                 
                                 <div class="row">
@@ -173,8 +220,54 @@
                                 
                                 <!-- Carousel items -->
                                 <div class="carousel-inner" id="itemsCarouselMasRecientes">
-                                </div>
                                 
+                    <?php
+                    $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
+                    $consulta .= "cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media ";
+                    $consulta .= "FROM actividades act ";
+                    $consulta .= "INNER JOIN votos v ON act.id = v.idactividad ";
+                    $consulta .= "INNER JOIN recursos r ON act.id = r.idactividad ";
+                    $consulta .= "INNER JOIN auxcategorias cat ON act.idcategoria = cat.id ";
+                    $consulta .= "GROUP BY act.id ";
+                    $consulta .= "ORDER BY act.created DESC ";
+                    $consulta .= "LIMIT 3";
+                    $result = $db->prepare($consulta);
+                    $result->execute();
+                    $arrayResult = $result->fetchAll();
+                    // Más Recientes 
+                    for($z=0;$z<$result->rowCount();$z++){
+                        if($z == 0){
+                            echo '<div class="item active">';
+                        }else{
+                            echo '<div class="item">';
+                        }
+                        echo '    <div class="row">';
+                        echo '       <div class="col-xs-12 col-sm-12 col-md-6">';
+                        echo '            <a href=""> <img src="'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
+                        echo '       </div>';
+                        echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
+                        echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
+                        echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
+                        echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
+                        echo '            <div class="ratings">';
+                        echo '                <p class="pull-right" style="color:#fff">'.$arrayResult[$z]['veces'].' veces valorado</p>';
+                        echo '                <p>';
+                        for($i = 0;$i < 5;$i++){
+                            if($i < $arrayResult[$z]['media']){
+                                echo '<span class="glyphicon glyphicon-star"></span>';
+                            }else{
+                                echo '<span class="glyphicon glyphicon-star-empty"></span>';
+                            }
+                        }                 
+                        echo '               </p>';
+                        echo '           </div>';
+                        echo '       <a href="#" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>';
+                        echo '       </div>';
+                        echo '    </div>';
+                        echo '</div>';
+                    }
+                    ?>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <span data-slide="next" class="btn-vertical-slider glyphicon glyphicon-circle-arrow-down"

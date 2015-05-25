@@ -1,13 +1,11 @@
 <?php
     session_start();
     // Obtener la isla sobre la que se va a maquetar la imagen y la pagina actual
-    $isla = (isset($_GET['islaSeleccionada'])) ? $_POST['islaSeleccionada'] : "7";
-    $paginaSeleccionada = (isset($_GET['paginaSeleccionada'])) ? $_POST['paginaSeleccionada'] : "1";
-    $municipioSeleccionado = (isset($_GET['municipioSeleccionado'])) ? $_POST['municipioSeleccionado'] : "0";
-    $categoriaSeleccionada = (isset($_GET['categoriaSeleccionada'])) ? $_POST['categoriaSeleccionada'] : "1";
+    $isla = (isset($_GET['isla'])) ? $_GET['isla'] : "7";
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
+
     // Saber el nombre de los campos de las islas 
     $consulta = "SELECT * FROM auxislas where id = :isla ORDER BY nombre";
     $result = $db->prepare($consulta);
@@ -15,26 +13,12 @@
     $arrayResult = $result->fetchAll();
     $idIsla = $arrayResult[0]['id'];
     $nombreIsla = $arrayResult[0]['nombre'];
-    // Saber el numero total de actividades que hay
-    $consulta = "SELECT COUNT(id) as total FROM actividades WHERE idisla = :isla";
+
+    $consulta = "SELECT COUNT(id) as total FROM actividades where idisla = :isla";
     $result = $db->prepare($consulta);
-    $result->execute(array(':isla' => $idIsla));
+    $result->execute(array(':isla' => $isla));
     $arrayResult = $result->fetchAll();
     $totalActividades = $arrayResult[0]['total'];
-    $paginas =  $totalActividades / 3;
-    // Devolver los resultados de las islas con los datos necesario para maquetarlos
-    $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
-    $consulta .= "cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media ";
-    $consulta .= "FROM actividades act ";
-    $consulta .= "INNER JOIN votos v ON act.id = v.idactividad ";
-    $consulta .= "INNER JOIN recursos r ON act.id = r.idactividad ";
-    $consulta .= "INNER JOIN auxcategorias cat ON act.idcategoria = cat.id ";
-    $consulta .= "WHERE act.idisla = :isla ";
-    $consulta .= "GROUP BY act.id ";
-    $consulta .= "ORDER BY act.titulo ";
-    $result = $db->prepare($consulta);
-    $result->execute(array(':isla' => $idIsla));
-    $arrayResult = $result->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -101,6 +85,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Ayudando a personas para aprender. <h1><b>Help to Know!</b></h1></h2>
+                    <h1>Actividades de <?php echo $nombreIsla; ?></h1>
                 </div>
             </div>
             <!-- /.row -->
@@ -108,51 +93,59 @@
         <!-- /.container -->
     </section>
     
-    <!-- Seccion principal donde estarán todas las actividades -->
-    <section id="actividades" class="services bg-primary">
+    <!-- Mejor valoradas -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+    <section id="valoradas" class="services bg-primary">
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <h1>Actividades de <?php echo $nombreIsla; ?></h1>
+                    <h2>Actividades Mejor Valoradas</h2>
                     <hr class="small">
                     <div class="row">
-                   <!-- Principio del carrousel -->
-                   <div class="col-xs-12 col-sm-12 col-md-12">
-                        <form class="form" action="php/paginas/busqueda.php" method="POST" id="formularioBusqueda">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <select id="busquedaIslas" name="busquedaIslas" class="form-control">
-                                    </select>
+                       <!-- Principio del carrousel -->
+                       <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div id="myCarouselValoradas" class="vertical-slider carousel vertical slide col-md-12" data-ride="carousel">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <span data-slide="prev" class="btn-vertical-slider glyphicon glyphicon-circle-arrow-up "
+                                            style="font-size: 30px"></span>  
+                                    </div>
+                                    <div class="col-md-8"> 
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <select id="busquedaMunicipios" name="busquedaMunicipios" class="form-control" disabled>
-                                        <option value="0">Seleccione municipio</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <select id="busquedaCategorias" name="busquedaCategorias" class="form-control">
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <button id="enviarFormularioBusqueda" type="button" class="btn btn-lg btn-dark">Filtrar actividades</button>
-                        </form>
-                   </div>
-                    <hr class="small">
-                    <div class="row">
+                                <br />
+                                
+                    <!-- Carousel items -->
                     <?php
+                    $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
+                    $consulta .= "cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media ";
+                    $consulta .= "FROM actividades act ";
+                    $consulta .= "INNER JOIN votos v ON act.id = v.idactividad ";
+                    $consulta .= "INNER JOIN recursos r ON act.id = r.idactividad ";
+                    $consulta .= "INNER JOIN auxcategorias cat ON act.idcategoria = cat.id ";
+                    $consulta .= "WHERE act.idisla = :isla ";
+                    $consulta .= "GROUP BY act.id ";
+                    $consulta .= "ORDER BY AVG( v.valoracion ) DESC ";
+                    $consulta .= "LIMIT 3";
+                    $result = $db->prepare($consulta);
+                    $result->execute(array(":isla" => $idIsla ) );
+                    $arrayResult = $result->fetchAll();
+                    //Comprobar que se haya devuelto algun resultado
+                    if($result->rowCount() != 0){
+                    // Más Recientes 
+                    echo '<div class="carousel-inner" id="itemsCarouselMejorValoradas">';
                     for($z=0;$z<$result->rowCount();$z++){
-                        echo '<div class="item">';
+                        if($z == 0){
+                            echo '<div class="item active">';
+                        }else{
+                            echo '<div class="item">';
+                        }
                         echo '    <div class="row">';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6">';
                         echo '            <a href=""> <img src="../../'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
                         echo '       </div>';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
-                        echo '            <h3>'.$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
+                        echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
                         echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
                         echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
                         echo '            <div class="ratings">';
@@ -171,33 +164,24 @@
                         echo '       </div>';
                         echo '    </div>';
                         echo '</div>';
-                        echo '<hr>';
+                    }
+                    echo '</div>';
+                    }else{
+                        echo "<h2>No hay actividades en la isla: ".$nombreIsla."</h2>";
                     }
                     ?>
-
-                    <!-- Pagination -->
-                    <div class="row text-center">
-                        <div class="col-lg-12">
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#">&laquo;</a>
-                                </li>
-                                <?php 
-                                    for($i=1;$i<=$paginas;$i++){
-                                        echo '<li class="active">';
-                                        echo '  <a href="#">'.$i.'</a>';
-                                        echo '</li>';
-                                    }
-                                ?>
-                                <li>
-                                    <a href="#">&raquo;</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- /.row -->
-  
-                        
+                    
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <span data-slide="next" class="btn-vertical-slider glyphicon glyphicon-circle-arrow-down"
+                                            style="color: Black; font-size: 30px"></span>
+                                    </div>
+                                    <div class="col-md-8">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Fin del carrousel -->
                     </div>
                     <!-- /.row (nested) -->
                 </div>
@@ -208,6 +192,165 @@
         <!-- /.container -->
     </section>
     
+    <!-- Seccion de busqueda -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+    <section id="busqueda" class="portfolio">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <h2>Busqueda de actividades</h2>
+                    <hr class="small">
+                    <div class="row">
+                       <!-- Principio del carrousel -->
+                       <div class="col-xs-12 col-sm-12 col-md-12">
+                            <form class="form" action="php/paginas/busqueda.php" method="POST" id="formularioBusqueda">
+                                <div class="col-lg-4 col-lg-offset-2">
+                                    <div class="form-group">
+                                        <select id="busquedaMunicipios" name="busquedaMunicipios" class="form-control">
+                                            <option value="0">Seleccione municipio</option>
+                                            <?php
+                                            $consulta = "SELECT * FROM auxmunicipios where idisla = :isla ORDER BY nombre";
+                                            $result = $db->prepare($consulta);
+                                            $result->execute(array(':isla' => $idIsla));
+                                            $arrayResult = $result->fetchAll();
+                                            for($i=0;$i<$result->rowCount();$i++){
+                                                echo '<option value="'.$arrayResult[$i]['id'].'">'.$arrayResult[$i]['nombre'].'</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <select id="busquedaCategorias" name="busquedaCategorias" class="form-control">
+                                            <option value="0">Seleccione categoria</option>
+                                            <?php
+                                            $consulta = "SELECT * FROM auxcategorias ORDER BY nombre";
+                                            $result = $db->prepare($consulta);
+                                            $result->execute();
+                                            $arrayResult = $result->fetchAll();
+                                            for($i=0;$i<$result->rowCount();$i++){
+                                                echo '<option value="'.$arrayResult[$i]['id'].'">'.$arrayResult[$i]['nombre'].'</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button id="enviarFormularioBusqueda" type="button" class="btn btn-lg btn-dark"
+                                <?php echo ($totalActividades == 0) ? 'disabled>No hay actividades' : ">Buscar actividades";?></button>
+                            </form>
+                            
+                       </div>
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>        
+        
+        <!-- Más Recientes -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+    <section id="recientes" class="services bg-primary">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <h2>Actividades Más Recientes</h2>
+                    <hr class="small">
+                    <div class="row">
+                       <!-- Principio del carrousel -->
+                       <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div id="myCarouselRecientes" class="vertical-slider carousel vertical slide col-md-12" data-ride="carousel">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <span data-slide="prev" class="btn-vertical-slider glyphicon glyphicon-circle-arrow-up "
+                                            style="font-size: 30px"></span>  
+                                    </div>
+                                    <div class="col-md-8"> 
+                                    </div>
+                                </div>
+                                <br />
+                                
+                                <!-- Carousel items -->
+                                
+                                
+                    <?php
+                    $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
+                    $consulta .= "cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media ";
+                    $consulta .= "FROM actividades act ";
+                    $consulta .= "INNER JOIN votos v ON act.id = v.idactividad ";
+                    $consulta .= "INNER JOIN recursos r ON act.id = r.idactividad ";
+                    $consulta .= "INNER JOIN auxcategorias cat ON act.idcategoria = cat.id ";
+                    $consulta .= "WHERE act.idisla = :isla ";
+                    $consulta .= "GROUP BY act.id ";
+                    $consulta .= "ORDER BY act.created DESC ";
+                    $consulta .= "LIMIT 3";
+                    $result = $db->prepare($consulta);
+                    $result->execute(array(":isla" => $idIsla ) );
+                    $arrayResult = $result->fetchAll();
+                    // Más Recientes
+                    if($result->rowCount() != 0){
+                    echo '<div class="carousel-inner" id="itemsCarouselMasRecientes">';
+                    for($z=0;$z<$result->rowCount();$z++){
+                        if($z == 0){
+                            echo '<div class="item active">';
+                        }else{
+                            echo '<div class="item">';
+                        }
+                        echo '    <div class="row">';
+                        echo '       <div class="col-xs-12 col-sm-12 col-md-6">';
+                        echo '            <a href=""> <img src="../../'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
+                        echo '       </div>';
+                        echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
+                        echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
+                        echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
+                        echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
+                        echo '            <div class="ratings">';
+                        echo '                <p class="pull-right" style="color:#fff">'.$arrayResult[$z]['veces'].' veces valorado</p>';
+                        echo '                <p>';
+                        for($i = 0;$i < 5;$i++){
+                            if($i < $arrayResult[$z]['media']){
+                                echo '<span class="glyphicon glyphicon-star"></span>';
+                            }else{
+                                echo '<span class="glyphicon glyphicon-star-empty"></span>';
+                            }
+                        }                 
+                        echo '               </p>';
+                        echo '           </div>';
+                        echo '       <a href="#" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>';
+                        echo '       </div>';
+                        echo '    </div>';
+                        echo '</div>';
+                    }
+                    echo '</div>';
+                    }else{
+                        echo "<h2>No hay actividades en la isla: ".$nombreIsla."</h2>";
+                    }
+                    ?>
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <span data-slide="next" class="btn-vertical-slider glyphicon glyphicon-circle-arrow-down"
+                                            style="color: Black; font-size: 30px"></span>
+                                    </div>
+                                    <div class="col-md-8">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Fin del carrousel -->
+                    </div>
+                    <!-- /.row (nested) -->
+                </div>
+                <!-- /.col-lg-10 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
     <!-- Footer -->
     <footer>
         <div id="contacto" class="container">

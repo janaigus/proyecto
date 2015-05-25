@@ -2,7 +2,7 @@
     // Requerir el fichero para la conexion con la base de datos 
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
-    $consulta .= "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
+    $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
     $consulta .= "cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media ";
     $consulta .= "FROM actividades act ";
     $consulta .= "INNER JOIN votos v ON act.id = v.idactividad ";
