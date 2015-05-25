@@ -156,27 +156,17 @@
                         <div class="row text-center">
                             <div class="col-lg-12">
                                 <ul class="pagination">
-                                    <li>
-                                        <a href="#">&laquo;</a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="#">1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">3</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">4</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">5</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">&raquo;</a>
-                                    </li>
+                                    <?php 
+                                        for($i=1;$i <= ceil($totalActividades / 3);$i++){
+                                            if($i == $pagina){
+                                                echo '<li class="active">';
+                                            }else{
+                                                echo '<li>';
+                                            }
+                                            echo '<a href="categoria.php?categoria='.$categoria.'&pagina='.$i.'">'.$i.'</a>';
+                                            echo '</li>';
+                                        }
+                                    ?>
                                 </ul>
                             </div>
                         </div>
