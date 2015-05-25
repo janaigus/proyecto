@@ -48,7 +48,7 @@
                 <a href="#top" onclick = $("#menu-close").click(); >Home</a>
             </li>
             <li>
-                <a href="#valoradas" onclick = $("#menu-close").click(); >Mejor Valoradas</a>
+                <a href="#contacto" onclick = $("#menu-close").click(); >Contacto</a>
             </li>
             <hr>
             <li>

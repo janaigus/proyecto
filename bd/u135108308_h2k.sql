@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-05-2015 a las 21:35:49
+-- Tiempo de generación: 25-05-2015 a las 15:32:18
 -- Versión del servidor: 5.5.43-MariaDB-1ubuntu0.14.04.2
 -- Versión de PHP: 5.5.9-1ubuntu4.9
 
@@ -264,7 +264,28 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   PRIMARY KEY (`id`),
   KEY `idactividad` (`idactividad`),
   KEY `idusuario` (`idusuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=16 ;
+
+--
+-- Volcado de datos para la tabla `comentarios`
+--
+
+INSERT INTO `comentarios` (`id`, `idactividad`, `idusuario`, `texto`, `created`) VALUES
+(1, 1, 2, 'Comentario de prueba', '2015-05-25 13:31:47'),
+(2, 1, 3, 'Comentario de prueba', '2015-05-25 13:31:47'),
+(3, 2, 6, 'Comentario de prueba', '2015-05-25 13:31:47'),
+(4, 2, 7, 'Comentario de prueba', '2015-05-25 13:31:47'),
+(5, 3, 8, 'Comentario de prueba', '2015-05-25 13:31:47'),
+(6, 3, 5, 'Comentario de prueba', '2015-05-25 13:31:47'),
+(7, 1, 6, 'Comentario de prueba aleatorio', '2015-05-25 13:31:47'),
+(8, 10, 4, 'Comentario de prueba', '2015-05-25 13:31:47'),
+(9, 10, 3, 'Comentario de prueba', '2015-05-25 13:31:47'),
+(10, 3, 6, 'Comentario de prueba', '2015-05-25 13:31:47'),
+(11, 2, 3, 'Comentario de prueba', '2015-05-25 13:31:47'),
+(12, 2, 4, 'Comentario de prueba', '2015-05-25 13:31:47'),
+(13, 6, 8, 'Comentario de prueba', '2015-05-25 13:31:47'),
+(14, 6, 5, 'Comentario de prueba', '2015-05-25 13:31:47'),
+(15, 10, 7, 'Comentario de prueba', '2015-05-25 13:31:47');
 
 -- --------------------------------------------------------
 
@@ -317,6 +338,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `idmunicipio` int(11) NOT NULL,
   `idisla` int(11) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `avatar` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idmunicipio` (`idmunicipio`),
   KEY `idrol` (`idrol`),
@@ -327,15 +349,15 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `email`, `nick`, `nombre`, `apellidos`, `password`, `idrol`, `idmunicipio`, `idisla`, `created`) VALUES
-(1, 'janaigus@gmail.com', 'janai', 'Janai Gustavo', 'Expósito Bethencourt', '123456789', 1, 38031, 7, '2015-05-15 21:39:36'),
-(2, 'jonaigus@gmail.com', 'admin', 'Administrador', 'Administrador', '123456789', 1, 38041, 7, '2015-05-15 21:39:36'),
-(3, 'janai_exposito@outlook.com', 'Usuario', 'Usuario', 'Usuario', '123456789', 2, 35004, 3, '2015-05-15 21:40:41'),
-(4, 'otrouser@otrouser.es', 'Otrouser', 'Otrouser', 'Otrouser', '123456789', 2, 35015, 1, '2015-05-15 21:40:41'),
-(5, 'pepe@benavente.com', 'pebe', 'Pepe', 'Benavente', '1234567', 2, 38028, 7, '2015-05-23 21:58:05'),
-(6, 'hely@clak.com', 'hecl', 'Hely', 'Clarckson', '1234', 2, 35016, 2, '2015-05-23 22:00:18'),
-(7, 'metal@lovers.com', 'melo', 'Metal', 'Lovers', '1234', 2, 38901, 5, '2015-05-23 22:04:03'),
-(8, 'datos@prueba.com', 'dapr', 'Datos', 'Prueba', '1234', 2, 35007, 1, '2015-05-23 22:05:41');
+INSERT INTO `usuarios` (`id`, `email`, `nick`, `nombre`, `apellidos`, `password`, `idrol`, `idmunicipio`, `idisla`, `created`, `avatar`) VALUES
+(1, 'janaigus@gmail.com', 'janai', 'Janai Gustavo', 'Expósito Bethencourt', '123456789', 1, 38031, 7, '2015-05-15 21:39:36', ''),
+(2, 'jonaigus@gmail.com', 'admin', 'Administrador', 'Administrador', '123456789', 1, 38041, 7, '2015-05-15 21:39:36', ''),
+(3, 'janai_exposito@outlook.com', 'Usuario', 'Usuario', 'Usuario', '123456789', 2, 35004, 3, '2015-05-15 21:40:41', ''),
+(4, 'otrouser@otrouser.es', 'Otrouser', 'Otrouser', 'Otrouser', '123456789', 2, 35015, 1, '2015-05-15 21:40:41', ''),
+(5, 'pepe@benavente.com', 'pebe', 'Pepe', 'Benavente', '1234567', 2, 38028, 7, '2015-05-23 21:58:05', ''),
+(6, 'hely@clak.com', 'hecl', 'Hely', 'Clarckson', '1234', 2, 35016, 2, '2015-05-23 22:00:18', ''),
+(7, 'metal@lovers.com', 'melo', 'Metal', 'Lovers', '1234', 2, 38901, 5, '2015-05-23 22:04:03', ''),
+(8, 'datos@prueba.com', 'dapr', 'Datos', 'Prueba', '1234', 2, 35007, 1, '2015-05-23 22:05:41', '');
 
 -- --------------------------------------------------------
 
@@ -389,10 +411,10 @@ INSERT INTO `votos` (`id`, `idactividad`, `idusuario`, `valoracion`, `created`) 
 -- Filtros para la tabla `actividades`
 --
 ALTER TABLE `actividades`
-  ADD CONSTRAINT `actividades_ibfk_4` FOREIGN KEY (`idisla`) REFERENCES `auxislas` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `actividades_ibfk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `actividades_ibfk_2` FOREIGN KEY (`idcategoria`) REFERENCES `auxcategorias` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `actividades_ibfk_3` FOREIGN KEY (`idmunicipio`) REFERENCES `auxmunicipios` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `actividades_ibfk_3` FOREIGN KEY (`idmunicipio`) REFERENCES `auxmunicipios` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `actividades_ibfk_4` FOREIGN KEY (`idisla`) REFERENCES `auxislas` (`id`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `auxmunicipios`
@@ -404,7 +426,7 @@ ALTER TABLE `auxmunicipios`
 -- Filtros para la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`idactividad`) REFERENCES `actividades` (`idusuario`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`idactividad`) REFERENCES `actividades` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `comentarios_ibfk_2` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`id`) ON UPDATE CASCADE;
 
 --
@@ -417,9 +439,9 @@ ALTER TABLE `recursos`
 -- Filtros para la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD CONSTRAINT `usuarios_ibfk_3` FOREIGN KEY (`idisla`) REFERENCES `auxislas` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`idmunicipio`) REFERENCES `auxmunicipios` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`idrol`) REFERENCES `auxroles` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`idrol`) REFERENCES `auxroles` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `usuarios_ibfk_3` FOREIGN KEY (`idisla`) REFERENCES `auxislas` (`id`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `votos`
