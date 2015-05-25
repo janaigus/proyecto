@@ -2,7 +2,7 @@
     session_start();
     // Obtener la isla sobre la que se va a maquetar la imagen y la pagina actual
     $categoria = (isset($_GET['categoria'])) ? $_GET['categoria'] : "1";
-    $pagina = (isset($_GET['pagina'])) ? $_GET['pagina'] : "1";
+    $pagina = (isset($_GET['pagina'])) ? (int)$_GET['pagina'] : 1;
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
@@ -20,7 +20,6 @@
     $result->execute(array(':categoria' => $categoria));
     $arrayResult = $result->fetchAll();
     $totalActividades = $arrayResult[0]['total'];
-    echo $totalActividades;
 ?>
 
 <!DOCTYPE html>
@@ -114,7 +113,7 @@
                         $consulta .= "WHERE act.idcategoria = :categoria ";
                         $consulta .= "GROUP BY act.id ";
                         $consulta .= "ORDER BY act.created DESC ";
-                        $consulta .= "LIMIT 6 OFFSET 3 ";
+                        $consulta .= "LIMIT ".(3)." OFFSET ".(($pagina-1) * 3);
                         $result = $db->prepare($consulta);
                         $result->execute(array(':categoria' => $idCategoria) );
                         $arrayResult = $result->fetchAll();
