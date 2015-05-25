@@ -170,9 +170,9 @@
         $arrayResult = $result->fetchAll();
         for($i = 0;$i < $result->rowCount();$i++){
             echo '<div class="well" style="background-color: rgb(220, 246, 216);">';
-            echo '<h3><img src="../../'.$arrayResult[$i]['avatar'].'img/img_usuarios/avatares/default.png" alt="..." class="img-circle" height="30px" width="35px"> Anonymous</h3>';
-            echo '<span class="pull-right">10 days ago</span>';
-            echo '<p>This product was great in terms of quality. I would definitely buy another!</p>';
+            echo '<h3><img src="../../'.$arrayResult[$i]['avatar'].'" alt="..." class="img-circle" height="30px" width="35px">'.$arrayResult[$i]['nombre'].' '.$arrayResult[$i]['apellidos'].'</h3>';
+            echo '<span class="pull-right">'.$arrayResult[$i]['fecha'].'</span>';
+            echo '<p>'.$arrayResult[$i]['texto'].'</p>';
             echo '</div>';
         }
         ?>
