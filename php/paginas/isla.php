@@ -1,5 +1,24 @@
 <?php
-    session_start();LEFT
+    session_start();
+    // Obtener la isla sobre la que se va a maquetar la imagen y la pagina actual
+    $isla = (isset($_GET['isla'])) ? $_GET['isla'] : "7";
+    // Traer elementos de la base de datos
+    require('../bd/conexionBDlocal.php');
+    $db = conectaDb();
+
+    // Saber el nombre de los campos de las islas 
+    $consulta = "SELECT * FROM auxislas where id = :isla ORDER BY nombre";
+    $result = $db->prepare($consulta);
+    $result->execute(array(':isla' => $isla));
+    $arrayResult = $result->fetchAll();
+    $idIsla = $arrayResult[0]['id'];
+    $nombreIsla = $arrayResult[0]['nombre'];
+
+    $consulta = "SELECT COUNT(id) as total FROM actividades where idisla = :isla";
+    $result = $db->prepare($consulta);
+    $result->execute(array(':isla' => $isla));
+    $arrayResult = $result->fetchAll();
+    $totalActividades = $arrayResult[0]['total'];
 ?>
 
 <!DOCTYPE html>
