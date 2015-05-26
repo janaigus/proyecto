@@ -15,7 +15,7 @@
     $nombreIsla = $arrayResult[0]['nombre'];
 
     $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
-    $consulta .= "cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media ";
+    $consulta .= "act.idcategoria, cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media ";
     $consulta .= "FROM actividades act ";
     $consulta .= "LEFT JOIN votos v ON act.id = v.idactividad ";
     $consulta .= "LEFT JOIN recursos r ON act.id = r.idactividad ";
@@ -121,7 +121,9 @@
                 echo '       </div>';
                 echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
                 echo '            <h3>'.$arrayResult[0]['titulo'].'<h5>'.$arrayResult[0]['creada'].'</h5></h3>';
+                echo '            <a href="categoria.php?categoria='.$arrayResult[0]['idcategoria'].'" >';
                 echo '            <h4>'.$arrayResult[0]['categoria'].'</h4>';
+                echo '            </a>';
                 echo '            <p>'.$arrayResult[0]['descripcion'].'</p>';
                 echo '            <div class="ratings">';
                 echo '                <p class="pull-right" style="color:#000">'.$arrayResult[0]['veces'].' veces valorado</p>';
