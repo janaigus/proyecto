@@ -124,7 +124,7 @@
                 echo '       </div>';
                 echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
                 echo '            <h3>'.$arrayResult[0]['titulo'].'<h5>'.$arrayResult[0]['creada'].'</h5></h3>';
-                echo '            <a href="foro.php?categoria='.$arrayResult[$z]['idcategoria'].'&isla='.$arrayResult[$z]['idisla'];
+                echo '            <a href="foro.php?categoria='.$arrayResult[0]['idcategoria'].'&isla='.$arrayResult[0]['idisla'];
                 echo ' ">';
                 echo '            <h4>'.$arrayResult[0]['categoria'].'</h4>';
                 echo '            </a>';
