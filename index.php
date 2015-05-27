@@ -123,11 +123,14 @@
                                 <div class="carousel-inner" id="itemsCarouselMejorValoradas">
                     <?php
                     $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
-                    $consulta .= "act.idcategoria, cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media ";
+                    $consulta .= "act.idcategoria, cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media, ";
+                    $consulta .= "act.idisla, i.nombre, m.nombre as nombremunicipio ";
                     $consulta .= "FROM actividades act ";
                     $consulta .= "INNER JOIN votos v ON act.id = v.idactividad ";
                     $consulta .= "INNER JOIN recursos r ON act.id = r.idactividad ";
                     $consulta .= "INNER JOIN auxcategorias cat ON act.idcategoria = cat.id ";
+                    $consulta .= "INNER JOIN auxislas i ON act.idisla = i.id ";
+                    $consulta .= "INNER JOIN auxmunicipios m ON act.idmunicipio = m.id ";
                     $consulta .= "GROUP BY act.id ";
                     $consulta .= "ORDER BY AVG( v.valoracion ) DESC ";
                     $consulta .= "LIMIT 3";
@@ -147,7 +150,8 @@
                         echo '       </div>';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
                         echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
-                        echo '            <a href="php/paginas/foro.php?categoria='.$arrayResult[$z]['idcategoria'].'" style="color:white;">';
+                        echo '            <a href="php/paginas/foro.php?categoria='.$arrayResult[$z]['idcategoria'].'&isla='.$arrayResult[$z]['idisla'];
+                        echo ' " style="color:white;">';
                         echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
                         echo '            </a>';
                         echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
@@ -225,11 +229,14 @@
                                 
                     <?php
                     $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
-                    $consulta .= "act.idcategoria, cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media ";
+                    $consulta .= "act.idcategoria, cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media, ";
+                    $consulta .= "act.idisla, i.nombre, m.nombre as nombremunicipio ";
                     $consulta .= "FROM actividades act ";
                     $consulta .= "LEFT JOIN votos v ON act.id = v.idactividad ";
                     $consulta .= "LEFT JOIN recursos r ON act.id = r.idactividad ";
                     $consulta .= "LEFT JOIN auxcategorias cat ON act.idcategoria = cat.id ";
+                    $consulta .= "INNER JOIN auxislas i ON act.idisla = i.id ";
+                    $consulta .= "INNER JOIN auxmunicipios m ON act.idmunicipio = m.id ";
                     $consulta .= "GROUP BY act.id ";
                     $consulta .= "ORDER BY act.created DESC ";
                     $consulta .= "LIMIT 3";
@@ -249,7 +256,8 @@
                         echo '       </div>';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
                         echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
-                        echo '            <a href="php/paginas/foro.php?categoria='.$arrayResult[$z]['idcategoria'].'" style="color:white;">';
+                        echo '            <a href="php/paginas/foro.php?categoria='.$arrayResult[$z]['idcategoria'].'&isla='.$arrayResult[$z]['idisla'];
+                        echo ' " style="color:white;">';
                         echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
                         echo '            </a>';
                         echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
