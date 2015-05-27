@@ -155,7 +155,7 @@
                         echo '       </div>';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
                         echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
-                        echo '            <a href="categoria.php?categoria='.$arrayResult[$z]['idcategoria'].'" style="color:white;">';
+                        echo '            <a href="foro.php?categoria='.$arrayResult[$z]['idcategoria'].'" style="color:white;">';
                         echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
                         echo '            </a>';
                         echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
@@ -209,7 +209,7 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <h2>Busqueda de actividades</h2>
+                    <h2>Busqueda de actividades en <?php echo $nombreIsla;?></h2>
                     <hr class="small">
                     <div class="row">
                        <!-- Principio del carrousel -->
@@ -317,7 +317,7 @@
                         echo '       </div>';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
                         echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
-                        echo '            <a href="categoria.php?categoria='.$arrayResult[$z]['idcategoria'].'" style="color:white;">';
+                        echo '            <a href="foro.php?categoria='.$arrayResult[$z]['idcategoria'].'" style="color:white;">';
                         echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
                         echo '            </a>';
                         echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';

@@ -121,7 +121,7 @@
                 echo '       </div>';
                 echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
                 echo '            <h3>'.$arrayResult[0]['titulo'].'<h5>'.$arrayResult[0]['creada'].'</h5></h3>';
-                echo '            <a href="categoria.php?categoria='.$arrayResult[0]['idcategoria'].'" >';
+                echo '            <a href="foro.php?categoria='.$arrayResult[0]['idcategoria'].'" >';
                 echo '            <h4>'.$arrayResult[0]['categoria'].'</h4>';
                 echo '            </a>';
                 echo '            <p>'.$arrayResult[0]['descripcion'].'</p>';

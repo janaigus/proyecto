@@ -163,7 +163,7 @@
                                             }else{
                                                 echo '<li>';
                                             }
-                                            echo '<a href="categoria.php?categoria='.$categoria.'&pagina='.$i.'">'.$i.'</a>';
+                                            echo '<a href="foro.php?categoria='.$categoria.'&pagina='.$i.'">'.$i.'</a>';
                                             echo '</li>';
                                         }
                                     ?>
@@ -334,7 +334,7 @@
     <script src="../../js/bootstrap.min.js"></script>
     
     <!-- Mis archivos JavaScript -->
-    <script type="text/javascript" src="../../js/categoria.js"></script>
+    <script type="text/javascript" src="../../js/foro.js"></script>
         
     <!-- Custom Theme JavaScript -->
     <script>
