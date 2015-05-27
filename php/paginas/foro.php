@@ -2,22 +2,31 @@
     session_start();
     // Obtener la isla sobre la que se va a maquetar la imagen y la pagina actual
     $categoria = (isset($_GET['categoria'])) ? $_GET['categoria'] : "1";
+    $isla = (isset($_GET['isla'])) ? $_GET['isla'] : "1";
     $pagina = (isset($_GET['pagina'])) ? (int)$_GET['pagina'] : 1;
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
 
-    // Saber el nombre de los campos de las islas 
-    $consulta = "SELECT * FROM auxcategorias where id = :categoria";
+    // Saber el nombre de los campos de las categorias 
+    $consulta = "SELECT * FROM auxcategorias WHERE id = :categoria";
     $result = $db->prepare($consulta);
     $result->execute(array(':categoria' => $categoria));
     $arrayResult = $result->fetchAll();
     $idCategoria = $arrayResult[0]['id'];
     $nombreCategoria = $arrayResult[0]['nombre'];
     
-    $consulta = "SELECT COUNT(id) as total FROM actividades where idcategoria = :categoria";
+    // Saber el nombre de los campos de las islas
+    $consulta = "SELECT * FROM auxislas WHERE id = :isla";
     $result = $db->prepare($consulta);
-    $result->execute(array(':categoria' => $categoria));
+    $result->execute(array(':isla' => $isla));
+    $arrayResult = $result->fetchAll();
+    $idIsla = $arrayResult[0]['id'];
+    $nombreIsla = $arrayResult[0]['nombre'];
+
+    $consulta = "SELECT COUNT(id) as total FROM actividades WHERE idcategoria = :categoria AND idisla = :isla";
+    $result = $db->prepare($consulta);
+    $result->execute(array(':categoria' => $categoria, ':isla' => $isla));
     $arrayResult = $result->fetchAll();
     $totalActividades = $arrayResult[0]['total'];
 ?>
@@ -99,56 +108,64 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <h1><?php echo $nombreCategoria; ?></h1>
+                    <h1><?php echo $nombreCategoria." en ".$nombreIsla; ?></h1>
                     
                     <div class="row">
                         <hr>
                         <?php
                         $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
-                        $consulta .= "cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media ";
+                        $consulta .= "cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media, ";
+                        $consulta .= "act.idisla, i.nombre, m.nombre as nombremunicipio ";
                         $consulta .= "FROM actividades act ";
                         $consulta .= "LEFT JOIN votos v ON act.id = v.idactividad ";
                         $consulta .= "LEFT JOIN recursos r ON act.id = r.idactividad ";
                         $consulta .= "LEFT JOIN auxcategorias cat ON act.idcategoria = cat.id ";
-                        $consulta .= "WHERE act.idcategoria = :categoria ";
+                        $consulta .= "INNER JOIN auxislas i ON act.idisla = i.id ";
+                        $consulta .= "INNER JOIN auxmunicipios m ON act.idmunicipio = m.id ";
+                        $consulta .= "WHERE act.idcategoria = :categoria AND act.idisla = :isla ";
                         $consulta .= "GROUP BY act.id ";
                         $consulta .= "ORDER BY act.created DESC ";
                         $consulta .= "LIMIT ".(3)." OFFSET ".(($pagina-1) * 3);
                         $result = $db->prepare($consulta);
-                        $result->execute(array(':categoria' => $idCategoria) );
+                        $result->execute(array(':categoria' => $idCategoria, ':isla' => $idIsla) );
                         $arrayResult = $result->fetchAll();
-                        // Más Recientes 
-                        for($z=0;$z<$result->rowCount();$z++){
-                            if($z == 0){
-                                echo '<div class="item active">';
-                            }else{
-                                echo '<div class="item">';
-                            }
-                            echo '    <div class="row">';
-                            echo '       <div class="col-xs-12 col-sm-12 col-md-6">';
-                            echo '            <a href="./actividad.php?actividad='.$arrayResult[$z]['id'].'"> <img src="../../'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
-                            echo '       </div>';
-                            echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
-                            echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
-                            echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
-                            echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
-                            echo '            <div class="ratings">';
-                            echo '                <p class="pull-right" style="color:#fff">'.$arrayResult[$z]['veces'].' veces valorado</p>';
-                            echo '                <p>';
-                            for($i = 0;$i < 5;$i++){
-                                if($i < $arrayResult[$z]['media']){
-                                    echo '<span class="glyphicon glyphicon-star"></span>';
+                        // Comprobar que existan actividades o colocar en vacio
+                        if($result->rowCount() != 0){
+                            // Más Recientes 
+                            for($z=0;$z<$result->rowCount();$z++){
+                                if($z == 0){
+                                    echo '<div class="item active">';
                                 }else{
-                                    echo '<span class="glyphicon glyphicon-star-empty"></span>';
+                                    echo '<div class="item">';
                                 }
-                            }                 
-                            echo '               </p>';
-                            echo '           </div>';
-                            echo '       <a href="./actividad.php?actividad='.$arrayResult[$z]['id'].'" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>';
-                            echo '       </div>';
-                            echo '    </div>';
-                            echo '</div>';
-                            echo '<hr>';
+                                echo '    <div class="row">';
+                                echo '       <div class="col-xs-12 col-sm-12 col-md-6">';
+                                echo '            <a href="./actividad.php?actividad='.$arrayResult[$z]['id'].'"> <img src="../../'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
+                                echo '       </div>';
+                                echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
+                                echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
+                                echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
+                                echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
+                                echo '            <div class="ratings">';
+                                echo '                <p class="pull-right" style="color:#fff">'.$arrayResult[$z]['veces'].' veces valorado</p>';
+                                echo '                <p>';
+                                for($i = 0;$i < 5;$i++){
+                                    if($i < $arrayResult[$z]['media']){
+                                        echo '<span class="glyphicon glyphicon-star"></span>';
+                                    }else{
+                                        echo '<span class="glyphicon glyphicon-star-empty"></span>';
+                                    }
+                                }                 
+                                echo '               </p>';
+                                echo '           </div>';
+                                echo '       <a href="./actividad.php?actividad='.$arrayResult[$z]['id'].'" class="btn btn-lg btn-light">Ver más<span class="glyphicon glyphicon-chevron-right"></span></a>';
+                                echo '       </div>';
+                                echo '    </div>';
+                                echo '</div>';
+                                echo '<hr>';
+                            }
+                        }else{
+                            echo "<h3>No se encuentran resultados de <h2>".$nombreCategoria."</h2> para <h2>".$nombreIsla."</h2> </h3>";
                         }
                         ?>
 
@@ -163,7 +180,7 @@
                                             }else{
                                                 echo '<li>';
                                             }
-                                            echo '<a href="foro.php?categoria='.$categoria.'&pagina='.$i.'">'.$i.'</a>';
+                                            echo '<a href="foro.php?categoria='.$categoria.'&isla='.$isla.'&pagina='.$i.'">'.$i.'</a>';
                                             echo '</li>';
                                         }
                                     ?>
