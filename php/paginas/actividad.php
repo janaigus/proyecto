@@ -150,7 +150,9 @@
             </div>
 
             <div class="well">
+                <form accept-charset="UTF-8" action="" method="POST">
                 <textarea class="form-control" rows="3" style="resize:vertical;" placeholder="Comentario"></textarea>
+                <h6 class="pull-right">320 characters remaining</h6>
                 <div class="ratings" style="padding-top: 10px;">
                     <p>
                         <span class="glyphicon glyphicon-star"></span>
@@ -161,9 +163,9 @@
                     </p>
                 </div>
                 <div class="text-right">
-                    <a class="btn btn-success">Enviar comentario</a>
+                    <button class="btn btn-success" type="submit">Enviar comentario</button>
                 </div>
-
+                </form>
                 <hr>
         <?php 
         $consulta =  "SELECT com.texto, DATE_FORMAT( com.created,  '%d-%m-%Y a las %k:%i' ) AS fecha, usr.nombre, usr.apellidos, usr.avatar ";

@@ -88,86 +88,25 @@
             <div class="col-md-10 col-lg-offset-1" style="color:black;text-align: left;">
             <div class="thumbnail" style="padding: 20px 20px 20px 20px;">
                 <div class="caption-full">
-                <?php
-                echo '<div class="item">';
-                echo '    <div class="row">';
-                echo '       <div class="col-xs-12 col-sm-12 col-md-6">';
-                echo '            <a href=""> <img src="../../'.$arrayResult[0]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
-                echo '       </div>';
-                echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
-                echo '            <h3>'.$arrayResult[0]['titulo'].'<h5>'.$arrayResult[0]['creada'].'</h5></h3>';
-                echo '            <a href="foro.php?categoria='.$arrayResult[0]['idcategoria'].'&isla='.$arrayResult[0]['idisla'];
-                echo ' ">';
-                echo '            <h4>'.$arrayResult[0]['categoria'].'</h4>';
-                echo '            </a>';
-                echo '            <p>'.$arrayResult[0]['descripcion'].'</p>';
-                echo '            <div class="ratings">';
-                echo '                <p class="pull-right" style="color:#000">'.$arrayResult[0]['veces'].' veces valorado</p>';
-                echo '                <p>';
-                for($i = 0;$i < 5;$i++){
-                    if($i < $arrayResult[0]['media']){
-                        echo '<span class="glyphicon glyphicon-star"></span>';
-                    }else{
-                        echo '<span class="glyphicon glyphicon-star-empty"></span>';
-                    }
-                }                 
-                echo '               </p>';
-                echo '           </div>';
-                echo '       </div>';
-                echo '    </div>';
-                echo '</div>';
-                ?>
+                
+                <div class="item">
+                    <div class="row">
+                       <!-- First Featurette -->
+                    <!-- Second Featurette -->
+                    <div class="featurette" id="services">
+                        <img class="featurette-image img-circle img-responsive pull-left" src="http://placehold.it/300x300">
+                        <h2 class="featurette-heading">The Second Heading
+                            <span class="text-muted">Is Pretty Cool Too.</span>
+                        </h2>
+                        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                    </div>
+                    </div>
+                </div>
                     
                 </div>
             </div>
-
-            <div class="well">
-                <textarea class="form-control" rows="3" style="resize:vertical;" placeholder="Comentario"></textarea>
-                <div class="ratings" style="padding-top: 10px;">
-                    <p>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                    </p>
-                </div>
-                <div class="text-right">
-                    <a class="btn btn-success">Enviar comentario</a>
-                </div>
-
-                <hr>
-        <?php 
-        $consulta =  "SELECT com.texto, DATE_FORMAT( com.created,  '%d-%m-%Y a las %k:%i' ) AS fecha, usr.nombre, usr.apellidos, usr.avatar ";
-        $consulta .= "FROM comentarios com ";
-        $consulta .= "INNER JOIN usuarios usr ON com.idusuario = usr.id ";
-        $consulta .= "WHERE com.idactividad = :actividad ";
-        $consulta .= "ORDER BY com.created DESC ";
-        $result = $db->prepare($consulta);
-        $result->execute(array(':actividad' => $idActividad));
-        $arrayResult = $result->fetchAll();
-        if($result->rowCount() != 0){
-            for($i = 0;$i < $result->rowCount();$i++){
-                echo '<div class="well" style="background-color: rgb(220, 246, 216);">';
-                echo '<h3><img src="../../'.$arrayResult[$i]['avatar'].'" alt="..." class="img-circle" height="30px" width="35px">'.$arrayResult[$i]['nombre'].' '.$arrayResult[$i]['apellidos'].'</h3>';
-                echo '<span class="pull-right">'.$arrayResult[$i]['fecha'].'</span>';
-                echo '<p>'.$arrayResult[$i]['texto'].'</p>';
-                echo '</div>';
-            }
-        }else{
-            echo '<div class="well" style="background-color: rgb(220, 246, 216);">';
-            echo '<h3>No hay comentarios en la actividad.</h3>';
-            echo '</div>';
-        }
-        ?>
-                
-
-                <hr>
             </div>
-
             </div>
-
-        </div>
         </div>
         <!-- /.row -->
         </div>

@@ -17,6 +17,7 @@
             $_SESSION['nombre'] = $arrayResult[0]['nombre'];
             $_SESSION['rol'] = $arrayResult[0]['idrol'];
             $_SESSION['municipio'] = $arrayResult[0]['idmunicipio'];
+            $_SESSION['isla'] = $arrayResult[0]['idisla'];
             $_SESSION['email'] = $arrayResult[0]['email'];
             $_SESSION['fecha'] = date("Y-n-j H:i:s");
             echo "OK";
