@@ -76,41 +76,77 @@
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
     <section id="actividad" class="services bg-primary">
         <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-10 col-lg-offset-1">
-                    <div class="row">
-                    </div>
-                    <!-- /.row (nested) -->
-                </div>
-                <!-- /.col-lg-10 -->
-            <div class="row">
-
-            <div class="col-md-10 col-lg-offset-1" style="color:black;text-align: left;">
-            <div class="thumbnail" style="padding: 20px 20px 20px 20px;">
-                <div class="caption-full">
-                
-                <div class="item">
-                    <div class="row">
-                       <!-- First Featurette -->
-                    <!-- Second Featurette -->
-                    <div class="featurette" id="services">
-                        <img class="featurette-image img-circle img-responsive pull-left" src="http://placehold.it/300x300">
-                        <h2 class="featurette-heading">The Second Heading
-                            <span class="text-muted">Is Pretty Cool Too.</span>
-                        </h2>
-                        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-                    </div>
-                    </div>
-                </div>
-                    
-                </div>
+          <h1 class="page-header">Editar Perfil</h1>
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <div class="text-center">
+                <img src="http://lorempixel.com/200/200/people/9/" class="avatar img-circle img-thumbnail" alt="avatar">
+                <h6>Subir otra foto...</h6>
+                <input type="file" class="text-center center-block well well-sm" style="color: black;">
+              </div>
             </div>
+            <!-- edit form column -->
+            <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+              <div class="alert alert-info alert-dismissable" style="display:none;">
+                <a class="panel-close close" data-dismiss="alert">×</a> 
+                <i class="fa fa-coffee"></i>
+                Esto es una <strong>.alerta</strong>. Usar para mandar mensajes importantes al usuario
+              </div>
+              <h3>Información Personal</h3>
+              <form class="form-horizontal" role="form">
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Nombre:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" value="Vicente" type="text">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Apellidos:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" value="Bishop" type="text">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Company:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" value="" type="text">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Email:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" value="janesemail@gmail.com" type="text">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-3 control-label">Username:</label>
+                  <div class="col-md-8">
+                    <input class="form-control" value="janeuser" type="text">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-3 control-label">Password:</label>
+                  <div class="col-md-8">
+                    <input class="form-control" value="11111122333" type="password">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-3 control-label">Confirm password:</label>
+                  <div class="col-md-8">
+                    <input class="form-control" value="11111122333" type="password">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-3 control-label"></label>
+                  <div class="col-md-8">
+                    <input class="btn btn-lg btn-dark" value="Guardar cambios" type="button">
+                  </div>
+                </div>
+              </form>
             </div>
-            </div>
+          </div>
         </div>
-        <!-- /.row -->
-        </div>
-        <!-- /.container -->
     </section>
     
     <!-- Footer -->
