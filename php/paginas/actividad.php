@@ -16,7 +16,7 @@
 
     $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
     $consulta .= "act.idcategoria, cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media, ";
-    $consulta .= "act.idisla, i.nombre, m.nombre as nombremunicipio ";
+    $consulta .= "act.idisla, i.nombre AS nombreisla, m.nombre AS nombremunicipio ";
     $consulta .= "FROM actividades act ";
     $consulta .= "LEFT JOIN votos v ON act.id = v.idactividad ";
     $consulta .= "LEFT JOIN recursos r ON act.id = r.idactividad ";
@@ -120,13 +120,13 @@
                 echo '<div class="item">';
                 echo '    <div class="row">';
                 echo '       <div class="col-xs-12 col-sm-12 col-md-6">';
-                echo '            <a href=""> <img src="../../'.$arrayResult[0]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
+                echo '            <a href=""> <img src="../../'.$arrayResult[0]['ruta'].'" class="thumbnail" alt="Image" style="height:280px;width:450px;" /></a>';
                 echo '       </div>';
                 echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
                 echo '            <h3>'.$arrayResult[0]['titulo'].'<h5>'.$arrayResult[0]['creada'].'</h5></h3>';
                 echo '            <a href="foro.php?categoria='.$arrayResult[0]['idcategoria'].'&isla='.$arrayResult[0]['idisla'];
                 echo ' ">';
-                echo '            <h4>'.$arrayResult[0]['categoria'].'</h4>';
+                echo '            <h4>'.$arrayResult[0]['categoria'].' en '.$arrayResult[0]['nombreisla'].'</h4>';
                 echo '            </a>';
                 echo '            <p>'.$arrayResult[0]['descripcion'].'</p>';
                 echo '            <div class="ratings">';

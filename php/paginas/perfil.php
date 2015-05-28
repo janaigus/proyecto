@@ -1,5 +1,21 @@
 <?php
     session_start();
+    // Obtener el usuario sobre el que se va a maquetar la imagen
+    $usuario = (isset($_GET['usuario'])) ? $_GET['usuario'] : "1";
+    // Traer elementos de la base de datos
+    require('../bd/conexionBDlocal.php');
+    $db = conectaDb();
+    $consulta = "SELECT * FROM usuarios WHERE id = :usuario ORDER BY nombre";
+    $result = $db->prepare($consulta);
+    $result->execute(array(':usuario' => $usuario));
+    $arrayResult = $result->fetchAll();
+    $nombreUsuario = $arrayResult[0]['nombre'];
+    $apellidosUsuario = $arrayResult[0]['apellidos'];
+    $nickUsuario = $arrayResult[0]['nick'];
+    $emailUsuario = $arrayResult[0]['email'];
+    $idIsla = $arrayResult[0]['idisla'];
+    $idMunicipio = $arrayResult[0]['idmunicipio'];
+    $avatarUsuario = $arrayResult[0]['avatar'];
 ?>
 
 <!DOCTYPE html>
@@ -76,12 +92,12 @@
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
     <section id="actividad" class="services bg-primary">
         <div class="container">
-          <h1 class="page-header">Editar Perfil</h1>
+          <h1 class="page-header text-center">Editar Perfil</h1>
           <div class="row">
             <!-- left column -->
             <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="text-center">
-                <img src="http://lorempixel.com/200/200/people/9/" class="avatar img-circle img-thumbnail" alt="avatar">
+                <img src="../../<?php echo $avatarUsuario; ?>" class="avatar img-circle img-thumbnail" alt="avatar" height="200px" width="200">
                 <h6>Subir otra foto...</h6>
                 <input type="file" class="text-center center-block well well-sm" style="color: black;">
               </div>
@@ -93,56 +109,106 @@
                 <i class="fa fa-coffee"></i>
                 Esto es una <strong>.alerta</strong>. Usar para mandar mensajes importantes al usuario
               </div>
-              <h3>Información Personal</h3>
+              <h3>Información </h3>
               <form class="form-horizontal" role="form">
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Nombre:</label>
                   <div class="col-lg-8">
-                    <input class="form-control" value="Vicente" type="text">
+                    <input class="form-control" value="<?php echo $nombreUsuario; ?>" type="text">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Apellidos:</label>
                   <div class="col-lg-8">
-                    <input class="form-control" value="Bishop" type="text">
+                    <input class="form-control" value="<?php echo $apellidosUsuario; ?>" type="text">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-lg-3 control-label">Company:</label>
+                  <label class="col-lg-3 control-label">Nick:</label>
                   <div class="col-lg-8">
-                    <input class="form-control" value="" type="text">
+                    <input class="form-control" value="<?php echo $nickUsuario; ?>" type="text">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Email:</label>
                   <div class="col-lg-8">
-                    <input class="form-control" value="janesemail@gmail.com" type="text">
+                    <input class="form-control" value="<?php echo $emailUsuario; ?>" type="text">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-md-3 control-label">Username:</label>
+                    <label class="col-lg-3 control-label">Isla:</label>
+                    <div class="col-lg-8">
+                    <select id="islas" name="islas" class="form-control">
+                        <option value="0">Seleccione isla</option>
+                        <?php
+                        $consulta = "SELECT * FROM auxislas ORDER BY nombre";
+                        $result = $db->prepare($consulta);
+                        $result->execute();
+                        $arrayResult = $result->fetchAll();
+                        for($i=0;$i<$result->rowCount();$i++){
+                            echo $idIsla;
+                            echo '<option value="'.$arrayResult[$i]['id'].'"';
+                            if($arrayResult[$i]['id'] == $idIsla){
+                                echo ' selected="selected" ';
+                            }
+                            echo '>'.$arrayResult[$i]['nombre'].'</option>';
+                        }
+                        ?>
+                    </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Municipios:</label>
+                    <div class="col-lg-8">
+                    <select id="municipios" name="municipios" class="form-control">
+                        <option value="0">Seleccione municipio</option>
+                        <?php
+                        $consulta = "SELECT * FROM auxmunicipios WHERE idisla = :isla ORDER BY nombre";
+                        $result = $db->prepare($consulta);
+                        $result->execute(array(':isla' => $idIsla));
+                        $arrayResult = $result->fetchAll();
+                        for($i=0;$i<$result->rowCount();$i++){
+                            echo '<option value="'.$arrayResult[$i]['id'].'"';
+                            if($arrayResult[$i]['id'] == $idMunicipio){
+                                echo ' selected="selected" ';
+                            }
+                            echo '>'.$arrayResult[$i]['nombre'].'</option>';
+                        }
+                        ?>
+                    </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-3 control-label">Contraseña:</label>
                   <div class="col-md-8">
-                    <input class="form-control" value="janeuser" type="text">
+                    <input class="form-control" value="11111122333" type="password" disabled>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-md-3 control-label">Password:</label>
+                  <label class="col-md-3 control-label">Repetir contraseña:</label>
                   <div class="col-md-8">
-                    <input class="form-control" value="11111122333" type="password">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-3 control-label">Confirm password:</label>
-                  <div class="col-md-8">
-                    <input class="form-control" value="11111122333" type="password">
+                    <input class="form-control" value="11111122333" type="password" disabled>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-3 control-label"></label>
-                  <div class="col-md-8">
+                  <div class="col-md-6">
                     <input class="btn btn-lg btn-dark" value="Guardar cambios" type="button">
                   </div>
+                  <div class="col-md-1" style="padding-top: 13px;">
+                    <div class="dropup">
+                      <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
+                          Opciones
+                        <span class="glyphicon glyphicon-option-vertical"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Cambiar contraseña</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Darme de baja</a></li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
+                  
               </form>
             </div>
           </div>

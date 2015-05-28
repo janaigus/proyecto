@@ -143,7 +143,7 @@
                                 echo '            <a href="./actividad.php?actividad='.$arrayResult[$z]['id'].'"> <img src="../../'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
                                 echo '       </div>';
                                 echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
-                                echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
+                                echo '            <h3>'.$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
                                 echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
                                 echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
                                 echo '            <div class="ratings">';
