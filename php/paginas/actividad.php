@@ -72,7 +72,7 @@
                 <a href="../../index.php"  onclick = $("#menu-close").click(); >Help to Know</a>
             </li>
             <li>
-                <a href="#top" onclick = $("#menu-close").click(); >Home</a>
+                <a href="#actividad" onclick = $("#menu-close").click(); >Actividad</a>
             </li>
             <li>
                 <a href="#contacto" onclick = $("#menu-close").click(); >Contacto</a>
@@ -100,9 +100,9 @@
         <!-- /.container -->
     </section>
         
-    <!-- Mejor valoradas -->
+    <!-- Actividad -->
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-    <section id="valoradas" class="services bg-primary">
+    <section id="actividad" class="services bg-primary">
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">

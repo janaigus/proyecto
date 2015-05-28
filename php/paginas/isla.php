@@ -288,10 +288,7 @@
                                     </div>
                                 </div>
                                 <br />
-                                
                                 <!-- Carousel items -->
-                                
-                                
                     <?php
                     $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
                     $consulta .= "act.idcategoria, cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media, ";
