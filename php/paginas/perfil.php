@@ -58,10 +58,10 @@
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
             <li class="sidebar-brand">
-                <a href="#top"  onclick = $("#menu-close").click(); >Help to Know</a>
+                <a href="../../index.php"  onclick = $("#menu-close").click(); >Help to Know</a>
             </li>
             <li>
-                <a href="#top" onclick = $("#menu-close").click(); >Home</a>
+                <a href="#perfil" onclick = $("#menu-close").click(); >Perfil</a>
             </li>
             <li>
                 <a href="#contacto" onclick = $("#menu-close").click(); >Contacto</a>
@@ -88,9 +88,10 @@
         </div>
         <!-- /.container -->
     </section>
-   <!-- Actividad -->
+    
+    <!-- Perfil -->
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-    <section id="actividad" class="services bg-primary">
+    <section id="perfil" class="services bg-primary">
         <div class="container">
           <h1 class="page-header text-center">Editar Perfil</h1>
           <div class="row">
@@ -198,8 +199,8 @@
                   <div class="col-md-1" style="padding-top: 13px;">
                     <div class="dropup">
                       <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-expanded="true">
+                          <span class="glyphicon glyphicon-option-vertical"></span>  
                           Opciones
-                        <span class="glyphicon glyphicon-option-vertical"></span>
                       </button>
                       <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Cambiar contraseña</a></li>
