@@ -596,74 +596,7 @@
               </div>
             </div>
             <div class="modal-body">
-                <form role="form" action="./php/sesion/registro.php" method="POST" id="formularioRegistrarse">
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group" id="cajaRegistroNombre">
-                                <input type="text" name="registroNombre" id="registroNombre" class="form-control input-sm" placeholder="Nombre">  
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group" id="cajaRegistroApellidos">
-                                <input type="text" name="registroApellidos" id="registroApellidos" class="form-control input-sm" placeholder="Apellidos">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group" id="cajaRegistroEmail">
-                        <input type="email" name="registroEmail" id="registroEmail" class="form-control input-sm" placeholder="Email">
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group" id="cajaRegistroPass">
-                                <input type="password" name="registroPassword" id="registroPassword" class="form-control input-sm" placeholder="Contraseña">
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group" id="cajaRegistroCon">
-                                <input type="password" name="registroPass_con" id="registroPass_con" class="form-control input-sm" placeholder="Repetir Contraseña">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group" id="cajaRegistroIsla">
-                                <select id="registroIslas" name="registroIslas" class="form-control">
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class="form-group" id="cajaRegistroMunicipio">
-                                <select id="registroMunicipios" name="registroMunicipios" class="form-control" disabled>
-                                    <option value="0">Seleccione municipio</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12" align="center">
-                            <div class="form-group" id="cajaRegistroCaptcha">
-                                <div class="g-recaptcha" data-sitekey="6LecTAcTAAAAAFKmIACHrD4FhxgRTtNSdcVXUMss"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <input id="registrarseBoton" type="submit" value="Registrarse" class="btn btn-lg btn-light btn-block">
-                    <hr>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-4 col-lg-offset-2 col- text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='php/miFacebook.php' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
-                            </div>
-                            <!--<div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='#' class="btn btn-light twitter"> <i class="fa fa-twitter modal-icons"></i> Entrar con Twitter </a>
-                            </div>-->
-                            <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='php/miGoogle.php' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cancelar</button>

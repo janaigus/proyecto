@@ -18,28 +18,6 @@ $(document).ready(function () {
         }
     );
     
-    // Evento onchange cuando se selccione una isla
-    $('#registroIslas').on('change', function (ev) {
-        if($('#registroIslas').val() == 0){
-            $("#registroMunicipios").attr('disabled', true);
-            $("#registroMunicipios").html('<option value="0">Seleccione municipio</option>');
-        }else{
-            $.post('./php/obtenerRecursos/obtenerMunicipios.php', { islaSeleccionada: $('#registroIslas').val() },
-                function(respuesta)
-                {
-                    cadena = '<option value="0">Seleccione municipio</option>';
-                    $.each(respuesta, function(i, tupla){
-                        cadena += '<option value="'+tupla.id+'">'+tupla.nombre+'</option>';
-                    });
-                    $("#registroMunicipios").html(cadena );
-                    // Habilitar el input de isla
-                    $("#registroMunicipios").attr('disabled', false);
-                }
-                , "json"
-            );
-        }
-    });
-    
     // Campos de busqueda
     $('#busquedaIslas').on('change', function (ev) {
         if($('#busquedaIslas').val() == 0){
@@ -243,100 +221,7 @@ $(document).ready(function () {
         }
     });
     
-    // Gestion del submit del formulario de registro
-    $('#formularioRegistrarse').on('submit', function (ev) {
-        ev.preventDefault();
-        var correcto = true;
-        // Email
-        emailEncontrado = $("#registroEmail").val().match(expresionEmail);
-        if(emailEncontrado == null){
-            cambiarEstadoCaja("cajaEmailEntrar", true, "Introduzca un email correcto");
-            correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaEmailEntrar", false, "");
-        }
-        // Nombre
-        if($('#registroNombre').val() == ""){
-            cambiarEstadoCaja("cajaRegistroNombre", true, "Introduzca un nombre");
-            correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaRegistroNombre", false, "");
-        }
-        // Apellidos
-        if($('#registroApellidos').val() == ""){
-            cambiarEstadoCaja("cajaRegistroApellidos", true, "Introduzca unos apellidos");
-            correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaRegistroApellidos", false, "");
-        }
-        // Comprobar contraseña introducida y que la segunda coincide
-        if($('#registroPassword').val() == ""){
-            cambiarEstadoCaja("cajaRegistroPass", true, "Introduzca una contraseña");
-            correcto = false;
-        }else{
-            // Comprobar si el segundo campo está vacio
-            if($('#registroPass_con').val() == ""){
-                cambiarEstadoCaja("cajaRegistroCon", true, "Debe volver a introducir la contraseña");
-                correcto = false;
-            }else{
-                // Comprobar que las contraseñas coinciden
-                if($('#registroPassword').val() == $('#registroPass_con').val()){
-                    cambiarEstadoCaja("cajaRegistroCon", false, "");
-                }else{
-                    cambiarEstadoCaja("cajaRegistroCon", true, "Las contraseñas no coinciden");
-                    correcto = false;
-                }
-            }
-            cambiarEstadoCaja("cajaRegistroPass", false, "");
-        }
-        // Isla
-        if($('#registroIslas').val() == 0){
-            cambiarEstadoCaja("cajaRegistroIsla", true, "Seleccione una isla");
-            correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaRegistroIsla", false, "");
-        }
-        // Municipio
-        if($('#registroMunicipios').val() == 0){
-            cambiarEstadoCaja("cajaRegistroMunicipio", true, "Seleccione un municipio");
-            correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaRegistroMunicipio", false, "");
-        }
-        // Captcha
-        var respuestaC = $('[name=g-recaptcha-response]').val();
-        $.post('php/obtenerRecursos/comprobarCaptcha.php', {respuesta: respuestaC}, 
-                function(respuesta)
-                {
-                    humaroRegistro = respuesta.success;
-                if(!respuesta.success){
-                    grecaptcha.reset();
-                    correcto = false;
-                    cambiarEstadoCaja("registrarseBoton", true, "Rellene el captcha");
-                }else{
-                    cambiarEstadoCaja("registrarseBoton", false, "");
-                }
-            }, "json"
-        );
-        
-        if(correcto == true){
-            $.post('./php/sesion/registro.php', $('#formularioRegistrarse').serialize(), 
-                function(respuesta)
-                {
-                    switch(respuesta){
-                        case "OK":
-                            // Redireccionar a la pagina principal del usuario, las sesiones 
-                            // ya se habrán creado desde php se inicia sesión automaticamente
-                            alert("alles klar");
-                            break;
-                        case "REGISTEREDUSER":
-                            cambiarEstadoCaja("cajaRegistroEmail", true, "Email ya registrado.");
-                            break;
-                    }
-                }
-            );
-        }
-    });
+   
 });
     
 function cambiarEstadoCaja(nombreCaja, mal, mensaje){

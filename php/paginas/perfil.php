@@ -104,7 +104,7 @@
             <!-- left column -->
             <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="text-center">
-                <img src="../../<?php echo $avatarUsuario; ?>" class="avatar img-circle img-thumbnail" alt="avatar" height="200px" width="200">
+                <img src="../../<?php echo $avatarUsuario; ?>" class="avatar img-circle img-thumbnail" alt="avatar" height="200px" width="200px">
                 <h6>Subir otra foto...</h6>
                 <input type="file" class="text-center center-block well well-sm" style="color: black;">
               </div>

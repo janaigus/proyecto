@@ -2,83 +2,94 @@ expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 
 $(document).ready(function () {
     
+    
+
     // Evento onchange cuando se selccione una isla
-    $('#islas').on('change', function (ev) {
-        if($('#islas').val() == 0){
-            $("#municipios").attr('disabled', true);
-            $("#municipios").html('<option value="0">Seleccione municipio</option>');
+    $('#registroIslas').on('change', function (ev) {
+        if($('#registroIslas').val() == 0){
+            $("#registroMunicipios").attr('disabled', true);
+            $("#registroMunicipios").html('<option value="0">Seleccione municipio</option>');
         }else{
-            $.post('../obtenerRecursos/obtenerMunicipios.php', { islaSeleccionada: $('#islas').val() },
+            $.post('../obtenerRecursos/obtenerMunicipios.php', { islaSeleccionada: $('#registroIslas').val() },
                 function(respuesta)
                 {
                     cadena = '<option value="0">Seleccione municipio</option>';
                     $.each(respuesta, function(i, tupla){
                         cadena += '<option value="'+tupla.id+'">'+tupla.nombre+'</option>';
                     });
-                    $("#municipios").html(cadena );
+                    $("#registroMunicipios").html(cadena );
                     // Habilitar el input de isla
-                    // $("#municipios").attr('disabled', false);
+                    $("#registroMunicipios").attr('disabled', false);
                 }
                 , "json"
             );
         }
     });
     
-    /* Controlar los botones de slider de los "sliders" */
-    $('.btn-vertical-slider').on('click', function (ev) {
-        if ($(this).attr('data-slide') == 'next') {
-            if($(this).parents("#myCarouselValoradas").length > 0){
-                $(this).parents("#myCarouselValoradas").carousel('next');
-            }
-            else{
-                $(this).parents("#myCarouselRecientes").carousel('next');
-            }
-        }
-        if ($(this).attr('data-slide') == 'prev') {
-            if($(this).parents("#myCarouselValoradas").length > 0){
-                $(this).parents("#myCarouselValoradas").carousel('prev');
-            }
-            else{
-                $(this).parents("#myCarouselRecientes").carousel('prev');
-            }
-        }
-    });
-    
-    // Gestion del boton de login
-    $('#entrarBoton').on('click', function (ev) {
+     // Gestion del submit del formulario de registro
+    $('#formularioRegistrarse').on('submit', function (ev) {
         ev.preventDefault();
         var correcto = true;
-        emailEncontrado = $("#entrarEmail").val().match(expresionEmail);
+        // Email
+        emailEncontrado = $("#registroEmail").val().match(expresionEmail);
         if(emailEncontrado == null){
             cambiarEstadoCaja("cajaEmailEntrar", true, "Introduzca un email correcto");
             correcto = false;
         }else{
             cambiarEstadoCaja("cajaEmailEntrar", false, "");
         }
-        if($('#entrarPass').val() == ""){
-            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
+        // Nombre
+        if($('#registroNombre').val() == ""){
+            cambiarEstadoCaja("cajaRegistroNombre", true, "Introduzca un nombre");
             correcto = false;
         }else{
-            cambiarEstadoCaja("cajaPassEntrar", false, "");
+            cambiarEstadoCaja("cajaRegistroNombre", false, "");
         }
-        if(correcto){
-            $.post('../sesion/login.php', $('#formularioEntrar').serialize(), 
-                function(respuesta)
-                {
-                    switch(respuesta){
-                        case "OK":
-                            // Redireccionar a la pagina principal del usuario, las sesiones ya se habrán creado desde php
-                            alert("alles klar");
-                            break;
-                        case "BADPASS":
-                            cambiarEstadoCaja("cajaPassEntrar", true, "Contraseña incorrecta.");
-                            break;
-                        case "BADEMAIL":
-                            cambiarEstadoCaja("cajaEmailEntrar", true, "Email no registrado.");
-                            break;
-                    }
+        // Apellidos
+        if($('#registroApellidos').val() == ""){
+            cambiarEstadoCaja("cajaRegistroApellidos", true, "Introduzca unos apellidos");
+            correcto = false;
+        }else{
+            cambiarEstadoCaja("cajaRegistroApellidos", false, "");
+        }
+        // Comprobar contraseña introducida y que la segunda coincide
+        if($('#registroPassword').val() == ""){
+            cambiarEstadoCaja("cajaRegistroPass", true, "Introduzca una contraseña");
+            correcto = false;
+        }else{
+            // Comprobar si el segundo campo está vacio
+            if($('#registroPass_con').val() == ""){
+                cambiarEstadoCaja("cajaRegistroCon", true, "Debe volver a introducir la contraseña");
+                correcto = false;
+            }else{
+                // Comprobar que las contraseñas coinciden
+                if($('#registroPassword').val() == $('#registroPass_con').val()){
+                    cambiarEstadoCaja("cajaRegistroCon", false, "");
+                }else{
+                    cambiarEstadoCaja("cajaRegistroCon", true, "Las contraseñas no coinciden");
+                    correcto = false;
                 }
-            );
+            }
+            cambiarEstadoCaja("cajaRegistroPass", false, "");
+        }
+        // Isla
+        if($('#registroIslas').val() == 0){
+            cambiarEstadoCaja("cajaRegistroIsla", true, "Seleccione una isla");
+            correcto = false;
+        }else{
+            cambiarEstadoCaja("cajaRegistroIsla", false, "");
+        }
+        // Municipio
+        if($('#registroMunicipios').val() == 0){
+            cambiarEstadoCaja("cajaRegistroMunicipio", true, "Seleccione un municipio");
+            correcto = false;
+        }else{
+            cambiarEstadoCaja("cajaRegistroMunicipio", false, "");
+        }
+        
+        
+        if(correcto == true){
+            $('#formularioRegistrarse').submit();
         }
     });
     

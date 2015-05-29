@@ -1,7 +1,6 @@
 <?php
     session_start();
-    // Obtener la isla sobre la que se va a maquetar la imagen y la pagina actual
-    $idActividad = (isset($_GET['actividad'])) ? $_GET['actividad'] : "1";
+
     // Obtener variables con los parametros de la sesión del usuario
     $sesionNombre = (isset($_SESSION['nombre'])) ? $_SESSION['nombre'] : "";
     $sesionRol = (isset($_SESSION['rol'])) ? (int)$_SESSION['rol'] : "";
@@ -53,10 +52,10 @@
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
             <li class="sidebar-brand">
-                <a href="../../index.php"  onclick = $("#menu-close").click(); >Help to Know</a>
+                <a href="#top"  onclick = $("#menu-close").click(); >Help to Know</a>
             </li>
             <li>
-                <a href="#actividad" onclick = $("#menu-close").click(); >Actividad</a>
+                <a href="#top" onclick = $("#menu-close").click(); >Home</a>
             </li>
             <li>
                 <a href="#contacto" onclick = $("#menu-close").click(); >Contacto</a>
@@ -70,114 +69,21 @@
             </li>
         </ul>
     </nav>
-    
+
     <!-- About -->
     <section id="about" class="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Ayudando a personas para aprender. <h1><b>Help to Know!</b></h1></h2>
+                    <p class="lead">Aqui podrás encontrar desde una clase de costura, </br>hasta un curso profesional de desarrollo web </br>con certificación internacional</p>
                 </div>
             </div>
             <!-- /.row -->
         </div>
         <!-- /.container -->
     </section>
-        
-    <!-- Actividad -->
-    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-    <section id="actividad" class="services bg-primary">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-10 col-lg-offset-1">
-                    <div class="row">
-                        <h2>Crear actividad</h2>
-                        <hr class="small">
-                    </div>
-                    <!-- /.row (nested) -->
-                </div>
-                <!-- /.col-lg-10 -->
-            <div class="row">
 
-            <div class="col-md-10 col-lg-offset-1" style="color:black;text-align: left;">
-            <div class="thumbnail" style="padding: 20px 20px 20px 20px;">
-                <div class="caption-full">
-                <div class="item">
-                    <div class="row">
-                       <div class="col-xs-12 col-sm-12 col-md-6" style="height:280px;width:450px;border: 1px solid rgb(249,213,130);border-radius:4px;margin-left: 15px;margin-bottom: 20px;">
-                       </div>
-                       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">
-                            <form class="form-horizontal" role="form">
-                                <div class="form-group">
-                                  <div class="col-lg-12">
-                                    <input class="form-control" placeholder="Titulo" type="text">
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-12">
-                                    <select id="categorias" name="categorias" class="form-control">
-                                        <option value="0">Seleccione categoria</option>
-                                        <?php
-                                        $consulta = "SELECT * FROM auxcategorias ORDER BY nombre";
-                                        $result = $db->prepare($consulta);
-                                        $result->execute();
-                                        $arrayResult = $result->fetchAll();
-                                        for($i=0;$i<$result->rowCount();$i++){
-                                            echo '<option value="'.$arrayResult[$i]['id'].'">'.$arrayResult[$i]['nombre'].'</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                  <div class="col-lg-12">
-                                    <select id="islas" name="islas" class="form-control">
-                                        <option value="0">Seleccione isla</option>
-                                        <?php
-                                        $consulta = "SELECT * FROM auxislas ";
-                                        $result = $db->prepare($consulta);
-                                        $result->execute();
-                                        $arrayResult = $result->fetchAll();
-                                        for($i=0;$i<$result->rowCount();$i++){
-                                            echo '<option value="'.$arrayResult[$i]['id'].'">'.$arrayResult[$i]['nombre'].'</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <div class="col-lg-12">
-                                        <select id="municipios" name="municipios" class="form-control">
-                                            <option value="0">Seleccione municipio</option>
-                                            ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                  <div class="col-lg-12">
-                                    <textarea class="form-control" rows="3" style="resize:vertical;" placeholder="Comentario"></textarea>
-                                    <h5 class="pull-right">320 letras restantes</h5>
-                                  </div>
-                                </div>
-                           </form>
-                       </div>
-                    </div>
-                    <div class="row text-center">
-                        <input class="btn btn-lg btn-dark" value="Publicar actividad" type="button">
-                    </div>
-                </div>
-                    
-                </div>
-            </div>
-            </div>
-
-        </div>
-        </div>
-        <!-- /.row -->
-        </div>
-        <!-- /.container -->
-    </section>
-    
     <!-- Footer -->
     <footer>
         <div id="contacto" class="container">
@@ -332,7 +238,7 @@
     <script src="../../js/bootstrap.min.js"></script>
     
     <!-- Mis archivos JavaScript -->
-    <script type="text/javascript" src="../../js/crearactividad.js"></script>
+    <script type="text/javascript" src="../../js/administrador.js"></script>
         
     <!-- Custom Theme JavaScript -->
     <script>
