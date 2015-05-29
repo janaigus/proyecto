@@ -2,31 +2,15 @@
     session_start();
     // Obtener la isla sobre la que se va a maquetar la imagen y la pagina actual
     $idActividad = (isset($_GET['actividad'])) ? $_GET['actividad'] : "1";
+    // Obtener variables con los parametros de la sesión del usuario
+    $sesionNombre = (isset($_SESSION['nombre'])) ? $_SESSION['nombre'] : "";
+    $sesionRol = (isset($_SESSION['rol'])) ? (int)$_SESSION['rol'] : "";
+    $sesionMunicipio = (isset($_SESSION['municipio'])) ? (int)$_SESSION['municipio'] : "";
+    $sesionIsla = (isset($_SESSION['isla'])) ? (int)$_SESSION['isla'] : "";
+    $sesionTiempo = (isset($_SESSION['tiempo'])) ? $_SESSION['tiempo'] : "";
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
-
-    // Obtener la información completa de la actividad incluyendo votos y valoraciones
-    $consulta = "SELECT * FROM auxislas where id = :isla ORDER BY nombre";
-    $result = $db->prepare($consulta);
-    $result->execute(array(':isla' => $isla));
-    $arrayResult = $result->fetchAll();
-    $idIsla = $arrayResult[0]['id'];
-    $nombreIsla = $arrayResult[0]['nombre'];
-
-    $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
-    $consulta .= "act.idcategoria, cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media, ";
-    $consulta .= "act.idisla, i.nombre AS nombreisla, m.nombre AS nombremunicipio ";
-    $consulta .= "FROM actividades act ";
-    $consulta .= "LEFT JOIN votos v ON act.id = v.idactividad ";
-    $consulta .= "LEFT JOIN recursos r ON act.id = r.idactividad ";
-    $consulta .= "LEFT JOIN auxcategorias cat ON act.idcategoria = cat.id ";
-    $consulta .= "INNER JOIN auxislas i ON act.idisla = i.id ";
-    $consulta .= "INNER JOIN auxmunicipios m ON act.idmunicipio = m.id ";
-    $consulta .= "WHERE act.id = :actividad ";
-    $result = $db->prepare($consulta);
-    $result->execute(array(':actividad' => $idActividad));
-    $arrayResult = $result->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -116,85 +100,23 @@
             <div class="col-md-10 col-lg-offset-1" style="color:black;text-align: left;">
             <div class="thumbnail" style="padding: 20px 20px 20px 20px;">
                 <div class="caption-full">
-                <?php
-                echo '<div class="item">';
-                echo '    <div class="row">';
-                echo '       <div class="col-xs-12 col-sm-12 col-md-6">';
-                echo '            <a href=""> <img src="../../'.$arrayResult[0]['ruta'].'" class="thumbnail" alt="Image" style="height:280px;width:450px;" /></a>';
-                echo '       </div>';
-                echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
-                echo '            <h3>'.$arrayResult[0]['titulo'].'<h5>'.$arrayResult[0]['creada'].'</h5></h3>';
-                echo '            <a href="foro.php?categoria='.$arrayResult[0]['idcategoria'].'&isla='.$arrayResult[0]['idisla'];
-                echo ' ">';
-                echo '            <h4>'.$arrayResult[0]['categoria'].' en '.$arrayResult[0]['nombreisla'].'</h4>';
-                echo '            </a>';
-                echo '            <p>'.$arrayResult[0]['descripcion'].'</p>';
-                echo '            <div class="ratings">';
-                echo '                <p class="pull-right" style="color:#000">'.$arrayResult[0]['veces'].' veces valorado</p>';
-                echo '                <p>';
-                for($i = 0;$i < 5;$i++){
-                    if($i < $arrayResult[0]['media']){
-                        echo '<span class="glyphicon glyphicon-star"></span>';
-                    }else{
-                        echo '<span class="glyphicon glyphicon-star-empty"></span>';
-                    }
-                }                 
-                echo '               </p>';
-                echo '           </div>';
-                echo '       </div>';
-                echo '    </div>';
-                echo '</div>';
-                ?>
+                <div class="item">
+                    <div class="row">
+                       <div class="col-xs-12 col-sm-12 col-md-6">
+                            <img src="" class="thumbnail" alt="Image" style="">
+                       </div>
+                       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">
+                            <h3>Titulo<h5>Fecha(Automatico)</h5></h3>
+                            <h4>Categoria</h4>
+                            <h4>Isla</h4>
+                            <h4>Municipio</h4>
+                            <p>Descripcion</p>
+                       </div>
+                    </div>
+                </div>
                     
                 </div>
             </div>
-
-            <div class="well">
-                <form accept-charset="UTF-8" action="" method="POST">
-                <textarea class="form-control" rows="3" style="resize:vertical;" placeholder="Comentario"></textarea>
-                <h6 class="pull-right">320 characters remaining</h6>
-                <div class="ratings" style="padding-top: 10px;">
-                    <p>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                    </p>
-                </div>
-                <div class="text-right">
-                    <button class="btn btn-success" type="submit">Enviar comentario</button>
-                </div>
-                </form>
-                <hr>
-        <?php 
-        $consulta =  "SELECT com.texto, DATE_FORMAT( com.created,  '%d-%m-%Y a las %k:%i' ) AS fecha, usr.nombre, usr.apellidos, usr.avatar ";
-        $consulta .= "FROM comentarios com ";
-        $consulta .= "INNER JOIN usuarios usr ON com.idusuario = usr.id ";
-        $consulta .= "WHERE com.idactividad = :actividad ";
-        $consulta .= "ORDER BY com.created DESC ";
-        $result = $db->prepare($consulta);
-        $result->execute(array(':actividad' => $idActividad));
-        $arrayResult = $result->fetchAll();
-        if($result->rowCount() != 0){
-            for($i = 0;$i < $result->rowCount();$i++){
-                echo '<div class="well" style="background-color: rgb(220, 246, 216);">';
-                echo '<h3><img src="../../'.$arrayResult[$i]['avatar'].'" alt="..." class="img-circle" height="30px" width="35px">'.$arrayResult[$i]['nombre'].' '.$arrayResult[$i]['apellidos'].'</h3>';
-                echo '<span class="pull-right">'.$arrayResult[$i]['fecha'].'</span>';
-                echo '<p>'.$arrayResult[$i]['texto'].'</p>';
-                echo '</div>';
-            }
-        }else{
-            echo '<div class="well" style="background-color: rgb(220, 246, 216);">';
-            echo '<h3>No hay comentarios en la actividad.</h3>';
-            echo '</div>';
-        }
-        ?>
-                
-
-                <hr>
-            </div>
-
             </div>
 
         </div>

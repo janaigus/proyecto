@@ -2,6 +2,12 @@
     session_start();
     // Obtener la isla sobre la que se va a maquetar la imagen y la pagina actual
     $idActividad = (isset($_GET['actividad'])) ? $_GET['actividad'] : "1";
+    // Obtener variables con los parametros de la sesión del usuario
+    $sesionNombre = (isset($_SESSION['nombre'])) ? $_SESSION['nombre'] : "";
+    $sesionRol = (isset($_SESSION['rol'])) ? (int)$_SESSION['rol'] : "";
+    $sesionMunicipio = (isset($_SESSION['municipio'])) ? (int)$_SESSION['municipio'] : "";
+    $sesionIsla = (isset($_SESSION['isla'])) ? (int)$_SESSION['isla'] : "";
+    $sesionTiempo = (isset($_SESSION['tiempo'])) ? $_SESSION['tiempo'] : "";
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
