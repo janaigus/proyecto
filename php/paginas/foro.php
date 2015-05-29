@@ -4,6 +4,7 @@
     $categoria = (isset($_GET['categoria'])) ? $_GET['categoria'] : "1";
     $isla = (isset($_GET['isla'])) ? $_GET['isla'] : "1";
     $pagina = (isset($_GET['pagina'])) ? (int)$_GET['pagina'] : 1;
+    //Obtener variables con los parametros de la sesión del usuario
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
@@ -109,7 +110,10 @@
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">
                     <h1><?php echo $nombreCategoria." en ".$nombreIsla; ?></h1>
-                    
+                    <hr class="small">
+                    <div>
+                        <button class="btn btn-lg btn-light" type="submit">Publicar Actividad</button>
+                    </div>
                     <div class="row">
                         <hr>
                         <?php

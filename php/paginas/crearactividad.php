@@ -152,7 +152,7 @@
             <div class="well">
                 <form accept-charset="UTF-8" action="" method="POST">
                 <textarea class="form-control" rows="3" style="resize:vertical;" placeholder="Comentario"></textarea>
-                <h5 class="pull-right">320 letras</h5>
+                <h6 class="pull-right">320 characters remaining</h6>
                 <div class="ratings" style="padding-top: 10px;">
                     <p>
                         <span class="glyphicon glyphicon-star"></span>
@@ -163,7 +163,7 @@
                     </p>
                 </div>
                 <div class="text-right">
-                    <button class="btn btn-success" type="submit" disabled>Enviar comentario</button>
+                    <button class="btn btn-success" type="submit">Enviar comentario</button>
                 </div>
                 </form>
                 <hr>
