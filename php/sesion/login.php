@@ -13,7 +13,6 @@
         $userContra = $arrayResult[0]['password'];
         //Si la contraseña del usuario coincide, crear sesiones y redirigir a su página
         if($_POST['entrarPass'] == $userContra){
-            $_SESSION['h2k'] = $arrayResult[0]['sesion_creada'];
             $_SESSION['nombre'] = $arrayResult[0]['nombre'];
             $_SESSION['rol'] = $arrayResult[0]['idrol'];
             $_SESSION['municipio'] = $arrayResult[0]['idmunicipio'];

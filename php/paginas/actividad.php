@@ -152,7 +152,7 @@
             <div class="well">
                 <form accept-charset="UTF-8" action="" method="POST">
                 <textarea class="form-control" rows="3" style="resize:vertical;" placeholder="Comentario"></textarea>
-                <h5 class="pull-right">320 letras</h5>
+                <h5 class="pull-right">320 letras restantes</h5>
                 <div class="ratings" style="padding-top: 10px;">
                     <p>
                         <span class="glyphicon glyphicon-star"></span>

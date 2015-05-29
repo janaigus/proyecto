@@ -4,7 +4,12 @@
     $categoria = (isset($_GET['categoria'])) ? $_GET['categoria'] : "1";
     $isla = (isset($_GET['isla'])) ? $_GET['isla'] : "1";
     $pagina = (isset($_GET['pagina'])) ? (int)$_GET['pagina'] : 1;
-    //Obtener variables con los parametros de la sesión del usuario
+    // Obtener variables con los parametros de la sesión del usuario
+    $pagina = (isset($_GET['pagina'])) ? (int)$_GET['pagina'] : 1;
+    $pagina = (isset($_GET['pagina'])) ? (int)$_GET['pagina'] : 1;
+    $pagina = (isset($_GET['pagina'])) ? (int)$_GET['pagina'] : 1;
+    $pagina = (isset($_GET['pagina'])) ? (int)$_GET['pagina'] : 1;
+    $pagina = (isset($_GET['pagina'])) ? (int)$_GET['pagina'] : 1;
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
