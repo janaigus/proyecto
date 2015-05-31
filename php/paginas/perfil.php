@@ -13,15 +13,26 @@
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
     if(isset($_POST['nombre'])){
-        $campos = array('email','nick','nombre','apellidos','password');
-        // Recorrer los campos haciendo los updates necesarios
-        // Realizar el update sobre el propio formulario
-        for($i=0;$i<count($campos);$i++){
-            if($_POST[$campos[$i]] != ""){
-                $consulta = 'UPDATE  usuarios SET '.$campos[$i].' = :valor WHERE id = '.$usuario;
-                $result = $db->prepare($consulta);
-                $resultado = $result->execute(array(':valor' => $_POST[$campos[$i]]) );
-            }
+        // Realizar el update de todos los campos menos del avatar
+        $consulta = 'UPDATE u135108308_h2k.usuarios SET ';
+        $consulta .= 'email = :email , ';
+        $consulta .= 'nick = :nick , ';
+        $consulta .= 'nombre = :nombre , ';
+        $consulta .= 'apellidos = :apell , ';
+        $consulta .= 'password = :pass ';
+        $consulta .= 'WHERE usuarios.id = '.$usuario;
+        
+        $result = $db->prepare($consulta);
+        $resultado = $result->execute(array(':email' => $_POST['email'],
+                                            ':nick' => $_POST['nick'],
+                                            ':nombre' => $_POST['nombre'],
+                                            ':apell' => $_POST['apellidos'],
+                                            ':pass' => md5(md5(md5($_POST['password'])))
+                                           ));
+        if($resultado == true){
+            echo "ok";
+        }else{
+            echo "error";
         }
         // Hacer lo mismo con el avatar
         // Si el archivo se ha encontrado tener la ruta con el nuevo nombre
@@ -35,19 +46,20 @@
         }else{
             $mensaje = '<span class="glyphicon glyphicon-ok-circle"></span> '.$name.' | Completado correctamente<br/>';
         }*/
-    }else{
-        $consulta = "SELECT * FROM usuarios WHERE id = :usuario ORDER BY nombre";
-        $result = $db->prepare($consulta);
-        $result->execute(array(':usuario' => $usuario));
-        $arrayResult = $result->fetchAll();
-        $nombreUsuario = $arrayResult[0]['nombre'];
-        $apellidosUsuario = $arrayResult[0]['apellidos'];
-        $nickUsuario = $arrayResult[0]['nick'];
-        $emailUsuario = $arrayResult[0]['email'];
-        $idIsla = $arrayResult[0]['idisla'];
-        $idMunicipio = $arrayResult[0]['idmunicipio'];
-        $avatarUsuario = $arrayResult[0]['avatar'];
+        
     }
+    $consulta = "SELECT * FROM usuarios WHERE id = :usuario ORDER BY nombre";
+    $result = $db->prepare($consulta);
+    $result->execute(array(':usuario' => $usuario));
+    $arrayResult = $result->fetchAll();
+    $nombreUsuario = $arrayResult[0]['nombre'];
+    $apellidosUsuario = $arrayResult[0]['apellidos'];
+    $nickUsuario = $arrayResult[0]['nick'];
+    $emailUsuario = $arrayResult[0]['email'];
+    $idIsla = $arrayResult[0]['idisla'];
+    $idMunicipio = $arrayResult[0]['idmunicipio'];
+    $avatarUsuario = $arrayResult[0]['avatar'];
+    $passUsuario = $arrayResult[0]['password'];
 ?>
 
 <!DOCTYPE html>
@@ -122,7 +134,7 @@
         <div class="container">
           <h1 class="page-header text-center">Editar Perfil</h1>
           <div class="row">
-            <form class="form-horizontal" role="form" action="./perfil.php" method="POST" id="formularioPerfil">
+            <form class="form-horizontal" role="form" action="<?php echo "./perfil.php?usuario=".$usuario; ?>" method="POST" id="formularioPerfil">
             <!-- left column -->
             <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="text-center">
@@ -136,7 +148,6 @@
               <div class="alert alert-info alert-dismissable" id="panelAlertas" style="display:none;">
                 <a class="panel-close close" data-dismiss="alert">×</a> 
                 <i class="fa fa-coffee"></i>
-                Esto es una <strong>.alerta</strong>. Usar para mandar mensajes importantes al usuario
               </div>
               <h3>Información </h3>
                 <div class="form-group">
@@ -166,19 +177,19 @@
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="password">Contraseña:</label>
                   <div class="col-md-8">
-                    <input class="form-control" name="password" id="password" value="11111122333" type="password" disabled="disabled">
+                    <input class="form-control" name="password" id="password" value="" type="password" disabled="disabled">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="confirmPass">Repetir contraseña:</label>
                   <div class="col-md-8">
-                    <input class="form-control" name="confirmPass" id="confirmPass" value="11111122333" type="password" disabled="disabled">
+                    <input class="form-control" name="confirmPass" id="confirmPass" value="" type="password" disabled="disabled">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-3 control-label"></label>
                   <div class="col-md-6">
-                    <input class="btn btn-lg btn-dark" id="guardarCambios" value="Guardar cambios" type="button" style="visibility: hidden;">
+                    <input class="btn btn-lg btn-dark" id="guardarCambios" value="Guardar cambios" type="submit" style="visibility: hidden;">
                   </div>
                   <div class="col-md-1" style="padding-top: 13px;">
                     <div class="dropup">
@@ -194,7 +205,6 @@
                     </div>
                   </div>
                 </div>
-                  
               </form>
             </div>
           </div>

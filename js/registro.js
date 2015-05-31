@@ -23,7 +23,7 @@ $(document).ready(function () {
         }
     });
     
-     // Gestion del submit del formulario de registro
+    // Gestion del submit del formulario de registro
     $('#formularioRegistrarse').on('submit', function (ev) {
         var correcto = true;
         var mensajesError = '<a class="panel-close close" data-dismiss="alert">×</a>';
@@ -55,14 +55,11 @@ $(document).ready(function () {
                 correcto = false;
             }else{
                 // Comprobar que las contraseñas coinciden
-                if($('#registroPassword').val() == $('#registroPass_con').val()){
-                    cambiarEstadoCaja("cajaRegistroCon", false, "");
-                }else{
+                if($('#registroPassword').val() != $('#registroPass_con').val()){
                     mensajesError += iconoError + "Las contraseñas no coinciden</br>";
                     correcto = false;
                 }
             }
-            cambiarEstadoCaja("cajaRegistroPass", false, "");
         }
         // Isla
         if($('#registroIslas').val() == 0){
