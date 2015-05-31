@@ -150,3 +150,13 @@ $(document).ready(function () {
         $("#cajaMensajeContacto").popover('destroy');
     });
 });
+
+function cambiarEstadoCaja(nombreCaja, mal, mensaje){
+    if(mal){
+        $('#'+nombreCaja).popover({ trigger: 'focus', placement: 'bottom', content: mensaje });
+        $('#'+nombreCaja).popover('show');
+        correcto = false;
+    }else{
+        $('#'+nombreCaja).popover('destroy');
+    }
+}

@@ -74,12 +74,7 @@
                 <a href="#contacto" onclick = $("#menu-close").click(); >Contacto</a>
             </li>
             <hr>
-            <li>
-                <a id="btnEntrar" href="#modalEntrar">Iniciar Sesión</a>
-            </li>
-            <li>
-                <a id="btnLateralRegistrarse" href="#modalRegistrarse">Registrarse</a>
-            </li>
+            
         </ul>
     </nav>
 
@@ -102,63 +97,63 @@
         <div class="container">
           <h1 class="page-header text-center">Editar Perfil</h1>
           <div class="row">
+            <form class="form-horizontal" role="form" action="./perfil.php" method="POST" id="formularioPerfil">
             <!-- left column -->
             <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="text-center">
                 <img src="../../<?php echo $avatarUsuario; ?>" class="avatar img-circle img-thumbnail" alt="avatar" height="200px" width="200px">
                 <h6>Subir otra foto...</h6>
-                <input type="file" class="text-center center-block well well-sm" style="color: black;">
+                <input type="file" class="text-center center-block well well-sm" style="color: black;" disabled="disabled">
               </div>
             </div>
             <!-- edit form column -->
             <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
-              <div class="alert alert-info alert-dismissable" style="display:none;">
+              <div class="alert alert-info alert-dismissable" id="panelAlertas" style="display:none;">
                 <a class="panel-close close" data-dismiss="alert">×</a> 
                 <i class="fa fa-coffee"></i>
                 Esto es una <strong>.alerta</strong>. Usar para mandar mensajes importantes al usuario
               </div>
               <h3>Información </h3>
-              <form class="form-horizontal" role="form">
                 <div class="form-group">
-                  <label class="col-lg-3 control-label">Nombre:</label>
+                  <label class="col-lg-3 control-label" for="nombre">Nombre:</label>
                   <div class="col-lg-8">
-                    <input class="form-control" value="<?php echo $nombreUsuario; ?>" type="text">
+                    <input class="form-control" name="nombre" id="nombre" value="<?php echo $nombreUsuario; ?>" type="text" disabled="disabled">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-lg-3 control-label">Apellidos:</label>
+                  <label class="col-lg-3 control-label" for="apellidos">Apellidos:</label>
                   <div class="col-lg-8">
-                    <input class="form-control" value="<?php echo $apellidosUsuario; ?>" type="text">
+                    <input class="form-control" name="apellidos" id="apellidos" value="<?php echo $apellidosUsuario; ?>" type="text" disabled="disabled">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-lg-3 control-label">Nick:</label>
+                  <label class="col-lg-3 control-label" for="nick">Nick:</label>
                   <div class="col-lg-8">
-                    <input class="form-control" value="<?php echo $nickUsuario; ?>" type="text">
+                    <input class="form-control" name="nick" id="nick" value="<?php echo $nickUsuario; ?>" type="text" disabled="disabled">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-lg-3 control-label">Email:</label>
+                  <label class="col-lg-3 control-label" for="email" >Email:</label>
                   <div class="col-lg-8">
-                    <input class="form-control" value="<?php echo $emailUsuario; ?>" type="text">
+                    <input class="form-control" name="email" id="email" value="<?php echo $emailUsuario; ?>" type="text" disabled="disabled">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-md-3 control-label">Contraseña:</label>
+                  <label class="col-md-3 control-label" for="password">Contraseña:</label>
                   <div class="col-md-8">
-                    <input class="form-control" value="11111122333" type="password" disabled>
+                    <input class="form-control" name="password" id="password" value="11111122333" type="password" disabled="disabled">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-md-3 control-label">Repetir contraseña:</label>
+                  <label class="col-md-3 control-label" for="confirmPass">Repetir contraseña:</label>
                   <div class="col-md-8">
-                    <input class="form-control" value="11111122333" type="password" disabled>
+                    <input class="form-control" name="confirmPass" id="confirmPass" value="11111122333" type="password" disabled="disabled">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-3 control-label"></label>
                   <div class="col-md-6">
-                    <input class="btn btn-lg btn-dark" value="Guardar cambios" type="button">
+                    <input class="btn btn-lg btn-dark" id="guardarCambios" value="Guardar cambios" type="button" style="visibility: hidden;">
                   </div>
                   <div class="col-md-1" style="padding-top: 13px;">
                     <div class="dropup">
@@ -166,9 +161,10 @@
                           <span class="glyphicon glyphicon-option-vertical"></span>  
                           Opciones
                       </button>
-                      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Cambiar contraseña</a></li>
+                      <ul class="dropdown-menu" role="menu" aria-labelledby="options">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Darme de baja</a></li>
+                        <hr>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="cambiarInfo">Cambiar información</a></li>
                       </ul>
                     </div>
                   </div>
@@ -209,61 +205,7 @@
             </div>
         </div>
     </footer>
-
-    <!-- Modal Inicio Sesión-->
-    <div class="modal fade" id="modalEntrar" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <div class="row">
-                  <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="../../img/img_pagina/logo.png" alt="Logo" width="180" height="95">
-                  </div>
-              </div>
-            </div>
-            <div class="modal-body">
-                  <form class="form" action="./php/sesion/login.php" method="POST" id="formularioEntrar">
-                    <div class="form-group" id="cajaEmailEntrar">
-                        <div class="inner-addon left-addon">
-                            <i class="glyphicon glyphicon-user"></i>
-                            <input type="text" id="entrarEmail" name="entrarEmail" class="form-control input-lg" placeholder="Email"/>
-                        </div>
-                    </div>
-                    <div class="form-group" id="cajaPassEntrar">
-                        <div class="inner-addon left-addon">
-                            <i class="glyphicon glyphicon-lock"></i>
-                            <input id="entrarPass" name="entrarPass" type="password" class="form-control input-lg" placeholder="Password"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                      <button id="entrarBoton" class="btn btn-lg btn-light btn-block">Iniciar sesión</button>
-                      <span class="pull-right"><a href="" id="entrarRegistrarse">Registrarse</a></span><span><a href="#">Ayuda</a></span>
-                    </div>
-                    <hr>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-4 col-lg-offset-2 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='./php/miFacebook.php' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
-                            </div>
-                            <!--<div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='#' class="btn btn-light twitter"> <i class="fa fa-twitter modal-icons"></i> Entrar con Twitter </a>
-                            </div>-->
-                            <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='./php/miGoogle.php' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
-                            </div>
-                        </div>
-                    </div>
-                  </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal" id="entrarCancelar">Cancelar</button>
-            </div>
-          </div>
-        </div>
-    </div>
-        
+    
     <!-- Modal Contacto-->
     <div class="modal fade" id="modalContacto" role="dialog">
         <div class="modal-dialog">

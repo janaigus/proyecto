@@ -1,24 +1,16 @@
 expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 
 $(document).ready(function () {
-    
-    /* Controlar los botones de slider de los "sliders" */
-    $('.btn-vertical-slider').on('click', function (ev) {
-        if ($(this).attr('data-slide') == 'next') {
-            if($(this).parents("#myCarouselValoradas").length > 0){
-                $(this).parents("#myCarouselValoradas").carousel('next');
-            }
-            else{
-                $(this).parents("#myCarouselRecientes").carousel('next');
-            }
-        }
-        if ($(this).attr('data-slide') == 'prev') {
-            if($(this).parents("#myCarouselValoradas").length > 0){
-                $(this).parents("#myCarouselValoradas").carousel('prev');
-            }
-            else{
-                $(this).parents("#myCarouselRecientes").carousel('prev');
-            }
+    $('#cambiarInfo').on('click', function (ev) {
+        ev.preventDefault();
+        if($(this).html() == "Cancelar"){
+            $(this).html("Cambiar información");
+            $('#guardarCambios').css("visibility", "hidden");
+            $('#formularioPerfil input').attr("disabled", true);
+        }else{
+            $(this).html("Cancelar");
+            $('#guardarCambios').css("visibility", "visible");
+            $('#formularioPerfil input[disabled=disabled]').attr("disabled", false);
         }
     });
     
@@ -60,10 +52,6 @@ $(document).ready(function () {
         }
     });
     
-    $('#btnEntrar').on('click', function (ev) {
-        $("#menu-close").click();
-        $("#modalEntrar").modal("show"); 
-    });
     
     // Gestión del envio del formulario de contacto
     $('#enviarFormularioContacto').on('click', function (ev) {
