@@ -8,11 +8,24 @@
     $sesionMunicipio = (isset($_SESSION['municipioh2k'])) ? (int)$_SESSION['municipioh2k'] : "";
     $sesionIsla = (isset($_SESSION['islah2k'])) ? (int)$_SESSION['islah2k'] : "";
     $sesionTiempo = (isset($_SESSION['tiempoh2k'])) ? $_SESSION['tiempoh2k'] : "";
-
+    
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
+    $consulta = "SELECT * FROM usuarios WHERE id = :usuario ORDER BY nombre";
+    $result = $db->prepare($consulta);
+    $result->execute(array(':usuario' => $usuario));
+    $arrayResult = $result->fetchAll();
+    $nombreUsuario = $arrayResult[0]['nombre'];
+    $apellidosUsuario = $arrayResult[0]['apellidos'];
+    $nickUsuario = $arrayResult[0]['nick'];
+    $emailUsuario = $arrayResult[0]['email'];
+    $idIsla = $arrayResult[0]['idisla'];
+    $idMunicipio = $arrayResult[0]['idmunicipio'];
+    $avatarUsuario = $arrayResult[0]['avatar'];
+    $passUsuario = $arrayResult[0]['password'];
     if(isset($_POST['nombre'])){
+        $mensaje = '';
         // Realizar el update de todos los campos menos del avatar
         $consulta = 'UPDATE u135108308_h2k.usuarios SET ';
         $consulta .= 'email = :email , ';
@@ -30,36 +43,36 @@
                                             ':pass' => md5(md5(md5($_POST['password'])))
                                            ));
         if($resultado == true){
-            echo "ok";
-        }else{
-            echo "error";
+            $mensaje = 'Información actualizada correctamente<br/>';
         }
+        
         // Hacer lo mismo con el avatar
-        // Si el archivo se ha encontrado tener la ruta con el nuevo nombre
         // Importante subir el archivo a la ruta img/img_usuarios/avatares/
-        /*$tmp_name = $_FILES["archivoAvatar"]["name"];
-        $arrayNombre = explode(".", $tmp_name);
-        $ruta = $_POST['nick']."avatar".$arrayNombre[count($arrayNombre) - 1];
-        // Mover el archivo despuesde realizar la consulta
-        if(!move_uploaded_file($tmp_name, "img/img_usuarios/avatares/$name")){
-            $mensaje = '<span class="glyphicon glyphicon-remove-circle"></span> '.$name.' | No se ha podido subir el archivo correctamente<br />';
-        }else{
-            $mensaje = '<span class="glyphicon glyphicon-ok-circle"></span> '.$name.' | Completado correctamente<br/>';
-        }*/
+        if(isset($_FILES['archivoAvatar']) ){
+            $tmp_name = $_FILES["archivoAvatar"]["tmp_name"];
+            $name = $_FILES["archivoAvatar"]["name"];
+            $arrayNombre = explode(".", $name);
+            $rutaFinal = "img/img_usuarios/avatares/".$nickUsuario."avatar.".$arrayNombre[count($arrayNombre) - 1];
+            // Mover el archivo despuesde realizar la consulta
+            if(!move_uploaded_file($tmp_name, "../../".$rutaFinal)){
+                $mensaje .= 'No se ha podido subir el archivo correctamente<br/>';
+            }else{
+                // Realizar el update de todos los campos menos del avatar
+                $consulta = 'UPDATE u135108308_h2k.usuarios SET ';
+                $consulta .= 'avatar= :avatar ';
+                $consulta .= 'WHERE usuarios.id = '.$usuario;
+
+                $result = $db->prepare($consulta);
+                $resultado = $result->execute(array(':avatar' => $rutaFinal ));
+                if($resultado == true){
+                    $mensaje .= 'El avatar se ha actualizado correctamente<br/>';
+                }else{
+                    $mensaje .= 'error su avatar sigue siendo el anterior<br/>';
+                }
+            }
+        }
         
     }
-    $consulta = "SELECT * FROM usuarios WHERE id = :usuario ORDER BY nombre";
-    $result = $db->prepare($consulta);
-    $result->execute(array(':usuario' => $usuario));
-    $arrayResult = $result->fetchAll();
-    $nombreUsuario = $arrayResult[0]['nombre'];
-    $apellidosUsuario = $arrayResult[0]['apellidos'];
-    $nickUsuario = $arrayResult[0]['nick'];
-    $emailUsuario = $arrayResult[0]['email'];
-    $idIsla = $arrayResult[0]['idisla'];
-    $idMunicipio = $arrayResult[0]['idmunicipio'];
-    $avatarUsuario = $arrayResult[0]['avatar'];
-    $passUsuario = $arrayResult[0]['password'];
 ?>
 
 <!DOCTYPE html>
@@ -134,20 +147,20 @@
         <div class="container">
           <h1 class="page-header text-center">Editar Perfil</h1>
           <div class="row">
-            <form class="form-horizontal" role="form" action="<?php echo "./perfil.php?usuario=".$usuario; ?>" method="POST" id="formularioPerfil">
+            <form class="form-horizontal" role="form" action="<?php echo "./perfil.php?usuario=".$usuario; ?>" method="POST" id="formularioPerfil" enctype="multipart/form-data">
             <!-- left column -->
             <div class="col-md-4 col-sm-6 col-xs-12">
               <div class="text-center">
-                <img src="../../<?php echo $avatarUsuario; ?>" class="avatar img-circle img-thumbnail" alt="avatar" height="200px" width="200px">
+                <img src="../../<?php echo $avatarUsuario; ?>" class="avatar img-circle img-thumbnail" alt="avatar" style="height: 200px; width: 200px;">
                 <h6>Subir otra foto...</h6>
                 <input type="file" name="archivoAvatar" id="archivoAvatar" class="text-center center-block well well-sm" style="color: black;" disabled="disabled">
               </div>
             </div>
             <!-- edit form column -->
             <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
-              <div class="alert alert-info alert-dismissable" id="panelAlertas" style="display:none;">
+              <div class="alert alert-info alert-dismissable" id="panelAlertas" <?php echo (!isset($mensaje)) ? 'style="display:none;"' : ''; ?> >
                 <a class="panel-close close" data-dismiss="alert">×</a> 
-                <i class="fa fa-coffee"></i>
+                <?php echo (isset($mensaje)) ? $mensaje : ''; ?>
               </div>
               <h3>Información </h3>
                 <div class="form-group">
@@ -177,13 +190,13 @@
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="password">Contraseña:</label>
                   <div class="col-md-8">
-                    <input class="form-control" name="password" id="password" value="" type="password" disabled="disabled">
+                    <input class="form-control" name="password" id="password" type="password" disabled="disabled">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="confirmPass">Repetir contraseña:</label>
                   <div class="col-md-8">
-                    <input class="form-control" name="confirmPass" id="confirmPass" value="" type="password" disabled="disabled">
+                    <input class="form-control" name="confirmPass" id="confirmPass" type="password" disabled="disabled">
                   </div>
                 </div>
                 <div class="form-group">
