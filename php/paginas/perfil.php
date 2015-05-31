@@ -2,8 +2,6 @@
     session_start();
     // Obtener el usuario sobre el que se va a maquetar la imagen
     $usuario = (isset($_GET['usuario'])) ? $_GET['usuario'] : "1";
-    var_dump($_POST);
-var_dump($_FILES);
     // Obtener variables con los parametros de la sesión del usuario
     $sesionId = (isset($_SESSION['idh2k'])) ? $_SESSION['idh2k'] : "";
     $sesionNick = (isset($_SESSION['nickh2k'])) ? $_SESSION['nickh2k'] : "";
