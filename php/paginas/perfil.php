@@ -3,7 +3,7 @@
     // Obtener el usuario sobre el que se va a maquetar la imagen
     $usuario = (isset($_GET['usuario'])) ? $_GET['usuario'] : "1";
     // Obtener variables con los parametros de la sesión del usuario
-    $sesionNombre = (isset($_SESSION['nombreh2k'])) ? $_SESSION['nombre'h2k] : "";
+    $sesionNombre = (isset($_SESSION['nombreh2k'])) ? $_SESSION['nombreh2k'] : "";
     $sesionRol = (isset($_SESSION['rolh2k'])) ? (int)$_SESSION['rolh2k'] : "";
     $sesionMunicipio = (isset($_SESSION['municipioh2k'])) ? (int)$_SESSION['municipioh2k'] : "";
     $sesionIsla = (isset($_SESSION['islah2k'])) ? (int)$_SESSION['islah2k'] : "";
