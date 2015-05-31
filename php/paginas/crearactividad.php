@@ -8,11 +8,14 @@
     $sesionNombre = (isset($_SESSION['nombreh2k'])) ? $_SESSION['nombreh2k'] : "";
     $sesionRol = (isset($_SESSION['rolh2k'])) ? (int)$_SESSION['rolh2k'] : "";
     $sesionMunicipio = (isset($_SESSION['municipioh2k'])) ? (int)$_SESSION['municipioh2k'] : "";
-    $sesionIsla = (isset($_SESSION['islah2k'])) ? (int)$_SESSION['islah2k'] : "";
+    $sesionIsla = (isset($_SESSION['islah2k'])) ? (int)$_SESSION['islah2k'] : "1";
     $sesionTiempo = (isset($_SESSION['tiempoh2k'])) ? $_SESSION['tiempoh2k'] : "";
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
+    // Validar datos recibidos
+    
+    // Si no existe fotografia colocar por defecto. En caso contrario realizar insert en recursos
 ?>
 
 <!DOCTYPE html>
@@ -106,9 +109,15 @@
                 <!-- /.col-lg-10 -->
             <div class="row">
             <form class="form-horizontal" role="form" action="./crearactividad.php" method="POST" id="formularioActividad" enctype="multipart/form-data">
+            
             <div class="col-md-10 col-lg-offset-1" style="color:black;text-align: left;">
+            
             <div class="thumbnail" style="padding: 20px 20px 20px 20px;">
                 <div class="caption-full">
+                <div class="alert alert-info alert-dismissable" id="panelAlertas" <?php echo (!isset($error)) ? 'style="display: none;"' : ''; ?> >
+            <a class="panel-close close" data-dismiss="alert">×</a>
+                <?php echo (isset($error)) ? $error : ''; ?>
+            </div>
                 <div class="item">
                     <div class="row">
                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6" >
@@ -144,31 +153,23 @@
                                 </div>
                                 <div class="form-group">
                                   <div class="col-lg-12">
-                                    <select id="islas" name="islas" class="form-control">
-                                        <option value="0">Seleccione isla</option>
-                                        <?php
-                                        $consulta = "SELECT * FROM auxislas ";
-                                        $result = $db->prepare($consulta);
-                                        $result->execute();
-                                        $arrayResult = $result->fetchAll();
-                                        for($i=0;$i<$result->rowCount();$i++){
-                                            echo '<option value="'.$arrayResult[$i]['id'].'">'.$arrayResult[$i]['nombre'].'</option>';
-                                        }
-                                        ?>
-                                    </select>
-                                  </div>
-                                </div>
-                                <div class="form-group">
-                                  <div class="col-lg-12">
                                         <select id="municipios" name="municipios" class="form-control">
                                             <option value="0">Seleccione municipio</option>
+                                            <?php
+                                            $consulta = "SELECT * FROM auxmunicipios WHERE idisla = :isla ";
+                                            $result = $db->prepare($consulta);
+                                            $result->execute(array(':isla' => $sesionIsla ));
+                                            $arrayResult = $result->fetchAll();
+                                            for($i=0;$i<$result->rowCount();$i++){
+                                                echo '<option value="'.$arrayResult[$i]['id'].'">'.$arrayResult[$i]['nombre'].'</option>';
+                                            }
                                             ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                   <div class="col-lg-12">
-                                    <textarea name="descripcion" id="descripcion" class="form-control" rows="3" style="resize:vertical;" placeholder="Comentario" maxlength="250"></textarea>
+                                    <textarea name="descripcion" id="descripcion" class="form-control" rows="6" style="resize:vertical;" placeholder="Comentario" maxlength="250"></textarea>
                                       <h5 class="pull-right"><span id="lrestantes">250 letras restantes</span></h5>
                                   </div>
                                 </div>

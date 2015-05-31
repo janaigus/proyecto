@@ -1,6 +1,36 @@
-expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
-
 $(document).ready(function () {
+    
+    $('#formularioActividad').on('submit', function (ev) {
+        var correcto = true;
+        var mensajesError = '<a class="panel-close close" data-dismiss="alert">×</a>';
+        var iconoError = '<span class="glyphicon glyphicon-remove"></span>';
+        // Titulo
+        if($('#titulo').val() == ""){
+            mensajesError += iconoError + "Introduzca un nombre</br>";
+            correcto = false;
+        }
+        // Descripcion
+        if($('#descripcion').val() == ""){
+            mensajesError += iconoError + "Introduzca unos apellidos</br>";
+            correcto = false;
+        }
+        // Municipio
+        if($('#municipios').val() == 0){
+            mensajesError += iconoError + "Seleccione un municipio</br>";
+            correcto = false;
+        }
+        // Categoria
+        if($('#categorias').val() == 0){
+            mensajesError += iconoError + "Seleccione un categorias</br>";
+            correcto = false;
+        }
+        // Comprobar que es correcto para enviarlo
+        if(correcto == false){
+            ev.preventDefault();
+            $('#panelAlertas').html(mensajesError);
+            $('#panelAlertas').css("display", "block");
+        }
+    });
     
     // Añadir el on change para mostrar la miniatura de la imagen al subirla
     $('#imagenActividad').on("change", function(ev){ 
@@ -16,28 +46,6 @@ $(document).ready(function () {
         var value   = $(this).val();
         var current = value.length;
         $('#lrestantes').html((250 - current) + " letras restantes");
-    });
-    
-    // Evento onchange cuando se selccione una isla
-    $('#islas').on('change', function (ev) {
-        if($('#islas').val() == 0){
-            $("#municipios").attr('disabled', true);
-            $("#municipios").html('<option value="0">Seleccione municipio</option>');
-        }else{
-            $.post('../obtenerRecursos/obtenerMunicipios.php', { islaSeleccionada: $('#islas').val() },
-                function(respuesta)
-                {
-                    cadena = '<option value="0">Seleccione municipio</option>';
-                    $.each(respuesta, function(i, tupla){
-                        cadena += '<option value="'+tupla.id+'">'+tupla.nombre+'</option>';
-                    });
-                    $("#municipios").html(cadena );
-                    // Habilitar el input de isla
-                    // $("#municipios").attr('disabled', false);
-                }
-                , "json"
-            );
-        }
     });
     
     /* Controlar los botones de slider de los "sliders" */
