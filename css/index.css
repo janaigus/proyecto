@@ -417,3 +417,10 @@ a {
 /* add padding  */
 .left-addon input  { padding-left:  30px; }
 .right-addon input { padding-right: 30px; }
+
+/* Caja drag and drop */
+#imagenColocada{
+    height: 280px;
+    width: 450px;
+}
+

@@ -2,6 +2,22 @@ expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 
 $(document).ready(function () {
     
+    // Añadir el on change para mostrar la miniatura de la imagen al subirla
+    $('#imagenActividad').on("change", function(ev){ 
+        // Prevenir el comportamiento por defecto en el drop que es abrir el archivo en el propio navegador
+        ev.preventDefault();
+        // Recoger el fichero que se ha recibido en nuestra variable global
+        var fich = document.getElementById("imagenActividad").files[0];
+        // Recoger el img donde estará la vista previa de la imagen y colocarle el archivo
+        $('#imagenColocada').attr("src", URL.createObjectURL(fich));
+    });
+    
+    $('#descripcion').on('keypress', function (ev) {
+        var value   = $(this).val();
+        var current = value.length;
+        $('#lrestantes').html((250 - current) + " letras restantes");
+    });
+    
     // Evento onchange cuando se selccione una isla
     $('#islas').on('change', function (ev) {
         if($('#islas').val() == 0){

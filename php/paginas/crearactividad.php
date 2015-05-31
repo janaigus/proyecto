@@ -105,19 +105,25 @@
                 </div>
                 <!-- /.col-lg-10 -->
             <div class="row">
-
+            <form class="form-horizontal" role="form" action="./crearactividad.php" method="POST" id="formularioActividad" enctype="multipart/form-data">
             <div class="col-md-10 col-lg-offset-1" style="color:black;text-align: left;">
             <div class="thumbnail" style="padding: 20px 20px 20px 20px;">
                 <div class="caption-full">
                 <div class="item">
                     <div class="row">
-                       <div class="col-xs-12 col-sm-12 col-md-6" style="height:280px;width:450px;border: 1px solid rgb(249,213,130);border-radius:4px;margin-left: 15px;margin-bottom: 20px;">
+                       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6" >
+                           <div class="text-center">
+                            <img id="imagenColocada" src="../../img/img_actividades/default.jpg" class="" alt="">
+                            <h6>Subir otra foto...</h6>
+                            <input type="file" name="imagenActividad" id="imagenActividad" class="text-center center-block well well-sm" style="color: black;">
+                          </div>
                        </div>
-                       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">
-                            <form class="form-horizontal" role="form">
+                    
+                       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6" style="text-align: left;">
+                            <form class="form-horizontal" action="" role="form">
                                 <div class="form-group">
                                   <div class="col-lg-12">
-                                    <input class="form-control" placeholder="Titulo" type="text">
+                                    <input name="titulo" id="titulo" class="form-control" placeholder="Titulo" type="text">
                                   </div>
                                 </div>
                                 <div class="form-group">
@@ -162,22 +168,22 @@
                                 </div>
                                 <div class="form-group">
                                   <div class="col-lg-12">
-                                    <textarea class="form-control" rows="3" style="resize:vertical;" placeholder="Comentario"></textarea>
-                                    <h5 class="pull-right">320 letras restantes</h5>
+                                    <textarea name="descripcion" id="descripcion" class="form-control" rows="3" style="resize:vertical;" placeholder="Comentario" maxlength="250"></textarea>
+                                      <h5 class="pull-right"><span id="lrestantes">250 letras restantes</span></h5>
                                   </div>
                                 </div>
                            </form>
                        </div>
                     </div>
                     <div class="row text-center">
-                        <input class="btn btn-lg btn-dark" value="Publicar actividad" type="button">
+                        <input class="btn btn-lg btn-dark" value="Publicar actividad" type="submit">
                     </div>
                 </div>
                     
                 </div>
             </div>
             </div>
-
+            </form>
         </div>
         </div>
         <!-- /.row -->
