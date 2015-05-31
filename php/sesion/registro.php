@@ -160,14 +160,8 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <select id="registroIslas" name="registroIslas" class="form-control input-lg" value="">
+                        <option value="0">Seleccione isla</option>
                         <?php
-                        if(isset($_POST['registroIslas'])){
-                            $consulta = "SELECT * FROM auxislas WHERE id = :idisla ORDER BY nombre";
-                            $result = $db->prepare($consulta);
-                            $result->execute(array(':idisla' => $_POST['registroIslas']));
-                            echo '<option value="'.$arrayResult[0]['id'].'">'.$arrayResult[0]['nombre'].'</option>';
-                        }else{
-                            echo '<option value="0">Seleccione isla</option>';
                             $consulta = "SELECT * FROM auxislas ORDER BY nombre";
                             $result = $db->prepare($consulta);
                             $result->execute();
@@ -175,7 +169,6 @@
                             for($i=0;$i<$result->rowCount();$i++){
                                 echo '<option value="'.$arrayResult[$i]['id'].'">'.$arrayResult[$i]['nombre'].'</option>';
                             }
-                        }
                         ?>
                     </select>
                 </div>
@@ -183,16 +176,7 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group" id="cajaRegistroMunicipio">
                     <select id="registroMunicipios" name="registroMunicipios" class="form-control input-lg"  value="" disabled>
-                        <?php
-                        if(isset($_POST['registroMunicipios'])){
-                            $consulta = "SELECT * FROM auxmunicipios WHERE id = :idmunicipio ORDER BY nombre";
-                            $result = $db->prepare($consulta);
-                            $result->execute(array(':idmunicipio' => $_POST['registroMunicipios']));
-                            echo '<option value="'.$arrayResult[0]['id'].'">'.$arrayResult[0]['nombre'].'</option>';
-                        }else{
-                            echo '<option value="0">Seleccione municipio</option>';
-                        }
-                        ?>
+                        <option value="0">Seleccione municipio</option>
                     </select>
                 </div>
             </div>
