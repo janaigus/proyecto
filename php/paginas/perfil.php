@@ -13,21 +13,41 @@
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
     if(isset($_POST['nombre'])){
+        $campos = array('email','nick','nombre','apellidos','password');
+        // Recorrer los campos haciendo los updates necesarios
         // Realizar el update sobre el propio formulario
+        for($i=0;$i<count($campos);$i++){
+            if($_POST[$campos[$i]] != ""){
+                $consulta = 'UPDATE  usuarios SET '.$campos[$i].' = :valor WHERE id = '.$usuario;
+                $result = $db->prepare($consulta);
+                $resultado = $result->execute(array(':valor' => $_POST[$campos[$i]]) );
+            }
+        }
+        // Hacer lo mismo con el avatar
+        // Si el archivo se ha encontrado tener la ruta con el nuevo nombre
         // Importante subir el archivo a la ruta img/img_usuarios/avatares/
+        /*$tmp_name = $_FILES["archivoAvatar"]["name"];
+        $arrayNombre = explode(".", $tmp_name);
+        $ruta = $_POST['nick']."avatar".$arrayNombre[count($arrayNombre) - 1];
+        // Mover el archivo despuesde realizar la consulta
+        if(!move_uploaded_file($tmp_name, "img/img_usuarios/avatares/$name")){
+            $mensaje = '<span class="glyphicon glyphicon-remove-circle"></span> '.$name.' | No se ha podido subir el archivo correctamente<br />';
+        }else{
+            $mensaje = '<span class="glyphicon glyphicon-ok-circle"></span> '.$name.' | Completado correctamente<br/>';
+        }*/
+    }else{
+        $consulta = "SELECT * FROM usuarios WHERE id = :usuario ORDER BY nombre";
+        $result = $db->prepare($consulta);
+        $result->execute(array(':usuario' => $usuario));
+        $arrayResult = $result->fetchAll();
+        $nombreUsuario = $arrayResult[0]['nombre'];
+        $apellidosUsuario = $arrayResult[0]['apellidos'];
+        $nickUsuario = $arrayResult[0]['nick'];
+        $emailUsuario = $arrayResult[0]['email'];
+        $idIsla = $arrayResult[0]['idisla'];
+        $idMunicipio = $arrayResult[0]['idmunicipio'];
+        $avatarUsuario = $arrayResult[0]['avatar'];
     }
-    $consulta = "SELECT * FROM usuarios WHERE id = :usuario ORDER BY nombre";
-    $result = $db->prepare($consulta);
-    $result->execute(array(':usuario' => $usuario));
-    $arrayResult = $result->fetchAll();
-    $nombreUsuario = $arrayResult[0]['nombre'];
-    $apellidosUsuario = $arrayResult[0]['apellidos'];
-    $nickUsuario = $arrayResult[0]['nick'];
-    $emailUsuario = $arrayResult[0]['email'];
-    $idIsla = $arrayResult[0]['idisla'];
-    $idMunicipio = $arrayResult[0]['idmunicipio'];
-    $avatarUsuario = $arrayResult[0]['avatar'];
-    
 ?>
 
 <!DOCTYPE html>
@@ -108,7 +128,7 @@
               <div class="text-center">
                 <img src="../../<?php echo $avatarUsuario; ?>" class="avatar img-circle img-thumbnail" alt="avatar" height="200px" width="200px">
                 <h6>Subir otra foto...</h6>
-                <input type="file" id="archivoAvatar" class="text-center center-block well well-sm" style="color: black;" disabled="disabled">
+                <input type="file" name="archivoAvatar" id="archivoAvatar" class="text-center center-block well well-sm" style="color: black;" disabled="disabled">
               </div>
             </div>
             <!-- edit form column -->

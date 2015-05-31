@@ -4,9 +4,7 @@ $(document).ready(function () {
     $('#cambiarInfo').on('click', function (ev) {
         ev.preventDefault();
         if($(this).html() == "Cancelar"){
-            $(this).html("Cambiar información");
-            $('#guardarCambios').css("visibility", "hidden");
-            $('#formularioPerfil input').attr("disabled", true);
+            location.reload();
         }else{
             $(this).html("Cancelar");
             $('#guardarCambios').css("visibility", "visible");
