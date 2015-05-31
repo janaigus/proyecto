@@ -2,6 +2,8 @@
     session_start();
     // Obtener el usuario sobre el que se va a maquetar la imagen
     $usuario = (isset($_GET['usuario'])) ? $_GET['usuario'] : "1";
+    var_dump($_POST);
+var_dump($_FILES);
     // Obtener variables con los parametros de la sesión del usuario
     $sesionId = (isset($_SESSION['idh2k'])) ? $_SESSION['idh2k'] : "";
     $sesionNick = (isset($_SESSION['nickh2k'])) ? $_SESSION['nickh2k'] : "";
@@ -29,36 +31,61 @@
         $passUsuario = $arrayResult[0]['password'];
         
         $mensaje = '';
-        // Realizar el update de todos los campos menos del avatar
-        $consulta = 'UPDATE u135108308_h2k.usuarios SET ';
-        $consulta .= 'email = :email , ';
-        $consulta .= 'nick = :nick , ';
-        $consulta .= 'nombre = :nombre , ';
-        $consulta .= 'apellidos = :apell , ';
-        $consulta .= 'password = :pass ';
-        $consulta .= 'WHERE usuarios.id = '.$usuario;
-        
-        $result = $db->prepare($consulta);
-        $resultado = $result->execute(array(':email' => $_POST['email'],
-                                            ':nick' => $_POST['nick'],
-                                            ':nombre' => $_POST['nombre'],
-                                            ':apell' => $_POST['apellidos'],
-                                            ':pass' => md5(md5(md5($_POST['password'])))
-                                           ));
-        if($resultado == true){
-            $mensaje = 'Información actualizada correctamente<br/>';
+        $correcto = true;
+        // Si el email anterior es distinto del nuevo
+        if($_POST['email'] != $emailUsuario){
+            // Comprobar que el email y el nick no existen en la base de datos
+            $consulta = "SELECT * FROM usuarios where email=:email";
+            $result = $db->prepare($consulta);
+            $result->execute(array(":email" => $_POST['email']));
+            if($result->rowCount() != 0){
+                $mensaje = "El email está en uso<br/>";
+                $correcto = false;
+            }
         }
-        
+        // Si el nick anterior es distinto del nuevo
+        if($_POST['nick'] != $nickUsuario){
+            // Comprobar que el email y el nick no existen en la base de datos
+            $consulta = "SELECT * FROM usuarios where nick=:nick";
+            $result = $db->prepare($consulta);
+            $result->execute(array(":nick" => $_POST['nick']));
+            if($result->rowCount() != 0){
+                $mensaje = "El nick ya está en uso<br/>";
+                $correcto = false;
+            }
+        }
+        // Una vez que los datos anteriores son correctos continuar la actualizacion
+        if($correcto == true){
+            // Realizar el update de todos los campos menos del avatar
+            $consulta = 'UPDATE u135108308_h2k.usuarios SET ';
+            $consulta .= 'email = :email , ';
+            $consulta .= 'nick = :nick , ';
+            $consulta .= 'nombre = :nombre , ';
+            $consulta .= 'apellidos = :apell , ';
+            $consulta .= 'password = :pass ';
+            $consulta .= 'WHERE usuarios.id = '.$usuario;
+
+            $result = $db->prepare($consulta);
+            $resultado = $result->execute(array(':email' => $_POST['email'],
+                                                ':nick' => $_POST['nick'],
+                                                ':nombre' => $_POST['nombre'],
+                                                ':apell' => $_POST['apellidos'],
+                                                ':pass' => md5(md5(md5($_POST['password'])))
+                                               ));
+            if($resultado == true){
+                $mensaje = 'Información actualizada correctamente<br/>';
+            }
+        }
         // Hacer lo mismo con el avatar
         // Importante subir el archivo a la ruta img/img_usuarios/avatares/
-        if(isset($_FILES['archivoAvatar']) ){
+        if(isset($_FILES['archivoAvatar']) and $_FILES['archivoAvatar']["error"] == 0){
             $tmp_name = $_FILES["archivoAvatar"]["tmp_name"];
             $name = $_FILES["archivoAvatar"]["name"];
             $arrayNombre = explode(".", $name);
             $rutaFinal = "img/img_usuarios/avatares/".$nickUsuario."avatar.".$arrayNombre[count($arrayNombre) - 1];
             // Mover el archivo despuesde realizar la consulta
             if(!move_uploaded_file($tmp_name, "../../".$rutaFinal)){
-                $mensaje .= 'No se ha podido subir el archivo correctamente<br/>';
+                $mensaje .= 'No se ha cambiado el avatar<br/>';
             }else{
                 // Realizar el update de todos los campos menos del avatar
                 $consulta = 'UPDATE u135108308_h2k.usuarios SET ';
@@ -70,7 +97,7 @@
                 if($resultado == true){
                     $mensaje .= 'El avatar se ha actualizado correctamente<br/>';
                 }else{
-                    $mensaje .= 'error su avatar sigue siendo el anterior<br/>';
+                    $mensaje .= 'Error. su avatar sigue siendo el anterior<br/>';
                 }
             }
         }
@@ -80,6 +107,7 @@
     $result = $db->prepare($consulta);
     $result->execute(array(':usuario' => $usuario));
     $arrayResult = $result->fetchAll();
+    $idUsuario = $arrayResult[0]['id'];
     $nombreUsuario = $arrayResult[0]['nombre'];
     $apellidosUsuario = $arrayResult[0]['apellidos'];
     $nickUsuario = $arrayResult[0]['nick'];
@@ -89,7 +117,7 @@
     $avatarUsuario = $arrayResult[0]['avatar'];
     $passUsuario = $arrayResult[0]['password'];
     // Seguridad, el usuario debe haber iniciado sesion y ser el mismo que al que se está intentando acceder
-    if(!($sesionNombre != "" and $sesionNombre == $nombreUsuario)){
+    if(!($sesionNombre != "" and $sesionId == $idUsuario)){
         header('Location: ../../index.php');
     }
 ?>

@@ -133,7 +133,11 @@
                     <h1><?php echo $nombreCategoria." en ".$nombreIsla; ?></h1>
                     <hr class="small">
                     <div>
-                        <button class="btn btn-lg btn-light" type="submit">Publicar Actividad</button>
+                        <?php
+                        if($sesionIsla == $isla){
+                            echo'<button class="btn btn-lg btn-dark" type="submit">Publicar Actividad</button>';
+                        }
+                        ?>
                     </div>
                     <div class="row">
                         <hr>

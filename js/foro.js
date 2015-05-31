@@ -44,8 +44,8 @@ $(document).ready(function () {
                 {
                     switch(respuesta){
                         case "OK":
-                            // Redireccionar a la pagina principal del usuario, las sesiones ya se habrán creado desde php
-                            alert("alles klar");
+                            //  Recargar la pagina
+                            location.reload();
                             break;
                         case "BADPASS":
                             cambiarEstadoCaja("cajaPassEntrar", true, "Contraseña incorrecta.");
