@@ -38,7 +38,6 @@
 
                     if($resultado){
                         // Crear las sesiones y redireccionar a index
-                        echo "OK";
                         $_SESSION['nombreh2k'] = $_POST['registroNombre'];
                         $_SESSION['rolh2k'] = 2;
                         $_SESSION['municipioh2k'] = $_POST['registroMunicipios'];
@@ -160,8 +159,26 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <select id="registroIslas" name="registroIslas" class="form-control input-lg" value="">
-                        <option value="0">Seleccione isla</option>
+                            <option value="0">Seleccione isla</option>
                         <?php
+                            $consulta = "SELECT * FROM auxislas ORDER BY nombre";
+                            $result = $db->prepare($consulta);
+                            $result->execute();
+                            $arrayResult = $result->fetchAll();
+                            for($i=0;$i<$result->rowCount();$i++){
+                                echo '<option value="'.$arrayResult[$i]['id'].'"';
+                                if(isset($_POST['registroIslas'])){
+                                    echo 'selected="selected" ';
+                                }
+                                echo '>'.$arrayResult[$i]['nombre'].'</option>';
+                            }
+                        if(isset($_POST['registroIslas'])){
+                            $consulta = "SELECT * FROM auxislas WHERE id = :isla ORDER BY nombre";
+                            $result = $db->prepare($consulta);
+                            $result->execute(array(':isla' => $_POST['registroIslas']));
+                            echo '<option value="'.$arrayResult[0]['id'].'">'.$arrayResult[0]['nombre'].'</option>';
+                        }else{
+                            echo '<option value="0">Seleccione isla</option>';
                             $consulta = "SELECT * FROM auxislas ORDER BY nombre";
                             $result = $db->prepare($consulta);
                             $result->execute();
@@ -169,6 +186,7 @@
                             for($i=0;$i<$result->rowCount();$i++){
                                 echo '<option value="'.$arrayResult[$i]['id'].'">'.$arrayResult[$i]['nombre'].'</option>';
                             }
+                        }
                         ?>
                     </select>
                 </div>
@@ -176,7 +194,16 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group" id="cajaRegistroMunicipio">
                     <select id="registroMunicipios" name="registroMunicipios" class="form-control input-lg"  value="" disabled>
-                        <option value="0">Seleccione municipio</option>
+                        <?php
+                        if(isset($_POST['registroMunicipios'])){
+                            $consulta = "SELECT * FROM auxmunicipios WHERE id = :municipio ORDER BY nombre";
+                            $result = $db->prepare($consulta);
+                            $result->execute(array(':municipio' => $_POST['registroMunicipios']));
+                            echo '<option value="'.$arrayResult[0]['id'].'">'.$arrayResult[0]['nombre'].'</option>';
+                        }else{
+                            echo '<option value="0">Seleccione municipio</option>';
+                        }
+                        ?>
                     </select>
                 </div>
             </div>
