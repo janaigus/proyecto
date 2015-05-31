@@ -1,49 +1,62 @@
 <?php
     session_start();
+    if(isset($_SESSION['nombreh2k'])){
+        header('Location: ../../index.php');
+    }
     // Requerir el fichero para la conexion con la base de datos 
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
+    // Si han llegado datos del formulario de registro
     if(isset($_POST['registroNombre'])){
         $consulta = "SELECT * FROM usuarios where email=:email";
         $result = $db->prepare($consulta);
         $result->execute(array(":email" => $_POST['registroEmail']));
-        
-        $respuesta = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=6LecTAcTAAAAAKg7meG4TT6RWFKD8i4jox9WlsEA&response='.$_POST['g-recaptcha-response'].'&remoteip='.$_SERVER['REMOTE_ADDR']), true);
-        
-        // Si no hay resultados continuar con el insert
+        // Si el email está disponible
         if((!$result->rowCount() > 0)){
-            if($respuesta['success'] == 1){
-                $consulta = "INSERT INTO usuarios (email, nick, nombre, apellidos, password, idrol, idmunicipio, idisla) ";
-                $consulta .= "VALUES (:mail, :alias, :name, :sname, :pass, :rol, :mun, :isla)";
+            $consulta = "SELECT * FROM usuarios where nick=:nick";
+            $result = $db->prepare($consulta);
+            $result->execute(array(":nick" => $_POST['registroNick']));
+            // Si el nick está disponible
+            if((!$result->rowCount() > 0)){
+                // Si el captcha es correcto
+                $respuesta = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=6LecTAcTAAAAAKg7meG4TT6RWFKD8i4jox9WlsEA&response='.$_POST['g-recaptcha-response'].'&remoteip='.$_SERVER['REMOTE_ADDR']), true);
+                if($respuesta['success'] == 1){
+                    $consulta = "INSERT INTO usuarios (email, nick, nombre, apellidos, password, idrol, idmunicipio, idisla) ";
+                    $consulta .= "VALUES (:mail, :alias, :name, :sname, :pass, :rol, :mun, :isla)";
 
-                $result  = $db->prepare($consulta);
-                $resultado = $result->execute(array(
-                    ":mail" => $_POST['registroEmail'],
-                    ":alias" => $_POST['registroEmail'],
-                    ":name" => $_POST['registroNombre'],
-                    ":sname" => $_POST['registroApellidos'],
-                    ":pass" => md5(md5(md5($_POST['registroPassword']))),
-                    ":rol" => 2,
-                    ":mun" => $_POST['registroMunicipios'],
-                    ":isla" => $_POST['registroIslas']
-                ));
-                
-                if($resultado){
-                    // Crear las sesiones y redireccionar a index
-                    echo "OK";
-                    $_SESSION['nombre'] = $_POST['registroNombre'];
-                    $_SESSION['rol'] = 2;
-                    $_SESSION['municipio'] = $_POST['registroMunicipios'];
-                    $_SESSION['isla'] = $_POST['registroIslas'];
-                    $_SESSION['email'] = $arrayResult[0]['email'];
-                    $_SESSION['tiempo'] = date("Y-n-j H:i:s");
-                    header('Location: ../../index.php');
+                    $result  = $db->prepare($consulta);
+                    $resultado = $result->execute(array(
+                        ":mail" => $_POST['registroEmail'],
+                        ":alias" => $_POST['registroNick'],
+                        ":name" => $_POST['registroNombre'],
+                        ":sname" => $_POST['registroApellidos'],
+                        ":pass" => md5(md5(md5($_POST['registroPassword']))),
+                        ":rol" => 2,
+                        ":mun" => $_POST['registroMunicipios'],
+                        ":isla" => $_POST['registroIslas']
+                    ));
+
+                    if($resultado){
+                        // Crear las sesiones y redireccionar a index
+                        echo "OK";
+                        $_SESSION['nombreh2k'] = $_POST['registroNombre'];
+                        $_SESSION['rolh2k'] = 2;
+                        $_SESSION['municipioh2k'] = $_POST['registroMunicipios'];
+                        $_SESSION['islah2k'] = $_POST['registroIslas'];
+                        $_SESSION['emailh2k'] = $arrayResult[0]['email'];
+                        $_SESSION['tiempoh2k'] = date("Y-n-j H:i:s");
+                        header('Location: ../../index.php');
+                    }else{
+                        $error = '<span class="glyphicon glyphicon-remove"></span>No se ha podido completar el registro';
+                    }//Resultado
+                    
                 }else{
-                    $error = '<span class="glyphicon glyphicon-remove"></span>No se ha podido completar el registro';
-                }
+                    $error = '<span class="glyphicon glyphicon-remove"></span>Captcha incorrecto';
+                } //Captcha
+                
             }else{
-                $error = '<span class="glyphicon glyphicon-remove"></span>Captcha incorrecto';
-            }
+                $error = '<span class="glyphicon glyphicon-remove"></span>El nick no está disponible';
+            } // Nick
         }else{
             $error = '<span class="glyphicon glyphicon-remove"></span>Ya existe un usuario regitrado con ese email';
         }
@@ -114,45 +127,54 @@
             
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group" id="cajaRegistroNombre">
+                <div class="form-group">
                     <input type="text" name="registroNombre" id="registroNombre" class="form-control input-lg" placeholder="Nombre" value="<?php echo (isset($_POST['registroNombre'])) ? $_POST['registroNombre'] : ''; ?>">  
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group" id="cajaRegistroApellidos">
+                <div class="form-group">
                     <input type="text" name="registroApellidos" id="registroApellidos" class="form-control input-lg" placeholder="Apellidos" value="<?php echo (isset($_POST['registroApellidos'])) ? $_POST['registroApellidos'] : ''; ?>">
                 </div>
             </div>
         </div>
 
-        <div class="form-group" id="cajaRegistroEmail">
+        <div class="form-group">
             <input type="email" name="registroEmail" id="registroEmail" class="form-control input-lg" placeholder="Email" value="<?php echo (isset($_POST['registroEmail'])) ? $_POST['registroEmail'] : ''; ?>">
         </div>
-
+        <div class="form-group">
+            <input type="text" name="registroNick" id="registroNick" class="form-control input-lg" placeholder="Nick" value="<?php echo (isset($_POST['registroNick'])) ? $_POST['registroNick'] : ''; ?>">
+        </div>
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group" id="cajaRegistroPass">
+                <div class="form-group">
                     <input type="password" name="registroPassword" id="registroPassword" class="form-control input-lg" placeholder="Contraseña" value="<?php echo (isset($_POST['registroPassword'])) ? $_POST['registroPassword'] : ''; ?>">
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group" id="cajaRegistroCon">
+                <div class="form-group">
                     <input type="password" name="registroPass_con" id="registroPass_con" class="form-control input-lg" placeholder="Repetir Contraseña" value="<?php echo (isset($_POST['registroPass_con'])) ? $_POST['registroPass_con'] : ''; ?>">
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group" id="cajaRegistroIsla">
+                <div class="form-group">
                     <select id="registroIslas" name="registroIslas" class="form-control input-lg" value="">
-                        <option value="0">Seleccione isla</option>
                         <?php
-                        $consulta = "SELECT * FROM auxislas ORDER BY nombre";
-                        $result = $db->prepare($consulta);
-                        $result->execute();
-                        $arrayResult = $result->fetchAll();
-                        for($i=0;$i<$result->rowCount();$i++){
-                            echo '<option value="'.$arrayResult[$i]['id'].'">'.$arrayResult[$i]['nombre'].'</option>';
+                        if(isset($_POST['registroIslas'])){
+                            $consulta = "SELECT * FROM auxislas WHERE id = :idisla ORDER BY nombre";
+                            $result = $db->prepare($consulta);
+                            $result->execute(array(':idisla' => $_POST['registroIslas']));
+                            echo '<option value="'.$arrayResult[0]['id'].'">'.$arrayResult[0]['nombre'].'</option>';
+                        }else{
+                            echo '<option value="0">Seleccione isla</option>';
+                            $consulta = "SELECT * FROM auxislas ORDER BY nombre";
+                            $result = $db->prepare($consulta);
+                            $result->execute();
+                            $arrayResult = $result->fetchAll();
+                            for($i=0;$i<$result->rowCount();$i++){
+                                echo '<option value="'.$arrayResult[$i]['id'].'">'.$arrayResult[$i]['nombre'].'</option>';
+                            }
                         }
                         ?>
                     </select>
@@ -161,7 +183,16 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group" id="cajaRegistroMunicipio">
                     <select id="registroMunicipios" name="registroMunicipios" class="form-control input-lg"  value="" disabled>
-                        <option value="0">Seleccione municipio</option>
+                        <?php
+                        if(isset($_POST['registroMunicipios'])){
+                            $consulta = "SELECT * FROM auxmunicipios WHERE id = :idmunicipio ORDER BY nombre";
+                            $result = $db->prepare($consulta);
+                            $result->execute(array(':idmunicipio' => $_POST['registroMunicipios']));
+                            echo '<option value="'.$arrayResult[0]['id'].'">'.$arrayResult[0]['nombre'].'</option>';
+                        }else{
+                            echo '<option value="0">Seleccione municipio</option>';
+                        }
+                        ?>
                     </select>
                 </div>
             </div>

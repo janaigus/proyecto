@@ -75,10 +75,7 @@ $(document).ready(function () {
             correcto = false;
         }
         // Comprobar que es correcto para enviarlo
-        if(correcto == true){
-            alert("todo ok");
-            //$('#formularioRegistrarse').submit();
-        }else{
+        if(correcto == false){
             ev.preventDefault();
             $('#panelAlertas').html(mensajesError);
             $('#panelAlertas').css("display", "block");
