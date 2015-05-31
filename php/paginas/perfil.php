@@ -8,6 +8,7 @@
     $sesionMunicipio = (isset($_SESSION['municipioh2k'])) ? (int)$_SESSION['municipioh2k'] : "";
     $sesionIsla = (isset($_SESSION['islah2k'])) ? (int)$_SESSION['islah2k'] : "";
     $sesionTiempo = (isset($_SESSION['tiempoh2k'])) ? $_SESSION['tiempoh2k'] : "";
+
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
@@ -141,49 +142,6 @@
                   <div class="col-lg-8">
                     <input class="form-control" value="<?php echo $emailUsuario; ?>" type="text">
                   </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Isla:</label>
-                    <div class="col-lg-8">
-                    <select id="islas" name="islas" class="form-control">
-                        <option value="0">Seleccione isla</option>
-                        <?php
-                        $consulta = "SELECT * FROM auxislas ORDER BY nombre";
-                        $result = $db->prepare($consulta);
-                        $result->execute();
-                        $arrayResult = $result->fetchAll();
-                        for($i=0;$i<$result->rowCount();$i++){
-                            echo $idIsla;
-                            echo '<option value="'.$arrayResult[$i]['id'].'"';
-                            if($arrayResult[$i]['id'] == $idIsla){
-                                echo ' selected="selected" ';
-                            }
-                            echo '>'.$arrayResult[$i]['nombre'].'</option>';
-                        }
-                        ?>
-                    </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Municipios:</label>
-                    <div class="col-lg-8">
-                    <select id="municipios" name="municipios" class="form-control">
-                        <option value="0">Seleccione municipio</option>
-                        <?php
-                        $consulta = "SELECT * FROM auxmunicipios WHERE idisla = :isla ORDER BY nombre";
-                        $result = $db->prepare($consulta);
-                        $result->execute(array(':isla' => $idIsla));
-                        $arrayResult = $result->fetchAll();
-                        for($i=0;$i<$result->rowCount();$i++){
-                            echo '<option value="'.$arrayResult[$i]['id'].'"';
-                            if($arrayResult[$i]['id'] == $idMunicipio){
-                                echo ' selected="selected" ';
-                            }
-                            echo '>'.$arrayResult[$i]['nombre'].'</option>';
-                        }
-                        ?>
-                    </select>
-                    </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-3 control-label">Contraseña:</label>

@@ -2,28 +2,6 @@ expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 
 $(document).ready(function () {
     
-    // Evento onchange cuando se selccione una isla
-    $('#islas').on('change', function (ev) {
-        if($('#islas').val() == 0){
-            $("#municipios").attr('disabled', true);
-            $("#municipios").html('<option value="0">Seleccione municipio</option>');
-        }else{
-            $.post('../obtenerRecursos/obtenerMunicipios.php', { islaSeleccionada: $('#islas').val() },
-                function(respuesta)
-                {
-                    cadena = '<option value="0">Seleccione municipio</option>';
-                    $.each(respuesta, function(i, tupla){
-                        cadena += '<option value="'+tupla.id+'">'+tupla.nombre+'</option>';
-                    });
-                    $("#municipios").html(cadena );
-                    // Habilitar el input de isla
-                    // $("#municipios").attr('disabled', false);
-                }
-                , "json"
-            );
-        }
-    });
-    
     /* Controlar los botones de slider de los "sliders" */
     $('.btn-vertical-slider').on('click', function (ev) {
         if ($(this).attr('data-slide') == 'next') {

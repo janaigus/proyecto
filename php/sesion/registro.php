@@ -37,6 +37,28 @@
                     ));
 
                     if($resultado){
+                        // Enviar correo de confirmacion de la creacion del usuario
+                        $para      = 'janaigus@gmail.com, info@helptoknow.esy.es,'.$_POST['registroEmail'];
+                        $titulo    = 'Gracias por registrarse en Help To Know.';
+                        $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+                        $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                        $cabeceras .= 'From: '.$_POST['registroEmail'].'' . "\r\n" .
+                            'Reply-To: info@helptoknow.esy.es' . "\r\n" .
+                            'X-Mailer: PHP/' . phpversion();
+
+                        $mensaje = '
+                        <html>
+                        <head>
+                          <meta charset="utf-8">
+                        </head>
+                        <body>
+                          <h1>Mensaje enviado: </h1>
+                          <p>Ha sido registrado satisfactoriamente en Help to Know</p>
+                          <p>Datos de acceso:</br>Email: '.$_POST['registroEmail'].'</br>Nick dentro de la página: '.$_POST['registroNick'].'
+                          </p>
+                        </body>
+                        </html>
+                        ';
                         // Crear las sesiones y redireccionar a index
                         $_SESSION['nombreh2k'] = $_POST['registroNombre'];
                         $_SESSION['rolh2k'] = 2;
