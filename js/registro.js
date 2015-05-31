@@ -1,9 +1,6 @@
 expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 
 $(document).ready(function () {
-    
-    
-
     // Evento onchange cuando se selccione una isla
     $('#registroIslas').on('change', function (ev) {
         if($('#registroIslas').val() == 0){
@@ -28,45 +25,40 @@ $(document).ready(function () {
     
      // Gestion del submit del formulario de registro
     $('#formularioRegistrarse').on('submit', function (ev) {
-        ev.preventDefault();
         var correcto = true;
+        var mensajesError = '<a class="panel-close close" data-dismiss="alert">×</a>';
+        var iconoError = '<span class="glyphicon glyphicon-remove"></span>';
         // Email
         emailEncontrado = $("#registroEmail").val().match(expresionEmail);
         if(emailEncontrado == null){
-            cambiarEstadoCaja("cajaEmailEntrar", true, "Introduzca un email correcto");
+            mensajesError += iconoError + "Introduzca un email correcto</br>";
             correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaEmailEntrar", false, "");
         }
         // Nombre
         if($('#registroNombre').val() == ""){
-            cambiarEstadoCaja("cajaRegistroNombre", true, "Introduzca un nombre");
+            mensajesError += iconoError + "Introduzca un nombre</br>";
             correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaRegistroNombre", false, "");
         }
         // Apellidos
         if($('#registroApellidos').val() == ""){
-            cambiarEstadoCaja("cajaRegistroApellidos", true, "Introduzca unos apellidos");
+            mensajesError += iconoError + "Introduzca unos apellidos</br>";
             correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaRegistroApellidos", false, "");
         }
         // Comprobar contraseña introducida y que la segunda coincide
         if($('#registroPassword').val() == ""){
-            cambiarEstadoCaja("cajaRegistroPass", true, "Introduzca una contraseña");
+            mensajesError += iconoError + "Introduzca una contraseña</br>";
             correcto = false;
         }else{
             // Comprobar si el segundo campo está vacio
             if($('#registroPass_con').val() == ""){
-                cambiarEstadoCaja("cajaRegistroCon", true, "Debe volver a introducir la contraseña");
+                mensajesError += iconoError + "Debe repetir la contraseña</br>";
                 correcto = false;
             }else{
                 // Comprobar que las contraseñas coinciden
                 if($('#registroPassword').val() == $('#registroPass_con').val()){
                     cambiarEstadoCaja("cajaRegistroCon", false, "");
                 }else{
-                    cambiarEstadoCaja("cajaRegistroCon", true, "Las contraseñas no coinciden");
+                    mensajesError += iconoError + "Las contraseñas no coinciden</br>";
                     correcto = false;
                 }
             }
@@ -74,29 +66,25 @@ $(document).ready(function () {
         }
         // Isla
         if($('#registroIslas').val() == 0){
-            cambiarEstadoCaja("cajaRegistroIsla", true, "Seleccione una isla");
+            mensajesError += iconoError + "Seleccione una isla</br>";
             correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaRegistroIsla", false, "");
         }
         // Municipio
         if($('#registroMunicipios').val() == 0){
-            cambiarEstadoCaja("cajaRegistroMunicipio", true, "Seleccione un municipio");
+            mensajesError += iconoError + "Seleccione un municipio</br>";
             correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaRegistroMunicipio", false, "");
         }
-        
-        
+        // Comprobar que es correcto para enviarlo
         if(correcto == true){
-            $('#formularioRegistrarse').submit();
+            alert("todo ok");
+            //$('#formularioRegistrarse').submit();
+        }else{
+            ev.preventDefault();
+            $('#panelAlertas').html(mensajesError);
+            $('#panelAlertas').css("display", "block");
         }
     });
     
-    $('#btnEntrar').on('click', function (ev) {
-        $("#menu-close").click();
-        $("#modalEntrar").modal("show"); 
-    });
     
     // Gestión del envio del formulario de contacto
     $('#enviarFormularioContacto').on('click', function (ev) {

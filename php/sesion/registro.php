@@ -1,34 +1,52 @@
 <?php
-    // Requerir el fichero para la conexion con la base de datos 
-    // IMPORTANTE CAMBIAR el fichero de la BD local por el de la BD del hosting
     session_start();
+    // Requerir el fichero para la conexion con la base de datos 
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
-    $consulta = "SELECT * FROM usuarios where email=:email";
-    $result = $db->prepare($consulta);
-    $result->execute(array(":email" => $_POST['registroEmail']));
-
-    // Si no hay resultados continuar con el insert
-    if(!$result->rowCount() > 0){
-        $consulta = "INSERT INTO usuarios(email, nick, nombre, apellidos, password, idrol, idmunicipio)
-            VALUES(:mail, :alias, :name, :sname, :pass, :rol, :mun)";
-        $result  = $db->prepare($consulta);
-        $resultado = $result->execute(array(
-            "mail" => $_POST['registroEmail'],
-            "alias" => strtolower(substr($_POST['registroNombre'], 0, 2).substr($_POST['registroApellidos'], 0, 2)),
-            "name" => $_POST['registroNombre'],
-            "sname" => $_POST['registroApellidos'],
-            "pass" => md5(md5(md5($_POST['registroPassword']))),
-            "rol" => 2,
-            "mun" => $_POST['registroMunicipios']
-        ));
-        if($resultado){
-            echo "OK";
-        }
-    }else{
-        // El email ya está registrado y NO puede ser insertado
-        echo "REGISTEREDUSER";
+    if(isset($_POST['registroNombre'])){
+        $consulta = "SELECT * FROM usuarios where email=:email";
+        $result = $db->prepare($consulta);
+        $result->execute(array(":email" => $_POST['registroEmail']));
         
+        $respuesta = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=6LecTAcTAAAAAKg7meG4TT6RWFKD8i4jox9WlsEA&response='.$_POST['g-recaptcha-response'].'&remoteip='.$_SERVER['REMOTE_ADDR']), true);
+        
+        // Si no hay resultados continuar con el insert
+        if((!$result->rowCount() > 0)){
+            if($respuesta['success'] == 1){
+                $consulta = "INSERT INTO usuarios (email, nick, nombre, apellidos, password, idrol, idmunicipio, idisla) ";
+                $consulta .= "VALUES (:mail, :alias, :name, :sname, :pass, :rol, :mun, :isla)";
+
+                $result  = $db->prepare($consulta);
+                $resultado = $result->execute(array(
+                    ":mail" => $_POST['registroEmail'],
+                    ":alias" => $_POST['registroEmail'],
+                    ":name" => $_POST['registroNombre'],
+                    ":sname" => $_POST['registroApellidos'],
+                    ":pass" => md5(md5(md5($_POST['registroPassword']))),
+                    ":rol" => 2,
+                    ":mun" => $_POST['registroMunicipios'],
+                    ":isla" => $_POST['registroIslas']
+                ));
+                
+                if($resultado){
+                    // Crear las sesiones y redireccionar a index
+                    echo "OK";
+                    $_SESSION['nombre'] = $_POST['registroNombre'];
+                    $_SESSION['rol'] = 2;
+                    $_SESSION['municipio'] = $_POST['registroMunicipios'];
+                    $_SESSION['isla'] = $_POST['registroIslas'];
+                    $_SESSION['email'] = $arrayResult[0]['email'];
+                    $_SESSION['tiempo'] = date("Y-n-j H:i:s");
+                    header('Location: ../../index.php');
+                }else{
+                    $error = '<span class="glyphicon glyphicon-remove"></span>No se ha podido completar el registro';
+                }
+            }else{
+                $error = '<span class="glyphicon glyphicon-remove"></span>Captcha incorrecto';
+            }
+        }else{
+            $error = '<span class="glyphicon glyphicon-remove"></span>Ya existe un usuario regitrado con ese email';
+        }
     }
 ?>
 
@@ -49,7 +67,7 @@
 
     <!-- Custom Fonts -->
     <link href="../../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="../../fonts/serif-pro.css" rel="stylesheet" type="text/css">
 
     <!-- Custom CSS -->
     <link href="../../css/index.css" rel="stylesheet">
@@ -78,6 +96,7 @@
         <!-- /.container -->
     </section>
    <section class="services bg-primary">
+        <div class="container">
         <div class="row text-center">
             <div class="col-lg-8 col-lg-offset-2">
                 <h1>Registro</h1>
@@ -87,39 +106,45 @@
         <div class="col-lg-6 col-lg-offset-3">
         <hr class="small">
         <form role="form" action="./registro.php" method="POST" id="formularioRegistrarse">
+            
+        <div class="alert alert-info alert-dismissable" id="panelAlertas" <?php echo (!isset($error)) ? 'style="display: none;"' : ''; ?> >
+            <a class="panel-close close" data-dismiss="alert">×</a>
+            <?php echo (isset($error)) ? $error : ''; ?>
+        </div>
+            
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group" id="cajaRegistroNombre">
-                    <input type="text" name="registroNombre" id="registroNombre" class="form-control input-lg" placeholder="Nombre">  
+                    <input type="text" name="registroNombre" id="registroNombre" class="form-control input-lg" placeholder="Nombre" value="<?php echo (isset($_POST['registroNombre'])) ? $_POST['registroNombre'] : ''; ?>">  
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group" id="cajaRegistroApellidos">
-                    <input type="text" name="registroApellidos" id="registroApellidos" class="form-control input-lg" placeholder="Apellidos">
+                    <input type="text" name="registroApellidos" id="registroApellidos" class="form-control input-lg" placeholder="Apellidos" value="<?php echo (isset($_POST['registroApellidos'])) ? $_POST['registroApellidos'] : ''; ?>">
                 </div>
             </div>
         </div>
 
         <div class="form-group" id="cajaRegistroEmail">
-            <input type="email" name="registroEmail" id="registroEmail" class="form-control input-lg" placeholder="Email">
+            <input type="email" name="registroEmail" id="registroEmail" class="form-control input-lg" placeholder="Email" value="<?php echo (isset($_POST['registroEmail'])) ? $_POST['registroEmail'] : ''; ?>">
         </div>
 
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group" id="cajaRegistroPass">
-                    <input type="password" name="registroPassword" id="registroPassword" class="form-control input-lg" placeholder="Contraseña">
+                    <input type="password" name="registroPassword" id="registroPassword" class="form-control input-lg" placeholder="Contraseña" value="<?php echo (isset($_POST['registroPassword'])) ? $_POST['registroPassword'] : ''; ?>">
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group" id="cajaRegistroCon">
-                    <input type="password" name="registroPass_con" id="registroPass_con" class="form-control input-lg" placeholder="Repetir Contraseña">
+                    <input type="password" name="registroPass_con" id="registroPass_con" class="form-control input-lg" placeholder="Repetir Contraseña" value="<?php echo (isset($_POST['registroPass_con'])) ? $_POST['registroPass_con'] : ''; ?>">
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group" id="cajaRegistroIsla">
-                    <select id="registroIslas" name="registroIslas" class="form-control input-lg">
+                    <select id="registroIslas" name="registroIslas" class="form-control input-lg" value="">
                         <option value="0">Seleccione isla</option>
                         <?php
                         $consulta = "SELECT * FROM auxislas ORDER BY nombre";
@@ -135,7 +160,7 @@
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group" id="cajaRegistroMunicipio">
-                    <select id="registroMunicipios" name="registroMunicipios" class="form-control input-lg" disabled>
+                    <select id="registroMunicipios" name="registroMunicipios" class="form-control input-lg"  value="" disabled>
                         <option value="0">Seleccione municipio</option>
                     </select>
                 </div>
@@ -143,7 +168,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12" align="center">
-                <div class="form-group" id="cajaRegistroCaptcha">
+                <div class="form-group">
                     <div class="g-recaptcha" data-sitekey="6LecTAcTAAAAAFKmIACHrD4FhxgRTtNSdcVXUMss"></div>
                 </div>
             </div>
@@ -155,9 +180,6 @@
                 <div class="col-lg-4 col-lg-offset-2 col- text-center" style="padding: 6px 0px 6px 0px">
                     <a href='php/miFacebook.php' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
                 </div>
-                <!--<div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                    <a href='#' class="btn btn-light twitter"> <i class="fa fa-twitter modal-icons"></i> Entrar con Twitter </a>
-                </div>-->
                 <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
                     <a href='php/miGoogle.php' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
                 </div>
@@ -166,6 +188,7 @@
     </form>
     </div>
     </div>
+   </div>
     </section>
     <!-- Footer -->
     <footer>

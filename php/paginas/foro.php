@@ -5,11 +5,11 @@
     $isla = (isset($_GET['isla'])) ? $_GET['isla'] : "1";
     $pagina = (isset($_GET['pagina'])) ? (int)$_GET['pagina'] : 1;
     // Obtener variables con los parametros de la sesión del usuario
-    $sesionNombre = (isset($_SESSION['nombre'])) ? $_SESSION['nombre'] : "";
-    $sesionRol = (isset($_SESSION['rol'])) ? (int)$_SESSION['rol'] : "";
-    $sesionMunicipio = (isset($_SESSION['municipio'])) ? (int)$_SESSION['municipio'] : "";
-    $sesionIsla = (isset($_SESSION['isla'])) ? (int)$_SESSION['isla'] : "";
-    $sesionTiempo = (isset($_SESSION['tiempo'])) ? $_SESSION['tiempo'] : "";
+    $sesionNombre = (isset($_SESSION['nombreh2k'])) ? $_SESSION['nombreh2k'] : "";
+    $sesionRol = (isset($_SESSION['rolh2k'])) ? (int)$_SESSION['rolh2k'] : "";
+    $sesionMunicipio = (isset($_SESSION['municipioh2k'])) ? (int)$_SESSION['municipioh2k'] : "";
+    $sesionIsla = (isset($_SESSION['islah2k'])) ? (int)$_SESSION['islah2k'] : "";
+    $sesionTiempo = (isset($_SESSION['tiempoh2k'])) ? $_SESSION['tiempoh2k'] : "";
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();

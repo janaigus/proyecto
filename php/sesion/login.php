@@ -13,12 +13,12 @@
         $userContra = $arrayResult[0]['password'];
         //Si la contraseña del usuario coincide, crear sesiones y redirigir a su página
         if($_POST['entrarPass'] == $userContra){
-            $_SESSION['nombre'] = $arrayResult[0]['nombre'];
-            $_SESSION['rol'] = $arrayResult[0]['idrol'];
-            $_SESSION['municipio'] = $arrayResult[0]['idmunicipio'];
-            $_SESSION['isla'] = $arrayResult[0]['idisla'];
-            $_SESSION['email'] = $arrayResult[0]['email'];
-            $_SESSION['tiempo'] = date("Y-n-j H:i:s");
+            $_SESSION['nombreh2k'] = $arrayResult[0]['nombre'];
+            $_SESSION['rolh2k'] = $arrayResult[0]['idrol'];
+            $_SESSION['municipioh2k'] = $arrayResult[0]['idmunicipio'];
+            $_SESSION['islah2k'] = $arrayResult[0]['idisla'];
+            $_SESSION['emailh2k'] = $arrayResult[0]['email'];
+            $_SESSION['tiempoh2k'] = date("Y-n-j H:i:s");
             echo "OK";
         }else
             echo "BADPASS";
