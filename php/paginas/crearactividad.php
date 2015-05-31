@@ -13,9 +13,61 @@
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
-    // Validar datos recibidos
+    // Crear variables con datos recibidos por POST
+    $correcto = true;
+    $titulo = (isset($_POST['titulo'])) ? $_POST['titulo'] : "";
+    $descripcion = (isset($_POST['descripcion'])) ? $_POST['descripcion'] : "";
+    $categoria = (isset($_POST['categoria'])) ? $_POST['categoria'] : "";
+    $municipio = (isset($_POST['municipio'])) ? $_POST['municipio'] : "";
+    if(isset($_POST['titulo'])){
+        // Realizar el update de todos los campos menos del avatar
+        $consulta = 'INSERT INTO u135108308_h2k.recursos (idusuario,  idcategoria,  titulo, descripcion , idmunicipio) ';
+        $consulta .= ' VALUES (:usuario, :categoria, :titulo, :descripcion, :municipio)';
+        // Crear el path dependiendo de si existe o no una imagen a añadir
+        $result = $db->prepare($consulta);
+        $resultado = $result->execute(array(':usuario' => $sesionId, 
+                                            ':categoria' => $categoria,
+                                            ':titulo' => $path,
+                                            ':descripcion' => $descripcion,
+                                            ':municipio' => $municipio
+                                           ));
+        if(!$resultado){
+            $error = "No se ha podido añadir la actividad";
+            $correcto = false;
+        }else{
+            $idActividad = $db->lastInsertId();
+        }
     
-    // Si no existe fotografia colocar por defecto. En caso contrario realizar insert en recursos
+        // Realizar insert en recursos de la iamgen. Si no hay, enlazar a por defecto
+        // Hacer lo mismo con el avatar
+        // Importante subir el archivo a la ruta img/img_usuarios/avatares/
+        if(isset($_FILES['imagenActividad']) and $_FILES['imagenActividad']["error"] == 0){
+            $tmp_name = $_FILES["imagenActividad"]["tmp_name"];
+            $name = $_FILES["imagenActividad"]["name"];
+            $arrayNombre = explode(".", $name);
+            $rutaFinal = "img/img_actividades/".$titulo."avatar.".$arrayNombre[count($arrayNombre) - 1];
+            // Mover el archivo antes de realizar la consulta
+            if(!move_uploaded_file($tmp_name, "../../".$rutaFinal)){
+                $error = 'No se ha añadido la imagen<br/>';
+                $correcto = false;
+            }
+        }
+        // Realizar el update de todos los campos menos del avatar
+        $consulta = 'INSERT INTO u135108308_h2k.recursos (idactividad, ruta) ';
+        $consulta .= ' VALUES (:actividad, :ruta)';
+        // Crear el path dependiendo de si existe o no una imagen a añadir
+        $result = $db->prepare($consulta);
+        $resultado = $result->execute(array(':actividad' => $idActividad, ':recurso' => $path));
+
+        if(!$resultado == true){
+            $error = 'No se pudo añadir la imagen<br/>';
+            $correcto = false;
+        }
+        if($correcto){
+            header('Location: ./actividad.php?actividad='.$idActividad);
+        }   
+    }    
+    
 ?>
 
 <!DOCTYPE html>

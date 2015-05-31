@@ -81,7 +81,7 @@
             $name = $_FILES["archivoAvatar"]["name"];
             $arrayNombre = explode(".", $name);
             $rutaFinal = "img/img_usuarios/avatares/".$nickUsuario."avatar.".$arrayNombre[count($arrayNombre) - 1];
-            // Mover el archivo despuesde realizar la consulta
+            // Mover el archivo antes de realizar la consulta
             if(!move_uploaded_file($tmp_name, "../../".$rutaFinal)){
                 $mensaje .= 'No se ha cambiado el avatar<br/>';
             }else{
