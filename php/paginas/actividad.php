@@ -3,6 +3,8 @@
     // Obtener la isla sobre la que se va a maquetar la imagen y la pagina actual
     $idActividad = (isset($_GET['actividad'])) ? $_GET['actividad'] : "1";
     // Obtener variables con los parametros de la sesión del usuario
+    $sesionId = (isset($_SESSION['idh2k'])) ? $_SESSION['idh2k'] : "";
+    $sesionNick = (isset($_SESSION['nickh2k'])) ? $_SESSION['nickh2k'] : "";
     $sesionNombre = (isset($_SESSION['nombreh2k'])) ? $_SESSION['nombreh2k'] : "";
     $sesionRol = (isset($_SESSION['rolh2k'])) ? (int)$_SESSION['rolh2k'] : "";
     $sesionMunicipio = (isset($_SESSION['municipioh2k'])) ? (int)$_SESSION['municipioh2k'] : "";
@@ -84,12 +86,26 @@
                 <a href="#contacto" onclick = $("#menu-close").click(); >Contacto</a>
             </li>
             <hr>
-            <li>
-                <a id="btnEntrar" href="#modalEntrar">Iniciar Sesión</a>
-            </li>
-            <li>
-                <a id="btnLateralRegistrarse" href="#modalRegistrarse">Registrarse</a>
-            </li>
+            <?php
+            if($sesionNombre == ""){
+                echo'
+                <li>
+                    <a id="btnEntrar" href="#modalEntrar">Iniciar Sesión</a>
+                </li>
+                <li>
+                    <a id="btnLateralRegistrarse" href="../sesion/registro.php">Registrarse</a>
+                </li>';
+            }else{
+                echo'
+                    <li>
+                        <a href="./perfil.php?usuario='.$sesionId.'">'.$sesionNick.'</a>
+                    </li>
+                    <li>
+                        <a href="../sesion/cerrarsesion.php">Cerrar Sesión</a>
+                    </li>
+                    ';
+            }
+            ?>
         </ul>
     </nav>
     

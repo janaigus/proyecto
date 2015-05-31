@@ -117,6 +117,27 @@
 </head>
 
 <body>
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <li class="sidebar-brand">
+                <a href="../../index.php"  onclick = $("#menu-close").click(); >Help to Know</a>
+            </li>
+            <li>
+                <a href="#registro" onclick = $("#menu-close").click(); >Registro</a>
+            </li>
+            <li>
+                <a href="#contacto" onclick = $("#menu-close").click(); >Contacto</a>
+            </li>
+            <hr>
+            <li>
+                <a id="btnEntrar" href="#modalEntrar">Iniciar Sesión</a>
+            </li>
+        </ul>
+    </nav>
+    
     <!-- About -->
     <section id="about" class="about">
         <div class="container">
@@ -129,7 +150,8 @@
         </div>
         <!-- /.container -->
     </section>
-   <section class="services bg-primary">
+    
+   <section class="services bg-primary" id="registro">
         <div class="container">
         <div class="row text-center">
             <div class="col-lg-8 col-lg-offset-2">

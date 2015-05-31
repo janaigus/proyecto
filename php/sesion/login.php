@@ -12,7 +12,9 @@
         $arrayResult = $result->fetchAll();
         $userContra = $arrayResult[0]['password'];
         //Si la contraseña del usuario coincide, crear sesiones y redirigir a su página
-        if($_POST['entrarPass'] == $userContra){
+        if(md5(md5(md5($_POST['entrarPass']))) == $userContra){
+            $_SESSION['idh2k'] = $arrayResult[0]['id'];
+            $_SESSION['nickh2k'] = $arrayResult[0]['nick'];
             $_SESSION['nombreh2k'] = $arrayResult[0]['nombre'];
             $_SESSION['rolh2k'] = $arrayResult[0]['idrol'];
             $_SESSION['municipioh2k'] = $arrayResult[0]['idmunicipio'];

@@ -1,11 +1,13 @@
 <?php
     session_start();
     // Obtener variables con los parametros de la sesión del usuario
-    $sesionNombre = (isset($_SESSION['nombre'])) ? $_SESSION['nombre'] : "";
-    $sesionRol = (isset($_SESSION['rol'])) ? (int)$_SESSION['rol'] : "";
-    $sesionMunicipio = (isset($_SESSION['municipio'])) ? (int)$_SESSION['municipio'] : "";
-    $sesionIsla = (isset($_SESSION['isla'])) ? (int)$_SESSION['isla'] : "";
-    $sesionTiempo = (isset($_SESSION['tiempo'])) ? $_SESSION['tiempo'] : "";
+    $sesionId = (isset($_SESSION['idh2k'])) ? $_SESSION['idh2k'] : "";
+    $sesionNick = (isset($_SESSION['nickh2k'])) ? $_SESSION['nickh2k'] : "";
+    $sesionNombre = (isset($_SESSION['nombreh2k'])) ? $_SESSION['nombreh2k'] : "";
+    $sesionRol = (isset($_SESSION['rolh2k'])) ? (int)$_SESSION['rolh2k'] : "";
+    $sesionMunicipio = (isset($_SESSION['municipioh2k'])) ? (int)$_SESSION['municipioh2k'] : "";
+    $sesionIsla = (isset($_SESSION['islah2k'])) ? (int)$_SESSION['islah2k'] : "";
+    $sesionTiempo = (isset($_SESSION['tiempoh2k'])) ? $_SESSION['tiempoh2k'] : "";
     require('php/bd/conexionBDlocal.php');
     $db = conectaDb();
 ?>
@@ -81,12 +83,26 @@
                 <a href="#contacto" onclick = $("#menu-close").click(); >Contacto</a>
             </li>
             <hr>
-            <li>
-                <a id="btnEntrar" href="#modalEntrar">Iniciar Sesión</a>
-            </li>
-            <li>
-                <a id="btnLateralRegistrarse" href="#modalRegistrarse">Registrarse</a>
-            </li>
+            <?php
+            if($sesionNombre == ""){
+                echo'
+                <li>
+                    <a id="btnEntrar" href="#modalEntrar">Iniciar Sesión</a>
+                </li>
+                <li>
+                    <a id="btnLateralRegistrarse" href="./php/sesion/registro.php">Registrarse</a>
+                </li>';
+            }else{
+                echo'
+                    <li>
+                        <a href="./php/paginas/perfil.php?usuario='.$sesionId.'">'.$sesionNick.'</a>
+                    </li>
+                    <li>
+                        <a href="./php/sesion/cerrarsesion.php">Cerrar Sesión</a>
+                    </li>
+                    ';
+            }
+            ?>
         </ul>
     </nav>
 
@@ -141,7 +157,7 @@
                     <?php
                     $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
                     $consulta .= "act.idcategoria, cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media, ";
-                    $consulta .= "act.idisla, i.nombre, m.nombre as nombremunicipio ";
+                    $consulta .= "act.idisla, i.nombre AS nombreisla, m.nombre AS nombremunicipio ";
                     $consulta .= "FROM actividades act ";
                     $consulta .= "INNER JOIN votos v ON act.id = v.idactividad ";
                     $consulta .= "INNER JOIN recursos r ON act.id = r.idactividad ";
@@ -169,7 +185,7 @@
                         echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
                         echo '            <a href="php/paginas/foro.php?categoria='.$arrayResult[$z]['idcategoria'].'&isla='.$arrayResult[$z]['idisla'];
                         echo ' " style="color:white;">';
-                        echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
+                        echo '            <h4>'.$arrayResult[0]['categoria'].' en '.$arrayResult[0]['nombreisla'].'</h4>';
                         echo '            </a>';
                         echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
                         echo '            <div class="ratings">';
@@ -247,7 +263,7 @@
                     <?php
                     $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
                     $consulta .= "act.idcategoria, cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media, ";
-                    $consulta .= "act.idisla, i.nombre, m.nombre as nombremunicipio ";
+                    $consulta .= "act.idisla, i.nombre AS nombreisla, m.nombre AS nombremunicipio ";
                     $consulta .= "FROM actividades act ";
                     $consulta .= "LEFT JOIN votos v ON act.id = v.idactividad ";
                     $consulta .= "LEFT JOIN recursos r ON act.id = r.idactividad ";
@@ -275,7 +291,7 @@
                         echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
                         echo '            <a href="php/paginas/foro.php?categoria='.$arrayResult[$z]['idcategoria'].'&isla='.$arrayResult[$z]['idisla'];
                         echo ' " style="color:white;">';
-                        echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
+                        echo '            <h4>'.$arrayResult[0]['categoria'].' en '.$arrayResult[0]['nombreisla'].'</h4>';
                         echo '            </a>';
                         echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
                         echo '            <div class="ratings">';
@@ -565,9 +581,6 @@
                             <div class="col-lg-4 col-lg-offset-2 text-center" style="padding: 6px 0px 6px 0px">
                                 <a href='./php/miFacebook.php' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
                             </div>
-                            <!--<div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='#' class="btn btn-light twitter"> <i class="fa fa-twitter modal-icons"></i> Entrar con Twitter </a>
-                            </div>-->
                             <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
                                 <a href='./php/miGoogle.php' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
                             </div>
@@ -577,29 +590,6 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal" id="entrarCancelar">Cancelar</button>
-            </div>
-          </div>
-        </div>
-    </div>
-        
-    <!-- Modal Registro-->
-    <div class="modal fade" id="modalRegistrarse" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <div class="row">
-                  <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="img/img_pagina/logo.png" alt="Logo" width="180" height="95">
-                  </div>
-              </div>
-            </div>
-            <div class="modal-body">
-                
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cancelar</button>
             </div>
           </div>
         </div>

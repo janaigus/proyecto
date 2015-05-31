@@ -146,6 +146,49 @@ $(document).ready(function () {
         $("#cajaEmailContacto").popover('destroy');
         $("#cajaMensajeContacto").popover('destroy');
     });
+    
+    $('#btnEntrar').on('click', function (ev) {
+        $("#menu-close").click();
+        $("#modalEntrar").modal("show"); 
+    });
+    
+    // Gestion del boton de login
+    $('#entrarBoton').on('click', function (ev) {
+        ev.preventDefault();
+        var correcto = true;
+        emailEncontrado = $("#entrarEmail").val().match(expresionEmail);
+        if(emailEncontrado == null){
+            cambiarEstadoCaja("cajaEmailEntrar", true, "Introduzca un email correcto");
+            correcto = false;
+        }else{
+            cambiarEstadoCaja("cajaEmailEntrar", false, "");
+        }
+        if($('#entrarPass').val() == ""){
+            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
+            correcto = false;
+        }else{
+            cambiarEstadoCaja("cajaPassEntrar", false, "");
+        }
+        if(correcto){
+            $.post('../sesion/login.php', $('#formularioEntrar').serialize(), 
+                function(respuesta)
+                {
+                    switch(respuesta){
+                        case "OK":
+                            //  Recargar la pagina
+                            location.reload();
+                            break;
+                        case "BADPASS":
+                            cambiarEstadoCaja("cajaPassEntrar", true, "Contraseña incorrecta.");
+                            break;
+                        case "BADEMAIL":
+                            cambiarEstadoCaja("cajaEmailEntrar", true, "Email no registrado.");
+                            break;
+                    }
+                }
+            );
+        }
+    });
 });
 
 function cambiarEstadoCaja(nombreCaja, mal, mensaje){

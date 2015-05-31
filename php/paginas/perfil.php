@@ -3,6 +3,8 @@
     // Obtener el usuario sobre el que se va a maquetar la imagen
     $usuario = (isset($_GET['usuario'])) ? $_GET['usuario'] : "1";
     // Obtener variables con los parametros de la sesión del usuario
+    $sesionId = (isset($_SESSION['idh2k'])) ? $_SESSION['idh2k'] : "";
+    $sesionNick = (isset($_SESSION['nickh2k'])) ? $_SESSION['nickh2k'] : "";
     $sesionNombre = (isset($_SESSION['nombreh2k'])) ? $_SESSION['nombreh2k'] : "";
     $sesionRol = (isset($_SESSION['rolh2k'])) ? (int)$_SESSION['rolh2k'] : "";
     $sesionMunicipio = (isset($_SESSION['municipioh2k'])) ? (int)$_SESSION['municipioh2k'] : "";
@@ -12,19 +14,20 @@
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
-    $consulta = "SELECT * FROM usuarios WHERE id = :usuario ORDER BY nombre";
-    $result = $db->prepare($consulta);
-    $result->execute(array(':usuario' => $usuario));
-    $arrayResult = $result->fetchAll();
-    $nombreUsuario = $arrayResult[0]['nombre'];
-    $apellidosUsuario = $arrayResult[0]['apellidos'];
-    $nickUsuario = $arrayResult[0]['nick'];
-    $emailUsuario = $arrayResult[0]['email'];
-    $idIsla = $arrayResult[0]['idisla'];
-    $idMunicipio = $arrayResult[0]['idmunicipio'];
-    $avatarUsuario = $arrayResult[0]['avatar'];
-    $passUsuario = $arrayResult[0]['password'];
     if(isset($_POST['nombre'])){
+        $consulta = "SELECT * FROM usuarios WHERE id = :usuario ORDER BY nombre";
+        $result = $db->prepare($consulta);
+        $result->execute(array(':usuario' => $usuario));
+        $arrayResult = $result->fetchAll();
+        $nombreUsuario = $arrayResult[0]['nombre'];
+        $apellidosUsuario = $arrayResult[0]['apellidos'];
+        $nickUsuario = $arrayResult[0]['nick'];
+        $emailUsuario = $arrayResult[0]['email'];
+        $idIsla = $arrayResult[0]['idisla'];
+        $idMunicipio = $arrayResult[0]['idmunicipio'];
+        $avatarUsuario = $arrayResult[0]['avatar'];
+        $passUsuario = $arrayResult[0]['password'];
+        
         $mensaje = '';
         // Realizar el update de todos los campos menos del avatar
         $consulta = 'UPDATE u135108308_h2k.usuarios SET ';
@@ -71,7 +74,23 @@
                 }
             }
         }
-        
+    }
+    // Rellenar los datos
+    $consulta = "SELECT * FROM usuarios WHERE id = :usuario ORDER BY nombre";
+    $result = $db->prepare($consulta);
+    $result->execute(array(':usuario' => $usuario));
+    $arrayResult = $result->fetchAll();
+    $nombreUsuario = $arrayResult[0]['nombre'];
+    $apellidosUsuario = $arrayResult[0]['apellidos'];
+    $nickUsuario = $arrayResult[0]['nick'];
+    $emailUsuario = $arrayResult[0]['email'];
+    $idIsla = $arrayResult[0]['idisla'];
+    $idMunicipio = $arrayResult[0]['idmunicipio'];
+    $avatarUsuario = $arrayResult[0]['avatar'];
+    $passUsuario = $arrayResult[0]['password'];
+    // Seguridad, el usuario debe haber iniciado sesion y ser el mismo que al que se está intentando acceder
+    if(!($sesionNombre != "" and $sesionNombre == $nombreUsuario)){
+        header('Location: ../../index.php');
     }
 ?>
 
@@ -124,7 +143,16 @@
                 <a href="#contacto" onclick = $("#menu-close").click(); >Contacto</a>
             </li>
             <hr>
-            
+            <?php
+            echo'
+                <li>
+                    <a href="perfil.php?usuario='.$sesionId.'">'.$sesionNick.'</a>
+                </li>
+                <li>
+                    <a href="../sesion/cerrarsesion.php">Cerrar Sesión</a>
+                </li>
+                ';
+            ?>
         </ul>
     </nav>
 
