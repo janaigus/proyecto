@@ -82,7 +82,6 @@ $(document).ready(function () {
         }
     });
     
-    
     // Gestión del envio del formulario de contacto
     $('#enviarFormularioContacto').on('click', function (ev) {
         ev.preventDefault();
@@ -150,16 +149,4 @@ $(document).ready(function () {
         $("#cajaEmailContacto").popover('destroy');
         $("#cajaMensajeContacto").popover('destroy');
     });
-    
-    
 });
-
-function cambiarEstadoCaja(nombreCaja, mal, mensaje){
-    if(mal){
-        $('#'+nombreCaja).popover({ trigger: 'focus', placement: 'bottom', content: mensaje });
-        $('#'+nombreCaja).popover('show');
-        correcto = false;
-    }else{
-        $('#'+nombreCaja).popover('destroy');
-    }
-}
