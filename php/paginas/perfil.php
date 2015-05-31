@@ -12,6 +12,10 @@
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
+    if(isset($_POST['nombre'])){
+        // Realizar el update sobre el propio formulario
+        // Importante subir el archivo a la ruta img/img_usuarios/avatares/
+    }
     $consulta = "SELECT * FROM usuarios WHERE id = :usuario ORDER BY nombre";
     $result = $db->prepare($consulta);
     $result->execute(array(':usuario' => $usuario));
@@ -23,6 +27,7 @@
     $idIsla = $arrayResult[0]['idisla'];
     $idMunicipio = $arrayResult[0]['idmunicipio'];
     $avatarUsuario = $arrayResult[0]['avatar'];
+    
 ?>
 
 <!DOCTYPE html>
@@ -103,7 +108,7 @@
               <div class="text-center">
                 <img src="../../<?php echo $avatarUsuario; ?>" class="avatar img-circle img-thumbnail" alt="avatar" height="200px" width="200px">
                 <h6>Subir otra foto...</h6>
-                <input type="file" class="text-center center-block well well-sm" style="color: black;" disabled="disabled">
+                <input type="file" id="archivoAvatar" class="text-center center-block well well-sm" style="color: black;" disabled="disabled">
               </div>
             </div>
             <!-- edit form column -->
@@ -163,7 +168,7 @@
                       </button>
                       <ul class="dropdown-menu" role="menu" aria-labelledby="options">
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Darme de baja</a></li>
-                        <hr>
+                        <li role="presentation" class="divider"></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="cambiarInfo">Cambiar información</a></li>
                       </ul>
                     </div>
