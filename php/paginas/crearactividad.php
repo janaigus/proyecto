@@ -17,19 +17,20 @@
     $correcto = true;
     $titulo = (isset($_POST['titulo'])) ? $_POST['titulo'] : "";
     $descripcion = (isset($_POST['descripcion'])) ? $_POST['descripcion'] : "";
-    $categoria = (isset($_POST['categoria'])) ? $_POST['categoria'] : "";
-    $municipio = (isset($_POST['municipio'])) ? $_POST['municipio'] : "";
+    $categoria = (isset($_POST['categorias'])) ? $_POST['categorias'] : "";
+    $municipio = (isset($_POST['municipios'])) ? $_POST['municipios'] : "";
     if(isset($_POST['titulo'])){
         // Realizar el update de todos los campos menos del avatar
-        $consulta = 'INSERT INTO u135108308_h2k.recursos (idusuario,  idcategoria,  titulo, descripcion , idmunicipio) ';
-        $consulta .= ' VALUES (:usuario, :categoria, :titulo, :descripcion, :municipio)';
+        $consulta = 'INSERT INTO actividades (idusuario,  idcategoria,  titulo, descripcion , idmunicipio, idisla) ';
+        $consulta .= ' VALUES (:usuario, :categoria, :titulo, :descripcion, :municipio, :isla)';
         // Crear el path dependiendo de si existe o no una imagen a añadir
         $result = $db->prepare($consulta);
         $resultado = $result->execute(array(':usuario' => $sesionId, 
                                             ':categoria' => $categoria,
-                                            ':titulo' => $path,
+                                            ':titulo' => $titulo,
                                             ':descripcion' => $descripcion,
-                                            ':municipio' => $municipio
+                                            ':municipio' => $municipio,
+                                            ':isla' => $sesionIsla
                                            ));
         if(!$resultado){
             $error = "No se ha podido añadir la actividad";
@@ -51,13 +52,16 @@
                 $error = 'No se ha añadido la imagen<br/>';
                 $correcto = false;
             }
+        }else{
+            $rutaFinal = 'img/img_actividades/default.jpg';
         }
         // Realizar el update de todos los campos menos del avatar
         $consulta = 'INSERT INTO u135108308_h2k.recursos (idactividad, ruta) ';
         $consulta .= ' VALUES (:actividad, :ruta)';
         // Crear el path dependiendo de si existe o no una imagen a añadir
+        
         $result = $db->prepare($consulta);
-        $resultado = $result->execute(array(':actividad' => $idActividad, ':recurso' => $path));
+        $resultado = $result->execute(array(':actividad' => $idActividad, ':ruta' => $rutaFinal));
 
         if(!$resultado == true){
             $error = 'No se pudo añadir la imagen<br/>';
@@ -65,7 +69,7 @@
         }
         if($correcto){
             header('Location: ./actividad.php?actividad='.$idActividad);
-        }   
+        }
     }    
     
 ?>
