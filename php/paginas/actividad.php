@@ -35,6 +35,30 @@
     $result = $db->prepare($consulta);
     $result->execute(array(':actividad' => $idActividad));
     $arrayResult = $result->fetchAll();
+    
+    $bloqueo = true;
+    if($sesionNick != ""){
+        $bloqueo = false;
+        // Si existe parametro post con uncomentario
+        if(isset($_POST['comentario'])){
+            // Realizar el update de todos los campos menos del avatar
+            $consulta = 'INSERT INTO recursos (idactividad, ruta) ';
+            $consulta .= ' VALUES (:actividad, :ruta)';
+            // Crear el path dependiendo de si existe o no una imagen a añadir
+
+            $result = $db->prepare($consulta);
+            $resultado = $result->execute(array(':actividad' => $idActividad, ':ruta' => $rutaFinal));
+
+            if(!$resultado == true){
+                $error = 'No se pudo añadir la imagen<br/>';
+                $correcto = false;
+            }
+            if($correcto){
+                header('Location: ./actividad.php?actividad='.$idActividad);
+            }
+        }
+        
+    }
 ?>
 
 <!DOCTYPE html>
@@ -172,20 +196,20 @@
             </div>
 
             <div class="well">
-                <form accept-charset="UTF-8" action="" method="POST">
-                <textarea class="form-control" rows="3" style="resize:vertical;" placeholder="Comentario"></textarea>
-                <h5 class="pull-right">320 letras restantes</h5>
-                <div class="ratings" style="padding-top: 10px;">
+                <form accept-charset="UTF-8" action="./actividad.php?actividad=<?php echo $idActividad; ?>" method="POST">
+                <textarea class="form-control" rows="3" style="resize:vertical;" id="comentarios" placeholder="Comentario" name="comentarios" <?php echo ($bloqueo) ? "disabled" : "" ?> maxlength="250"></textarea>
+                <h5 class="pull-right" id="lrestantes" >250 letras restantes</h5>
+                <div class="rating" style="padding-top: 10px;visibility:<?php echo ($bloqueo) ? "hidden" : "visible" ?>;" id="" >
                     <p>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span>☆</span>
+                        <span>☆</span>
+                        <span>☆</span>
+                        <span>☆</span>
+                        <span>☆</span>
                     </p>
                 </div>
                 <div class="text-right">
-                    <button class="btn btn-success" type="submit" disabled>Enviar comentario</button>
+                    <button class="btn btn-success" type="submit" <?php echo ($bloqueo) ? "disabled" : "" ?> ><?php echo ($bloqueo) ? "Inicie sesión" : "Enviar comentario" ?></button>
                 </div>
                 </form>
                 <hr>

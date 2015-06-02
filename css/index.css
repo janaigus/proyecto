@@ -424,3 +424,19 @@ a {
     width: 450px;
 }
 
+/* Efectoo en los ratings */
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  color: rgb(255, 144, 0);
+}
+.rating > p span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+}
+.rating > p span:hover:before,
+.rating > p span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}

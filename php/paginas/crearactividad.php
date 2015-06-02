@@ -56,7 +56,7 @@
             $rutaFinal = 'img/img_actividades/default.jpg';
         }
         // Realizar el update de todos los campos menos del avatar
-        $consulta = 'INSERT INTO u135108308_h2k.recursos (idactividad, ruta) ';
+        $consulta = 'INSERT INTO recursos (idactividad, ruta) ';
         $consulta .= ' VALUES (:actividad, :ruta)';
         // Crear el path dependiendo de si existe o no una imagen a añadir
         

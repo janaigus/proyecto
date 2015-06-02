@@ -1,6 +1,13 @@
 expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 
 $(document).ready(function () {
+    
+    $('#comentarios').on('keypress', function (ev) {
+        var value   = $(this).val();
+        var current = value.length;
+        $('#lrestantes').html((250 - current) + " letras restantes");
+    });
+    
     /* Controlar los botones de slider de los "sliders" */
     $('.btn-vertical-slider').on('click', function (ev) {
         if ($(this).attr('data-slide') == 'next') {
@@ -44,8 +51,8 @@ $(document).ready(function () {
                 {
                     switch(respuesta){
                         case "OK":
-                            // Redireccionar a la pagina principal del usuario, las sesiones ya se habrán creado desde php
-                            alert("alles klar");
+                            //  Recargar la pagina
+                            location.reload();
                             break;
                         case "BADPASS":
                             cambiarEstadoCaja("cajaPassEntrar", true, "Contraseña incorrecta.");
