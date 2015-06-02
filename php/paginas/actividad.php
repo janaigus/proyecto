@@ -40,22 +40,14 @@
     if($sesionNick != ""){
         $bloqueo = false;
         // Si existe parametro post con uncomentario
-        if(isset($_POST['comentario'])){
+        if(isset($_POST['comentarios'])){
             // Realizar el update de todos los campos menos del avatar
-            $consulta = 'INSERT INTO recursos (idactividad, ruta) ';
-            $consulta .= ' VALUES (:actividad, :ruta)';
+            $consulta = 'INSERT INTO comentarios (idactividad, idusuario, texto) ';
+            $consulta .= ' VALUES (:actividad, :usuario, :com)';
             // Crear el path dependiendo de si existe o no una imagen a añadir
-
             $result = $db->prepare($consulta);
-            $resultado = $result->execute(array(':actividad' => $idActividad, ':ruta' => $rutaFinal));
-
-            if(!$resultado == true){
-                $error = 'No se pudo añadir la imagen<br/>';
-                $correcto = false;
-            }
-            if($correcto){
-                header('Location: ./actividad.php?actividad='.$idActividad);
-            }
+            $result->execute(array(':actividad' => $idActividad, ':usuario' => $sesionId, ':com' => $_POST['comentarios']));
+            unset($_POST['comentarios']);
         }
         
     }
@@ -196,6 +188,12 @@
             </div>
 
             <div class="well">
+                <div class="thumbnail" style="padding: 20px 20px 20px 20px;">
+                    <div class="caption-full">
+                    <div class="alert alert-info alert-dismissable" id="panelAlertas" <?php echo (!isset($error)) ? 'style="display: none;"' : ''; ?> >
+                <a class="panel-close close" data-dismiss="alert">×</a>
+                    <?php echo (isset($error)) ? $error : ''; ?>
+                </div>
                 <form accept-charset="UTF-8" action="./actividad.php?actividad=<?php echo $idActividad; ?>" method="POST">
                 <textarea class="form-control" rows="3" style="resize:vertical;" id="comentarios" placeholder="Comentario" name="comentarios" <?php echo ($bloqueo) ? "disabled" : "" ?> maxlength="250"></textarea>
                 <h5 class="pull-right" id="lrestantes" >250 letras restantes</h5>
@@ -209,7 +207,7 @@
                     </p>
                 </div>
                 <div class="text-right">
-                    <button class="btn btn-success" type="submit" <?php echo ($bloqueo) ? "disabled" : "" ?> ><?php echo ($bloqueo) ? "Inicie sesión" : "Enviar comentario" ?></button>
+                    <button class="btn btn-success" type="submit" id="enviarcom" <?php echo ($bloqueo) ? "disabled" : "" ?> ><?php echo ($bloqueo) ? "Inicie sesión" : "Enviar comentario" ?></button>
                 </div>
                 </form>
                 <hr>

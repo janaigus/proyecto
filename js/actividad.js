@@ -2,6 +2,23 @@ expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 
 $(document).ready(function () {
     
+    $('#enviarcom').on('click', function (ev) {
+        var correcto = true;
+        var mensajesError = '<a class="panel-close close" data-dismiss="alert">×</a>';
+        var iconoError = '<span class="glyphicon glyphicon-remove"></span>';
+        // Titulo
+        if($('#comentarios').val() == ""){
+            mensajesError += iconoError + "El comentario debe estar relleno.</br>";
+            correcto = false;
+        }
+        // Comprobar que es correcto para enviarlo
+        if(correcto == false){
+            ev.preventDefault();
+            $('#panelAlertas').html(mensajesError);
+            $('#panelAlertas').css("display", "block");
+        }
+    });
+    
     $('#comentarios').on('keypress', function (ev) {
         var value   = $(this).val();
         var current = value.length;
