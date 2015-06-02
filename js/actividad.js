@@ -45,6 +45,11 @@ $(document).ready(function () {
         }
     });
     
+    // Cuando el usuario
+    $('.ec-stars-wrapper span').on('click', function(ev){
+        alert($(this).attr('id'));
+    });
+    
     // Gestion del boton de login
     $('#entrarBoton').on('click', function (ev) {
         ev.preventDefault();

@@ -47,7 +47,6 @@
             // Crear el path dependiendo de si existe o no una imagen a añadir
             $result = $db->prepare($consulta);
             $result->execute(array(':actividad' => $idActividad, ':usuario' => $sesionId, ':com' => $_POST['comentarios']));
-            unset($_POST['comentarios']);
         }
         
     }
@@ -197,14 +196,12 @@
                 <form accept-charset="UTF-8" action="./actividad.php?actividad=<?php echo $idActividad; ?>" method="POST">
                 <textarea class="form-control" rows="3" style="resize:vertical;" id="comentarios" placeholder="Comentario" name="comentarios" <?php echo ($bloqueo) ? "disabled" : "" ?> maxlength="250"></textarea>
                 <h5 class="pull-right" id="lrestantes" >250 letras restantes</h5>
-                <div class="rating" style="padding-top: 10px;visibility:<?php echo ($bloqueo) ? "hidden" : "visible" ?>;" id="" >
-                    <p>
-                        <span>☆</span>
-                        <span>☆</span>
-                        <span>☆</span>
-                        <span>☆</span>
-                        <span>☆</span>
-                    </p>
+                <div class="ec-stars-wrapper" style="padding-top: 10px;visibility:<?php echo ($bloqueo) ? "hidden" : "visible" ?>;" id="" >
+                        <span id="1">&#9733;</span>
+                        <span id="2">&#9733;</span>
+                        <span id="3">&#9733;</span>
+                        <span id="4">&#9733;</span>
+                        <span id="5">&#9733;</span>
                 </div>
                 <div class="text-right">
                     <button class="btn btn-success" type="submit" id="enviarcom" <?php echo ($bloqueo) ? "disabled" : "" ?> ><?php echo ($bloqueo) ? "Inicie sesión" : "Enviar comentario" ?></button>
