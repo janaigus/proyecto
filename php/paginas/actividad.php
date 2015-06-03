@@ -54,6 +54,7 @@
                 $result = $db->prepare($consulta);
                 $result->execute(array(":actividad" => $idActividad, ":usuario" => $sesionId, ":voto" => $_POST['valoracion']));
             }
+            header('Location: ./actividad.php?actividad='.$idActividad);
         }
     }
 ?>
