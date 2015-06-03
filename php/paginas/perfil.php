@@ -269,7 +269,7 @@
                           Opciones
                       </button>
                       <ul class="dropdown-menu" role="menu" aria-labelledby="options">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Darme de baja</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="../sesion/borrarperfil.php">Darme de baja</a></li>
                         <li role="presentation" class="divider"></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="cambiarInfo">Cambiar información</a></li>
                       </ul>

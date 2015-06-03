@@ -61,6 +61,24 @@
         </div>
         <!-- /.container -->
     </section>
+    
+    <!-- Portfolio -->
+    <section id="islas" class="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 text-center">
+                    <h2>¿Está seguro que desea borrar su perfil?</h2>
+                    <p class="lead">Si hace esto, toda sus actividad, valoraciones y comentarios serán borrados completamente de Help to Know.</p>
+                    <hr class="small">
+                    <form class="form" action="./borrarperfil.php" method="POST">
+                        <input type="submit" class="btn btn-lg btn-danger" value="Si"/>
+                        <a href="" class="btn btn-lg btn-light">No</a>
+                    </form>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
 
     <!-- Footer -->
     <footer>
