@@ -47,8 +47,14 @@
             // Crear el path dependiendo de si existe o no una imagen a añadir
             $result = $db->prepare($consulta);
             $result->execute(array(':actividad' => $idActividad, ':usuario' => $sesionId, ':com' => $_POST['comentarios']));
+            
+            // Añadir la valoracion de estrellas si la hay
+            if($_POST['valoracion'] != ""){
+                $consulta = "INSERT INTO votos (idactividad, idusuario, valoracion) VALUES (:actividad, :usuario, :voto)";
+                $result = $db->prepare($consulta);
+                $result->execute(array(":actividad" => $idActividad, ":usuario" => $sesionId, ":voto" => $_POST['valoracion']));
+            }
         }
-        
     }
 ?>
 
@@ -196,7 +202,22 @@
                 <form accept-charset="UTF-8" action="./actividad.php?actividad=<?php echo $idActividad; ?>" method="POST">
                 <textarea class="form-control" rows="3" style="resize:vertical;" id="comentarios" placeholder="Comentario" name="comentarios" <?php echo ($bloqueo) ? "disabled" : "" ?> maxlength="250"></textarea>
                 <h5 class="pull-right" id="lrestantes" >250 letras restantes</h5>
-                <div class="ec-stars-wrapper" style="padding-top: 10px;visibility:<?php echo ($bloqueo) ? "hidden" : "visible" ?>;" id="" >
+                    <div id="mensajeValoracion">
+                    <?php
+                        // Comprobar si el usuario ya ha valorado esta actividad para no dejarlo volver a valorarla
+                        $consulta = "SELECT * FROM votos WHERE idusuario = :usuario AND idactividad = :actividad";
+                        $result = $db->prepare($consulta);
+                        $result->execute(array(':usuario' => $sesionId, 'actividad' => $idActividad));
+                        $arrayResult = $result->fetchAll();
+                        if($result->rowCount() != 0){
+                            // Bloquear la valoracion para ese usuario
+                            $yavalorada = true;
+                            echo "Has valorado esta actividad con ".$arrayResult[0]['valoracion']." estrellas";
+                        }
+                    ?>
+                    </div>
+                    <input type="hidden" id="valoracion" name="valoracion" value="">
+                <div class="ec-stars-wrapper" style="padding-top: 10px;visibility:<?php echo ($bloqueo or isset($yavalorada)) ? "hidden" : "visible" ?>;" id="" >
                         <span id="1">&#9733;</span>
                         <span id="2">&#9733;</span>
                         <span id="3">&#9733;</span>
