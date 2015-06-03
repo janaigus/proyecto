@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-05-2015 a las 19:10:54
+-- Tiempo de generación: 03-06-2015 a las 23:41:32
 -- Versión del servidor: 5.5.43-MariaDB-1ubuntu0.14.04.2
 -- Versión de PHP: 5.5.9-1ubuntu4.9
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `actividades` (
   KEY `idcategoria` (`idcategoria`),
   KEY `idmunicipio` (`idmunicipio`),
   KEY `idisla` (`idisla`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=23 ;
 
 --
 -- Volcado de datos para la tabla `actividades`
@@ -62,7 +62,7 @@ INSERT INTO `actividades` (`id`, `idusuario`, `idcategoria`, `titulo`, `created`
 (13, 1, 1, 'Desarrollo para android', '2015-05-25 16:54:01', 'Aprende desarrollo en android con mi curso de 2 años en la escuela privada. Tel: 922922922', 38031, 7),
 (14, 1, 1, 'Clases de php', '2015-05-25 17:04:47', 'Tienes problemas con php en los estudios. Te puedo ayudar tanto telematicamente como en persona. Contacta conmigo en el 656565655 o en el email elphpepe@pepe.com', 38031, 7),
 (15, 1, 1, 'Creemos nuestro propio videojuego', '2015-05-25 17:04:47', 'Estoy empezando a crear mi propio MMO y me gustaría crear un grupo de trabajo para aprender y que lo pasemos genial. Más Info: 666555444', 38031, 7),
-(16, 1, 1, 'Blender 3D designer', '2015-05-25 17:04:47', 'Estoy buscando a alguien que sepa de blender en 3D. Email: miemail@email.com', 38031, 7);
+(16, 1, 1, 'Blender 3D designer', '2015-05-25 17:04:48', 'Estoy buscando a alguien que sepa de blender en 3D. Email: miemail@email.com', 38031, 7);
 
 -- --------------------------------------------------------
 
@@ -262,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   PRIMARY KEY (`id`),
   KEY `idactividad` (`idactividad`),
   KEY `idusuario` (`idusuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=41 ;
 
 --
 -- Volcado de datos para la tabla `comentarios`
@@ -300,7 +300,7 @@ CREATE TABLE IF NOT EXISTS `recursos` (
   PRIMARY KEY (`id`),
   KEY `idactividad` (`idactividad`),
   KEY `idactividad_2` (`idactividad`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=23 ;
 
 --
 -- Volcado de datos para la tabla `recursos`
@@ -341,26 +341,26 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `idmunicipio` int(11) NOT NULL,
   `idisla` int(11) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `avatar` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `avatar` varchar(150) COLLATE utf8_spanish_ci NOT NULL DEFAULT 'img/img_usuarios/avatares/default.png',
   PRIMARY KEY (`id`),
   KEY `idmunicipio` (`idmunicipio`),
   KEY `idrol` (`idrol`),
   KEY `idisla` (`idisla`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `email`, `nick`, `nombre`, `apellidos`, `password`, `idrol`, `idmunicipio`, `idisla`, `created`, `avatar`) VALUES
-(1, 'janaigus@gmail.com', 'janai', 'Janai Gustavo', 'Expósito Bethencourt', '123456789', 1, 38031, 7, '2015-05-15 21:39:36', 'img/img_usuarios/avatares/default.png'),
-(2, 'jonaigus@gmail.com', 'admin', 'Administrador', 'Administrador', '123456789', 1, 38041, 7, '2015-05-15 21:39:36', 'img/img_usuarios/avatares/default.png'),
-(3, 'janai_exposito@outlook.com', 'Usuario', 'Usuario', 'Usuario', '123456789', 2, 35004, 3, '2015-05-15 21:40:41', 'img/img_usuarios/avatares/default.png'),
-(4, 'otrouser@otrouser.es', 'Otrouser', 'Otrouser', 'Otrouser', '123456789', 2, 35015, 1, '2015-05-15 21:40:41', 'img/img_usuarios/avatares/default.png'),
-(5, 'pepe@benavente.com', 'pebe', 'Pepe', 'Benavente', '1234567', 2, 38028, 7, '2015-05-23 21:58:05', 'img/img_usuarios/avatares/default.png'),
-(6, 'hely@clak.com', 'hecl', 'Hely', 'Clarckson', '1234', 2, 35016, 2, '2015-05-23 22:00:18', 'img/img_usuarios/avatares/default.png'),
-(7, 'metal@lovers.com', 'melo', 'Metal', 'Lovers', '1234', 2, 38901, 5, '2015-05-23 22:04:03', 'img/img_usuarios/avatares/default.png'),
-(8, 'datos@prueba.com', 'dapr', 'Datos', 'Prueba', '1234', 2, 35007, 1, '2015-05-23 22:05:41', 'img/img_usuarios/avatares/default.png');
+(1, 'janaigus@gmail.com', 'janai', 'Janai Gustavo', 'Expósito Bethencourt', '2e99bf4e42962410038bc6fa4ce40d97', 1, 38031, 7, '2015-05-15 21:39:36', 'img/img_usuarios/avatares/janaisavatar.png'),
+(2, 'jonaigus@gmail.com', 'admin', 'Administrador', 'Administrador', '2e99bf4e42962410038bc6fa4ce40d97', 1, 38041, 7, '2015-05-15 21:39:36', 'img/img_usuarios/avatares/default.png'),
+(3, 'janai_exposito@outlook.com', 'Usuario', 'Usuario', 'Usuario', '2e99bf4e42962410038bc6fa4ce40d97', 2, 35004, 3, '2015-05-15 21:40:41', 'img/img_usuarios/avatares/default.png'),
+(4, 'otrouser@otrouser.es', 'Otrouser', 'Otrouser', 'Otrouser', '2e99bf4e42962410038bc6fa4ce40d97', 2, 35015, 1, '2015-05-15 21:40:41', 'img/img_usuarios/avatares/default.png'),
+(5, 'pepe@benavente.com', 'pebe', 'Pepe', 'Benavente', '2e99bf4e42962410038bc6fa4ce40d97', 2, 38028, 7, '2015-05-23 21:58:05', 'img/img_usuarios/avatares/default.png'),
+(6, 'hely@clak.com', 'hecl', 'Hely', 'Clarckson', '2e99bf4e42962410038bc6fa4ce40d97', 2, 35016, 2, '2015-05-23 22:00:18', 'img/img_usuarios/avatares/default.png'),
+(7, 'metal@lovers.com', 'melo', 'Metal', 'Lovers', '2e99bf4e42962410038bc6fa4ce40d97', 2, 38901, 5, '2015-05-23 22:04:03', 'img/img_usuarios/avatares/default.png'),
+(8, 'datos@prueba.com', 'dapr', 'Datosde', 'Pruebas', '2e99bf4e42962410038bc6fa4ce40d97', 2, 35007, 1, '2015-05-23 22:05:41', 'img/img_usuarios/avatares/dapravatar.jpg');
 
 -- --------------------------------------------------------
 
@@ -377,7 +377,7 @@ CREATE TABLE IF NOT EXISTS `votos` (
   PRIMARY KEY (`id`),
   KEY `idactividad` (`idactividad`),
   KEY `idusuario` (`idusuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=98 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=117 ;
 
 --
 -- Volcado de datos para la tabla `votos`
