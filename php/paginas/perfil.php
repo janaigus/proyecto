@@ -75,6 +75,7 @@
                 $_SESSION['nickh2k'] = $_POST['nick'];
                 $_SESSION['nombreh2k'] = $_POST['nick'];
                 $_SESSION['emailh2k'] = $_POST['email'];
+                header('Location: ./perfil.php?usuario='.$usuario);
             }
         }
         // Hacer lo mismo con el avatar
@@ -366,6 +367,7 @@
             </div>
             <div class="modal-body">
                   <div id="mensajeInfo"></div>
+                    
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cerrar</button>
