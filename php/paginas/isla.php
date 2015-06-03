@@ -212,7 +212,7 @@
                     }
                     echo '</div>';
                     }else{
-                        echo "<h2>No hay actividades en la isla: ".$nombreIsla."</h2>";
+                        echo "<h2>No hay actividades valoradas en la isla: ".$nombreIsla."</h2>";
                     }
                     ?>
                     
