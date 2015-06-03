@@ -52,7 +52,7 @@ $(document).ready(function () {
         // Hacer desaparecer las estrellas
         $('.ec-stars-wrapper').css('display', 'none');
         // Mostrar el texto como ya se ha realizado la valoración
-        $('#mensajeValoracion').html("Has valorado esta actividad con "+$(this).attr('id')+" estrellas. </br>Por favor rellena y envia tu comentario para continuar");
+        $('#mensajeValoracion').html("Has valorado esta actividad con "+$(this).attr('id')+" estrellas. </br>Por favor rellena y envia tu comentario para continuar.");
         
     });
     
