@@ -26,36 +26,38 @@
         $consulta = "DELETE FROM votos WHERE idusuario = :usuario";
         $result = $db->prepare($consulta);
         $result->bindParam(":usuario", $sesionId, PDO::PARAM_STR);
-        //$resultado = $result->execute(array(":usuario" => $sesionId));
-        $resultado = $result->execute();
-        echo "votos".$resultado."<br/>";
-        /*
+        $result->execute();
+        
+        
         // Luego borrar los comentarios
         $consulta = "DELETE FROM comentarios WHERE idusuario = :usuario";
         $result = $db->prepare($consulta);
-        $resultado = $result->execute(array(":usuario" => $sesionId));
-        echo "comentarios".$resultado."<br/>";
+        $result->bindParam(":usuario", $sesionId, PDO::PARAM_STR);
+        $result->execute();
         
         for($i=0;$i < count($arrayActividades);$i++){
             // Borrar los recursos de esas actividades y luego las propias actividades
             $consulta = "DELETE FROM recursos WHERE idactividad = :actividad";
             $result = $db->prepare($consulta);
-            $resultado = $result->execute(array(":actividad" => $arrayActividades[$i]['id']));
-            echo "recursos".$resultado."<br/>";            
+            $result->bindParam(":actividad", $arrayActividades[$i]['id'], PDO::PARAM_STR);
+            $result->execute();            
         }
         
         for($i=0;$i < count($arrayActividades);$i++){
             // Borrar las actividades 
             $consulta = "DELETE FROM actividades WHERE id = :actividad";
             $result = $db->prepare($consulta);
-            $resultado = $result->execute(array(":actividad" => $arrayActividades[$i]['id']));
-            echo "actividades".$resultado."<br/>";   
+            $result->bindParam(":actividad", $arrayActividades[$i]['id'], PDO::PARAM_STR);
+            $result->execute(); 
         }
         // Borrar el usuario del sistema
-        $consulta = "DELETE FROM usuarios WHERE idusuario = :usuario";
+        $consulta = "DELETE FROM usuarios WHERE id = :usuario";
         $result = $db->prepare($consulta);
-        $resultado = $result->execute(array(":usuario" => $sesionId));
-        echo "usuarios".$resultado."<br/>";*/
+        $result->bindParam(":usuario", $sesionId, PDO::PARAM_STR);
+        $result->execute();
+        
+        session_destroy();
+        header('Location: ../../index.php');
     }
 ?>
 
