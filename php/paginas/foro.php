@@ -135,7 +135,7 @@
                     <div>
                         <?php
                         if($sesionIsla == $isla){
-                            echo'<button class="btn btn-lg btn-dark" type="submit">Publicar Actividad</button>';
+                            echo'<a href="./crearactividad.php" class="btn btn-lg btn-dark" type="submit">Publicar Actividad</a>';
                         }
                         ?>
                     </div>

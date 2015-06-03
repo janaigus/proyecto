@@ -1,6 +1,5 @@
 <?php
     session_start();
-
     // Obtener variables con los parametros de la sesión del usuario
     $sesionId = (isset($_SESSION['idh2k'])) ? $_SESSION['idh2k'] : "";
     $sesionNick = (isset($_SESSION['nickh2k'])) ? $_SESSION['nickh2k'] : "";
@@ -12,6 +11,41 @@
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
+    if(isset($_POST['si']) and $_POST['si'] == "Si"){
+        // Array para guardar las actividades que son del usuario y que serán borradas
+        $arrayActividades = array();
+        
+        // Comenzar borrando los votos
+        $consulta = "DELETE FROM votos WHERE idusuario = :usuario";
+        $result = $db->prepare($consulta);
+        $result->execute(array(":usuario" => $sesionId));
+        
+        // Luego borrar los comentarios
+        $consulta = "DELETE FROM votos WHERE idusuario = :usuario";
+        $result = $db->prepare($consulta);
+        $result->execute(array(":usuario" => $sesionId));
+        
+        // Luego obtener las actividades del usuario
+        $consulta = "SELECT id FROM actividades WHERE idusuario = :usuario";
+        $result = $db->prepare($consulta);
+        $result->execute(array(":usuario" => $sesionId));
+        $arrayResult = $result->fetchAll();
+        
+        // Borrar los recursos de esas actividades
+        $consulta = "DELETE FROM recursos WHERE idactividad = :actividad";
+        $result = $db->prepare($consulta);
+        $result->execute(array(":actividad" => $sesionId));
+        
+        // Borrar las actividades 
+        $consulta = "DELETE FROM votos WHERE idusuario = :usuario";
+        $result = $db->prepare($consulta);
+        $result->execute(array(":usuario" => $sesionId));
+        
+        // Borrar el usuario del sistema
+        $consulta = "DELETE FROM usuarios WHERE idusuario = :usuario";
+        $result = $db->prepare($consulta);
+        $result->execute(array(":usuario" => $sesionId));
+    }
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +105,7 @@
                     <p class="lead">Si hace esto, toda sus actividad, valoraciones y comentarios serán borrados completamente de Help to Know.</p>
                     <hr class="small">
                     <form class="form" action="./borrarperfil.php" method="POST">
-                        <input type="submit" class="btn btn-lg btn-danger" value="Si"/>
+                        <input type="submit" class="btn btn-lg btn-danger" value="Si" name="si"/>
                         <a href="" class="btn btn-lg btn-light">No</a>
                     </form>
             </div>
