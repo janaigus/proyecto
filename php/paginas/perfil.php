@@ -72,7 +72,7 @@
                                                ));
             if($resultado == true){
                 $mensaje = 'Información actualizada correctamente<br/>';
-                $_SESSION['nickh2k'] = $arrayResult[0]['nick'];
+                $_SESSION['nickh2k'] = $_POST['nick'];
                 $_SESSION['nombreh2k'] = $_POST['nick'];
                 $_SESSION['emailh2k'] = $_POST['email'];
             }
