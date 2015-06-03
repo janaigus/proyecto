@@ -134,6 +134,13 @@
                     <h2>Actividades Mejor Valoradas</h2>
                     <hr class="small">
                     <div class="row">
+                    <div>
+                        <?php
+                        if($sesionIsla == $isla){
+                            echo'<a href="./crearactividad.php" class="btn btn-lg btn-dark" type="submit">Publicar Actividad</a>';
+                        }
+                        ?>
+                    </div>
                        <!-- Principio del carrousel -->
                        <div class="col-xs-12 col-sm-12 col-md-12">
                             <div id="myCarouselValoradas" class="vertical-slider carousel vertical slide col-md-12" data-ride="carousel">

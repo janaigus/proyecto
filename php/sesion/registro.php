@@ -35,7 +35,7 @@
                         ":mun" => $_POST['registroMunicipios'],
                         ":isla" => $_POST['registroIslas']
                     ));
-
+                    $idUsuario = $db->lastInsertId();
                     if($resultado){
                         // Enviar correo de confirmacion de la creacion del usuario
                         $para      = 'janaigus@gmail.com, info@helptoknow.esy.es,'.$_POST['registroEmail'];
@@ -60,6 +60,8 @@
                         </html>
                         ';
                         // Crear las sesiones y redireccionar a index
+                        $_SESSION['idh2k'] = $idUsuario;
+                        $_SESSION['nickh2k'] = $_POST['registroNick'];
                         $_SESSION['nombreh2k'] = $_POST['registroNombre'];
                         $_SESSION['rolh2k'] = 2;
                         $_SESSION['municipioh2k'] = $_POST['registroMunicipios'];

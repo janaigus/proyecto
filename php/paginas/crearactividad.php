@@ -129,7 +129,7 @@
                     <a href="./perfil.php?usuario='.$sesionId.'">'.$sesionNick.'</a>
                 </li>
                 <li>
-                    <a href="../cerrarsesion.php">Cerrar Sesión</a>
+                    <a href="../sesion/cerrarsesion.php">Cerrar Sesión</a>
                 </li>
                 ';
             
