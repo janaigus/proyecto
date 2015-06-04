@@ -63,24 +63,14 @@
             </li>
             <hr>
             <?php
-            if($sesionNombre == ""){
-                echo'
+            echo'
                 <li>
-                    <a id="btnEntrar" href="#modalEntrar">Iniciar Sesión</a>
+                    <a href="./perfil.php?usuario='.$sesionId.'">'.$sesionNick.'</a>
                 </li>
                 <li>
-                    <a id="btnLateralRegistrarse" href="#modalRegistrarse">Registrarse</a>
-                </li>';
-            }else{
-                echo'
-                    <li>
-                        <a href="./perfil.php?usuario='.$sesionId.'">'.$sesionNick.'</a>
-                    </li>
-                    <li>
-                        <a href="../cerrarsesion.php">Cerrar Sesión</a>
-                    </li>
-                    ';
-            }
+                    <a href="../cerrarsesion.php">Cerrar Sesión</a>
+                </li>
+                ';
             ?>
         </ul>
     </nav>
@@ -90,141 +80,27 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Ayudando a personas para aprender. <h1><b>Help to Know!</b></h1></h2>
-                    <p class="lead">Aqui podrás encontrar desde una clase de costura, </br>hasta un curso profesional de desarrollo web </br>con certificación internacional</p>
+                    <h1><b>Help to Know!</b></h1>
                 </div>
             </div>
             <!-- /.row -->
         </div>
         <!-- /.container -->
     </section>
-
-    <!-- Footer -->
-    <footer>
-        <div id="contacto" class="container">
-            <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4><strong>Help to know</strong>
-                    </h4>
-                    <p>P. SHERMAN, CALLE WALLABY 42,<br>SYDNEY, AU 90210</p>
-                    <ul class="list-unstyled">
-                        <li><i class="fa fa-phone fa-fw"></i> (123) 456-7890</li>
-                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="#modalContacto" id="btnContacto">Contacto</a>
-                        <li><span><a href="">Uso de la web</a></span><span> / <a href="#">Ayuda</a></span></li>
-                        </li>
-                    </ul>
-                    <br>
-                    <ul class="list-inline">
-                        <li>
-                            <a href="https://www.facebook.com/pages/Help-to-know/1615724538676574?ref=hl"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://twitter.com/?lang=es"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
-                        </li>
-                    </ul>
-                    <hr class="small">
-                    <p class="text-muted">Copyright &copy; Help to Know! 2015</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Modal Inicio Sesión-->
-    <div class="modal fade" id="modalEntrar" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <div class="row">
-                  <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="../../img/img_pagina/logo.png" alt="Logo" width="180" height="95">
-                  </div>
-              </div>
-            </div>
-            <div class="modal-body">
-                  <form class="form" action="./php/sesion/login.php" method="POST" id="formularioEntrar">
-                    <div class="form-group" id="cajaEmailEntrar">
-                        <div class="inner-addon left-addon">
-                            <i class="glyphicon glyphicon-user"></i>
-                            <input type="text" id="entrarEmail" name="entrarEmail" class="form-control input-lg" placeholder="Email"/>
-                        </div>
-                    </div>
-                    <div class="form-group" id="cajaPassEntrar">
-                        <div class="inner-addon left-addon">
-                            <i class="glyphicon glyphicon-lock"></i>
-                            <input id="entrarPass" name="entrarPass" type="password" class="form-control input-lg" placeholder="Password"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                      <button id="entrarBoton" class="btn btn-lg btn-light btn-block">Iniciar sesión</button>
-                      <span class="pull-right"><a href="" id="entrarRegistrarse">Registrarse</a></span><span><a href="#">Ayuda</a></span>
-                    </div>
-                    <hr>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-4 col-lg-offset-2 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='./php/miFacebook.php' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
-                            </div>
-                            <!--<div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='#' class="btn btn-light twitter"> <i class="fa fa-twitter modal-icons"></i> Entrar con Twitter </a>
-                            </div>-->
-                            <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='./php/miGoogle.php' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
-                            </div>
-                        </div>
-                    </div>
-                  </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal" id="entrarCancelar">Cancelar</button>
-            </div>
+    
+    <!-- Perfil -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+    <section id="perfil" class="services bg-primary">
+        <div class="container">
+          <h1 class="page-header text-center">Actividades</h1>
+          <div class="row">
+              
           </div>
         </div>
-    </div>
-        
-    <!-- Modal Contacto-->
-    <div class="modal fade" id="modalContacto" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <div class="row">
-                  <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="../../img/img_pagina/logo.png" alt="Logo" width="180" height="95">
-                    <h3 class="modal-title"><b>Contacto</b></h3>
-                  </div>
-              </div>
-            </div>
-            <div class="modal-body">
-                  <form class="form" action="php/contacto.php" method="POST" id="formularioContacto">
-                    <div class="form-group" id="cajaNombreContacto">
-                        <input name="nombreContacto" type="text" id="nombreContacto" class="form-control input-lg" placeholder="Nombre"/>
-                    </div>
-                    <div class="form-group" id="cajaEmailContacto">
-                        <input name="emailContacto" type="text" id="emailContacto" class="form-control input-lg" placeholder="Email"/>
-                    </div>
-                    <div class="form-group" id="cajaAsuntoContacto">
-                        <input name="asuntoContacto" type="text" id="asuntoContacto" class="form-control input-lg" placeholder="Asunto"/>
-                    </div>
-                    <div class="form-group" id="cajaMensajeContacto">
-                        <textarea name="mensajeContacto" class="form-control" id="mensajeContacto"rows="3" placeholder="Mensaje..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button id="enviarFormularioContacto" class="btn btn-lg btn-light btn-block">Enviar</button>
-                    </div>
-                  </form>
-            </div>
-            <div class="modal-footer">
-              <button id="cancelarContacto" type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cancelar</button>
-            </div>
-          </div>
-        </div>
-    </div>
-        
+    </section>
+    
     <!-- Modal Información-->
-    <div class="modal fade" id="modalInfo" role="dialog">
+    <div class="modal fade" id="modalWarning" role="dialog">
         <div class="modal-dialog">
           <!-- Modal content-->
           <div class="modal-content">
@@ -236,8 +112,12 @@
                   </div>
               </div>
             </div>
-            <div class="modal-body">
-                  <div id="mensajeInfo"></div>
+            <div class="modal-body text-center">
+                <h2>¿Realmente desea hacer esto?</h2>
+                <p class="lead">Una vez confirmada la accion no podrá volver atras.</p>
+                <hr class="small">
+                <button class="btn btn-lg btn-danger" id="warningConfirmar"> Si</button>
+                <button class="btn btn-lg btn-light" data-dismiss="modal">No</button>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cerrar</button>
