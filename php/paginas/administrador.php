@@ -57,13 +57,13 @@
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
             <li class="sidebar-brand">
-                <a href="#top"  onclick = $("#menu-close").click(); >Help to Know</a>
+                <a href="../../index.php"  onclick = $("#menu-close").click(); >Help to Know</a>
             </li>
             <li>
-                <a href="#comentarios" onclick = $("#menu-close").click(); >Administrar comentarios</a>
+                <a href="#comentarios" onclick = $("#menu-close").click(); >Comentarios</a>
             </li>
             <li>
-                <a href="#contacto" onclick = $("#menu-close").click(); >Contacto</a>
+                <a href="#votos" onclick = $("#menu-close").click(); >Votos</a>
             </li>
             <hr>
             <?php
@@ -144,10 +144,8 @@ echo '
         <div>'.$arrayResult[$i]['fecha'].'</div>
     </div>
     <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
-        <div id="cajaBotonesEditar_'.$arrayResult[$i]['id'].'">
         <button id="confirmarEditarComentario_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-edit"></span> Guardar </button>
         <button id="editarComentario_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> Editar </button>
-        </div>
     </div>
     <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
         <button id="borrarComentario_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> Borrar </button>
@@ -162,12 +160,12 @@ echo '
         </div>
     </section>
     
-<section id="Votos" class="portfolio">
+<section id="votos" class="portfolio">
         <div class="container">
           <h1 class="page-header text-center">Votos</h1>
           <div class="row">
               <div class="col-md-12" style="color:black;">
-                  <div class="thumbnail" style="height: 350px;overflow: auto;" id="grupoComentarios">
+                  <div class="thumbnail" style="height: 350px;overflow: auto;" id="grupoVotos">
                       <div class="row text-center" style="margin: 10px 10px 10px 15px;color:rgb(0,122,135);">
                             <div class="col-xs-2 col-lg-1"  style="margin: 6px 0px 6px 0px;">
                                 Actividad
@@ -209,7 +207,7 @@ echo '
         <div>'.$arrayResult[$i]['nick'].'</div>
     </div>
     <div class="col-xs-12 col-lg-4" style="padding: 6px 0px 6px 15px;">
-        <select id="textoComentario_'.$arrayResult[$i]['id'].'" class="form-control" disabled="disabled">
+        <select id="selectVoto_'.$arrayResult[$i]['id'].'" class="form-control" disabled="disabled">
           <option value="1" '.(($arrayResult[$i]['valoracion'] == 1) ? "selected='selected'" : "").'>1</option>
           <option value="2" '.(($arrayResult[$i]['valoracion'] == 2) ? "selected='selected'" : "").'>2</option>
           <option value="3" '.(($arrayResult[$i]['valoracion'] == 3) ? "selected='selected'" : "").'>3</option>
@@ -221,13 +219,11 @@ echo '
         <div>'.$arrayResult[$i]['fecha'].'</div>
     </div>
     <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
-        <div id="cajaBotonesEditar_'.$arrayResult[$i]['id'].'">
-        <button id="confirmarEditar_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-edit"></span> Guardar </button>
-        <button id="editarComentario_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> Editar </button>
-        </div>
+        <button id="confirmarEditarVoto_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-edit"></span> Guardar </button>
+        <button id="editarVoto_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> Editar </button>
     </div>
     <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
-        <button id="borrarComentario_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> Borrar </button>
+        <button id="borrarVoto_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> Borrar </button>
     </div>
 </div>
 ';
