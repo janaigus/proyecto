@@ -352,7 +352,7 @@ echo '
     <div class="col-xs-12 col-lg-2" style="padding: 12px 0px 6px 15px;">
         <textarea id="descripcionActividad_'.$arrayResult[$i]['id'].'" class=" form-control" rows="1" style="resize:vertical;" maxlength="250" disabled="disabled">'.$arrayResult[$i]['descripcion'].'</textarea>
     </div>
-    <div class="col-xs-12 col-lg-1" style="padding: 15px 0px 6px 0px;">
+    <div class="col-xs-12 col-lg-1" style="padding: 14px 0px 6px 0px;">
         <button id="confirmarEditarComentario_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-edit"></span></button>
         <button id="editarActividad_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> </button>
         <button id="borrarActividad_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> </button>
