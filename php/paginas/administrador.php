@@ -8,6 +8,10 @@
     $sesionMunicipio = (isset($_SESSION['municipioh2k'])) ? (int)$_SESSION['municipioh2k'] : "";
     $sesionIsla = (isset($_SESSION['islah2k'])) ? (int)$_SESSION['islah2k'] : "";
     $sesionTiempo = (isset($_SESSION['tiempoh2k'])) ? $_SESSION['tiempoh2k'] : "";
+    // SEGURIDAD
+    /*if($sesionRol != "1"){
+        header("Location: ../../index.php");
+    }*/
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
@@ -68,7 +72,7 @@
                     <a href="./perfil.php?usuario='.$sesionId.'">'.$sesionNick.'</a>
                 </li>
                 <li>
-                    <a href="../cerrarsesion.php">Cerrar Sesión</a>
+                    <a href="../sesion/cerrarsesion.php">Cerrar Sesión</a>
                 </li>
                 ';
             ?>

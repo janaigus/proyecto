@@ -3,23 +3,18 @@
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
     if($_POST['comando'] == "editar"){
-        $consulta = 'UPDATE usuarios SET ';
-        $consulta .= 'email = :email , ';
-        $consulta .= 'nick = :nick , ';
-        $consulta .= 'nombre = :nombre , ';
-        $consulta .= 'apellidos = :apell , ';
-        $consulta .= 'password = :pass ';
-        $consulta .= 'WHERE usuarios.id = '.$usuario;
-
+        $consulta = 'UPDATE comentarios SET ';
+        $consulta .= 'texto = :texto ';
+        $consulta .= 'WHERE comentarios.id = '.$_POST['idcomentario'];
         $result = $db->prepare($consulta);
-        $resultado = $result->execute(array(':email' => $_POST['email']));
+        $resultado = $result->execute(array(':texto' => $_POST['texto']));
         echo "OK";
     }else{
         if($_POST['comando'] == "borrar"){
             // Comenzar borrando los votos
-            $consulta = "DELETE FROM votos WHERE id = :voto";
+            $consulta = "DELETE FROM comentarios WHERE id = :comentario";
             $result = $db->prepare($consulta);
-            $result->bindParam(":voto", $_POST['idvoto'], PDO::PARAM_STR);
+            $result->bindParam(":comentario", $_POST['idcomentario'], PDO::PARAM_STR);
             $result->execute();
             echo "OK";
         }
