@@ -130,16 +130,16 @@ for($i = 0;$i < count($arrayResult);$i++){
 echo '
 <div class="row text-center" style="margin: 10px 10px 10px 10px; border: 1px solid #ccc; border-radius: 4px;">
     <div class="col-xs-12 col-lg-1"  style="margin: 12px 0px 6px 0px;">
-        <a href="./actividad.php?actividad='.$arrayResult[$i]['idactividad'].'" id="actividadComentario'.$arrayResult[$i]['id'].'">'.$arrayResult[$i]['idactividad'].'</a>
+        <a href="./actividad.php?actividad='.$arrayResult[$i]['idactividad'].'">'.$arrayResult[$i]['idactividad'].'</a>
     </div>
     <div class="col-xs-12 col-lg-1" style="padding: 12px 0px 6px 0px;">
-        <div id="usuarioComentario'.$arrayResult[$i]['id'].'">'.$arrayResult[$i]['nick'].'</div>
+        <div>'.$arrayResult[$i]['nick'].'</div>
     </div>
     <div class="col-xs-12 col-lg-4" style="padding: 6px 0px 6px 15px;">
         <textarea id="textoComentario'.$arrayResult[$i]['id'].'" class=" form-control" rows="1" style="resize:vertical;" maxlength="250" disabled="disabled">'.$arrayResult[$i]['texto'].'</textarea>
     </div>
     <div class="col-xs-12 col-lg-2" style="padding: 12px 0px 6px 0px;">
-        <div id="fechaComentario'.$arrayResult[$i]['id'].'">'.$arrayResult[$i]['fecha'].'</div>
+        <div>'.$arrayResult[$i]['fecha'].'</div>
     </div>
     <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
         <button id="editarComentario'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> Editar </button>
