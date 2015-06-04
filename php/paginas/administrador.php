@@ -1,6 +1,5 @@
 <?php
     session_start();
-
     // Obtener variables con los parametros de la sesión del usuario
     $sesionId = (isset($_SESSION['idh2k'])) ? $_SESSION['idh2k'] : "";
     $sesionNick = (isset($_SESSION['nickh2k'])) ? $_SESSION['nickh2k'] : "";

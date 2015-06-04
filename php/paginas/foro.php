@@ -204,7 +204,22 @@
                         <div class="row text-center">
                             <div class="col-lg-12">
                                 <ul class="pagination">
-                                    <?php 
+                                    <?php
+                                        if($pagina != 1){
+                                            echo '<li>
+                                          <a href="foro.php?categoria='.$categoria.'&isla='.$isla.'&pagina='.($pagina-1).'" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                          </a>
+                                        </li>';
+                                        }else{
+                                            echo '
+                                            <li class="disabled">
+                                              <a href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                              </a>
+                                            </li>
+                                            ';
+                                        }
                                         for($i=1;$i <= ceil($totalActividades / 3);$i++){
                                             if($i == $pagina){
                                                 echo '<li class="active">';
@@ -213,6 +228,21 @@
                                             }
                                             echo '<a href="foro.php?categoria='.$categoria.'&isla='.$isla.'&pagina='.$i.'">'.$i.'</a>';
                                             echo '</li>';
+                                        }
+                                        if($pagina != ceil($totalActividades / 3)){
+                                            echo '<li>
+                                          <a href="foro.php?categoria='.$categoria.'&isla='.$isla.'&pagina='.($pagina+1).'" aria-label="Previous">
+                                            <span aria-hidden="true">&raquo;</span>
+                                          </a>
+                                        </li>';
+                                        }else{
+                                            echo '
+                                            <li class="disabled">
+                                              <a href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&raquo;</span>
+                                              </a>
+                                            </li>
+                                            ';
                                         }
                                     ?>
                                 </ul>

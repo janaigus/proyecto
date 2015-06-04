@@ -202,6 +202,22 @@
                             <div class="col-lg-12">
                                 <ul class="pagination">
                                     <?php 
+                                        
+                                        if($pagina != 1){
+                                            echo '<li>
+                                          <a href="busqueda.php?categoria='.$categoria.'&isla='.$isla.'&municipio='.$municipio.'&pagina='.($pagina-1).'" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                          </a>
+                                        </li>';
+                                        }else{
+                                            echo '
+                                            <li class="disabled">
+                                              <a href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                              </a>
+                                            </li>
+                                            ';
+                                        }
                                         for($i=1;$i <= ceil($totalActividades / 3);$i++){
                                             if($i == $pagina){
                                                 echo '<li class="active">';
@@ -210,6 +226,21 @@
                                             }
                                             echo '<a href="busqueda.php?categoria='.$categoria.'&isla='.$isla.'&municipio='.$municipio.'&pagina='.$i.'">'.$i.'</a>';
                                             echo '</li>';
+                                        }
+                                        if($pagina != ceil($totalActividades / 3)){
+                                            echo '<li>
+                                          <a href="busqueda.php?categoria='.$categoria.'&isla='.$isla.'&municipio='.$municipio.'&pagina='.($pagina+1).'" aria-label="Previous">
+                                            <span aria-hidden="true">&raquo;</span>
+                                          </a>
+                                        </li>';
+                                        }else{
+                                            echo '
+                                            <li class="disabled">
+                                              <a href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&raquo;</span>
+                                              </a>
+                                            </li>
+                                            ';
                                         }
                                     ?>
                                 </ul>
