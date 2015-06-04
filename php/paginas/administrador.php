@@ -245,56 +245,94 @@ echo '
               <div class="col-md-12" style="color:black;">
                   <div class="thumbnail" style="height: 350px;overflow: auto;" id="grupoComentarios">
                       <div class="row text-center" style="margin: 10px 10px 10px 15px;color:rgb(0,122,135);">
+                            <div class="col-xs-2 col-lg-2"  style="margin: 6px 0px 6px 0px;">
+                                Categoria
+                            </div>
                             <div class="col-xs-2 col-lg-1"  style="margin: 6px 0px 6px 0px;">
-                                Actividad
+                                Isla
+                            </div>
+                            <div class="col-xs-2 col-lg-2"  style="margin: 6px 0px 6px 0px;">
+                                Municipio
                             </div>
                             <div class="col-xs-2 col-lg-1" style="margin: 6px 0px 6px 0px;">
                                 Usuario
                             </div>
-                            <div class="col-xs-2 col-lg-4" style="margin: 6px 0px 6px 0px;">
-                                Texto
+                            <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
+                                Titulo
                             </div>
                             <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
-                                Fecha
+                                Descripción
                             </div>
-                            <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
-                                Editar
-                            </div>
-                            <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
-                                Borrar
+                            <div class="col-xs-2 col-lg-1" style="margin: 6px 0px 6px 0px;">
+                                Acción
                             </div>
                         </div>
 <?php
-// Crear todas las filas necesarias para los comentarios
-$consulta =  "SELECT com.id, com.texto, DATE_FORMAT( com.created,  '%d-%m-%Y a las %k:%i' ) ";
-$consulta .= " AS fecha, com.idusuario, com.idactividad, usr.nick AS nick ";
-$consulta .= "FROM comentarios com ";
-$consulta .= "INNER JOIN usuarios usr ON com.idusuario = usr.id ";
-$consulta .= "ORDER BY com.created DESC ";
+$consulta = "SELECT * FROM auxcategorias ORDER BY nombre";
+$result = $db->prepare($consulta);
+$result->execute();
+$categorias = $result->fetchAll();
+                                        
+$consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, ";
+$consulta .= "act.idcategoria, cat.nombre AS categoria, u.nombre AS nombreusuario, ";
+$consulta .= "act.idisla, i.nombre AS nombreisla, m.nombre AS nombremunicipio ";
+$consulta .= "FROM actividades act ";
+$consulta .= "LEFT JOIN auxcategorias cat ON act.idcategoria = cat.id ";
+$consulta .= "INNER JOIN auxislas i ON act.idisla = i.id ";
+$consulta .= "INNER JOIN auxmunicipios m ON act.idmunicipio = m.id ";
+$consulta .= "INNER JOIN usuarios u ON act.idusuario = u.id ";
+$consulta .= "ORDER BY act.created DESC";
 $result = $db->prepare($consulta);
 $result->execute();
 $arrayResult = $result->fetchAll();
+
 for($i = 0;$i < count($arrayResult);$i++){
 echo '
 <div class="row text-center" style="margin: 10px 10px 10px 10px; border: 1px solid #ccc; border-radius: 4px;">
-    <div class="col-xs-12 col-lg-1"  style="margin: 12px 0px 6px 0px;">
-        <a href="./actividad.php?actividad='.$arrayResult[$i]['idactividad'].'">'.$arrayResult[$i]['idactividad'].'</a>
+    <div class="col-xs-12 col-lg-2"  style="margin: 12px 0px 6px 15px;">
+        <select id="categoriaActividad_'.$arrayResult[$i]['id'].'" class="form-control" disabled="disabled">
+          <option value="1">categoria</option>
+          <option value="2">categoria</option>
+          <option value="3">categoria</option>
+          <option value="4">categoria</option>
+          <option value="5">categoria</option>
+        </select>
     </div>
     <div class="col-xs-12 col-lg-1" style="padding: 12px 0px 6px 0px;">
-        <div>'.$arrayResult[$i]['nick'].'</div>
+        <select id="islaActividad_'.$arrayResult[$i]['id'].'" class="form-control" disabled="disabled">
+          <option value="1">Fuerteventura</option>
+          <option value="2">Isla</option>
+          <option value="3">Isla</option>
+          <option value="4">Isla</option>
+          <option value="5">Isla</option>
+        </select>
     </div>
-    <div class="col-xs-12 col-lg-4" style="padding: 6px 0px 6px 15px;">
-        <textarea id="textoComentario_'.$arrayResult[$i]['id'].'" class=" form-control" rows="1" style="resize:vertical;" maxlength="250" disabled="disabled">'.$arrayResult[$i]['texto'].'</textarea>
+    <div class="col-xs-12 col-lg-2" style="padding: 12px 0px 6px 15px;">
+        <select id="municipioActividad_'.$arrayResult[$i]['id'].'" class="form-control" disabled="disabled">
+    '; // echo
+        for($z=0;$z<count($categorias);$z++){
+            echo '<option value="'.$categorias[$z]['id'].'"';
+            if($arrayResult[$i]['categoria'] == $categorias[$z]['nombre']){
+                echo ' selected="selected" ';
+            }
+            echo '>'.$categorias[$z]['nombre'].'</option>';
+        }
+    
+    echo '</select>
+    </div>
+    <div class="col-xs-12 col-lg-1" style="padding: 18px 0px 6px 0px;">
+        <div>Usuario</div>
     </div>
     <div class="col-xs-12 col-lg-2" style="padding: 12px 0px 6px 0px;">
-        <div>'.$arrayResult[$i]['fecha'].'</div>
+        <textarea id="tituloActividad_'.$arrayResult[$i]['id'].'" class=" form-control" rows="1" style="resize:vertical;" maxlength="250" disabled="disabled">'.$arrayResult[$i]['titulo'].'</textarea>
     </div>
-    <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
-        <button id="confirmarEditarComentario_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-edit"></span> Guardar </button>
-        <button id="editarComentario_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> Editar </button>
+    <div class="col-xs-12 col-lg-2" style="padding: 12px 0px 6px 15px;">
+        <textarea id="descripcionActividad_'.$arrayResult[$i]['id'].'" class=" form-control" rows="1" style="resize:vertical;" maxlength="250" disabled="disabled">'.$arrayResult[$i]['descripcion'].'</textarea>
     </div>
-    <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
-        <button id="borrarComentario_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> Borrar </button>
+    <div class="col-xs-12 col-lg-1" style="padding: 15px 0px 6px 0px;">
+        <button id="confirmarEditarComentario_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-edit"></span></button>
+        <button id="editarActividad_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> </button>
+        <button id="borrarActividad_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> </button>
     </div>
 </div>
 ';
