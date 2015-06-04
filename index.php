@@ -480,28 +480,28 @@
                     <div class="row">
                        <!-- Principio del carrousel -->
                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <form class="form" action="php/paginas/busqueda.php" method="POST" id="formularioBusqueda">
+                            <form class="form" action="php/paginas/busqueda.php" method="GET" id="formularioBusqueda">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <select id="busquedaIslas" name="busquedaIslas" class="form-control">
+                                        <select id="busquedaIslas" name="isla" class="form-control">
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <select id="busquedaMunicipios" name="busquedaMunicipios" class="form-control" disabled>
+                                        <select id="busquedaMunicipios" name="municipio" class="form-control" disabled>
                                             <option value="0">Seleccione municipio</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <select id="busquedaCategorias" name="busquedaCategorias" class="form-control">
+                                        <select id="busquedaCategorias" name="categoria" class="form-control">
                                         </select>
                                     </div>
                                 </div>
                             </div>
-                            <button id="enviarFormularioBusqueda" type="button" class="btn btn-lg btn-dark">Buscar actividades</button>
+                            <button id="enviarFormularioBusqueda" type="submit" class="btn btn-lg btn-dark">Buscar actividades</button>
                             </form>
                        </div>
                     </div>

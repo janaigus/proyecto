@@ -2,8 +2,10 @@ expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 var humanoRegistro = false;
 
 $(document).ready(function () {
-    
-    
+    $('#formularioBusqueda').on('submit', function (){
+        
+        alert("asdfdsa");
+    });
     // ISLAS Y MUNICIPIOS
     // Cargar las islas en select de islas de la ventana de registro
     $.getJSON('./php/obtenerRecursos/obtenerIslas.php',
