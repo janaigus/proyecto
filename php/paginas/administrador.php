@@ -118,28 +118,38 @@
                         </div>
 <?php
 // Crear todas las filas necesarias para los comentarios
+$consulta =  "SELECT com.id, com.texto, DATE_FORMAT( com.created,  '%d-%m-%Y a las %k:%i' ) ";
+$consulta .= " AS fecha, com.idusuario, com.idactividad, usr.nick AS nick ";
+$consulta .= "FROM comentarios com ";
+$consulta .= "INNER JOIN usuarios usr ON com.idusuario = usr.id ";
+$consulta .= "ORDER BY com.created DESC ";
+$result = $db->prepare($consulta);
+$result->execute();
+$arrayResult = $result->fetchAll();
+for($i = 0;$i < count($arrayResult);$i++){
 echo '
 <div class="row text-center" style="margin: 10px 10px 10px 10px; border: 1px solid #ccc; border-radius: 4px;">
-    <div class="col-xs-2 col-lg-1"  style="margin: 12px 0px 6px 0px;">
-        <a id="comentarioActividadId"> asd</a>
+    <div class="col-xs-12 col-lg-1"  style="margin: 12px 0px 6px 0px;">
+        <a href="./actividad.php?actividad='.$arrayResult[$i]['idactividad'].'" id="actividadComentario'.$arrayResult[$i]['id'].'">'.$arrayResult[$i]['idactividad'].'</a>
     </div>
-    <div class="col-xs-2 col-lg-1" style="margin: 12px 0px 6px 0px;">
-        <a id="comentarioUsuarioId"> asd</a>
+    <div class="col-xs-12 col-lg-1" style="padding: 12px 0px 6px 0px;">
+        <div id="usuarioComentario'.$arrayResult[$i]['id'].'">'.$arrayResult[$i]['nick'].'</div>
     </div>
-    <div class="col-xs-2 col-lg-4" style="margin: 6px 0px 6px 0px;">
-        <textarea id="comentarioTextoId"class=" form-control" rows="1" style="resize:vertical;" maxlength="250" disabled="disabled"></textarea>
+    <div class="col-xs-12 col-lg-4" style="padding: 6px 0px 6px 15px;">
+        <textarea id="textoComentario'.$arrayResult[$i]['id'].'" class=" form-control" rows="1" style="resize:vertical;" maxlength="250" disabled="disabled">'.$arrayResult[$i]['texto'].'</textarea>
     </div>
-    <div class="col-xs-2 col-lg-2" style="margin: 12px 0px 6px 0px;">
-        <div id="comentarioFechaId">algo</div>
+    <div class="col-xs-12 col-lg-2" style="padding: 12px 0px 6px 0px;">
+        <div id="fechaComentario'.$arrayResult[$i]['id'].'">'.$arrayResult[$i]['fecha'].'</div>
     </div>
-    <div class="col-xs-2 col-lg-2" style="margin: 8px 0px 6px 0px;">
-        <button id="comentarioEditarId" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> Editar </button>
+    <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
+        <button id="editarComentario'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> Editar </button>
     </div>
-    <div class="col-xs-2 col-lg-2" style="margin: 8px 0px 6px 0px;">
-        <button id="comentarioBorrarId" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> Borrar </button>
+    <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
+        <button id="borrarComentario'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> Borrar </button>
     </div>
 </div>
 ';
+}
 ?>
                   </div>
               </div>
