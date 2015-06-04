@@ -244,7 +244,7 @@ echo '
           <div class="row">
               <div class="col-md-12" style="color:black;">
                   <div class="thumbnail" style="height: 350px;overflow: auto;" id="grupoComentarios">
-                      <div class="row text-center" style="margin: 10px 10px 10px 15px;color:rgb(0,122,135);">
+                      <div class="row text-center" style="margin: 10px 10px 10px 40px;color:rgb(0,122,135);">
                             <div class="col-xs-2 col-lg-2"  style="margin: 6px 0px 6px 0px;">
                                 Categoria
                             </div>
@@ -274,7 +274,7 @@ $result->execute();
 $categorias = $result->fetchAll();
                                         
 $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, ";
-$consulta .= "act.idcategoria, cat.nombre AS categoria, u.nombre AS nombreusuario, ";
+$consulta .= "act.idcategoria, cat.nombre AS categoria, u.nick AS nickusuario, act.idmunicipio, ";
 $consulta .= "act.idisla, i.nombre AS nombreisla, m.nombre AS nombremunicipio ";
 $consulta .= "FROM actividades act ";
 $consulta .= "LEFT JOIN auxcategorias cat ON act.idcategoria = cat.id ";
@@ -291,37 +291,60 @@ echo '
 <div class="row text-center" style="margin: 10px 10px 10px 10px; border: 1px solid #ccc; border-radius: 4px;">
     <div class="col-xs-12 col-lg-2"  style="margin: 12px 0px 6px 15px;">
         <select id="categoriaActividad_'.$arrayResult[$i]['id'].'" class="form-control" disabled="disabled">
-          <option value="1">categoria</option>
-          <option value="2">categoria</option>
-          <option value="3">categoria</option>
-          <option value="4">categoria</option>
-          <option value="5">categoria</option>
-        </select>
-    </div>
-    <div class="col-xs-12 col-lg-1" style="padding: 12px 0px 6px 0px;">
-        <select id="islaActividad_'.$arrayResult[$i]['id'].'" class="form-control" disabled="disabled">
-          <option value="1">Fuerteventura</option>
-          <option value="2">Isla</option>
-          <option value="3">Isla</option>
-          <option value="4">Isla</option>
-          <option value="5">Isla</option>
-        </select>
-    </div>
-    <div class="col-xs-12 col-lg-2" style="padding: 12px 0px 6px 15px;">
-        <select id="municipioActividad_'.$arrayResult[$i]['id'].'" class="form-control" disabled="disabled">
-    '; // echo
+        '; // echo
+    
         for($z=0;$z<count($categorias);$z++){
             echo '<option value="'.$categorias[$z]['id'].'"';
             if($arrayResult[$i]['categoria'] == $categorias[$z]['nombre']){
                 echo ' selected="selected" ';
             }
             echo '>'.$categorias[$z]['nombre'].'</option>';
+        }   
+        
+              
+    echo '
+    </select>
+    </div>
+    <div class="col-xs-12 col-lg-1" style="padding: 12px 0px 6px 0px;">
+        <select id="islaActividad_'.$arrayResult[$i]['id'].'" class="form-control" disabled="disabled">
+        '; // echo
+        
+        $otrodb = conectaDb();
+        $consulta = "SELECT * FROM auxislas";
+        $resultado = $otrodb->prepare($consulta);
+        $resultado->execute();
+        $islas = $resultado->fetchAll();
+        for($z=0;$z<count($islas);$z++){
+            echo '<option value="'.$islas[$z]['id'].'"';
+            if($arrayResult[$i]['idisla'] == $islas[$z]['id']){
+                echo ' selected="selected" ';
+            }
+            echo '>'.$islas[$z]['nombre'].'</option>';
+        }
+
+    echo ' </select>
+    </div>
+    <div class="col-xs-12 col-lg-2" style="padding: 12px 0px 6px 15px;">
+        <select id="municipioActividad_'.$arrayResult[$i]['id'].'" class="form-control" disabled="disabled">
+    '; // echo
+    
+        $otrodb = conectaDb();
+        $consulta = "SELECT * FROM auxmunicipios WHERE idisla = :isla ORDER BY nombre";
+        $resultado = $otrodb->prepare($consulta);
+        $resultado->execute(array( ':isla' => $arrayResult[$i]['idisla'] ) );
+        $municipios = $resultado->fetchAll();
+        for($z=0;$z<count($municipios);$z++){
+            echo '<option value="'.$municipios[$z]['id'].'"';
+            if($arrayResult[$i]['idmunicipio'] == $municipios[$z]['id']){
+                echo ' selected="selected" ';
+            }
+            echo '>'.$municipios[$z]['nombre'].'</option>';
         }
     
     echo '</select>
     </div>
     <div class="col-xs-12 col-lg-1" style="padding: 18px 0px 6px 0px;">
-        <div>Usuario</div>
+        <div>'.$arrayResult[$i]['nickusuario'].'</div>
     </div>
     <div class="col-xs-12 col-lg-2" style="padding: 12px 0px 6px 0px;">
         <textarea id="tituloActividad_'.$arrayResult[$i]['id'].'" class=" form-control" rows="1" style="resize:vertical;" maxlength="250" disabled="disabled">'.$arrayResult[$i]['titulo'].'</textarea>
