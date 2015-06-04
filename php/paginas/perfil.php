@@ -55,7 +55,7 @@
         // Una vez que los datos anteriores son correctos continuar la actualizacion
         if($correcto == true){
             // Realizar el update de todos los campos menos del avatar
-            $consulta = 'UPDATE u135108308_h2k.usuarios SET ';
+            $consulta = 'UPDATE usuarios SET ';
             $consulta .= 'email = :email , ';
             $consulta .= 'nick = :nick , ';
             $consulta .= 'nombre = :nombre , ';

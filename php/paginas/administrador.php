@@ -95,7 +95,7 @@
           <h1 class="page-header text-center">Comentarios</h1>
           <div class="row">
               <div class="col-md-12" style="color:black;">
-                  <div class="thumbnail" style="height: 350px;overflow: auto;">
+                  <div class="thumbnail" style="height: 350px;overflow: auto;" id="grupoComentarios">
                       <div class="row text-center" style="margin: 10px 10px 10px 15px;color:rgb(0,122,135);">
                             <div class="col-xs-2 col-lg-1"  style="margin: 6px 0px 6px 0px;">
                                 Actividad
@@ -136,16 +136,19 @@ echo '
         <div>'.$arrayResult[$i]['nick'].'</div>
     </div>
     <div class="col-xs-12 col-lg-4" style="padding: 6px 0px 6px 15px;">
-        <textarea id="textoComentario'.$arrayResult[$i]['id'].'" class=" form-control" rows="1" style="resize:vertical;" maxlength="250" disabled="disabled">'.$arrayResult[$i]['texto'].'</textarea>
+        <textarea id="textoComentario_'.$arrayResult[$i]['id'].'" class=" form-control" rows="1" style="resize:vertical;" maxlength="250" disabled="disabled">'.$arrayResult[$i]['texto'].'</textarea>
     </div>
     <div class="col-xs-12 col-lg-2" style="padding: 12px 0px 6px 0px;">
         <div>'.$arrayResult[$i]['fecha'].'</div>
     </div>
     <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
-        <button id="editarComentario'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> Editar </button>
+        <div id="cajaBotonesEditar_'.$arrayResult[$i]['id'].'">
+        <button id="confirmarEditar_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-edit"></span> Guardar </button>
+        <button id="editarComentario_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> Editar </button>
+        </div>
     </div>
     <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
-        <button id="borrarComentario'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> Borrar </button>
+        <button id="borrarComentario_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> Borrar </button>
     </div>
 </div>
 ';
