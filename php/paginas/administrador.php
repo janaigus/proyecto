@@ -92,9 +92,57 @@
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
     <section id="perfil" class="services bg-primary">
         <div class="container">
-          <h1 class="page-header text-center">Actividades</h1>
+          <h1 class="page-header text-center">Comentarios</h1>
           <div class="row">
-              
+              <div class="col-md-12" style="color:black;height: 350px;overflow: auto;">
+                  <div class="thumbnail" style="">
+                      <div class="row text-center" style="margin: 10px 10px 10px 15px;color:rgb(0,122,135);">
+                            <div class="col-xs-2 col-lg-1"  style="margin: 6px 0px 6px 0px;">
+                                Actividad
+                            </div>
+                            <div class="col-xs-2 col-lg-1" style="margin: 6px 0px 6px 0px;">
+                                Usuario
+                            </div>
+                            <div class="col-xs-2 col-lg-4" style="margin: 6px 0px 6px 0px;">
+                                Texto
+                            </div>
+                            <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
+                                Fecha
+                            </div>
+                            <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
+                                Editar
+                            </div>
+                            <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
+                                Borrar
+                            </div>
+                        </div>
+<?php
+// Crear todas las filas necesarias para los comentarios
+echo '
+<div class="row text-center" style="margin: 10px 10px 10px 10px; border: 1px solid #ccc; border-radius: 4px;">
+    <div class="col-xs-2 col-lg-1"  style="margin: 12px 0px 6px 0px;">
+        <a id="comentarioActividadId"> asd</a>
+    </div>
+    <div class="col-xs-2 col-lg-1" style="margin: 12px 0px 6px 0px;">
+        <a id="comentarioUsuarioId"> asd</a>
+    </div>
+    <div class="col-xs-2 col-lg-4" style="margin: 6px 0px 6px 0px;">
+        <textarea id="comentarioTextoId"class=" form-control" rows="1" style="resize:vertical;" maxlength="250" disabled="disabled"></textarea>
+    </div>
+    <div class="col-xs-2 col-lg-2" style="margin: 12px 0px 6px 0px;">
+        <div id="comentarioFechaId">algo</div>
+    </div>
+    <div class="col-xs-2 col-lg-2" style="margin: 8px 0px 6px 0px;">
+        <button id="comentarioEditarId" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> Editar </button>
+    </div>
+    <div class="col-xs-2 col-lg-2" style="margin: 8px 0px 6px 0px;">
+        <button id="comentarioBorrarId" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> Borrar </button>
+    </div>
+</div>
+';
+?>
+                  </div>
+              </div>
           </div>
         </div>
     </section>
