@@ -1,6 +1,6 @@
 <?php
     session_start();
-    // Obtener la isla sobre la que se va a maquetar la imagen y la pagina actual
+    // Obtener la isla y categoria sobre la que se va a maquetar la imagen y la pagina actua
     $categoria = (isset($_GET['categoria'])) ? $_GET['categoria'] : "1";
     $isla = (isset($_GET['isla'])) ? $_GET['isla'] : "1";
     $pagina = (isset($_GET['pagina'])) ? (int)$_GET['pagina'] : 1;
@@ -32,7 +32,8 @@
     $idIsla = $arrayResult[0]['id'];
     $nombreIsla = $arrayResult[0]['nombre'];
 
-    $consulta = "SELECT COUNT(id) as total FROM actividades WHERE idcategoria = :categoria AND idisla = :isla";
+    // Obtener el total de actividades para dicha isla y categoria
+    $consulta = "SELECT COUNT(id) AS total FROM actividades WHERE idcategoria = :categoria AND idisla = :isla";
     $result = $db->prepare($consulta);
     $result->execute(array(':categoria' => $categoria, ':isla' => $isla));
     $arrayResult = $result->fetchAll();
@@ -124,6 +125,7 @@
         </div>
         <!-- /.container -->
     </section>
+
     <!-- Mejor valoradas -->
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
     <section id="valoradas" class="services bg-primary">
