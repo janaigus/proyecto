@@ -94,8 +94,8 @@
         <div class="container">
           <h1 class="page-header text-center">Comentarios</h1>
           <div class="row">
-              <div class="col-md-12" style="color:black;height: 350px;overflow: auto;">
-                  <div class="thumbnail" style="">
+              <div class="col-md-12" style="color:black;">
+                  <div class="thumbnail" style="height: 350px;overflow: auto;">
                       <div class="row text-center" style="margin: 10px 10px 10px 15px;color:rgb(0,122,135);">
                             <div class="col-xs-2 col-lg-1"  style="margin: 6px 0px 6px 0px;">
                                 Actividad
