@@ -12,7 +12,7 @@ $(document).ready(function () {
             $('#textoComentario_'+id).attr("disabled", false);
             $(this).attr("id", "cancelarEditarComentario_"+id);
             $(this).html("Cancelar");
-            $('#confirmarEditar_'+id).css("display", "inline");
+            $('#confirmarEditarComentario_'+id).css("display", "inline");
         }else{
             if($(this).attr("id").indexOf("cancelarEditar") >= 0){
                 location.reload();
@@ -31,7 +31,7 @@ $(document).ready(function () {
                 );
             });
         }
-        if($(this).attr("id").indexOf("confirmar") >= 0){
+        if($(this).attr("id").indexOf("confirmarEditarComentario") >= 0){
             $.post('../acciones/comentario.php', { idcomentario: id, texto: $('#textoComentario_'+id).val(), comando: "editar"}, 
                 function(respuesta)
                 {
