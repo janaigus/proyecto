@@ -2,10 +2,35 @@ expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 var humanoRegistro = false;
 
 $(document).ready(function () {
-    $('#formularioBusqueda').on('submit', function (){
-        
-        alert("asdfdsa");
+    
+    $('#formularioBusqueda').on('submit', function (ev){
+        var correcto = true;
+        var mensajeBusqueda = "Compruebe los datos de la busqueda: </br>";
+        // Comprobar email
+        // Isla
+        if($('#busquedaIslas').val() == 0){
+            mensajeBusqueda += "Seleccione una isla</br>";
+            correcto = false;
+        }
+        // Municipio
+        if($('#busquedaMunicipios').val() == 0){
+            mensajeBusqueda += "Seleccione un municipio</br>";
+            correcto = false;
+        }
+        //Categoria
+        if($('#busquedaCategorias').val() == 0){
+            mensajeBusqueda += "Seleccione una categoria</br>";
+            correcto = false;
+        }
+                                    
+        // Peticion ajax, mostrar el mensaje si el correo se ha enviado correctamente
+        if(!correcto){
+            ev.preventDefault();
+            $("#mensajeInfo").html(mensajeBusqueda);
+            $("#modalInfo").modal("show"); 
+        }
     });
+    
     // ISLAS Y MUNICIPIOS
     // Cargar las islas en select de islas de la ventana de registro
     $.getJSON('./php/obtenerRecursos/obtenerIslas.php',
@@ -74,39 +99,7 @@ $(document).ready(function () {
         }
     });
     
-    /* Manejar eventos ON click */
-    // Gestión del envio del formulario de contacto
-    $('#enviarFormularioBusqueda').on('click', function (ev) {
-        ev.preventDefault();
-        var correcto = true;
-        var mensajeBusqueda = "Compruebe los datos de la busqueda: </br>";
-        // Comprobar email
-        // Isla
-        if($('#busquedaIslas').val() == 0){
-            mensajeBusqueda += "Seleccione una isla</br>";
-            correcto = false;
-        }
-        // Municipio
-        if($('#busquedaMunicipios').val() == 0){
-            mensajeBusqueda += "Seleccione un municipio</br>";
-            correcto = false;
-        }
-        //Categoria
-        if($('#busquedaCategorias').val() == 0){
-            mensajeBusqueda += "Seleccione una categoria</br>";
-            correcto = false;
-        }
-                                    
-        // Peticion ajax, mostrar el mensaje si el correo se ha enviado correctamente
-        if(correcto){
-            // hacer un submit del formulario
-            $('#formularioBusqueda').submit
-        }else{
-            $("#mensajeInfo").html(mensajeBusqueda);
-            $("#modalInfo").modal("show"); 
-        }
-    });
-    
+    // ON CLICK
     // Gestión del envio del formulario de contacto
     $('#enviarFormularioContacto').on('click', function (ev) {
         ev.preventDefault();
