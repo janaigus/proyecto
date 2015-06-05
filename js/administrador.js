@@ -84,7 +84,7 @@ $(document).ready(function () {
             $(this).attr("id", "cancelarEditarActividad_"+id);
             
             // Cambiar iconos
-            $('#confirmarEditarActividad_'+id).html();
+            $('#confirmarEditarActividad_'+id).html('<span class="glyphicon glyphicon-save"></span>');
             $(this).html('<span class="glyphicon glyphicon-remove"></span>');
             // Mostrar confirmar y ocultar borrar
             $('#confirmarEditarActividad_'+id).css("display", "inline");

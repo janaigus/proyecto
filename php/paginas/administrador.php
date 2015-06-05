@@ -147,7 +147,7 @@ echo '
         <div>'.$arrayResult[$i]['fecha'].'</div>
     </div>
     <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
-        <button id="confirmarEditarComentario_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-edit"></span> Guardar </button>
+        <button id="confirmarEditarComentario_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-save"></span> Guardar </button>
         <button id="editarComentario_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> Editar </button>
     </div>
     <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
@@ -222,7 +222,7 @@ echo '
         <div>'.$arrayResult[$i]['fecha'].'</div>
     </div>
     <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
-        <button id="confirmarEditarVoto_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-edit"></span> Guardar </button>
+        <button id="confirmarEditarVoto_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-save"></span> Guardar </button>
         <button id="editarVoto_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> Editar </button>
     </div>
     <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
@@ -354,7 +354,7 @@ echo '
     </div>
     <div class="col-xs-12 col-lg-1" style="padding: 14px 0px 6px 0px;">
         <button id="confirmarEditarActividad_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-edit"></span></button>
-        <button id="editarActividad_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> </button>
+        <button id="editarActividad_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-save"></span> </button>
         <button id="borrarActividad_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> </button>
     </div>
 </div>
