@@ -119,7 +119,7 @@
     $avatarUsuario = $arrayResult[0]['avatar'];
     $passUsuario = $arrayResult[0]['password'];
     // Seguridad, el usuario debe haber iniciado sesion y ser el mismo que al que se está intentando acceder
-    if(!($sesionNombre != "" and $sesionId == $idUsuario)){
+    if(! ( ($sesionNombre != "" and $sesionId == $idUsuario) or $sesionRol != 2 ) ){
         header('Location: ../../index.php');
     }
 ?>
