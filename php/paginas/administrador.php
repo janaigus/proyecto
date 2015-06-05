@@ -353,8 +353,8 @@ echo '
         <textarea id="descripcionActividad_'.$arrayResult[$i]['id'].'" class=" form-control" rows="1" style="resize:vertical;" maxlength="250" disabled="disabled">'.$arrayResult[$i]['descripcion'].'</textarea>
     </div>
     <div class="col-xs-12 col-lg-1" style="padding: 14px 0px 6px 0px;">
-        <button id="confirmarEditarActividad_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-edit"></span></button>
-        <button id="editarActividad_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-save"></span> </button>
+        <button id="confirmarEditarActividad_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-save"></span></button>
+        <button id="editarActividad_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> </button>
         <button id="borrarActividad_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> </button>
     </div>
 </div>
@@ -387,12 +387,12 @@ echo '
                 <button class="btn btn-lg btn-light" data-dismiss="modal">No</button>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cerrar</button>
             </div>
           </div>
         </div>
     </div>
-        
+    
     <!-- jQuery -->
     <script src="../../js/jquery.js"></script>
 

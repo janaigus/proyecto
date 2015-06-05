@@ -83,8 +83,7 @@ $(document).ready(function () {
             $('#selectVoto_'+id).attr("disabled", false);
             $(this).attr("id", "cancelarEditarActividad_"+id);
             
-            // Cambiar iconos
-            $('#confirmarEditarActividad_'+id).html('<span class="glyphicon glyphicon-save"></span>');
+            // Cambiar icono
             $(this).html('<span class="glyphicon glyphicon-remove"></span>');
             // Mostrar confirmar y ocultar borrar
             $('#confirmarEditarActividad_'+id).css("display", "inline");
@@ -98,6 +97,7 @@ $(document).ready(function () {
         if($(this).attr("id").indexOf("borrar") >= 0){
             $('#modalWarning').modal("show");
             $('#warningConfirmar').on('click', function (ev){
+                
                 $.post('../acciones/actividad.php', { idactividad: id, comando: "borrar" }, 
                     function(respuesta)
                     {
@@ -106,20 +106,21 @@ $(document).ready(function () {
                         }
                     }
                 );
+                
             });
         }
         
         // Comprobar que boton confirmar editar se ha presionado
         if($(this).attr("id").indexOf("confirmarEditarActividad") >= 0){
             
-            $.post('../acciones/actividad.php', { idactividad: id, voto: $('#selectVoto_'+id).val(), comando: "editar"}, 
+            /*$.post('../acciones/actividad.php', { idactividad: id, comando: "editar", voto: $('#selectVoto_'+id).val() }, 
                 function(respuesta)
                 {
                     if(respuesta == "OK"){
                         location.reload();
                     }
                 }
-            );
+            );*/
             
         }
     });

@@ -12,10 +12,30 @@
     }else{
         if($_POST['comando'] == "borrar"){
             // Comenzar borrando los votos
-            $consulta = "DELETE FROM votos WHERE id = :voto";
+            $consulta = "DELETE FROM votos WHERE idactividad = :actividad";
             $result = $db->prepare($consulta);
-            $result->bindParam(":voto", $_POST['idvoto'], PDO::PARAM_STR);
+            $result->bindParam(":actividad", $_POST['idactividad'], PDO::PARAM_STR);
             $result->execute();
+            
+            // Luego borrar los comentarios
+            $consulta = "DELETE FROM comentarios WHERE idactividad = :actividad";
+            $result = $db->prepare($consulta);
+            $result->bindParam(":actividad", $_POST['idactividad'], PDO::PARAM_STR);
+            $result->execute();
+            
+            // Borrar los recursos de esas actividades y luego las propias actividades
+            $consulta = "DELETE FROM recursos WHERE idactividad = :actividad";
+            $result = $db->prepare($consulta);
+            $result->bindParam(":actividad", $_POST['idactividad'], PDO::PARAM_STR);
+            $result->execute();            
+
+
+            // Borrar las actividades 
+            $consulta = "DELETE FROM actividades WHERE id = :actividad";
+            $result = $db->prepare($consulta);
+            $result->bindParam(":actividad", $_POST['idactividad'], PDO::PARAM_STR);
+            $result->execute(); 
+            
             echo "OK";
         }
     }
