@@ -165,7 +165,7 @@ $(document).ready(function () {
         }
         if($(this).attr("id").indexOf("confirmarEditarCategoria") >= 0){
             
-            $.post('../acciones/categoria.php', { idcategoria: id, texto: $('#textoComentario_'+id).val(), comando: "editar"}, 
+            $.post('../acciones/categoria.php', { idcategoria: id, nombre: $('#nombreCategoria_'+id).val(), comando: "editar"}, 
                 function(respuesta)
                 {
                     if(respuesta == "OK"){
