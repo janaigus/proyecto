@@ -71,6 +71,9 @@
             <li>
                 <a href="#usuarios" onclick = $("#menu-close").click(); >Usuarios</a>
             </li>
+            <li>
+                <a href="#categorias" onclick = $("#menu-close").click(); >Categorias</a>
+            </li>
             <hr>
             <?php
             echo'
@@ -430,6 +433,66 @@ echo '
           </div>
         </div>
     </section>
+    
+    <section id="categorias" class="services bg-primary">
+        <div class="container">
+          <h1 class="page-header text-center">Categorias</h1>
+          <div class="row">
+              <div class="col-md-8" style="color:black;">
+                  <div class="thumbnail" style="height: 350px;overflow: auto;" id="grupoCategorias">
+                      <div class="row text-center" style="margin: 10px 10px 10px 15px;color:rgb(0,122,135);">
+                            <div class="col-xs-2 col-lg-4"  style="margin: 6px 0px 6px 0px;">
+                                Nombre
+                            </div>
+                            <div class="col-xs-2 col-lg-3" style="margin: 6px 0px 6px 0px;">
+                                Fecha
+                            </div>
+                            <div class="col-xs-2 col-lg-3" style="margin: 6px 0px 6px 0px;">
+                                Editar
+                            </div>
+                            <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
+                                Borrar
+                            </div>
+                        </div>
+<?php
+// Crear todas las filas necesarias para los comentarios
+$consulta =  "SELECT * , DATE_FORMAT( created,  '%d-%m-%Y a las %k:%i' ) AS creado ";
+$consulta .= "FROM auxcategorias ";
+$consulta .= "ORDER BY created DESC ";
+$result = $db->prepare($consulta);
+$result->execute();
+$arrayResult = $result->fetchAll();
+for($i = 0;$i < count($arrayResult);$i++){
+echo '
+<div class="row text-center" style="margin: 10px 10px 10px 10px; border: 1px solid #ccc; border-radius: 4px;">
+    <div class="col-xs-12 col-lg-4"  style="margin: 6px 0px 6px 0px;">
+        <input type="text" class="form-control" id="nombreCategoria_'.$arrayResult[$i]['id'].'" value="'.$arrayResult[$i]['nombre'].'" disabled="disabled"/>
+    </div>
+    <div class="col-xs-12 col-lg-3" style="padding: 12px 0px 6px 0px;">
+        <div>'.$arrayResult[$i]['creado'].'</div>
+    </div>
+    <div class="col-xs-12 col-lg-3" style="padding: 8px 0px 6px 0px;">
+        <button id="confirmarEditarCategoria_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-save"></span> Guardar </button>
+        <button id="editarCategoria_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> Editar </button>
+    </div>
+    <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
+        <button id="borrarCategoria_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> Borrar </button>
+    </div>
+</div>
+';
+}
+?>
+                  </div>
+              </div>
+              <div class="col-md-3 col-md-offset-1" style="color:black;">
+                  <div class="thumbnail" style="height: 350px;overflow: auto;" id="grupoCategorias">
+                      Crear nueva
+                  </div>
+              </div>
+          </div>
+        </div>
+    </section>
+    
     <!-- Modal Información-->
     <div class="modal fade" id="modalWarning" role="dialog">
         <div class="modal-dialog">
@@ -444,7 +507,7 @@ echo '
               </div>
             </div>
             <div class="modal-body text-center">
-                <h2>¿Realmente desea hacer esto?</h2>
+                <h2>¿Realmente desea BORRAR?</h2>
                 <p class="lead">Una vez confirmada la accion no podrá volver atras.</p>
                 <hr class="small">
                 <button class="btn btn-lg btn-danger" id="warningConfirmar"> Si</button>

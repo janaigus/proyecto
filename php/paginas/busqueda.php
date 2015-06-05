@@ -122,8 +122,21 @@
         </ul>
     </nav>
 
-    <!-- Mejor valoradas -->
-    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+        
+    <!-- About -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Ayudando a personas para aprender. <h1><b>Help to Know!</b></h1></h2>
+                    <p class="lead">Aqui podrás encontrar desde una clase de costura, </br>hasta un curso profesional de desarrollo web </br>con certificación internacional</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
     <section id="valoradas" class="services bg-primary">
         <div class="container">
             <div class="row text-center">
@@ -256,20 +269,7 @@
         </div>
         <!-- /.container -->
     </section>    
-    
-    <!-- About -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Ayudando a personas para aprender. <h1><b>Help to Know!</b></h1></h2>
-                    <p class="lead">Aqui podrás encontrar desde una clase de costura, </br>hasta un curso profesional de desarrollo web </br>con certificación internacional</p>
-                </div>
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container -->
-    </section>
+
 
     <!-- Footer -->
     <footer>
