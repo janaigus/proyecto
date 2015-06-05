@@ -485,8 +485,10 @@ echo '
                   </div>
               </div>
               <div class="col-md-3 col-md-offset-1" style="color:black;">
-                  <div class="thumbnail" style="height: 350px;overflow: auto;" id="grupoCategorias">
-                      Crear nueva
+                  <div class="thumbnail" style="height: 350px;" id="grupoCategorias">
+                      <div class="row text-center">
+                            Crear categoria
+                      </div>
                   </div>
               </div>
           </div>

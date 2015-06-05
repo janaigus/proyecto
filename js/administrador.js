@@ -177,6 +177,17 @@ $(document).ready(function () {
         }
     });
     
+    /*
+    $.post('../acciones/categoria.php', { idcategoria: id, nombre: $('#nombreCategoria_'+id).val(), comando: "editar"}, 
+        function(respuesta)
+        {
+            if(respuesta == "OK"){
+                location.reload();
+            }
+        }
+    );*/
+    
+    
     // Cambio en el select de isla 
     $("#grupoActividades select[id*='islaActividad_']").on('change', function (ev) {
         var id = $(this).attr("id").split("_")[1];
