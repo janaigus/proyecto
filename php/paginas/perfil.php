@@ -59,16 +59,18 @@
             $consulta .= 'email = :email , ';
             $consulta .= 'nick = :nick , ';
             $consulta .= 'nombre = :nombre , ';
-            $consulta .= 'apellidos = :apell , ';
-            $consulta .= 'password = :pass ';
+            if(isset($_POST['password']) and $_POST['password'] != ""){
+                $consulta .= 'apellidos = :apell , ';
+                $consulta .= 'password = '.md5(md5(md5($_POST['password'] ) ) ) ;
+            }else{
+                $consulta .= 'apellidos = :apell ';
+            }
             $consulta .= 'WHERE usuarios.id = '.$usuario;
-
             $result = $db->prepare($consulta);
             $resultado = $result->execute(array(':email' => $_POST['email'],
                                                 ':nick' => $_POST['nick'],
                                                 ':nombre' => $_POST['nombre'],
-                                                ':apell' => $_POST['apellidos'],
-                                                ':pass' => md5(md5(md5($_POST['password'])))
+                                                ':apell' => $_POST['apellidos']
                                                ));
             if($resultado == true){
                 $mensaje = 'Información actualizada correctamente<br/>';

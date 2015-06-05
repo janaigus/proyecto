@@ -28,10 +28,7 @@ $(document).ready(function () {
             correcto = false;
         }
         // Comprobar contraseña introducida y que la segunda coincide
-        if($('#password').val() == ""){
-            mensajesError += iconoError + "Introduzca la nueva contraseña, puede introducir la contraseña actual </br>";
-            correcto = false;
-        }else{
+        if($('#password').val() != ""){
             // Comprobar si el segundo campo está vacio
             if($('#confirmPass').val() == ""){
                 mensajesError += iconoError + "Debe repetir la contraseña</br>";
