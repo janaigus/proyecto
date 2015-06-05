@@ -253,7 +253,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-md-3 control-label" for="password">Contraseña:</label>
+                  <label class="col-md-3 control-label" for="password">Nueva Contraseña:</label>
                   <div class="col-md-8">
                     <input class="form-control" name="password" id="password" type="password" disabled="disabled">
                   </div>
