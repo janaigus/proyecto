@@ -61,17 +61,22 @@
             $consulta .= 'nombre = :nombre , ';
             if(isset($_POST['password']) and $_POST['password'] != ""){
                 $consulta .= 'apellidos = :apell , ';
-                $consulta .= 'password = '.md5(md5(md5($_POST['password'] ) ) ) ;
+                $consulta .= 'password = :pass ';
             }else{
                 $consulta .= 'apellidos = :apell ';
             }
             $consulta .= 'WHERE usuarios.id = '.$usuario;
             $result = $db->prepare($consulta);
-            $resultado = $result->execute(array(':email' => $_POST['email'],
+            $valores = array(':email' => $_POST['email'],
                                                 ':nick' => $_POST['nick'],
                                                 ':nombre' => $_POST['nombre'],
                                                 ':apell' => $_POST['apellidos']
-                                               ));
+                                               );
+            if(isset($_POST['password']) and $_POST['password'] != ""){
+                $valores['pass'] = md5(md5(md5($_POST['password'])));
+            }
+            $resultado = $result->execute($valores);
+            
             if($resultado == true){
                 $mensaje = 'Información actualizada correctamente<br/>';
                 $_SESSION['nickh2k'] = $_POST['nick'];
@@ -121,7 +126,7 @@
     $avatarUsuario = $arrayResult[0]['avatar'];
     $passUsuario = $arrayResult[0]['password'];
     // Seguridad, el usuario debe haber iniciado sesion y ser el mismo que al que se está intentando acceder
-    if(! ( ($sesionNombre != "" and $sesionId == $idUsuario) or $sesionRol != 2 ) ){
+    if(! ( ($sesionNombre != "" and $sesionId == $idUsuario) or $sesionRol == 1 ) ){
         header('Location: ../../index.php');
     }
 ?>
