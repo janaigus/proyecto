@@ -79,10 +79,14 @@ $(document).ready(function () {
         var id = $(this).attr("id").split("_")[1];
         // Comprobar que boton editar se ha presionado
         if($(this).attr("id").indexOf("editar") >= 0){
+            // Desbloquear los campos para poder editarlos
+            $('#categoriaActividad_'+id).attr("disabled", false);
+            $('#islaActividad_'+id).attr("disabled", false);
+            $('#municipioActividad_'+id).attr("disabled", false);
+            $('#tituloActividad_'+id).attr("disabled", false);
+            $('#descripcionActividad_'+id).attr("disabled", false);
             
-            $('#selectVoto_'+id).attr("disabled", false);
             $(this).attr("id", "cancelarEditarActividad_"+id);
-            
             // Cambiar icono
             $(this).html('<span class="glyphicon glyphicon-remove"></span>');
             // Mostrar confirmar y ocultar borrar
@@ -112,18 +116,40 @@ $(document).ready(function () {
         
         // Comprobar que boton confirmar editar se ha presionado
         if($(this).attr("id").indexOf("confirmarEditarActividad") >= 0){
-            
-            /*$.post('../acciones/actividad.php', { idactividad: id, comando: "editar", voto: $('#selectVoto_'+id).val() }, 
-                function(respuesta)
-                {
-                    if(respuesta == "OK"){
-                        location.reload();
-                    }
-                }
-            );*/
+            $.post('../acciones/actividad.php', 
+                   { idactividad: id, 
+                     comando: "editar", 
+                     categoria: $('#categoriaActividad_'+id).val(),
+                     isla: $('#islaActividad_'+id).val(),
+                     municipio: $('#municipioActividad_'+id).val(),
+                     titulo: $('#tituloActividad_'+id).val(),
+                     descripcion: $('#descripcionActividad_'+id).val()
+                   }, 
+                   function(respuesta)
+                   {
+                       if(respuesta == "OK"){
+                           location.reload();
+                       }
+                   }
+            );
             
         }
     });
     
+    // IMPORTANTE QUE TODOS LOS SELECT DE ISLA HAGAN QUE EL MUNICIPIO CAMBIE
+    $("#grupoActividades select[id*='islaActividad_']").on('change', function (ev) {
+        var id = $(this).attr("id").split("_")[1];
+        $.post('../obtenerRecursos/obtenerMunicipios.php', { islaSeleccionada: $('#islaActividad_'+id).val() },
+            function(respuesta)
+            {
+                cadena = '';
+                $.each(respuesta, function(i, tupla){
+                    cadena += '<option value="'+tupla.id+'">'+tupla.nombre+'</option>';
+                });
+                $("#municipioActividad_"+id).html(cadena );
+            }
+            , "json"
+        );
+        
+    });
 });
-

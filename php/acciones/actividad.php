@@ -3,12 +3,25 @@
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
     if($_POST['comando'] == "editar"){
-        $consulta = 'UPDATE votos SET ';
-        $consulta .= 'valoracion = :voto ';
-        $consulta .= 'WHERE votos.id = '.$_POST['idvoto'];
+        $consulta .= 'UPDATE actividades SET ';
+        $consulta .= 'idcategoria = :categoria, ';
+        $consulta .= 'titulo = :titulo, ';
+        $consulta .= 'descripcion = :descripcion, ';
+        $consulta .= 'idmunicipio = :municipio, ';
+        $consulta .= 'idisla = :isla ';
+        $consulta .= 'WHERE actividades.id = '.$_POST['idactividad'];
         $result = $db->prepare($consulta);
-        $resultado = $result->execute(array(':voto' => $_POST['voto']));
-        echo "OK";
+        $resultado = $result->execute(array(':categoria' => $_POST['categoria'],
+                                            ':titulo' => $_POST['titulo'],
+                                            ':descripcion' => $_POST['descripcion'],
+                                            ':municipio' => $_POST['municipio'],
+                                            ':isla' => $_POST['isla']
+                                           ));
+        if($resultado == 1){
+            echo "OK";
+        }else{
+            echo "BAD";
+        }
     }else{
         if($_POST['comando'] == "borrar"){
             // Comenzar borrando los votos
@@ -27,16 +40,18 @@
             $consulta = "DELETE FROM recursos WHERE idactividad = :actividad";
             $result = $db->prepare($consulta);
             $result->bindParam(":actividad", $_POST['idactividad'], PDO::PARAM_STR);
-            $result->execute();            
-
+            $result->execute();
 
             // Borrar las actividades 
             $consulta = "DELETE FROM actividades WHERE id = :actividad";
             $result = $db->prepare($consulta);
             $result->bindParam(":actividad", $_POST['idactividad'], PDO::PARAM_STR);
-            $result->execute(); 
-            
-            echo "OK";
+            $resultado = $result->execute(); 
+            if($resultado == 1){
+                echo "OK";
+            }else{
+                echo "BAD";
+            }
         }
     }
 ?>
