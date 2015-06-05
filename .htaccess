@@ -1,0 +1,7 @@
+# Activar RewriteEngine
+RewriteEngine on
+# Reescribir la URL solicitada por el usuario
+#   Entrada:  actividad/NOMBRE/
+#   Salida: actividad.php?id=NOMBRE
+RewriteRule ^actividad/([^/\.]+)/?$ php/paginas/actividad.php?id=$1
+RewriteRule ^clientes/([^/\.]+)/edad/([^/\.]+)/sexo/([^/\.]+)/?$ php/paginas/clientes.php?id=$1&edad=$2&sexo=$3
