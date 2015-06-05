@@ -243,8 +243,8 @@ echo '
           <h1 class="page-header text-center">Actividades</h1>
           <div class="row">
               <div class="col-md-12" style="color:black;">
-                  <div class="thumbnail" style="height: 350px;overflow: auto;" id="grupoComentarios">
-                      <div class="row text-center" style="margin: 10px 10px 10px 40px;color:rgb(0,122,135);">
+                  <div class="thumbnail" style="height: 350px;overflow: auto;" id="grupoActividades">
+                       <div class="row text-center" style="margin: 10px 10px 10px 40px;color:rgb(0,122,135);">
                             <div class="col-xs-2 col-lg-2"  style="margin: 6px 0px 6px 0px;">
                                 Categoria
                             </div>
@@ -277,11 +277,11 @@ $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created
 $consulta .= "act.idcategoria, cat.nombre AS categoria, u.nick AS nickusuario, act.idmunicipio, ";
 $consulta .= "act.idisla, i.nombre AS nombreisla, m.nombre AS nombremunicipio ";
 $consulta .= "FROM actividades act ";
-$consulta .= "LEFT JOIN auxcategorias cat ON act.idcategoria = cat.id ";
+$consulta .= "INNER JOIN auxcategorias cat ON act.idcategoria = cat.id ";
 $consulta .= "INNER JOIN auxislas i ON act.idisla = i.id ";
 $consulta .= "INNER JOIN auxmunicipios m ON act.idmunicipio = m.id ";
 $consulta .= "INNER JOIN usuarios u ON act.idusuario = u.id ";
-$consulta .= "ORDER BY act.created DESC";
+$consulta .= "ORDER BY act.idisla";
 $result = $db->prepare($consulta);
 $result->execute();
 $arrayResult = $result->fetchAll();
@@ -299,9 +299,9 @@ echo '
                 echo ' selected="selected" ';
             }
             echo '>'.$categorias[$z]['nombre'].'</option>';
-        }   
-        
-              
+        }
+    
+    
     echo '
     </select>
     </div>
@@ -353,7 +353,7 @@ echo '
         <textarea id="descripcionActividad_'.$arrayResult[$i]['id'].'" class=" form-control" rows="1" style="resize:vertical;" maxlength="250" disabled="disabled">'.$arrayResult[$i]['descripcion'].'</textarea>
     </div>
     <div class="col-xs-12 col-lg-1" style="padding: 14px 0px 6px 0px;">
-        <button id="confirmarEditarComentario_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-edit"></span></button>
+        <button id="confirmarEditarActividad_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-edit"></span></button>
         <button id="editarActividad_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> </button>
         <button id="borrarActividad_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> </button>
     </div>
