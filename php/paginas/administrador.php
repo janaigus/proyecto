@@ -88,6 +88,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h1><b>Help to Know!</b></h1>
+                    <h2>Administración</h2>
                 </div>
             </div>
             <!-- /.row -->
@@ -366,6 +367,7 @@ echo '
           </div>
         </div>
     </section>
+    
     <!-- Modal Información-->
     <div class="modal fade" id="modalWarning" role="dialog">
         <div class="modal-dialog">
