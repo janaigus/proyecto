@@ -594,6 +594,52 @@ echo '
                   </div>
               </div>
           </div>
+          <div class="row">
+            <div class="col-md-4 col-md-offset-4" style="color:black;">
+                  <div class="thumbnail" id="grupoCategorias">
+                      <div class="row text-center" style="margin: 15px 10px 10px 10px;">
+                            <div class="alert alert-info alert-dismissable" id="panelAlertasCategorias" style="display:none;">
+                                <a class="panel-close close" data-dismiss="alert">×</a> 
+                                <div id="mensajeAlertasCategorias"></div>
+                            </div>
+                            <form class="form" action="../acciones/centroseducativos.php" method="POST" id="formularioNuevaCategoria">
+                            <h4 style="color:rgb(0,122,135);">Añadir centro educativo</h4>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="nombre" id="nombreNuevoCentro" placeholder="Nombre"/>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="informacion" class=" form-control" rows="4" style="resize:vertical;" maxlength="250" placeholder="Información" id="informacionNuevoCentro"></textarea>
+                            </div>
+                            <div class="form-group">    
+                            <select id="isla" class="form-control">
+                            <option value="0">Seleccione una isla</option>
+                            <?php
+                            for($z=0;$z<count($islas);$z++){
+                                echo '<option value="'.$islas[$z]['id'].'"';
+                                if($centrosEducativos[$i]['idisla'] == $islas[$z]['id']){
+                                    echo ' selected="selected" ';
+                                }
+                                echo '>'.$islas[$z]['nombre'].'</option>';
+                            }
+                            ?>
+                            </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="longitud" id="longitudNuevoCentro" placeholder="Longitud"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="latitud" id="latitudNuevoCentro" placeholder="Latitud" />
+                            </div>
+                                 
+                            <button type="submit" name="comando" value="agregar" id="botonNuevaCentro" class="btn btn-light">
+                                <span class="glyphicon glyphicon-plus"></span> 
+                                Añadir centro educativo
+                            </button>
+                            </form>
+                      </div>
+                  </div>
+              </div>  
+          </div>
         </div>
     </section>
     

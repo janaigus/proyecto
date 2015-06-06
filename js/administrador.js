@@ -232,12 +232,19 @@ $(document).ready(function () {
                 correcto = false;
             }
             if(correcto){
-                $.post('../acciones/centroseducativos.php', { idcentro: id, nombre: $('#nombreCentro_'+id).val(), comando: "editar"}, 
+                $.post('../acciones/centroseducativos.php', { idcentro: id, 
+                                                             nombre: $('#nombreCentro_'+id).val(), 
+                                                             longitud: $('#longitudCentro_'+id).val(),
+                                                             latitud: $('#latitudCentro_'+id).val(),
+                                                             info: $('#informacionCentro_'+id).val(),
+                                                             isla: $('#islaCentro_'+id).val(),
+                                                             comando: "editar" }, 
                     function(respuesta)
                     {
                         if(respuesta == "OK"){
                             location.reload();
                         }
+                        alert(respuesta);
                     }
                 );
             }else{

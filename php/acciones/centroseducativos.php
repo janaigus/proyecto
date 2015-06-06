@@ -4,7 +4,7 @@
     $db = conectaDb();
     $idcentro = (isset($_POST['idcentro'])) ? $_POST['idcentro'] : "";
     if($_POST['comando'] == "editar"){
-        $consulta = 'UPDATE  centroseducativos SET ';
+        $consulta = 'UPDATE centroseducativos SET ';
         $consulta .= 'nombre = :nombre, ';
         $consulta .= 'longitud = :longitud, ';
         $consulta .= 'latitud = :latitud, ';
