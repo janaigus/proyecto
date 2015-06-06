@@ -102,6 +102,13 @@
                     </li>
                     ';
             }
+            if($sesionRol == "1"){
+                echo'
+                <hr>
+                <li>
+                    <a href="./php/paginas/administrador.php">Admnistrar Sitio</a>
+                </li>';
+            }
             ?>
         </ul>
     </nav>

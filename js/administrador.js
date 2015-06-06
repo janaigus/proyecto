@@ -177,16 +177,13 @@ $(document).ready(function () {
         }
     });
     
-    /*
-    $.post('../acciones/categoria.php', { idcategoria: id, nombre: $('#nombreCategoria_'+id).val(), comando: "editar"}, 
-        function(respuesta)
-        {
-            if(respuesta == "OK"){
-                location.reload();
-            }
+    $('#formularioNuevaCategoria').on('submit', function(ev){
+        if($('#nombreNuevaCategoria').val() == ""){
+            $('#panelAlertasCategorias').css("display", "inline-block");
+            $('#mensajeAlertasCategorias').html("Por favor introduzca un titulo para la categoria");
+            ev.preventDefault();
         }
-    );*/
-    
+    });
     
     // Cambio en el select de isla 
     $("#grupoActividades select[id*='islaActividad_']").on('change', function (ev) {

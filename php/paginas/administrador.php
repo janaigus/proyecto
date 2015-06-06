@@ -485,9 +485,21 @@ echo '
                   </div>
               </div>
               <div class="col-md-3 col-md-offset-1" style="color:black;">
-                  <div class="thumbnail" style="height: 350px;" id="grupoCategorias">
-                      <div class="row text-center">
-                            Crear categoria
+                  <div class="thumbnail" id="grupoCategorias">
+                      <div class="row text-center" style="margin: 15px 10px 10px 10px;">
+                            <div class="alert alert-info alert-dismissable" id="panelAlertasCategorias" style="display:none;">
+                                <a class="panel-close close" data-dismiss="alert">×</a> 
+                                <div id="mensajeAlertasCategorias"></div>
+                            </div>
+                            <form class="form" action="../acciones/categoria.php" method="POST" id="formularioNuevaCategoria">
+                            <h4 style="color:rgb(0,122,135);">Crear categoria</h4>
+                            <input type="text" class="form-control" name="nombre" id="nombreNuevaCategoria" />
+                            <br/>
+                            <button type="submit" name="comando" value="agregar" id="botonNuevaCategoria" class="btn btn-light">
+                                <span class="glyphicon glyphicon-plus"></span> 
+                                Añadir categoria
+                            </button>
+                            </form>
                       </div>
                   </div>
               </div>

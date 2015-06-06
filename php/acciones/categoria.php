@@ -61,21 +61,23 @@
             $consulta = "DELETE FROM auxcategorias WHERE id = :categoria";
             $result = $db->prepare($consulta);
             $result->bindParam(":categoria", $idcategoria, PDO::PARAM_STR);
-            $result->execute();
+            $resultado = $result->execute();
+            if($resultado == 1){
+                echo "OK";
+            }else{
+                echo "BAD";
+            }
         }else{
             if($_POST['comando'] == "agregar"){
                 // Comenzar borrando los votos
-                $consulta = "INSERT INTO categorias (nombre) ";
-                $consulta = "VALUES (:nombre)";
+                $consulta = "INSERT INTO auxcategorias (nombre) ";
+                $consulta .= "VALUES (:nombre)";
                 $result = $db->prepare($consulta);
                 $result->bindParam(":nombre", $_POST['nombre'], PDO::PARAM_STR);
-                $result->execute();
+                $resultado = $result->execute();
                 if($resultado == 1){
-                    echo "OK";
-                }else{
-                    echo "BAD";
+                    header ('Location: ../paginas/administrador.php#categorias');
                 }
-                
             }
         }
     }
