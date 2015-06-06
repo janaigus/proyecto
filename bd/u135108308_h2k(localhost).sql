@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 06-06-2015 a las 12:00:05
+-- Tiempo de generación: 06-06-2015 a las 15:00:54
 -- Versión del servidor: 5.5.43-MariaDB-1ubuntu0.14.04.2
 -- Versión de PHP: 5.5.9-1ubuntu4.9
 
@@ -102,6 +102,9 @@ CREATE TABLE IF NOT EXISTS `auxislas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(140) COLLATE utf8_spanish_ci NOT NULL,
   `avatar` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
+  `longitud` double NOT NULL,
+  `latitud` double NOT NULL,
+  `zoom` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
 
@@ -109,14 +112,14 @@ CREATE TABLE IF NOT EXISTS `auxislas` (
 -- Volcado de datos para la tabla `auxislas`
 --
 
-INSERT INTO `auxislas` (`id`, `nombre`, `avatar`) VALUES
-(1, 'Fuerteventura', 'img/img_pagina/islas/fuerteventura.png'),
-(2, 'Gran Canaria', 'img/img_pagina/islas/gran-canaria.png'),
-(3, 'Lanzarote', 'img/img_pagina/islas/lanzarote.png'),
-(4, 'La Gomera', 'img/img_pagina/islas/la-gomera.png'),
-(5, 'El Hierro', 'img/img_pagina/islas/el-hierro.png'),
-(6, 'La Palma', 'img/img_pagina/islas/la-palma.png'),
-(7, 'Tenerife', 'img/img_pagina/islas/tenerife.png');
+INSERT INTO `auxislas` (`id`, `nombre`, `avatar`, `longitud`, `latitud`, `zoom`) VALUES
+(1, 'Fuerteventura', 'img/img_pagina/islas/fuerteventura.png', -14.012113, 28.417463, 9),
+(2, 'Gran Canaria', 'img/img_pagina/islas/gran-canaria.png', -15.600339, 27.96234, 10),
+(3, 'Lanzarote', 'img/img_pagina/islas/lanzarote.png', -13.634458, 29.033449, 9),
+(4, 'La Gomera', 'img/img_pagina/islas/la-gomera.png', -17.235721, 28.118658, 10),
+(5, 'El Hierro', 'img/img_pagina/islas/el-hierro.png', -17.995843, 27.746808, 10),
+(6, 'La Palma', 'img/img_pagina/islas/la-palma.png', -17.850734, 28.663933, 10),
+(7, 'Tenerife', 'img/img_pagina/islas/tenerife.png', -16.574138, 28.288092, 9);
 
 -- --------------------------------------------------------
 

@@ -22,6 +22,9 @@
     $arrayResult = $result->fetchAll();
     $idIsla = $arrayResult[0]['id'];
     $nombreIsla = $arrayResult[0]['nombre'];
+    $latitudIsla = $arrayResult[0]['latitud'];
+    $longitudIsla = $arrayResult[0]['longitud'];
+    $zoomIsla = $arrayResult[0]['zoom'];
 
     $consulta = "SELECT COUNT(id) as total FROM actividades where idisla = :isla";
     $result = $db->prepare($consulta);
@@ -61,37 +64,26 @@
     <!-- Api de google para recaptcha -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
     
-    <!-- Centros educativos con google maps 
-    <script src="https://maps.googleapis.com/maps/api/js"></script>-->
-    <style>
-      #map-canvas {
-        width: 500px;
-        height: 400px;
-      }
-    </style>
     <?php 
         // Obtener todos los centros educativos de una isla
         $otrodb = conectaDb();
         // Saber el nombre de los campos de las islas 
-        $consulta = "SELECT * FROM auxislas where id = :isla ORDER BY nombre";
+        $consulta = "SELECT * FROM centroseducativos where idisla = :isla ORDER BY nombre";
         $result = $otrodb->prepare($consulta);
         $result->execute(array(':isla' => $isla));
-        $arrayResult = $result->fetchAll();
-        $idIsla = $arrayResult[0]['id'];
-        $nombreIsla = $arrayResult[0]['nombre'];
-    
+        $arrayCentros = $result->fetchAll();
     ?>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script>
         function initialize() {
-          var myLatlng = new google.maps.LatLng(28.3243649,-16.5370592);
+          var myLatlng = new google.maps.LatLng(<?php echo $latitudIsla.','.$longitudIsla;?>);
           var mapOptions = {
-            zoom: 10,
+            zoom: <?php echo $zoomIsla; ?>,
             center: myLatlng
           };
 
           var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
+/*
           var contentString = '<div id="content">'+
               '<h3 id="firstHeading" class="firstHeading">Nombre del instituto</h3>'+
               '<div id="bodyContent">'+
@@ -134,6 +126,7 @@
           google.maps.event.addListener(marker2, 'click', function() {
             infowindow2.open(map,marker2);
           });
+            */
         }
           google.maps.event.addDomListener(window, 'load', initialize);
     </script>
