@@ -75,7 +75,7 @@
                 <a href="#categorias" onclick = $("#menu-close").click(); >Categorias</a>
             </li>
             <li>
-                <a href="#centroseducativos" onclick = $("#menu-close").click(); >centros Educativos</a>
+                <a href="#centroseducativos" onclick = $("#menu-close").click(); >Centros Educativos</a>
             </li>
             <hr>
             <?php
@@ -515,8 +515,9 @@ echo '
         <div class="container">
           <h1 class="page-header text-center">Centros educativos</h1>
           <div class="row">
-              <div class="alert alert-info alert-dismissable" id="panelAlertas" style="display: none;" >
+              <div class="alert alert-info alert-dismissable" id="panelAlertasEditarCentro" style="display: none;" >
               <a class="panel-close close" data-dismiss="alert">×</a>
+                  <div id="mensajeEditarCentro"></div>
               </div>
               <div class="col-md-12" style="color:black;">
                   <div class="thumbnail" style="height: 350px;overflow: auto;" id="grupoCentros">
@@ -598,20 +599,20 @@ echo '
             <div class="col-md-4 col-md-offset-4" style="color:black;">
                   <div class="thumbnail" id="grupoCategorias">
                       <div class="row text-center" style="margin: 15px 10px 10px 10px;">
-                            <div class="alert alert-info alert-dismissable" id="panelAlertasCategorias" style="display:none;">
+                            <div class="alert alert-info alert-dismissable text-left" id="panelAlertasAgregarCentro" style="display:none;">
                                 <a class="panel-close close" data-dismiss="alert">×</a> 
-                                <div id="mensajeAlertasCategorias"></div>
+                                <div id="mensajeAgregarCentro"></div>
                             </div>
-                            <form class="form" action="../acciones/centroseducativos.php" method="POST" id="formularioNuevaCategoria">
+                            <form class="form" action="../acciones/centroseducativos.php" method="POST" id="formularioNuevoCentro">
                             <h4 style="color:rgb(0,122,135);">Añadir centro educativo</h4>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="nombre" id="nombreNuevoCentro" placeholder="Nombre"/>
                             </div>
                             <div class="form-group">
-                                <textarea id="informacion" class=" form-control" rows="4" style="resize:vertical;" maxlength="250" placeholder="Información" id="informacionNuevoCentro"></textarea>
+                                <textarea name="informacion" class=" form-control" rows="4" style="resize:vertical;" maxlength="250" placeholder="Información" id="informacionNuevoCentro"></textarea>
                             </div>
                             <div class="form-group">    
-                            <select id="isla" class="form-control">
+                            <select name="isla" class="form-control" id="islaNuevoCentro">
                             <option value="0">Seleccione una isla</option>
                             <?php
                             for($z=0;$z<count($islas);$z++){

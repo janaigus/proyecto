@@ -38,7 +38,7 @@
         }else{
             if($_POST['comando'] == "agregar"){
                 // Comenzar borrando los votos
-                $consulta = "INSERT INTO auxcategorias (nombre, longitud, latitud, informacion, idisla) ";
+                $consulta = "INSERT INTO centroseducativos (nombre, longitud, latitud, informacion, idisla) ";
                 $consulta .= "VALUES (:nombre, :longitud, :latitud, :informacion, :isla)";
                 $result = $db->prepare($consulta);
                 $result->bindParam(":nombre", $_POST['nombre'], PDO::PARAM_STR);

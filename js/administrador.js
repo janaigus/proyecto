@@ -244,13 +244,45 @@ $(document).ready(function () {
                         if(respuesta == "OK"){
                             location.reload();
                         }
-                        alert(respuesta);
                     }
                 );
             }else{
-                $('#panelAlertas').html(mensaje);
-                $('#panelAlertas').css("display", "block");
+                $('#mensajeEditarCentro').html(mensaje);
+                $('#panelAlertasEditarCentro').css("display", "block");
             }
+        }
+    });
+    
+    $('#formularioNuevoCentro').on('submit', function(ev){
+        var expresionDoble = /^-?[0-9]+([,\.][0-9]*)?$/;
+        var mensaje = "";
+        var correcto = true;
+        if($('#nombreNuevoCentro').val() == ""){
+            mensaje += "El nombre del centro no puede estar vacio <br/>";
+            correcto = false;
+        }
+        if($('#informacionNuevoCentro').val() == ""){
+            mensaje += "El infromacion del centro no puede estar vacio <br/>";
+            correcto = false;
+        }
+        if($('#islaNuevoCentro').val() == 0){
+            mensaje += "El seleccione una isla para el nuevo centro <br/>";
+            correcto = false;
+        }
+        comprobarLongitud = $('#longitudNuevoCentro').val().match(expresionDoble);
+        if(comprobarLongitud == null){
+            mensaje += "La longitud no es un número correcto <br/>";
+            correcto = false;
+        }
+        comprobarLatitud = $('#latitudNuevoCentro').val().match(expresionDoble);
+        if(comprobarLatitud == null){
+            mensaje += "La latitud no es un número correcto <br/>";
+            correcto = false;
+        }
+        if(!correcto){
+            ev.preventDefault();
+            $('#mensajeAgregarCentro').html(mensaje);
+            $('#panelAlertasAgregarCentro').css("display", "block");
         }
     });
     
