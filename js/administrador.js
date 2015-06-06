@@ -197,9 +197,9 @@ $(document).ready(function () {
         }
         if($(this).attr("id").indexOf("borrar") >= 0){
             $('#modalWarning').modal("show"); 
-            /*
+            
             $('#warningConfirmar').on('click', function (ev){
-                $.post('../acciones/categoria.php', { idcategoria: id, comando: "borrar" }, 
+                $.post('../acciones/centroseducativos.php', { idcentro: id, comando: "borrar" }, 
                     function(respuesta)
                     {
                         if(respuesta == "OK"){
@@ -207,7 +207,7 @@ $(document).ready(function () {
                         }
                     }
                 );
-            });*/
+            });
         }
         if($(this).attr("id").indexOf("confirmarEditarCentro") >= 0){
             var expresionDoble = /^-?[0-9]+([,\.][0-9]*)?$/;
@@ -232,14 +232,14 @@ $(document).ready(function () {
                 correcto = false;
             }
             if(correcto){
-                /*$.post('../acciones/categoria.php', { idcategoria: id, nombre: $('#nombreCentro_'+id).val(), comando: "editar"}, 
+                $.post('../acciones/centroseducativos.php', { idcentro: id, nombre: $('#nombreCentro_'+id).val(), comando: "editar"}, 
                     function(respuesta)
                     {
                         if(respuesta == "OK"){
                             location.reload();
                         }
                     }
-                );*/
+                );
             }else{
                 $('#panelAlertas').html(mensaje);
                 $('#panelAlertas').css("display", "block");

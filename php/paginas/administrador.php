@@ -74,6 +74,9 @@
             <li>
                 <a href="#categorias" onclick = $("#menu-close").click(); >Categorias</a>
             </li>
+            <li>
+                <a href="#centroseducativos" onclick = $("#menu-close").click(); >centros Educativos</a>
+            </li>
             <hr>
             <?php
             echo'
@@ -508,7 +511,7 @@ echo '
     </section>
 
   
-    <section id="votos" class="portfolio">
+    <section id="centroseducativos" class="portfolio">
         <div class="container">
           <h1 class="page-header text-center">Centros educativos</h1>
           <div class="row">
