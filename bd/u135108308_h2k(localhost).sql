@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 06-06-2015 a las 11:03:19
+-- Tiempo de generación: 06-06-2015 a las 11:19:56
 -- Versión del servidor: 5.5.43-MariaDB-1ubuntu0.14.04.2
 -- Versión de PHP: 5.5.9-1ubuntu4.9
 
@@ -262,7 +262,16 @@ CREATE TABLE IF NOT EXISTS `centroseducativos` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idisla` (`idisla`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
+
+--
+-- Volcado de datos para la tabla `centroseducativos`
+--
+
+INSERT INTO `centroseducativos` (`id`, `nombre`, `longitud`, `latitud`, `direccion`, `idisla`, `created`) VALUES
+(1, 'IES Puerto de la Cruz (Telesforo Bravo)', -16.5503413, 28.412001, 'Calle las Cabezas, 7\r\n38400 Puerto de la Cruz\r\nSanta Cruz de Tenerife\r\nEspaña', 7, '2015-06-06 09:14:17'),
+(2, 'IES Mencey Bencomo', -16.583146, 28.383485, 'Calle San Isidro, 40B\r\n38419 Los Realejos\r\nSanta Cruz de Tenerife, España', 7, '2015-06-06 09:16:07'),
+(3, 'IES Mesa y López', -15.4422778, 28.1205402, 'Av. José Mesa y López, 69\r\n35010 Las Palmas de Gran Canaria\r\nLas Palmas\r\nEspaña', 2, '2015-06-06 09:18:04');
 
 -- --------------------------------------------------------
 
@@ -433,6 +442,12 @@ ALTER TABLE `actividades`
 --
 ALTER TABLE `auxmunicipios`
   ADD CONSTRAINT `auxmunicipios_ibfk_1` FOREIGN KEY (`idisla`) REFERENCES `auxislas` (`id`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `centroseducativos`
+--
+ALTER TABLE `centroseducativos`
+  ADD CONSTRAINT `centroseducativos_ibfk_1` FOREIGN KEY (`idisla`) REFERENCES `auxislas` (`id`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `comentarios`
