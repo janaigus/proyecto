@@ -68,7 +68,7 @@
         // Obtener todos los centros educativos de una isla
         $otrodb = conectaDb();
         // Saber el nombre de los campos de las islas 
-        $consulta = "SELECT * FROM centroseducativos where idisla = :isla ORDER BY nombre";
+        $consulta = "SELECT * FROM centroseducativos WHERE idisla = :isla ORDER BY nombre";
         $result = $otrodb->prepare($consulta);
         $result->execute(array(':isla' => $isla));
         $arrayCentros = $result->fetchAll();
@@ -76,13 +76,16 @@
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script>
         function initialize() {
-          var myLatlng = new google.maps.LatLng(<?php echo $latitudIsla.','.$longitudIsla;?>);
-          var mapOptions = {
-            zoom: <?php echo $zoomIsla; ?>,
-            center: myLatlng
-          };
+            var myLatlng = new google.maps.LatLng(<?php echo $latitudIsla.','.$longitudIsla;?>);
+            var mapOptions = {
+                zoom: <?php echo $zoomIsla; ?>,
+                center: myLatlng
+            };
 
-          var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            <?php
+
+            ?>
 /*
           var contentString = '<div id="content">'+
               '<h3 id="firstHeading" class="firstHeading">Nombre del instituto</h3>'+
@@ -128,7 +131,7 @@
           });
             */
         }
-          google.maps.event.addDomListener(window, 'load', initialize);
+        google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 </head>
 
