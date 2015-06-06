@@ -84,52 +84,41 @@
 
             var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
             <?php
-
-            ?>
-/*
-          var contentString = '<div id="content">'+
-              '<h3 id="firstHeading" class="firstHeading">Nombre del instituto</h3>'+
-              '<div id="bodyContent">'+
-              '<p>El Cuerpo</p>'+
-              '</div>'+
-              '</div>';
-
-          var infowindow = new google.maps.InfoWindow({
-              content: contentString
-          });
-
-          var marker = new google.maps.Marker({
-              position: myLatlng,
-              map: map,
-              title: 'Uluru (Ayers Rock)'
-          });
-            
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow.open(map,marker);
-          });
-            
-          // Anterior / nuevo
-          var contentString2 = '<div id="content">'+
-              '<h3 id="firstHeading" class="firstHeading">Nombre del instituto2</h3>'+
-              '<div id="bodyContent">'+
-              '<p>El Cuerpo2</p>'+
-              '</div>'+
-              '</div>';
-
-          var infowindow2 = new google.maps.InfoWindow({
-              content: contentString2
-          });
-
-          var marker2 = new google.maps.Marker({
-              position: new google.maps.LatLng(27.2566463,-16.684688),
-              map: map,
-              title: 'Otro royo'
-          });
-            
-          google.maps.event.addListener(marker2, 'click', function() {
-            infowindow2.open(map,marker2);
-          });
-            */
+            $order   = array("\r\n", "\n", "\r");
+            $replace = '<br />';
+            for($i=0;$i<count($arrayCentros);$i++){
+                $informacion = str_replace($order, $replace, $arrayCentros[$i]['informacion']);
+                // Cadena que se adjuntara como cuerpo
+                echo "
+                var contentString".$i." = '<div id=\"content\">'+
+                      '<h4 id=\"firstHeading\" class=\"firstHeading\" >".$arrayCentros[$i]['nombre']."</h4>'+
+                      '<div id=\"bodyContent\">'+
+                      '<p>".$informacion."</p>'+
+                      '</div>'+
+                      '</div>';
+                      ";
+                // Variable que contendrá el infowindow que monstrará dicho mensaje
+                echo "
+                var infowindow".$i." = new google.maps.InfoWindow({
+                      content: contentString".$i."
+                  }); 
+                  ";
+                // Crear el marcador con las posicion del lugar
+                echo "
+                var marker".$i." = new google.maps.Marker({
+                      position: new google.maps.LatLng(".$arrayCentros[$i]['latitud'].",".$arrayCentros[$i]['longitud']."),
+                      map: map,
+                      title: '".$arrayCentros[$i]['nombre']."'
+                  });
+                ";
+                // Añadir el infowindow al marcador que ira sobre el mapa
+                echo "
+                google.maps.event.addListener(marker".$i.", 'click', function() {
+                        infowindow".$i.".open(map,marker".$i.");
+                      });
+                      ";
+            }
+            ?> 
         }
         google.maps.event.addDomListener(window, 'load', initialize);
     </script>
