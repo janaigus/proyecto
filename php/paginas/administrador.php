@@ -9,9 +9,9 @@
     $sesionIsla = (isset($_SESSION['islah2k'])) ? (int)$_SESSION['islah2k'] : "";
     $sesionTiempo = (isset($_SESSION['tiempoh2k'])) ? $_SESSION['tiempoh2k'] : "";
     // SEGURIDAD
-    /*if($sesionRol != "1"){
+    if($sesionRol != "1"){
         header("Location: ../../index.php");
-    }*/
+    }
     // Traer elementos de la base de datos
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
