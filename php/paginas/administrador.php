@@ -512,20 +512,26 @@ echo '
         <div class="container">
           <h1 class="page-header text-center">Centros educativos</h1>
           <div class="row">
+              <div class="alert alert-info alert-dismissable" id="panelAlertas" style="display: none;" >
+              <a class="panel-close close" data-dismiss="alert">×</a>
+              </div>
               <div class="col-md-12" style="color:black;">
-                  <div class="thumbnail" style="height: 350px;overflow: auto;" id="grupoVotos">
+                  <div class="thumbnail" style="height: 350px;overflow: auto;" id="grupoCentros">
                       <div class="row text-center" style="margin: 10px 10px 10px 15px;color:rgb(0,122,135);">
-                            <div class="col-xs-2 col-lg-1"  style="margin: 6px 0px 6px 0px;">
-                                Actividad
-                            </div>
-                            <div class="col-xs-2 col-lg-1" style="margin: 6px 0px 6px 0px;">
-                                Usuario
-                            </div>
-                            <div class="col-xs-2 col-lg-4" style="margin: 6px 0px 6px 0px;">
-                                Votos
+                            <div class="col-xs-2 col-lg-2"  style="margin: 6px 0px 6px 0px;">
+                                Nombre
                             </div>
                             <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
-                                Fecha
+                                Información
+                            </div>
+                            <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
+                                Isla
+                            </div>
+                            <div class="col-xs-2 col-lg-1" style="margin: 6px 0px 6px 0px;">
+                                Longitud
+                            </div>
+                            <div class="col-xs-2 col-lg-1" style="margin: 6px 0px 6px 0px;">
+                                Latitud
                             </div>
                             <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
                                 Editar
@@ -536,42 +542,47 @@ echo '
                         </div>
 <?php
 // Crear todas las filas necesarias para los comentarios
-$consulta =  "SELECT vot.id, vot.valoracion, DATE_FORMAT( vot.created,  '%d-%m-%Y a las %k:%i' ) ";
-$consulta .= " AS fecha, vot.idusuario, vot.idactividad, usr.nick AS nick ";
-$consulta .= "FROM votos vot ";
-$consulta .= "INNER JOIN usuarios usr ON vot.idusuario = usr.id ";
-$consulta .= "ORDER BY vot.created DESC ";
+$consulta =  "SELECT * ";
+$consulta .= "FROM  centroseducativos ";
+$consulta .= "ORDER BY idisla ";
 $result = $db->prepare($consulta);
 $result->execute();
-$arrayResult = $result->fetchAll();
+$centrosEducativos = $result->fetchAll();
 
-for($i = 0;$i < count($arrayResult);$i++){
+for($i = 0;$i < count($centrosEducativos);$i++){
 echo '
 <div class="row text-center" style="margin: 10px 10px 10px 10px; border: 1px solid #ccc; border-radius: 4px;">
-    <div class="col-xs-12 col-lg-1"  style="margin: 12px 0px 6px 0px;">
-        <a href="./actividad.php?actividad='.$arrayResult[$i]['idactividad'].'">'.$arrayResult[$i]['idactividad'].'</a>
+    <div class="col-xs-12 col-lg-2"  style="margin: 8px 0px 6px 0px;">
+        <input type="text" class="form-control" id="nombreCentro_'.$centrosEducativos[$i]['id'].'" value="'.$centrosEducativos[$i]['nombre'].'" disabled="disabled"/>
     </div>
-    <div class="col-xs-12 col-lg-1" style="padding: 12px 0px 6px 0px;">
-        <div>'.$arrayResult[$i]['nick'].'</div>
+    <div class="col-xs-12 col-lg-2" style="padding: 8px 10px 6px 0px;">
+        <textarea id="informacionCentro_'.$centrosEducativos[$i]['id'].'" class=" form-control" rows="1" style="resize:vertical;" maxlength="250" disabled="disabled">'.$centrosEducativos[$i]['informacion'].'</textarea>
     </div>
-    <div class="col-xs-12 col-lg-4" style="padding: 6px 0px 6px 15px;">
-        <select id="selectVoto_'.$arrayResult[$i]['id'].'" class="form-control" disabled="disabled">
-          <option value="1" '.(($arrayResult[$i]['valoracion'] == 1) ? "selected='selected'" : "").'>1</option>
-          <option value="2" '.(($arrayResult[$i]['valoracion'] == 2) ? "selected='selected'" : "").'>2</option>
-          <option value="3" '.(($arrayResult[$i]['valoracion'] == 3) ? "selected='selected'" : "").'>3</option>
-          <option value="4" '.(($arrayResult[$i]['valoracion'] == 4) ? "selected='selected'" : "").'>4</option>
-          <option value="5" '.(($arrayResult[$i]['valoracion'] == 5) ? "selected='selected'" : "").'>5</option>
-        </select>
+    <div class="col-xs-12 col-lg-2" style="padding: 8px 10px 6px 0px;">
+        <select id="islaCentro_'.$centrosEducativos[$i]['id'].'" class="form-control" disabled="disabled">
+        '; // echo
+        for($z=0;$z<count($islas);$z++){
+            echo '<option value="'.$islas[$z]['id'].'"';
+            if($centrosEducativos[$i]['idisla'] == $islas[$z]['id']){
+                echo ' selected="selected" ';
+            }
+            echo '>'.$islas[$z]['nombre'].'</option>';
+        }
+
+    echo ' </select>
     </div>
-    <div class="col-xs-12 col-lg-2" style="padding: 12px 0px 6px 0px;">
-        <div>'.$arrayResult[$i]['fecha'].'</div>
+    <div class="col-xs-12 col-lg-1" style="padding: 8px 10px 6px 0px;">
+        <input type="text" class="form-control" id="longitudCentro_'.$centrosEducativos[$i]['id'].'" value="'.$centrosEducativos[$i]['longitud'].'" disabled="disabled"/>
     </div>
-    <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
-        <button id="confirmarEditarVoto_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-save"></span> Guardar </button>
-        <button id="editarVoto_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> Editar </button>
+    <div class="col-xs-12 col-lg-1" style="padding: 8px 10px 6px 0px;">
+        <input type="text" class="form-control" id="latitudCentro_'.$centrosEducativos[$i]['id'].'" value="'.$centrosEducativos[$i]['latitud'].'" disabled="disabled"/>
     </div>
-    <div class="col-xs-12 col-lg-2" style="padding: 8px 0px 6px 0px;">
-        <button id="borrarVoto_'.$arrayResult[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> Borrar </button>
+    <div class="col-xs-12 col-lg-2" style="padding: 10px 0px 6px 0px;">
+        <button id="confirmarEditarCentro_'.$centrosEducativos[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-save"></span> Guardar </button>
+        <button id="editarCentro_'.$centrosEducativos[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> Editar </button>
+    </div>
+    <div class="col-xs-12 col-lg-2" style="padding: 10px 0px 6px 0px;">
+        <button id="borrarCentro_'.$centrosEducativos[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> Borrar </button>
     </div>
 </div>
 ';

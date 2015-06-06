@@ -177,6 +177,76 @@ $(document).ready(function () {
         }
     });
     
+    $('#grupoCentros button').on('click', function(ev){
+        var id = $(this).attr("id").split("_")[1];
+        // Comprobar que boton se ha presionado
+        if($(this).attr("id").indexOf("editar") >= 0){
+            $('#nombreCentro_'+id).attr("disabled", false);
+            $('#informacionCentro_'+id).attr("disabled", false);
+            $('#islaCentro_'+id).attr("disabled", false);
+            $('#longitudCentro_'+id).attr("disabled", false);
+            $('#latitudCentro_'+id).attr("disabled", false);
+            
+            $(this).attr("id", "cancelarEditarCentro_"+id);
+            $(this).html('<span class="glyphicon glyphicon-remove"></span> Cancelar');
+            $('#confirmarEditarCentro_'+id).css("display", "inline");
+        }else{
+            if($(this).attr("id").indexOf("cancelarEditarCentro") >= 0){
+                location.reload();
+            }
+        }
+        if($(this).attr("id").indexOf("borrar") >= 0){
+            $('#modalWarning').modal("show"); 
+            /*
+            $('#warningConfirmar').on('click', function (ev){
+                $.post('../acciones/categoria.php', { idcategoria: id, comando: "borrar" }, 
+                    function(respuesta)
+                    {
+                        if(respuesta == "OK"){
+                            location.reload();
+                        }
+                    }
+                );
+            });*/
+        }
+        if($(this).attr("id").indexOf("confirmarEditarCentro") >= 0){
+            var expresionDoble = /^-?[0-9]+([,\.][0-9]*)?$/;
+            var mensaje = "";
+            var correcto = true;
+            if($('#nombreCentro_'+id).val() == ""){
+                mensaje += "El nombre del centro no puede estar vacio <br/>";
+                correcto = false;
+            }
+            if($('#informacionCentro_'+id).val() == ""){
+                mensaje += "El infromacion del centro no puede estar vacioa <br/>";
+                correcto = false;
+            }
+            comprobarLongitud = $('#longitudCentro_'+id).val().match(expresionDoble);
+            if(comprobarLongitud == null){
+                mensaje += "La longitud no es un número correcto <br/>";
+                correcto = false;
+            }
+            comprobarLatitud = $('#latitudCentro_'+id).val().match(expresionDoble);
+            if(comprobarLatitud == null){
+                mensaje += "La latitud no es un número correcto <br/>";
+                correcto = false;
+            }
+            if(correcto){
+                /*$.post('../acciones/categoria.php', { idcategoria: id, nombre: $('#nombreCentro_'+id).val(), comando: "editar"}, 
+                    function(respuesta)
+                    {
+                        if(respuesta == "OK"){
+                            location.reload();
+                        }
+                    }
+                );*/
+            }else{
+                $('#panelAlertas').html(mensaje);
+                $('#panelAlertas').css("display", "block");
+            }
+        }
+    });
+    
     $('#formularioNuevaCategoria').on('submit', function(ev){
         if($('#nombreNuevaCategoria').val() == ""){
             $('#panelAlertasCategorias').css("display", "inline-block");
