@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 06-06-2015 a las 11:19:56
+-- Tiempo de generación: 06-06-2015 a las 12:00:05
 -- Versión del servidor: 5.5.43-MariaDB-1ubuntu0.14.04.2
 -- Versión de PHP: 5.5.9-1ubuntu4.9
 
@@ -257,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `centroseducativos` (
   `nombre` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
   `longitud` double NOT NULL,
   `latitud` double NOT NULL,
-  `direccion` varchar(400) COLLATE utf8_spanish_ci NOT NULL,
+  `informacion` varchar(400) COLLATE utf8_spanish_ci NOT NULL,
   `idisla` int(11) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -268,8 +268,8 @@ CREATE TABLE IF NOT EXISTS `centroseducativos` (
 -- Volcado de datos para la tabla `centroseducativos`
 --
 
-INSERT INTO `centroseducativos` (`id`, `nombre`, `longitud`, `latitud`, `direccion`, `idisla`, `created`) VALUES
-(1, 'IES Puerto de la Cruz (Telesforo Bravo)', -16.5503413, 28.412001, 'Calle las Cabezas, 7\r\n38400 Puerto de la Cruz\r\nSanta Cruz de Tenerife\r\nEspaña', 7, '2015-06-06 09:14:17'),
+INSERT INTO `centroseducativos` (`id`, `nombre`, `longitud`, `latitud`, `informacion`, `idisla`, `created`) VALUES
+(1, 'IES Puerto de la Cruz (Telesforo Bravo)', -16.5503413, 28.412001, 'Tel: 922 38 01 12\r\nTelegram: 610 285 167 \r\n\r\nCalle las Cabezas, 7\r\n38400 Puerto de la Cruz\r\nSanta Cruz de Tenerife\r\nEspaña', 7, '2015-06-06 09:14:17'),
 (2, 'IES Mencey Bencomo', -16.583146, 28.383485, 'Calle San Isidro, 40B\r\n38419 Los Realejos\r\nSanta Cruz de Tenerife, España', 7, '2015-06-06 09:16:07'),
 (3, 'IES Mesa y López', -15.4422778, 28.1205402, 'Av. José Mesa y López, 69\r\n35010 Las Palmas de Gran Canaria\r\nLas Palmas\r\nEspaña', 2, '2015-06-06 09:18:04');
 
