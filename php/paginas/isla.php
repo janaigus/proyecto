@@ -71,6 +71,8 @@
     </style>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script>
+        var mierda = <?php echo "\"miercoles\"";?>;
+        alert(mierda);
       function initialize() {
         var mapCanvas = document.getElementById('map-canvas');
         var mapOptions = {
