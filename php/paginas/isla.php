@@ -69,20 +69,73 @@
         height: 400px;
       }
     </style>
+    <?php 
+        // Obtener todos los centros educativos de una isla
+        $otrodb = conectaDb();
+        // Saber el nombre de los campos de las islas 
+        $consulta = "SELECT * FROM auxislas where id = :isla ORDER BY nombre";
+        $result = $otrodb->prepare($consulta);
+        $result->execute(array(':isla' => $isla));
+        $arrayResult = $result->fetchAll();
+        $idIsla = $arrayResult[0]['id'];
+        $nombreIsla = $arrayResult[0]['nombre'];
+    
+    ?>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script>
-        var mierda = <?php echo "\"miercoles\"";?>;
-        alert(mierda);
-      function initialize() {
-        var mapCanvas = document.getElementById('map-canvas');
-        var mapOptions = {
-          center: new google.maps.LatLng(44.5403, -78.5463),
-          zoom: 8,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+        function initialize() {
+          var myLatlng = new google.maps.LatLng(28.3243649,-16.5370592);
+          var mapOptions = {
+            zoom: 10,
+            center: myLatlng
+          };
+
+          var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+          var contentString = '<div id="content">'+
+              '<h3 id="firstHeading" class="firstHeading">Nombre del instituto</h3>'+
+              '<div id="bodyContent">'+
+              '<p>El Cuerpo</p>'+
+              '</div>'+
+              '</div>';
+
+          var infowindow = new google.maps.InfoWindow({
+              content: contentString
+          });
+
+          var marker = new google.maps.Marker({
+              position: myLatlng,
+              map: map,
+              title: 'Uluru (Ayers Rock)'
+          });
+            
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map,marker);
+          });
+            
+          // Anterior / nuevo
+          var contentString2 = '<div id="content">'+
+              '<h3 id="firstHeading" class="firstHeading">Nombre del instituto2</h3>'+
+              '<div id="bodyContent">'+
+              '<p>El Cuerpo2</p>'+
+              '</div>'+
+              '</div>';
+
+          var infowindow2 = new google.maps.InfoWindow({
+              content: contentString2
+          });
+
+          var marker2 = new google.maps.Marker({
+              position: new google.maps.LatLng(27.2566463,-16.684688),
+              map: map,
+              title: 'Otro royo'
+          });
+            
+          google.maps.event.addListener(marker2, 'click', function() {
+            infowindow2.open(map,marker2);
+          });
         }
-        var map = new google.maps.Map(mapCanvas, mapOptions)
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
+          google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 </head>
 
@@ -432,9 +485,9 @@
                     <h2>Centros educativos en <?php echo $nombreIsla?></h2>
                     <hr class="small">
                 </div>
-                <div class="col-lg-10 col-lg-offset-1 text-center">
+                <div class="col-lg-10 col-lg-offset-2 text-center">
                     <div class="contenedor-mapa">
-                        <div id="map-canvas" style="width: 1000px;height: 400px;"></div>
+                        <div id="map-canvas" style="width: 800px;height: 400px;"></div>
                     </div>
                 </div>
             </div>
