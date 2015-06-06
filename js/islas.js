@@ -131,8 +131,6 @@ $(document).ready(function () {
         $("#cajaEmailContacto").popover('destroy');
         $("#cajaMensajeContacto").popover('destroy');
     });
-    
-    
 });
 
 function cambiarEstadoCaja(nombreCaja, mal, mensaje){
