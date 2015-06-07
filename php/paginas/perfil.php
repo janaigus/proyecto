@@ -292,7 +292,7 @@
                 </div>
               </form>
               <form class="form-horizontal" role="form" action="../sesion/borrarperfil.php" method="POST" id="borrarPerfil">
-                <input type="hidden" name="id" value="<?echo $usuario;?>" />  
+                <input type="hidden" name="id" value="<?php echo $usuario;?>" />  
               </form>
             </div>
           </div>

@@ -3,7 +3,7 @@
     // Obtener variables con los parametros de la sesión del usuario
 
     $usuarioId = (isset($_POST['id'])) ? $_POST['id'] : "";
-
+    
     $sesionId = (isset($_SESSION['idh2k'])) ? $_SESSION['idh2k'] : "";
     $sesionNick = (isset($_SESSION['nickh2k'])) ? $_SESSION['nickh2k'] : "";
     $sesionNombre = (isset($_SESSION['nombreh2k'])) ? $_SESSION['nombreh2k'] : "";
@@ -62,7 +62,7 @@
             session_destroy();
             header('Location: ../../index.php');
         }else{
-            header('Location: ../administrador.php#usuarios');
+            header('Location: ../paginas/administrador.php#usuarios');
         }
     }
 ?>
@@ -126,6 +126,7 @@
                     <form class="form" action="./borrarperfil.php" method="POST">
                         <input type="submit" class="btn btn-lg btn-danger" value="Si" name="si"/>
                         <a href="../../index.php" class="btn btn-lg btn-light">No</a>
+                        <input type="hidden" name="id" value="<?php echo $usuarioId;?>" />
                     </form>
             </div>
             <!-- /.row -->
