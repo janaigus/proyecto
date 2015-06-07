@@ -645,7 +645,6 @@
     <script type="text/javascript" src="../../js/islas.js"></script>
     
     
-    
     <!-- Custom Theme JavaScript -->
     <script>
     // Closes the sidebar menu
