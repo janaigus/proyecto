@@ -128,7 +128,11 @@ $(document).ready(function () {
         $("#cajaMensajeContacto").popover('destroy');
     });
     
-    
+    // Cuando se presione el boton procesar baja enviar el formulario que tramitará la baja
+    $('#procesarBaja').on('click', function (ev) {
+        ev.preventDefault();
+        $('#borrarPerfil').submit();
+    });
 });
 
 function cambiarEstadoCaja(nombreCaja, mal, mensaje){

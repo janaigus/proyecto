@@ -83,7 +83,7 @@
                 <a href="../../index.php"  onclick = $("#menu-close").click(); >Help to Know</a>
             </li>
             <li>
-                <a href="#top" onclick = $("#menu-close").click(); >Home</a>
+                <a href="#actividades" onclick = $("#menu-close").click(); >Actividades</a>
             </li>
             <li>
                 <a href="#contacto" onclick = $("#menu-close").click(); >Contacto</a>
@@ -108,6 +108,13 @@
                     </li>
                     ';
             }
+            if($sesionRol == "1"){
+                echo'
+                <hr>
+                <li>
+                    <a href="./administrador.php">Admnistrar Sitio</a>
+                </li>';
+            }
             ?>
         </ul>
     </nav>
@@ -126,9 +133,9 @@
         <!-- /.container -->
     </section>
 
-    <!-- Mejor valoradas -->
+    
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-    <section id="valoradas" class="services bg-primary">
+    <section id="actividades" class="services bg-primary">
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">
@@ -146,7 +153,7 @@
                         <?php
                         $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
                         $consulta .= "cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media, ";
-                        $consulta .= "act.idisla, i.nombre, m.nombre as nombremunicipio ";
+                        $consulta .= "act.idisla, i.nombre AS nombreisla, m.nombre AS nombremunicipio ";
                         $consulta .= "FROM actividades act ";
                         $consulta .= "LEFT JOIN votos v ON act.id = v.idactividad ";
                         $consulta .= "LEFT JOIN recursos r ON act.id = r.idactividad ";
@@ -174,8 +181,10 @@
                                 echo '            <a href="./actividad.php?actividad='.$arrayResult[$z]['id'].'"> <img src="../../'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
                                 echo '       </div>';
                                 echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
-                                echo '            <h3>'.$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
+                                echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'</h3>';
                                 echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
+                                echo '            <h5>Creada el '.$arrayResult[$z]['creada'];
+                                echo '            en '.$arrayResult[$z]['nombremunicipio'].', '.$arrayResult[$z]['nombreisla'].'</h5>';
                                 echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
                                 echo '            <div class="ratings">';
                                 echo '                <p class="pull-right" style="color:#fff">'.$arrayResult[$z]['veces'].' veces valorado</p>';
@@ -205,6 +214,7 @@
                             <div class="col-lg-12">
                                 <ul class="pagination">
                                     <?php
+                                        if($totalActividades != 0){
                                         if($pagina != 1){
                                             echo '<li>
                                           <a href="foro.php?categoria='.$categoria.'&isla='.$isla.'&pagina='.($pagina-1).'" aria-label="Previous">
@@ -243,6 +253,7 @@
                                               </a>
                                             </li>
                                             ';
+                                        }
                                         }
                                     ?>
                                 </ul>

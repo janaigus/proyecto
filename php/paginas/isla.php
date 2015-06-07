@@ -134,9 +134,6 @@
                 <a href="../../index.php"  onclick = $("#menu-close").click(); >Help to Know</a>
             </li>
             <li>
-                <a href="#top" onclick = $("#menu-close").click(); >Home</a>
-            </li>
-            <li>
                 <a href="#valoradas" onclick = $("#menu-close").click(); >Mejor Valoradas</a>
             </li>
             <li>
@@ -170,6 +167,13 @@
                         <a href="../sesion/cerrarsesion.php">Cerrar Sesión</a>
                     </li>
                     ';
+            }
+            if($sesionRol == "1"){
+                echo'
+                <hr>
+                <li>
+                    <a href="./administrador.php">Admnistrar Sitio</a>
+                </li>';
             }
             ?>
         </ul>
@@ -251,11 +255,13 @@
                         echo '            <a href=""> <img src="../../'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
                         echo '       </div>';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
-                        echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
-                        echo '            <a href="foro.php?categoria='.$arrayResult[$z]['idcategoria'].'&isla='.$arrayResult[$z]['idisla'];
+                        echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'</h3>';
+                        echo '            <a href="./foro.php?categoria='.$arrayResult[$z]['idcategoria'].'&isla='.$arrayResult[$z]['idisla'];
                         echo ' " style="color:white;">';
-                        echo '            <h4>'.$arrayResult[0]['categoria'].' en '.$arrayResult[0]['nombreisla'].'</h4>';
+                        echo '            <h4>'.$arrayResult[$z]['categoria'].' en '.$arrayResult[$z]['nombreisla'].'</h4>';
                         echo '            </a>';
+                        echo '            <h5>Creada el '.$arrayResult[$z]['creada'];
+                        echo '            en '.$arrayResult[$z]['nombremunicipio'].', '.$arrayResult[$z]['nombreisla'].'</h5>';
                         echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
                         echo '            <div class="ratings">';
                         echo '                <p class="pull-right" style="color:#fff">'.$arrayResult[$z]['veces'].' veces valorado</p>';
@@ -312,10 +318,10 @@
                     <div class="row">
                        <!-- Principio del carrousel -->
                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <form class="form" action="php/paginas/busqueda.php" method="POST" id="formularioBusqueda">
+                            <form class="form" action="./busqueda.php" method="GET" id="formularioBusqueda">
                                 <div class="col-lg-4 col-lg-offset-2">
                                     <div class="form-group">
-                                        <select id="busquedaMunicipios" name="busquedaMunicipios" class="form-control">
+                                        <select id="busquedaMunicipios" name="municipio" class="form-control">
                                             <option value="0">Seleccione municipio</option>
                                             <?php
                                             $consulta = "SELECT * FROM auxmunicipios where idisla = :isla ORDER BY nombre";
@@ -331,7 +337,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <select id="busquedaCategorias" name="busquedaCategorias" class="form-control">
+                                        <select id="busquedaCategorias" name="categoria" class="form-control">
                                             <option value="0">Seleccione categoria</option>
                                             <?php
                                             $consulta = "SELECT * FROM auxcategorias ORDER BY nombre";
@@ -346,7 +352,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <button id="enviarFormularioBusqueda" type="button" class="btn btn-lg btn-dark"
+                            <input type="hidden" name="isla" value="<?php echo $isla; ?>">
+                            <button id="enviarFormularioBusqueda" type="submit" class="btn btn-lg btn-dark"
                                 <?php echo ($totalActividades == 0) ? 'disabled>No hay actividades' : ">Buscar actividades";?></button>
                             </form>
                             
@@ -414,11 +421,13 @@
                         echo '            <a href=""> <img src="../../'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
                         echo '       </div>';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
-                        echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
-                        echo '            <a href="foro.php?categoria='.$arrayResult[$z]['idcategoria'].'&isla='.$arrayResult[$z]['idisla'];
+                        echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'</h3>';
+                        echo '            <a href="./foro.php?categoria='.$arrayResult[$z]['idcategoria'].'&isla='.$arrayResult[$z]['idisla'];
                         echo ' " style="color:white;">';
-                        echo '            <h4>'.$arrayResult[0]['categoria'].' en '.$arrayResult[0]['nombreisla'].'</h4>';
+                        echo '            <h4>'.$arrayResult[$z]['categoria'].' en '.$arrayResult[$z]['nombreisla'].'</h4>';
                         echo '            </a>';
+                        echo '            <h5>Creada el '.$arrayResult[$z]['creada'];
+                        echo '            en '.$arrayResult[$z]['nombremunicipio'].', '.$arrayResult[$z]['nombreisla'].'</h5>';
                         echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
                         echo '            <div class="ratings">';
                         echo '                <p class="pull-right" style="color:#fff">'.$arrayResult[$z]['veces'].' veces valorado</p>';
@@ -463,7 +472,7 @@
         <!-- /.container -->
     </section>
         
-    <section id="busqueda" class="map">
+    <section id="centroseducativos" class="map">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">

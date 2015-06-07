@@ -189,6 +189,13 @@
                     <a href="../sesion/cerrarsesion.php">Cerrar Sesión</a>
                 </li>
                 ';
+                if($sesionRol == "1"){
+                    echo'
+                    <hr>
+                    <li>
+                        <a href="./administrador.php">Admnistrar Sitio</a>
+                    </li>';
+                }
             ?>
         </ul>
     </nav>
@@ -276,13 +283,16 @@
                           Opciones
                       </button>
                       <ul class="dropdown-menu" role="menu" aria-labelledby="options">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="../sesion/borrarperfil.php">Darme de baja</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="" id="procesarBaja">Darme de baja</a></li>
                         <li role="presentation" class="divider"></li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="cambiarInfo">Cambiar información</a></li>
                       </ul>
                     </div>
                   </div>
                 </div>
+              </form>
+              <form class="form-horizontal" role="form" action="../sesion/borrarperfil.php" method="POST" id="borrarPerfil">
+                <input type="hidden" name="id" value="<?echo $usuario;?>" />  
               </form>
             </div>
           </div>

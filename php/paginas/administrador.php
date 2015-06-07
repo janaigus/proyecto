@@ -521,26 +521,26 @@ echo '
               </div>
               <div class="col-md-12" style="color:black;">
                   <div class="thumbnail" style="height: 350px;overflow: auto;" id="grupoCentros">
-                      <div class="row text-center" style="margin: 10px 10px 10px 15px;color:rgb(0,122,135);">
+                      <div class="row text-center" style="margin: 10px 10px 10px 10px;color:rgb(0,122,135);">
                             <div class="col-xs-2 col-lg-2"  style="margin: 6px 0px 6px 0px;">
                                 Nombre
                             </div>
                             <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
                                 Información
                             </div>
-                            <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
+                            <div class="col-xs-2 col-lg-1" style="margin: 6px 0px 6px 0px;">
                                 Isla
                             </div>
-                            <div class="col-xs-2 col-lg-1" style="margin: 6px 0px 6px 0px;">
+                            <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
                                 Longitud
                             </div>
-                            <div class="col-xs-2 col-lg-1" style="margin: 6px 0px 6px 0px;">
+                            <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
                                 Latitud
                             </div>
                             <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
                                 Editar
                             </div>
-                            <div class="col-xs-2 col-lg-2" style="margin: 6px 0px 6px 0px;">
+                            <div class="col-xs-2 col-lg-1" style="margin: 6px 0px 6px 0px;">
                                 Borrar
                             </div>
                         </div>
@@ -562,7 +562,7 @@ echo '
     <div class="col-xs-12 col-lg-2" style="padding: 8px 10px 6px 0px;">
         <textarea id="informacionCentro_'.$centrosEducativos[$i]['id'].'" class=" form-control" rows="1" style="resize:vertical;" maxlength="250" disabled="disabled">'.$centrosEducativos[$i]['informacion'].'</textarea>
     </div>
-    <div class="col-xs-12 col-lg-2" style="padding: 8px 10px 6px 0px;">
+    <div class="col-xs-12 col-lg-1" style="padding: 8px 10px 6px 0px;">
         <select id="islaCentro_'.$centrosEducativos[$i]['id'].'" class="form-control" disabled="disabled">
         '; // echo
         for($z=0;$z<count($islas);$z++){
@@ -575,17 +575,17 @@ echo '
 
     echo ' </select>
     </div>
-    <div class="col-xs-12 col-lg-1" style="padding: 8px 10px 6px 0px;">
+    <div class="col-xs-12 col-lg-2" style="padding: 8px 10px 6px 0px;">
         <input type="text" class="form-control" id="longitudCentro_'.$centrosEducativos[$i]['id'].'" value="'.$centrosEducativos[$i]['longitud'].'" disabled="disabled"/>
     </div>
-    <div class="col-xs-12 col-lg-1" style="padding: 8px 10px 6px 0px;">
+    <div class="col-xs-12 col-lg-2" style="padding: 8px 10px 6px 0px;">
         <input type="text" class="form-control" id="latitudCentro_'.$centrosEducativos[$i]['id'].'" value="'.$centrosEducativos[$i]['latitud'].'" disabled="disabled"/>
     </div>
     <div class="col-xs-12 col-lg-2" style="padding: 10px 0px 6px 0px;">
         <button id="confirmarEditarCentro_'.$centrosEducativos[$i]['id'].'" class="btn btn-sm btn-light" style="display: none;"><span class="glyphicon glyphicon-save"></span> Guardar </button>
         <button id="editarCentro_'.$centrosEducativos[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-edit"></span> Editar </button>
     </div>
-    <div class="col-xs-12 col-lg-2" style="padding: 10px 0px 6px 0px;">
+    <div class="col-xs-12 col-lg-1" style="padding: 10px 0px 6px 0px;">
         <button id="borrarCentro_'.$centrosEducativos[$i]['id'].'" class="btn btn-sm btn-light"><span class="glyphicon glyphicon-trash"></span> Borrar </button>
     </div>
 </div>

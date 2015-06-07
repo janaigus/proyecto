@@ -1,6 +1,9 @@
 <?php
     session_start();
     // Obtener variables con los parametros de la sesión del usuario
+
+    $usuarioId = (isset($_POST['id'])) ? $_POST['id'] : "";
+
     $sesionId = (isset($_SESSION['idh2k'])) ? $_SESSION['idh2k'] : "";
     $sesionNick = (isset($_SESSION['nickh2k'])) ? $_SESSION['nickh2k'] : "";
     $sesionNombre = (isset($_SESSION['nombreh2k'])) ? $_SESSION['nombreh2k'] : "";
@@ -18,21 +21,21 @@
         // Obtener las actividades del usuario
         $consulta = "SELECT id FROM actividades WHERE idusuario = :usuario";
         $result = $db->prepare($consulta);
-        $result->execute(array(":usuario" => $sesionId));
+        $result->execute(array(":usuario" => $usuarioId));
         $arrayResult = $result->fetchAll();
         $arrayActividades = $arrayResult;
         
         // Comenzar borrando los votos
         $consulta = "DELETE FROM votos WHERE idusuario = :usuario";
         $result = $db->prepare($consulta);
-        $result->bindParam(":usuario", $sesionId, PDO::PARAM_STR);
+        $result->bindParam(":usuario", $usuarioId, PDO::PARAM_STR);
         $result->execute();
         
         
         // Luego borrar los comentarios
         $consulta = "DELETE FROM comentarios WHERE idusuario = :usuario";
         $result = $db->prepare($consulta);
-        $result->bindParam(":usuario", $sesionId, PDO::PARAM_STR);
+        $result->bindParam(":usuario", $usuarioId, PDO::PARAM_STR);
         $result->execute();
         
         for($i=0;$i < count($arrayActividades);$i++){
@@ -53,11 +56,14 @@
         // Borrar el usuario del sistema
         $consulta = "DELETE FROM usuarios WHERE id = :usuario";
         $result = $db->prepare($consulta);
-        $result->bindParam(":usuario", $sesionId, PDO::PARAM_STR);
+        $result->bindParam(":usuario", $usuarioId, PDO::PARAM_STR);
         $result->execute();
-        
-        session_destroy();
-        header('Location: ../../index.php');
+        if($sesionRol != 1){
+            session_destroy();
+            header('Location: ../../index.php');
+        }else{
+            header('Location: ../administrador.php#usuarios');
+        }
     }
 ?>
 
@@ -119,7 +125,7 @@
                     <hr class="small">
                     <form class="form" action="./borrarperfil.php" method="POST">
                         <input type="submit" class="btn btn-lg btn-danger" value="Si" name="si"/>
-                        <a href="" class="btn btn-lg btn-light">No</a>
+                        <a href="../../index.php" class="btn btn-lg btn-light">No</a>
                     </form>
             </div>
             <!-- /.row -->
@@ -156,60 +162,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Modal Inicio Sesión-->
-    <div class="modal fade" id="modalEntrar" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <div class="row">
-                  <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="../../img/img_pagina/logo.png" alt="Logo" width="180" height="95">
-                  </div>
-              </div>
-            </div>
-            <div class="modal-body">
-                  <form class="form" action="./php/sesion/login.php" method="POST" id="formularioEntrar">
-                    <div class="form-group" id="cajaEmailEntrar">
-                        <div class="inner-addon left-addon">
-                            <i class="glyphicon glyphicon-user"></i>
-                            <input type="text" id="entrarEmail" name="entrarEmail" class="form-control input-lg" placeholder="Email"/>
-                        </div>
-                    </div>
-                    <div class="form-group" id="cajaPassEntrar">
-                        <div class="inner-addon left-addon">
-                            <i class="glyphicon glyphicon-lock"></i>
-                            <input id="entrarPass" name="entrarPass" type="password" class="form-control input-lg" placeholder="Password"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                      <button id="entrarBoton" class="btn btn-lg btn-light btn-block">Iniciar sesión</button>
-                      <span class="pull-right"><a href="" id="entrarRegistrarse">Registrarse</a></span><span><a href="#">Ayuda</a></span>
-                    </div>
-                    <hr>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-4 col-lg-offset-2 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='./php/miFacebook.php' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
-                            </div>
-                            <!--<div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='#' class="btn btn-light twitter"> <i class="fa fa-twitter modal-icons"></i> Entrar con Twitter </a>
-                            </div>-->
-                            <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='./php/miGoogle.php' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
-                            </div>
-                        </div>
-                    </div>
-                  </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal" id="entrarCancelar">Cancelar</button>
-            </div>
-          </div>
-        </div>
-    </div>
         
     <!-- Modal Contacto-->
     <div class="modal fade" id="modalContacto" role="dialog">

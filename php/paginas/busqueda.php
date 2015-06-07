@@ -1,11 +1,14 @@
 <?php
     session_start();
     // Obtener la isla, categoria y municipio sobre la que se va a maquetar la imagen y la pagina actua
-    $categoria = (isset($_GET['categoria'])) ? $_GET['categoria'] : "1";
-    $isla = (isset($_GET['isla'])) ? $_GET['isla'] : "7";
-    $municipio = (isset($_GET['municipio'])) ? (int)$_GET['municipio'] : "38031";
+    $categoria = (isset($_GET['categoria'])) ? $_GET['categoria'] : "";
+    $isla = (isset($_GET['isla'])) ? $_GET['isla'] : "";
+    $municipio = (isset($_GET['municipio'])) ? (int)$_GET['municipio'] : "";
     $pagina = (isset($_GET['pagina'])) ? (int)$_GET['pagina'] : 1;
-
+    
+    if($categoria == "" or $isla == "" or $municipio == ""){
+        header('Location: ../../index.php');
+    }
     // Obtener variables con los parametros de la sesión del usuario
     $sesionId = (isset($_SESSION['idh2k'])) ? $_SESSION['idh2k'] : "";
     $sesionNick = (isset($_SESSION['nickh2k'])) ? $_SESSION['nickh2k'] : "";
@@ -93,7 +96,7 @@
                 <a href="../../index.php"  onclick = $("#menu-close").click(); >Help to Know</a>
             </li>
             <li>
-                <a href="#resultado" onclick = $("#menu-close").click(); >Resultado</a>
+                <a href="#actividades" onclick = $("#menu-close").click(); >Actividades</a>
             </li>
             <li>
                 <a href="#contacto" onclick = $("#menu-close").click(); >Contacto</a>
@@ -118,6 +121,13 @@
                     </li>
                     ';
             }
+            if($sesionRol == "1"){
+                echo'
+                <hr>
+                <li>
+                    <a href="./administrador.php">Admnistrar Sitio</a>
+                </li>';
+            }
             ?>
         </ul>
     </nav>
@@ -137,11 +147,11 @@
         <!-- /.container -->
     </section>
 
-    <section id="valoradas" class="services bg-primary">
+    <section id="actividades" class="services bg-primary">
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <h1><?php echo $nombreCategoria." en ".$nombreIsla; ?></h1>
+                    <h1><?php echo $nombreCategoria." en ".$nombreMunicipio.", ".$nombreIsla; ?></h1>
                     <hr class="small">
                     <div>
                         <?php
@@ -154,8 +164,8 @@
                         <hr>
                         <?php
                         $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
-                        $consulta .= "cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media, ";
-                        $consulta .= "act.idisla, i.nombre, m.nombre as nombremunicipio ";
+                        $consulta .= "cat.nombre AS categoria, act.idcategoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media, ";
+                        $consulta .= "act.idisla, i.nombre AS nombreisla, m.nombre AS nombremunicipio ";
                         $consulta .= "FROM actividades act ";
                         $consulta .= "LEFT JOIN votos v ON act.id = v.idactividad ";
                         $consulta .= "LEFT JOIN recursos r ON act.id = r.idactividad ";
@@ -183,8 +193,13 @@
                                 echo '            <a href="./actividad.php?actividad='.$arrayResult[$z]['id'].'"> <img src="../../'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
                                 echo '       </div>';
                                 echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
-                                echo '            <h3>'.$arrayResult[$z]['titulo'].'<h5>'.$arrayResult[$z]['creada'].'</h5></h3>';
-                                echo '            <h4>'.$arrayResult[$z]['categoria'].'</h4>';
+                                echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'</h3>';
+                                echo '            <a href="./foro.php?categoria='.$arrayResult[$z]['idcategoria'].'&isla='.$arrayResult[$z]['idisla'];
+                                echo ' " style="color:white;">';
+                                echo '            <h4>'.$arrayResult[$z]['categoria'].' en '.$arrayResult[$z]['nombreisla'].'</h4>';
+                                echo '            </a>';
+                                echo '            <h5>Creada el '.$arrayResult[$z]['creada'];
+                                echo '            en '.$arrayResult[$z]['nombremunicipio'].', '.$arrayResult[$z]['nombreisla'].'</h5>';
                                 echo '            <p>'.$arrayResult[$z]['descripcion'].'</p>';
                                 echo '            <div class="ratings">';
                                 echo '                <p class="pull-right" style="color:#fff">'.$arrayResult[$z]['veces'].' veces valorado</p>';
@@ -215,7 +230,7 @@
                             <div class="col-lg-12">
                                 <ul class="pagination">
                                     <?php 
-                                        
+                                        if($totalActividades != 0){
                                         if($pagina != 1){
                                             echo '<li>
                                           <a href="busqueda.php?categoria='.$categoria.'&isla='.$isla.'&municipio='.$municipio.'&pagina='.($pagina-1).'" aria-label="Previous">
@@ -254,6 +269,7 @@
                                               </a>
                                             </li>
                                             ';
+                                        }
                                         }
                                     ?>
                                 </ul>

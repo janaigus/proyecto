@@ -59,6 +59,7 @@
                         </body>
                         </html>
                         ';
+                        mail($para, $titulo, $mensaje, $cabeceras);
                         // Crear las sesiones y redireccionar a index
                         $_SESSION['idh2k'] = $idUsuario;
                         $_SESSION['nickh2k'] = $_POST['registroNick'];
