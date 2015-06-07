@@ -2,7 +2,7 @@ expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 var humanoRegistro = false;
 
 $(document).ready(function () {
-    
+        
     $('#formularioBusqueda').on('submit', function (ev){
         var correcto = true;
         var mensajeBusqueda = "Compruebe los datos de la busqueda: </br>";
