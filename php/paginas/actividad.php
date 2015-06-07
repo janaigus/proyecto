@@ -174,11 +174,12 @@
                 echo '            <a href=""> <img src="../../'.$arrayResult[0]['ruta'].'" class="thumbnail" alt="Image" style="height:280px;width:450px;" /></a>';
                 echo '       </div>';
                 echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
-                echo '            <h3>'.$arrayResult[0]['titulo'].'<h5>'.$arrayResult[0]['creada'].'</h5></h3>';
-                echo '            <a href="foro.php?categoria='.$arrayResult[0]['idcategoria'].'&isla='.$arrayResult[0]['idisla'];
-                echo ' ">';
+                echo '            <h3>'.$arrayResult[0]['titulo'].'</h3>';
+                echo '            <a href="./foro.php?categoria='.$arrayResult[0]['idcategoria'].'&isla='.$arrayResult[0]['idisla'].'">';
                 echo '            <h4>'.$arrayResult[0]['categoria'].' en '.$arrayResult[0]['nombreisla'].'</h4>';
                 echo '            </a>';
+                echo '            <h5>Creada el '.$arrayResult[0]['creada'];
+                echo '            en '.$arrayResult[0]['nombremunicipio'].', '.$arrayResult[0]['nombreisla'].'</h5>';
                 echo '            <p>'.$arrayResult[0]['descripcion'].'</p>';
                 echo '            <div class="ratings">';
                 echo '                <p class="pull-right" style="color:#000">'.$arrayResult[0]['veces'].' veces valorado</p>';
