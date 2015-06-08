@@ -4,14 +4,26 @@
     $db = conectaDb();
     // Variables que representaran a la red social userid para ambas
     $userId = (isset($_POST['userID'])) ? $_POST['userID'] : "";
+    if($userId == ""){
+        header('Location: ../../index.php');
+    }
     // Comprobar si el usuario existe en la base de datos, 
     // en este caso se hará por la password que es donde almacenaremos el userID de facebook
     $consulta = "SELECT * FROM usuarios WHERE social = :userid";
     $result = $db->prepare($consulta);
-    $result->execute(array(":userid" => $_POST['userid']));
+    $result->execute(array(":userid" => $userId));
+    $arrayResult = $result->fetchAll();
     if($result->rowCount() > 0){
         // El usuario ya existe, iniciar sesion
-        
+        $_SESSION['idh2k'] = $arrayResult[0]['id'];
+        $_SESSION['nickh2k'] = $arrayResult[0]['nick'];
+        $_SESSION['nombreh2k'] = $arrayResult[0]['nombre'];
+        $_SESSION['rolh2k'] = $arrayResult[0]['idrol'];
+        $_SESSION['municipioh2k'] = $arrayResult[0]['idmunicipio'];
+        $_SESSION['islah2k'] = $arrayResult[0]['idisla'];
+        $_SESSION['emailh2k'] = $arrayResult[0]['email'];
+        $_SESSION['tiempoh2k'] = date("Y-n-j H:i:s");
+        header('Location: ../../index.php');
     }else{
         // Registrar al usuario
         // Comprobar si el email y el nick estan disponibles
@@ -26,7 +38,7 @@
                 $result->execute(array(":nick" => $_POST['registroNick']));
                 // Si el nick está disponible
                 if((!$result->rowCount() > 0)){
-                    $consulta = "INSERT INTO usuarios (email, nick, nombre, apellidos, password, idrol, idmunicipio, idisla, social) ";
+                    $consulta = "INSERT INTO usuarios (email, nick, nombre, apellidos, idrol, idmunicipio, idisla, social) ";
                     $consulta .= "VALUES (:mail, :alias, :name, :sname, :rol, :mun, :isla, :userid)";
 
                     $result  = $db->prepare($consulta);
@@ -38,7 +50,7 @@
                         ":rol" => 2,
                         ":mun" => $_POST['registroMunicipios'],
                         ":isla" => $_POST['registroIslas'],
-                        ":userid" => $_POST['userid']
+                        ":userid" => $userId
                     ));
                     $idUsuario = $db->lastInsertId();
                     if($resultado){
@@ -281,17 +293,6 @@
             </div>
         </div>
         <input id="registrarseBoton" type="submit" value="Registrarse" class="btn btn-lg btn-light btn-block">
-        <hr>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-lg-4 col-lg-offset-2 col- text-center" style="padding: 6px 0px 6px 0px">
-                    <a href='php/miFacebook.php' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
-                </div>
-                <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                    <a href='php/miGoogle.php' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
-                </div>
-            </div>
-        </div>
     </form>
     </div>
     </div>
