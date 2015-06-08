@@ -3,7 +3,7 @@
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
     // Variables que representaran a la red social userid para ambas
-    $userId = (isset($_POST['userID'])) ? $_POST['userID'] : "";
+    $userId = (isset($_POST['userid'])) ? $_POST['userid'] : "";
     if($userId == ""){
         header('Location: ../../index.php');
     }
@@ -127,7 +127,7 @@
                         $_SESSION['rolh2k'] = 2;
                         $_SESSION['municipioh2k'] = $_POST['registroMunicipios'];
                         $_SESSION['islah2k'] = $_POST['registroIslas'];
-                        $_SESSION['emailh2k'] = $arrayResult[0]['email'];
+                        $_SESSION['emailh2k'] = $_POST['registroEmail'];
                         $_SESSION['tiempoh2k'] = date("Y-n-j H:i:s");
                         header('Location: ../../index.php');
                     }else{
@@ -292,6 +292,7 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" name="userid" value="<?php echo (isset($_POST['userid'])) ? $_POST['userid'] : ''; ?>"/>
         <input id="registrarseBoton" type="submit" value="Registrarse" class="btn btn-lg btn-light btn-block">
     </form>
     </div>

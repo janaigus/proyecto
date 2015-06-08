@@ -1,3 +1,4 @@
+// Facebook
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
     console.log('statusChangeCallback');
@@ -60,13 +61,16 @@ FB.getLoginStatus(function(response) {
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
 function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
-        console.log('Successful login for: ' + response.name);
-        document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.name + '!';
-        alert(response.email);
-        alert(response.first_name);
-        alert(response.last_name);
-        alert(response.id);
+        // Colocar los datos del usuario en el formulario y enviar el formulario
+        $('#socialNombre').val(response.first_name);
+        $('#socialApellidos').val(response.last_name);
+        $('#socialId').val(response.id);
+        if(response.email){
+            $('#socialEmail').val(response.email);
+        }
+        $('#formularioRedes').submit();
     });
 }
+
+// Google
