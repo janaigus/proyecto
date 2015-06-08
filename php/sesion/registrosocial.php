@@ -27,7 +27,7 @@
     }else{
         // Registrar al usuario
         // Comprobar si el email y el nick estan disponibles
-        if(isset($_POST['registroNombre'])){
+        if(isset($_POST['registroMunicipios'])){
             $consulta = "SELECT * FROM usuarios where email=:email";
             $result = $db->prepare($consulta);
             $result->execute(array(":email" => $_POST['registroEmail']));
@@ -215,7 +215,7 @@
         <div class="container">
         <div class="row text-center">
             <div class="col-lg-8 col-lg-offset-2">
-                <h1>Registro</h1>
+                <h1>Terminar registro</h1>
             </div>
         </div>    
         <div class="row">

@@ -1,16 +1,10 @@
 // Facebook
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
-      testAPI();
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } 
+      enviarDatos();
+    }
 }
 
 // This function is called when someone finishes with the Login
@@ -60,7 +54,7 @@ FB.getLoginStatus(function(response) {
 
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
-function testAPI() {
+function enviarDatos() {
     FB.api('/me', function(response) {
         // Colocar los datos del usuario en el formulario y enviar el formulario
         $('#socialNombre').val(response.first_name);
