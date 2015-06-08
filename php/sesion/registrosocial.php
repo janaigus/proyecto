@@ -1,28 +1,33 @@
 <?php
     session_start();
-    if(isset($_SESSION['nombreh2k'])){
-        header('Location: ../../index.php');
-    }
-    // Requerir el fichero para la conexion con la base de datos 
     require('../bd/conexionBDlocal.php');
     $db = conectaDb();
-    // Si han llegado datos del formulario de registro
-    if(isset($_POST['registroNombre'])){
-        $consulta = "SELECT * FROM usuarios where email=:email";
-        $result = $db->prepare($consulta);
-        $result->execute(array(":email" => $_POST['registroEmail']));
-        // Si el email está disponible
-        if((!$result->rowCount() > 0)){
-            $consulta = "SELECT * FROM usuarios where nick=:nick";
+    // Variables que representaran a la red social userid para ambas
+    $userId = (isset($_POST['userID'])) ? $_POST['userID'] : "";
+    // Comprobar si el usuario existe en la base de datos, 
+    // en este caso se hará por la password que es donde almacenaremos el userID de facebook
+    $consulta = "SELECT * FROM usuarios WHERE social = :userid";
+    $result = $db->prepare($consulta);
+    $result->execute(array(":userid" => $_POST['userid']));
+    if($result->rowCount() > 0){
+        // El usuario ya existe, iniciar sesion
+        
+    }else{
+        // Registrar al usuario
+        // Comprobar si el email y el nick estan disponibles
+        if(isset($_POST['registroNombre'])){
+            $consulta = "SELECT * FROM usuarios where email=:email";
             $result = $db->prepare($consulta);
-            $result->execute(array(":nick" => $_POST['registroNick']));
-            // Si el nick está disponible
+            $result->execute(array(":email" => $_POST['registroEmail']));
+            // Si el email está disponible
             if((!$result->rowCount() > 0)){
-                // Si el captcha es correcto
-                $respuesta = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=6LecTAcTAAAAAKg7meG4TT6RWFKD8i4jox9WlsEA&response='.$_POST['g-recaptcha-response'].'&remoteip='.$_SERVER['REMOTE_ADDR']), true);
-                if($respuesta['success'] == 1){
-                    $consulta = "INSERT INTO usuarios (email, nick, nombre, apellidos, password, idrol, idmunicipio, idisla) ";
-                    $consulta .= "VALUES (:mail, :alias, :name, :sname, :pass, :rol, :mun, :isla)";
+                $consulta = "SELECT * FROM usuarios where nick=:nick";
+                $result = $db->prepare($consulta);
+                $result->execute(array(":nick" => $_POST['registroNick']));
+                // Si el nick está disponible
+                if((!$result->rowCount() > 0)){
+                    $consulta = "INSERT INTO usuarios (email, nick, nombre, apellidos, password, idrol, idmunicipio, idisla, social) ";
+                    $consulta .= "VALUES (:mail, :alias, :name, :sname, :rol, :mun, :isla, :userid)";
 
                     $result  = $db->prepare($consulta);
                     $resultado = $result->execute(array(
@@ -30,10 +35,10 @@
                         ":alias" => $_POST['registroNick'],
                         ":name" => $_POST['registroNombre'],
                         ":sname" => $_POST['registroApellidos'],
-                        ":pass" => md5(md5(md5($_POST['registroPassword']))),
                         ":rol" => 2,
                         ":mun" => $_POST['registroMunicipios'],
-                        ":isla" => $_POST['registroIslas']
+                        ":isla" => $_POST['registroIslas'],
+                        ":userid" => $_POST['userid']
                     ));
                     $idUsuario = $db->lastInsertId();
                     if($resultado){
@@ -116,19 +121,16 @@
                     }else{
                         $error = '<span class="glyphicon glyphicon-remove"></span>No se ha podido completar el registro';
                     }//Resultado
-                    
                 }else{
-                    $error = '<span class="glyphicon glyphicon-remove"></span>Captcha incorrecto';
-                } //Captcha
-                
+                    $error = '<span class="glyphicon glyphicon-remove"></span>El nick no está disponible';
+                } // Nick
             }else{
-                $error = '<span class="glyphicon glyphicon-remove"></span>El nick no está disponible';
-            } // Nick
-        }else{
-            $error = '<span class="glyphicon glyphicon-remove"></span>Ya existe un usuario regitrado con ese email';
+                $error = '<span class="glyphicon glyphicon-remove"></span>Ya existe un usuario regitrado con ese email';
+            }
         }
     }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -207,7 +209,7 @@
         <div class="row">
         <div class="col-lg-6 col-lg-offset-3">
         <hr class="small">
-        <form role="form" action="./registro.php" method="POST" id="formularioRegistrarse">
+        <form role="form" action="registrosocial.php" method="POST" id="formularioRegistrarse">
             
         <div class="alert alert-info alert-dismissable" id="panelAlertas" <?php echo (!isset($error)) ? 'style="display: none;"' : ''; ?> >
             <a class="panel-close close" data-dismiss="alert">×</a>
@@ -232,18 +234,6 @@
         </div>
         <div class="form-group">
             <input type="text" name="registroNick" id="registroNick" class="form-control input-lg" placeholder="Nick" value="<?php echo (isset($_POST['registroNick'])) ? $_POST['registroNick'] : ''; ?>">
-        </div>
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group">
-                    <input type="password" name="registroPassword" id="registroPassword" class="form-control input-lg" placeholder="Contraseña" value="<?php echo (isset($_POST['registroPassword'])) ? $_POST['registroPassword'] : ''; ?>">
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group">
-                    <input type="password" name="registroPass_con" id="registroPass_con" class="form-control input-lg" placeholder="Repetir Contraseña" value="<?php echo (isset($_POST['registroPass_con'])) ? $_POST['registroPass_con'] : ''; ?>">
-                </div>
-            </div>
         </div>
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
@@ -287,13 +277,6 @@
                         }
                         ?>
                     </select>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12" align="center">
-                <div class="form-group">
-                    <div class="g-recaptcha" data-sitekey="6LecTAcTAAAAAFKmIACHrD4FhxgRTtNSdcVXUMss"></div>
                 </div>
             </div>
         </div>
@@ -468,7 +451,7 @@
     <script src="../../js/bootstrap.min.js"></script>
     
     <!-- Mis archivos JavaScript -->
-    <script type="text/javascript" src="../../js/registro.js"></script>
+    <script type="text/javascript" src="../../js/registrosocial.js"></script>
         
     <!-- Custom Theme JavaScript -->
     <script>
