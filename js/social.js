@@ -50,3 +50,38 @@ function enviarDatos() {
     });
 }
 // Google
+
+(function() {
+   var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+   po.src = 'https://apis.google.com/js/client:plusone.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+ })();
+
+function signinCallback(authResult) {
+    if (authResult['access_token']) {
+        gapi.auth.setToken(authResult);
+        gapi.client.load('oauth2', 'v2', function() {
+          var request = gapi.client.oauth2.userinfo.get();
+          request.execute(enviarDatosGoogle);
+        });
+    // Oculta el botón de inicio de sesión ahora que el usuario está autorizado, por ejemplo:
+    //document.getElementById('signinButton').setAttribute('style', 'display: none');
+  } else if (authResult['error']) {
+    // Se ha producido un error.
+    // Posibles códigos de error:
+    //   "access_denied": el usuario ha denegado el acceso a la aplicación.
+    //   "immediate_failed": no se ha podido dar acceso al usuario de forma automática.
+    // console.log('There was an error: ' + authResult['error']);
+  }
+}
+
+function enviarDatosGoogle(response){
+    // Colocar los datos del usuario en el formulario y enviar el formulario
+        $('#socialNombre').val(response.given_name);
+        $('#socialApellidos').val(response.family_name);
+        $('#socialId').val(response.id);
+        if(response.email){
+            $('#socialEmail').val(response.email);
+        }
+        $('#formularioRedes').submit();
+}

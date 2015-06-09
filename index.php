@@ -602,12 +602,13 @@
                                   <span
                                     class="g-signin"
                                     data-callback="signinCallback"
-                                    data-clientid="CLIENT_ID"
+                                    data-clientid="588829378375-8d6r2pgvqjnsve27vthkofmifscipa9t.apps.googleusercontent.com"
                                     data-cookiepolicy="single_host_origin"
                                     data-requestvisibleactions="http://schemas.google.com/AddActivity"
-                                    data-scope="https://www.googleapis.com/auth/plus.login">
+                                    data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email">
                                   </span>
                                 </span>
+                                
                             </div>
                         </div>
                     </div>
