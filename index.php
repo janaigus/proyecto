@@ -39,11 +39,10 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <?php
-    if($sesionId == ""){
-        echo '<script type="text/javascript" src="js/social.js"></script>';
-    }
-    ?>
+    
+    <script type="text/javascript" src="js/social.js"></script>
+    
+    
     <!-- Api de google para recaptcha -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
     
