@@ -595,7 +595,6 @@
                         <div class="row">
                             <div class="col-lg-4 col-lg-offset-2 text-center" style="padding: 6px 0px 6px 0px">
                                 <fb:login-button size="large" scope="public_profile,email" onlogin="checkLoginState();">
-                                Iniciar Sesión
                                 </fb:login-button>
                             </div>
                             <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
