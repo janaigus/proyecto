@@ -59,11 +59,13 @@ function enviarDatos() {
 
 function signinCallback(authResult) {
     if (authResult['access_token']) {
+        if(authResult['status']['method'] == "PROMPT"){
         gapi.auth.setToken(authResult);
         gapi.client.load('oauth2', 'v2', function() {
           var request = gapi.client.oauth2.userinfo.get();
           request.execute(enviarDatosGoogle);
         });
+        }
     // Oculta el botón de inicio de sesión ahora que el usuario está autorizado, por ejemplo:
     //document.getElementById('signinButton').setAttribute('style', 'display: none');
   } else if (authResult['error']) {

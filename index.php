@@ -40,6 +40,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     
+    <!-- Fichero de JS para la gestion del incio de sesion con las redes sociales -->
     <script type="text/javascript" src="js/social.js"></script>
     
     
