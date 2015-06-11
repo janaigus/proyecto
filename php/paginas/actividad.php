@@ -15,13 +15,6 @@
     $db = conectaDb();
 
     // Obtener la información completa de la actividad incluyendo votos y valoraciones
-    $consulta = "SELECT * FROM auxislas where id = :isla ORDER BY nombre";
-    $result = $db->prepare($consulta);
-    $result->execute(array(':isla' => $isla));
-    $arrayResult = $result->fetchAll();
-    $idIsla = $arrayResult[0]['id'];
-    $nombreIsla = $arrayResult[0]['nombre'];
-
     $consulta = "SELECT act.id, act.titulo, act.descripcion, DATE_FORMAT(act.created, '%d-%m-%Y') AS creada, r.ruta, ";
     $consulta .= "act.idcategoria, cat.nombre AS categoria, COUNT( v.id ) AS veces, ROUND( AVG( v.valoracion ) ) AS media, ";
     $consulta .= "act.idisla, i.nombre AS nombreisla, m.nombre AS nombremunicipio ";

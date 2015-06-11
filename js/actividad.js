@@ -1,7 +1,6 @@
 expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 
 $(document).ready(function () {
-    
     $('#enviarcom').on('click', function (ev) {
         var correcto = true;
         var mensajesError = '<a class="panel-close close" data-dismiss="alert">×</a>';
