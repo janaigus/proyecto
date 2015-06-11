@@ -57,24 +57,18 @@ function enviarDatos() {
    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
  })();
 
+// Gestionar la llamada de callback al intentar iniciar sesion con google+
 function signinCallback(authResult) {
     if (authResult['access_token']) {
+        // Evitar el inicio de sesion automatico con el valor(PROMPT) de la propiedad "METHOD"
         if(authResult['status']['method'] == "PROMPT"){
-        gapi.auth.setToken(authResult);
-        gapi.client.load('oauth2', 'v2', function() {
-          var request = gapi.client.oauth2.userinfo.get();
-          request.execute(enviarDatosGoogle);
-        });
+            gapi.auth.setToken(authResult);
+            gapi.client.load('oauth2', 'v2', function() {
+              var request = gapi.client.oauth2.userinfo.get();
+              request.execute(enviarDatosGoogle);
+            });
         }
-    // Oculta el botón de inicio de sesión ahora que el usuario está autorizado, por ejemplo:
-    //document.getElementById('signinButton').setAttribute('style', 'display: none');
-  } else if (authResult['error']) {
-    // Se ha producido un error.
-    // Posibles códigos de error:
-    //   "access_denied": el usuario ha denegado el acceso a la aplicación.
-    //   "immediate_failed": no se ha podido dar acceso al usuario de forma automática.
-    // console.log('There was an error: ' + authResult['error']);
-  }
+    }
 }
 
 function enviarDatosGoogle(response){

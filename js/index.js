@@ -1,8 +1,5 @@
-expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
-var humanoRegistro = false;
-
 $(document).ready(function () {
-        
+    
     $('#formularioBusqueda').on('submit', function (ev){
         var correcto = true;
         var mensajeBusqueda = "Compruebe los datos de la busqueda: </br>";
@@ -33,7 +30,7 @@ $(document).ready(function () {
     
     // ISLAS Y MUNICIPIOS
     // Cargar las islas en select de islas de la ventana de registro
-    $.getJSON('./php/obtenerRecursos/obtenerIslas.php',
+    $.getJSON('php/obtenerRecursos/obtenerIslas.php',
         function(respuesta)
         {
             cadena = '<option value="0">Seleccione isla</option>';
@@ -51,7 +48,7 @@ $(document).ready(function () {
             $("#busquedaMunicipios").attr('disabled', true);
             $("#busquedaMunicipios").html('<option value="0">Seleccione municipio</option>');
         }else{
-            $.post('./php/obtenerRecursos/obtenerMunicipios.php', { islaSeleccionada: $('#busquedaIslas').val() },
+            $.post('php/obtenerRecursos/obtenerMunicipios.php', { islaSeleccionada: $('#busquedaIslas').val() },
                 function(respuesta)
                 {
                     cadena = '<option value="0">Seleccione municipio</option>';
@@ -67,7 +64,7 @@ $(document).ready(function () {
         }
     });
     
-    $.getJSON('./php/obtenerRecursos/obtenerCategorias.php',
+    $.getJSON('php/obtenerRecursos/obtenerCategorias.php',
         function(respuesta)
         {
             cadena = '<option value="0">Seleccione categoria</option>';
@@ -77,7 +74,6 @@ $(document).ready(function () {
             $("#busquedaCategorias").html(cadena);
         }
     );
-    
     
     /* Controlar los botones de slider de los "sliders" */
     $('.btn-vertical-slider').on('click', function (ev) {
@@ -98,133 +94,4 @@ $(document).ready(function () {
             }
         }
     });
-    
-    // ON CLICK
-    // Gestión del envio del formulario de contacto
-    $('#enviarFormularioContacto').on('click', function (ev) {
-        ev.preventDefault();
-        correcto = true;
-        // Comprobar email
-        emailEncontrado = $("#emailContacto").val().match(expresionEmail);
-        if(emailEncontrado == null){
-            cambiarEstadoCaja("cajaEmailContacto", true, "Introduzca un email correcto");
-            correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaEmailContacto", false, "");
-        }
-                                    
-        if($('#nombreContacto').val() == ""){
-            cambiarEstadoCaja("cajaNombreContacto", true, "Introduzca un nombre");
-            correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaNombreContacto", false, "");
-        }
-                                    
-        if($('#asuntoContacto').val() == ""){
-            cambiarEstadoCaja("cajaAsuntoContacto", true, "Introduzca un asunto");
-            correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaAsuntoContacto", false, "");
-        }
-                                    
-        if($('#mensajeContacto').val() == ""){
-            cambiarEstadoCaja("cajaMensajeContacto", true, "Introduzca un mensaje");
-            correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaMensajeContacto", false);
-        }
-                                    
-        // Peticion ajax, mostrar el mensaje si el correo se ha enviado correctamente
-        if(correcto){
-            $.post('./php/contacto.php', $('#formularioContacto').serialize(), 
-                function(respuesta)
-                {
-                    switch(respuesta){
-                        case "ENVIADO":
-                            $("#mensajeInfo").html("Mensaje enviado correctamente.");
-                            $("#cancelarContacto").click();
-                            $("#modalInfo").modal("show"); 
-                            break;
-                        case "NO ENVIADO":
-                            $("#mensajeInfo").html("Su mensaje no ha sido enviado por favor vuelva a intentarlo más tarde.");
-                            $("#cancelarContacto").click();
-                            $("#modalInfo").modal("show"); 
-                            break;
-                        default:
-                    }
-                }
-            );
-        }
-    });
-    
-    $('#btnEntrar').on('click', function (ev) {
-        $("#menu-close").click();
-        $("#modalEntrar").modal("show"); 
-    });
-    
-    $('#btnLateralRegistrarse').on('click', function (ev) {
-        $("#menu-close").click();
-        $("#modalRegistrarse").modal("show");
-    });
-    
-    $('#btnContacto').on('click', function (ev) {
-        $("#modalContacto").modal("show");        
-    });
-    
-    $('#cancelarContacto').on('click', function (ev) {
-        $("#cajaNombreContacto").popover('destroy');
-        $("#cajaAsuntoContacto").popover('destroy');
-        $("#cajaEmailContacto").popover('destroy');
-        $("#cajaMensajeContacto").popover('destroy');
-    });
-    
-    // Gestion del boton de login
-    $('#entrarBoton').on('click', function (ev) {
-        ev.preventDefault();
-        var correcto = true;
-        emailEncontrado = $("#entrarEmail").val().match(expresionEmail);
-        if(emailEncontrado == null){
-            cambiarEstadoCaja("cajaEmailEntrar", true, "Introduzca un email correcto");
-            correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaEmailEntrar", false, "");
-        }
-        if($('#entrarPass').val() == ""){
-            cambiarEstadoCaja("cajaPassEntrar", true, "Introduzca una contraseña");
-            correcto = false;
-        }else{
-            cambiarEstadoCaja("cajaPassEntrar", false, "");
-        }
-        if(correcto){
-            $.post('./php/sesion/login.php', $('#formularioEntrar').serialize(), 
-                function(respuesta)
-                {
-                    switch(respuesta){
-                        case "OK":
-                            //  Recargar la pagina
-                            location.reload();
-                            break;
-                        case "BADPASS":
-                            cambiarEstadoCaja("cajaPassEntrar", true, "Contraseña incorrecta.");
-                            break;
-                        case "BADEMAIL":
-                            cambiarEstadoCaja("cajaEmailEntrar", true, "Email no registrado.");
-                            break;
-                    }
-                }
-            );
-        }
-    });
-    
-   
 });
-    
-function cambiarEstadoCaja(nombreCaja, mal, mensaje){
-    if(mal){
-        $('#'+nombreCaja).popover({ trigger: 'focus', placement: 'bottom', content: mensaje });
-        $('#'+nombreCaja).popover('show');
-        correcto = false;
-    }else{
-        $('#'+nombreCaja).popover('destroy');
-    }
-}
