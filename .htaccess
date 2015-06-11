@@ -3,12 +3,12 @@ RewriteEngine on
 RewriteBase /proyecto
 
 RewriteRule ^logo/?$ img/img_pagina/logo.png
-# Colocar ficheros css en rutas amigables
-
+# Index
+RewriteRule ^([^/\.]+)/?$ ./php/paginas/index.php
 # Actividades
-RewriteRule ^actividad/([^/\.]+)/?$ php/paginas/actividad.php?actividad=$1
+#RewriteRule ^actividad/([^/\.]+)/?$ php/paginas/actividad.php?actividad=$1
 # Vista foro
-RewriteRule ^foro/([^/\.]+)/([^/\.]+)/([^/\.]+)/?$ php/paginas/foro.php?categoria=$1&isla=$2&pagina=$3
+#RewriteRule ^foro/([^/\.]+)/([^/\.]+)/([^/\.]+)/?$ php/paginas/foro.php?categoria=$1&isla=$2&pagina=$3
 # Vista Busqueda
 
 # Vista Administrador
@@ -22,3 +22,6 @@ RewriteRule ^foro/([^/\.]+)/([^/\.]+)/([^/\.]+)/?$ php/paginas/foro.php?categori
 # Vista Registro Social
 
 # Vista Borar Perfil
+
+# Vista Registro Normal
+RewriteRule ^registro/?$ php/sesion/registro.php

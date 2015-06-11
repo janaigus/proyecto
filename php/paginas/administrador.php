@@ -644,33 +644,9 @@ echo '
         </div>
     </section>
     
-    <!-- Modal Información-->
-    <div class="modal fade" id="modalWarning" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <div class="row">
-                  <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="../../img/img_pagina/logo.png" alt="Logo" width="180" height="95">
-                  </div>
-              </div>
-            </div>
-            <div class="modal-body text-center">
-                <h2>¿Realmente desea BORRAR?</h2>
-                <p class="lead">Una vez confirmada la accion no podrá volver atras.</p>
-                <hr class="small">
-                <button class="btn btn-lg btn-danger" id="warningConfirmar"> Si</button>
-                <button class="btn btn-lg btn-light" data-dismiss="modal">No</button>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-    </div>
-    
+     <!-- Incluir los modales necesarios--> 
+    <?php require('../../php/modales/info.php'); ?>  
+        
     <!-- jQuery -->
     <script src="../../js/jquery.js"></script>
 
@@ -679,39 +655,7 @@ echo '
     
     <!-- Mis archivos JavaScript -->
     <script type="text/javascript" src="../../js/administrador.js"></script>
-        
-    <!-- Custom Theme JavaScript -->
-    <script>
-    // Closes the sidebar menu
-    $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    // Opens the sidebar menu
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    // Scrolls to the selected menu item on the page
-    $(function() {
-        $('a[href*=#]:not([href=#])').click(function() {
-            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-
-                var target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                if (target.length) {
-                    $('html,body').animate({
-                        scrollTop: target.offset().top
-                    }, 1000);
-                    return false;
-                }
-                
-            }
-        });
-    });
-    </script>
+    <script type="text/javascript" src="../../js/funciones.js"></script> 
 
 </body>
 

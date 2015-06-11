@@ -83,6 +83,8 @@
     <![endif]-->
     <!-- Api de google para recaptcha -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
+    <!-- Fichero de JS para la gestion del incio de sesion con las redes sociales -->
+    <script type="text/javascript" src="../../js/social.js"></script>
 </head>
 
 <body>
@@ -317,122 +319,10 @@
         </div>
     </footer>
 
-    <!-- Modal Inicio Sesión-->
-    <div class="modal fade" id="modalEntrar" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <div class="row">
-                  <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="../../img/img_pagina/logo.png" alt="Logo" width="180" height="95">
-                  </div>
-              </div>
-            </div>
-            <div class="modal-body">
-                  <form class="form" action="./php/sesion/login.php" method="POST" id="formularioEntrar">
-                    <div class="form-group" id="cajaEmailEntrar">
-                        <div class="inner-addon left-addon">
-                            <i class="glyphicon glyphicon-user"></i>
-                            <input type="text" id="entrarEmail" name="entrarEmail" class="form-control input-lg" placeholder="Email"/>
-                        </div>
-                    </div>
-                    <div class="form-group" id="cajaPassEntrar">
-                        <div class="inner-addon left-addon">
-                            <i class="glyphicon glyphicon-lock"></i>
-                            <input id="entrarPass" name="entrarPass" type="password" class="form-control input-lg" placeholder="Password"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                      <button id="entrarBoton" class="btn btn-lg btn-light btn-block">Iniciar sesión</button>
-                      <span class="pull-right"><a href="" id="entrarRegistrarse">Registrarse</a></span><span><a href="#">Ayuda</a></span>
-                    </div>
-                    <hr>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-lg-4 col-lg-offset-2 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='./php/miFacebook.php' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
-                            </div>
-                            <!--<div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='#' class="btn btn-light twitter"> <i class="fa fa-twitter modal-icons"></i> Entrar con Twitter </a>
-                            </div>-->
-                            <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                                <a href='./php/miGoogle.php' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
-                            </div>
-                        </div>
-                    </div>
-                  </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal" id="entrarCancelar">Cancelar</button>
-            </div>
-          </div>
-        </div>
-    </div>
-        
-    <!-- Modal Contacto-->
-    <div class="modal fade" id="modalContacto" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <div class="row">
-                  <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="../../img/img_pagina/logo.png" alt="Logo" width="180" height="95">
-                    <h3 class="modal-title"><b>Contacto</b></h3>
-                  </div>
-              </div>
-            </div>
-            <div class="modal-body">
-                  <form class="form" action="php/contacto.php" method="POST" id="formularioContacto">
-                    <div class="form-group" id="cajaNombreContacto">
-                        <input name="nombreContacto" type="text" id="nombreContacto" class="form-control input-lg" placeholder="Nombre"/>
-                    </div>
-                    <div class="form-group" id="cajaEmailContacto">
-                        <input name="emailContacto" type="text" id="emailContacto" class="form-control input-lg" placeholder="Email"/>
-                    </div>
-                    <div class="form-group" id="cajaAsuntoContacto">
-                        <input name="asuntoContacto" type="text" id="asuntoContacto" class="form-control input-lg" placeholder="Asunto"/>
-                    </div>
-                    <div class="form-group" id="cajaMensajeContacto">
-                        <textarea name="mensajeContacto" class="form-control" id="mensajeContacto"rows="3" placeholder="Mensaje..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button id="enviarFormularioContacto" class="btn btn-lg btn-light btn-block">Enviar</button>
-                    </div>
-                  </form>
-            </div>
-            <div class="modal-footer">
-              <button id="cancelarContacto" type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cancelar</button>
-            </div>
-          </div>
-        </div>
-    </div>
-        
-    <!-- Modal Información-->
-    <div class="modal fade" id="modalInfo" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <div class="row">
-                  <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="../../img/img_pagina/logo.png" alt="Logo" width="180" height="95">
-                  </div>
-              </div>
-            </div>
-            <div class="modal-body">
-                  <div id="mensajeInfo"></div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-    </div>
+    <!-- Incluir los modales necesarios-->
+    <?php require('../../php/modales/login.php'); ?>
+    <?php require('../../php/modales/contacto.php'); ?>   
+    <?php require('../../php/modales/info.php'); ?>  
         
     <!-- jQuery -->
     <script src="../../js/jquery.js"></script>
@@ -441,39 +331,7 @@
     <script src="../../js/bootstrap.min.js"></script>
     
     <!-- Mis archivos JavaScript -->
-    <script type="text/javascript" src="../../js/busqueda.js"></script>
-        
-    <!-- Custom Theme JavaScript -->
-    <script>
-    // Closes the sidebar menu
-    $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    // Opens the sidebar menu
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    // Scrolls to the selected menu item on the page
-    $(function() {
-        $('a[href*=#]:not([href=#])').click(function() {
-            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-
-                var target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                if (target.length) {
-                    $('html,body').animate({
-                        scrollTop: target.offset().top
-                    }, 1000);
-                    return false;
-                }
-            }
-        });
-    });
-    </script>
+    <script type="text/javascript" src="../../js/funciones.js"></script> 
 
 </body>
 

@@ -329,69 +329,9 @@
         </div>
     </footer>
     
-    <!-- Modal Contacto-->
-    <div class="modal fade" id="modalContacto" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <div class="row">
-                  <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="../../img/img_pagina/logo.png" alt="Logo" width="180" height="95">
-                    <h3 class="modal-title"><b>Contacto</b></h3>
-                  </div>
-              </div>
-            </div>
-            <div class="modal-body">
-                  <form class="form" action="php/contacto.php" method="POST" id="formularioContacto">
-                    <div class="form-group" id="cajaNombreContacto">
-                        <input name="nombreContacto" type="text" id="nombreContacto" class="form-control input-lg" placeholder="Nombre"/>
-                    </div>
-                    <div class="form-group" id="cajaEmailContacto">
-                        <input name="emailContacto" type="text" id="emailContacto" class="form-control input-lg" placeholder="Email"/>
-                    </div>
-                    <div class="form-group" id="cajaAsuntoContacto">
-                        <input name="asuntoContacto" type="text" id="asuntoContacto" class="form-control input-lg" placeholder="Asunto"/>
-                    </div>
-                    <div class="form-group" id="cajaMensajeContacto">
-                        <textarea name="mensajeContacto" class="form-control" id="mensajeContacto"rows="3" placeholder="Mensaje..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button id="enviarFormularioContacto" class="btn btn-lg btn-light btn-block">Enviar</button>
-                    </div>
-                  </form>
-            </div>
-            <div class="modal-footer">
-              <button id="cancelarContacto" type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cancelar</button>
-            </div>
-          </div>
-        </div>
-    </div>
-        
-    <!-- Modal Información-->
-    <div class="modal fade" id="modalInfo" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <div class="row">
-                  <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="../../img/img_pagina/logo.png" alt="Logo" width="180" height="95">
-                  </div>
-              </div>
-            </div>
-            <div class="modal-body">
-                  <div id="mensajeInfo"></div>
-                    
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-lg btn-dark" data-dismiss="modal">Cerrar</button>
-            </div>
-          </div>
-        </div>
-    </div>
+    <!-- Incluir los modales necesarios-->
+    <?php require('../../php/modales/contacto.php'); ?>   
+    <?php require('../../php/modales/info.php'); ?> 
         
     <!-- jQuery -->
     <script src="../../js/jquery.js"></script>
@@ -400,40 +340,8 @@
     <script src="../../js/bootstrap.min.js"></script>
     
     <!-- Mis archivos JavaScript -->
+    <script type="text/javascript" src="../../js/funciones.js"></script>
     <script type="text/javascript" src="../../js/perfil.js"></script>
-        
-    <!-- Custom Theme JavaScript -->
-    <script>
-    // Closes the sidebar menu
-    $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    // Opens the sidebar menu
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    // Scrolls to the selected menu item on the page
-    $(function() {
-        $('a[href*=#]:not([href=#])').click(function() {
-            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-
-                var target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                if (target.length) {
-                    $('html,body').animate({
-                        scrollTop: target.offset().top
-                    }, 1000);
-                    return false;
-                }
-            }
-        });
-    });
-    </script>
-
 </body>
 
 </html>

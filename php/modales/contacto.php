@@ -9,13 +9,13 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <div class="row">
                   <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="img/img_pagina/logo.png" alt="Logo" width="180" height="95">
+                    <img src="../../img/img_pagina/logo.png" alt="Logo" width="180" height="95">
                     <h3 class="modal-title"><b>Contacto</b></h3>
                   </div>
               </div>
             </div>
             <div class="modal-body">
-                  <form class="form" action="php/contacto.php" method="POST" id="formularioContacto">
+                  <form class="form" action="../../php/contacto.php" method="POST" id="formularioContacto">
                     <div class="form-group" id="cajaNombreContacto">
                         <input name="nombreContacto" type="text" id="nombreContacto" class="form-control input-lg" placeholder="Nombre"/>
                     </div>
@@ -40,7 +40,7 @@
         </div>
     </div>
         
-    '?>
+    ';
 
 
 ?>

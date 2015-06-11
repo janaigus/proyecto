@@ -8,7 +8,7 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <div class="row">
                   <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="img/img_pagina/logo.png" alt="Logo" width="180" height="95">
+                    <img src="../../img/img_pagina/logo.png" alt="Logo" width="180" height="95">
                   </div>
               </div>
             </div>

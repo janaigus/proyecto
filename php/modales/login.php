@@ -8,12 +8,12 @@ echo '<!-- Modal Inicio Sesión-->
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <div class="row">
                   <div class="col-lg-4 col-lg-offset-4 text-center">
-                    <img src="img/img_pagina/logo.png" alt="Logo" width="180" height="95">
+                    <img src="../../img/img_pagina/logo.png" alt="Logo" width="180" height="95">
                   </div>
               </div>
             </div>
             <div class="modal-body">
-                  <form class="form" action="./php/sesion/login.php" method="POST" id="formularioEntrar">
+                  <form class="form" action="../sesion/login.php" method="POST" id="formularioEntrar">
                     <div class="form-group" id="cajaEmailEntrar">
                         <div class="inner-addon left-addon">
                             <i class="glyphicon glyphicon-user"></i>
@@ -28,7 +28,7 @@ echo '<!-- Modal Inicio Sesión-->
                     </div>
                     <div class="form-group">
                       <button id="entrarBoton" class="btn btn-lg btn-light btn-block">Iniciar sesión</button>
-                      <span class="pull-right"><a href="" id="entrarRegistrarse">Registrarse</a></span><span><a href="#">Ayuda</a></span>
+                      <span class="pull-right"><a href="../sesion/registro.php" id="entrarRegistrarse">Registrarse</a></span><span><a href="#">Ayuda</a></span>
                     </div>
                     <hr>
                     <div class="form-group">
@@ -48,7 +48,6 @@ echo '<!-- Modal Inicio Sesión-->
                                     data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email">
                                   </span>
                                 </span>
-                                
                             </div>
                         </div>
                     </div>
@@ -59,5 +58,6 @@ echo '<!-- Modal Inicio Sesión-->
             </div>
           </div>
         </div>
-    </div>';
+    </div>
+    ';
 ?>

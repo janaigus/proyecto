@@ -1,4 +1,4 @@
-expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
+var expresionEmail = /^[a-zA-Z0-9\._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$/;
 
 $(document).ready(function () {
     // Gestión del envio del formulario de contacto
@@ -36,7 +36,7 @@ $(document).ready(function () {
         }
         // Peticion ajax, mostrar el mensaje si el correo se ha enviado correctamente
         if(correcto){
-            $.post('php/contacto.php', $('#formularioContacto').serialize(), 
+            $.post('../contacto.php', $('#formularioContacto').serialize(), 
                 function(respuesta)
                 {
                     switch(respuesta){
@@ -50,7 +50,6 @@ $(document).ready(function () {
                             $("#cancelarContacto").click();
                             $("#modalInfo").modal("show"); 
                             break;
-                        default:
                     }
                 }
             );
@@ -93,7 +92,7 @@ $(document).ready(function () {
         }
         // Enviar el formulario cuando todo sea correcto via post
         if(correcto){
-            $.post('php/sesion/login.php', $('#formularioEntrar').serialize(), 
+            $.post('../sesion/login.php', $('#formularioEntrar').serialize(), 
                 function(respuesta)
                 {
                     switch(respuesta){
@@ -112,8 +111,56 @@ $(document).ready(function () {
             );
         }
     });
+    
+    /* Controlar los botones de slider de los "sliders" */
+    $('.btn-vertical-slider').on('click', function (ev) {
+        if ($(this).attr('data-slide') == 'next') {
+            if($(this).parents("#myCarouselValoradas").length > 0){
+                $(this).parents("#myCarouselValoradas").carousel('next');
+            }
+            else{
+                $(this).parents("#myCarouselRecientes").carousel('next');
+            }
+        }
+        if ($(this).attr('data-slide') == 'prev') {
+            if($(this).parents("#myCarouselValoradas").length > 0){
+                $(this).parents("#myCarouselValoradas").carousel('prev');
+            }
+            else{
+                $(this).parents("#myCarouselRecientes").carousel('prev');
+            }
+        }
+    });
 });
 
+// Closes the sidebar menu
+$("#menu-close").click(function(e) {
+    e.preventDefault();
+    $("#sidebar-wrapper").toggleClass("active");
+});
+
+// Opens the sidebar menu
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#sidebar-wrapper").toggleClass("active");
+});
+
+// Scrolls to the selected menu item on the page
+$(function() {
+    $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            if (target.length) {
+                $('html,body').animate({
+                    scrollTop: target.offset().top
+                }, 1000);
+                return false;
+            }
+        }
+    });
+});
 
 // Cambia el mensaje de la caja por el mensaje pasado, y la muestra.
 // Para que desaparezca solo se ha de pasar el parametro false en mal
