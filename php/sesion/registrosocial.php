@@ -330,9 +330,9 @@
     </footer>
 
     <!-- Incluir los modales necesarios-->
-    <?php require('../../php/modales/login.php'); ?>
-    <?php require('../../php/modales/contacto.php'); ?>   
-    <?php require('../../php/modales/info.php'); ?>  
+    <?php require('../modales/login.php'); ?>
+    <?php require('../modales/contacto.php'); ?>   
+    <?php require('../modales/info.php'); ?>  
     
     <!-- jQuery -->
     <script src="../../js/jquery.js"></script>
