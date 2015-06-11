@@ -43,7 +43,6 @@
     <!-- Fichero de JS para la gestion del incio de sesion con las redes sociales -->
     <script type="text/javascript" src="js/social.js"></script>
     
-    
     <!-- Api de google para recaptcha -->
     <script src='https://www.google.com/recaptcha/api.js'></script>
     
@@ -566,18 +565,12 @@
     <?php require('php/modales/info.php'); ?>  
 
     <!-- Formulario oculto para el registro con redes sociales -->
-<?php
-    if($sesionId != ""){
-        echo '
     <form class="form" action="./php/sesion/registrosocial.php" method="POST" id="formularioRedes">
         <input type="hidden" name="registroNombre" value="" id="socialNombre"/>
         <input type="hidden" name="registroApellidos" value="" id="socialApellidos"/>
         <input type="hidden" name="registroEmail" value="" id="socialEmail"/>
         <input type="hidden" name="userid" value="" id="socialId"/>
     </form>
-    ';
-    }
-?>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>

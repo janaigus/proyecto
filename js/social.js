@@ -1,32 +1,30 @@
 // Facebook
-// This is called with the results from from FB.getLoginStatus().
+// Funcion de callback cuando se complete el proceso login
 function statusChangeCallback(response) {
     if (response.status === 'connected') {
-      // Logged into your app and Facebook.
+      // Gestionar los datos recibidos
       enviarDatos();
     }
 }
 
-// This function is called when someone finishes with the Login
-// Button.  See the onlogin handler attached to it in the sample
-// code below.
+// Cuando alguien pulsa el login y acaba el proceso se lanza esta funcion
 function checkLoginState() {
     FB.getLoginStatus(function(response) {
       statusChangeCallback(response);
     });
 }
 
+// Inicializar los parametros de 
 window.fbAsyncInit = function() {
     FB.init({
-    appId      : '1114829315199633',
-    cookie     : true,  // enable cookies to allow the server to access 
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.2' // use version 2.2
-});
+        appId      : '1114829315199633',
+        cookie     : true,  
+        xfbml      : true,  
+        version    : 'v2.2'
+    });
 };
 
-// Load the SDK asynchronously
+// Carga asincrona de el SDK de faceboook
 (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
@@ -35,8 +33,7 @@ window.fbAsyncInit = function() {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-// Here we run a very simple test of the Graph API after login is
-// successful.  See statusChangeCallback() for when this call is made.
+// Funcion de callback cuando se 
 function enviarDatos() {
     FB.api('/me', function(response) {
         // Colocar los datos del usuario en el formulario y enviar el formulario
@@ -49,8 +46,8 @@ function enviarDatos() {
         $('#formularioRedes').submit();
     });
 }
-// Google
 
+// Google, carga asincrona del SDK
 (function() {
    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
    po.src = 'https://apis.google.com/js/client:plusone.js';
@@ -71,6 +68,7 @@ function signinCallback(authResult) {
     }
 }
 
+// Gestionar los datos y comenzar con el envio de los mismos
 function enviarDatosGoogle(response){
     // Colocar los datos del usuario en el formulario y enviar el formulario
         $('#socialNombre').val(response.given_name);

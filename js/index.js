@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    
     $('#formularioBusqueda').on('submit', function (ev){
         var correcto = true;
         var mensajeBusqueda = "Compruebe los datos de la busqueda: </br>";
