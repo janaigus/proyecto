@@ -306,6 +306,13 @@
     <?php require('../../php/modales/contacto.php'); ?>   
     <?php require('../../php/modales/info.php'); ?>  
         
+    <!-- Formulario oculto para el registro con redes sociales -->
+    <form class="form" action="./php/sesion/registrosocial.php" method="POST" id="formularioRedes">
+        <input type="hidden" name="registroNombre" value="" id="socialNombre"/>
+        <input type="hidden" name="registroApellidos" value="" id="socialApellidos"/>
+        <input type="hidden" name="registroEmail" value="" id="socialEmail"/>
+        <input type="hidden" name="userid" value="" id="socialId"/>
+    </form>
         
     <!-- jQuery -->
     <script src="../../js/jquery.js"></script>
