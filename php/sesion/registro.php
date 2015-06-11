@@ -303,11 +303,21 @@
         <hr>
         <div class="form-group">
             <div class="row">
-                <div class="col-lg-4 col-lg-offset-2 col- text-center" style="padding: 6px 0px 6px 0px">
-                    <a href='php/miFacebook.php' class="btn btn-light facebook"> <i class="fa fa-facebook modal-icons"></i> Entrar con Facebook </a>
+                <div class="col-lg-4 col-lg-offset-2 text-center" style="padding: 6px 0px 6px 0px">
+                    <fb:login-button size="large" scope="public_profile,email" onlogin="checkLoginState();">
+                    </fb:login-button>
                 </div>
-                <div class="col-lg-4 text-center" style="padding: 6px 0px 6px 0px">
-                    <a href='php/miGoogle.php' class="btn btn-light google"> <i class="fa fa-google-plus modal-icons"></i> Entrar con Google </a>
+                <div class="col-lg-4" style="padding: 6px 0px 6px 0px">
+                    <span id="signinButton">
+                      <span
+                        class="g-signin"
+                        data-callback="signinCallback"
+                        data-clientid="588829378375-8d6r2pgvqjnsve27vthkofmifscipa9t.apps.googleusercontent.com"
+                        data-cookiepolicy="single_host_origin"
+                        data-requestvisibleactions="http://schemas.google.com/AddActivity"
+                        data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email">
+                      </span>
+                    </span>
                 </div>
             </div>
         </div>
@@ -351,7 +361,14 @@
     <?php require('../../php/modales/contacto.php'); ?>   
     <?php require('../../php/modales/info.php'); ?>  
         
-        
+    <!-- Formulario oculto para el registro con redes sociales -->
+    <form class="form" action="./registrosocial.php" method="POST" id="formularioRedes">
+        <input type="hidden" name="registroNombre" value="" id="socialNombre"/>
+        <input type="hidden" name="registroApellidos" value="" id="socialApellidos"/>
+        <input type="hidden" name="registroEmail" value="" id="socialEmail"/>
+        <input type="hidden" name="userid" value="" id="socialId"/>
+    </form>
+    
     <!-- jQuery -->
     <script src="../../js/jquery.js"></script>
 
