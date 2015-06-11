@@ -1,10 +1,24 @@
 # Activar RewriteEngine
 RewriteEngine on
 RewriteBase /proyecto
-# Reescribir la URL solicitada por el usuario
-#   Entrada:  actividad/NOMBRE/
-#   Salida: actividad.php?id=NOMBRE
 
+RewriteRule ^logo/?$ img/img_pagina/logo.png
+# Colocar ficheros css en rutas amigables
+
+# Actividades
 RewriteRule ^actividad/([^/\.]+)/?$ php/paginas/actividad.php?actividad=$1
-
+# Vista foro
 RewriteRule ^foro/([^/\.]+)/([^/\.]+)/([^/\.]+)/?$ php/paginas/foro.php?categoria=$1&isla=$2&pagina=$3
+# Vista Busqueda
+
+# Vista Administrador
+
+# Vista Isla
+
+# Vista Perfil
+
+# Vista Crear actividad
+
+# Vista Registro Social
+
+# Vista Borar Perfil
