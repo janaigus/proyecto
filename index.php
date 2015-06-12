@@ -187,9 +187,7 @@
                         }
                         echo '    <div class="row">';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6">';
-                        echo ' <div height="280px" width="450px">';
-                        echo '            <a href="./php/paginas/actividad.php?actividad='.$arrayResult[$z]['id'].'"> <img src="'.$arrayResult[$z]['ruta'].'" class="img-thumbnail" alt="Image" style="height: 280px; width: 450px;"/></a>';
-                        echo '</div>';
+                        echo '            <a href="./php/paginas/actividad.php?actividad='.$arrayResult[$z]['id'].'"> <img src="'.$arrayResult[$z]['ruta'].'" class="img-thumbnail" alt="Image" style="height: 280px; width: 450px; margin-bottom:20px;" /></a>';
                         echo '       </div>';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
                         echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'</h3>';
@@ -297,7 +295,7 @@
                         }
                         echo '    <div class="row">';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6">';
-                        echo '            <a href="./php/paginas/actividad.php?actividad='.$arrayResult[$z]['id'].'"> <img src="'.$arrayResult[$z]['ruta'].'" class="thumbnail" alt="Image" height="280px" width="450px" /></a>';
+                        echo '            <a href="./php/paginas/actividad.php?actividad='.$arrayResult[$z]['id'].'"> <img src="'.$arrayResult[$z]['ruta'].'" class="img-thumbnail" alt="Image" style="height: 280px; width: 450px; margin-bottom:20px;" /></a>';
                         echo '       </div>';
                         echo '       <div class="col-xs-12 col-sm-12 col-md-6" style="text-align: left;">';
                         echo '            <h3>'.($z+1).". ".$arrayResult[$z]['titulo'].'</h3>';
