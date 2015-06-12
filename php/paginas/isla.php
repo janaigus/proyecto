@@ -22,9 +22,6 @@
     $arrayResult = $result->fetchAll();
     $idIsla = $arrayResult[0]['id'];
     $nombreIsla = $arrayResult[0]['nombre'];
-    $latitudIsla = $arrayResult[0]['latitud'];
-    $longitudIsla = $arrayResult[0]['longitud'];
-    $zoomIsla = $arrayResult[0]['zoom'];
 
     $consulta = "SELECT COUNT(id) as total FROM actividades where idisla = :isla";
     $result = $db->prepare($consulta);
@@ -72,6 +69,48 @@
         $result = $otrodb->prepare($consulta);
         $result->execute(array(':isla' => $isla));
         $arrayCentros = $result->fetchAll();
+        
+        // Obtener las coordenadas de las islas
+        $latitudIsla = 0;
+        $longitudIsla = 0;
+        $zoomIsla = 0;
+        switch ($nombreIsla){
+            case "Fuerteventura":
+                $latitudIsla = "28.417463";
+                $longitudIsla = "-14.012113";
+                $zoomIsla = "9";
+                break;
+            case "Gran Canaria":
+                $latitudIsla = "27.9577858";
+                $longitudIsla = "-15.5964362";
+                $zoomIsla = "10";
+                break;
+            case "Lanzarote":
+                $latitudIsla = "29.0386277";
+                $longitudIsla = "-13.6504782";
+                $zoomIsla = "9";
+                break;
+            case "La Gomera":
+                $latitudIsla = "28.1189216";
+                $longitudIsla = "-17.2236087";
+                $zoomIsla = "11";
+                break;
+            case "El Hierro":
+                $latitudIsla = "27.743538";
+                $longitudIsla = "-18.0218438";
+                $zoomIsla = "11";
+                break;
+            case "La Palma":
+                $latitudIsla = "28.6552101";
+                $longitudIsla = "-17.8657039";
+                $zoomIsla = "10";
+                break;
+            case "Tenerife":
+                $latitudIsla = "28.2936867";
+                $longitudIsla = "-16.5226805";
+                $zoomIsla = "9";
+                break;
+        }
     ?>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script>
@@ -121,6 +160,7 @@
             ?> 
         }
         google.maps.event.addDomListener(window, 'load', initialize);
+        
     </script>
     
     <!-- Fichero de JS para la gestion del incio de sesion con las redes sociales -->
