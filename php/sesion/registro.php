@@ -55,6 +55,7 @@
                             <div>
                                 <img src="http://helptoknow.esy.es/logo" alt="Logo" width="200" height="110">
                             </div>
+                            <hr>
                             <div>
                                 <h3>Se ha registrado correctamente</h3>
                             </div>
@@ -66,9 +67,9 @@
                                   <p>Nick dentro de la página: '.$_POST['registroNick'].'</p>
                             </div>
                             <hr>
-                                <h4><strong>Help to know</strong></h4>
-                                <p>P. SHERMAN, CALLE WALLABY 42,<br>SYDNEY, AU 90210</p>
-                                <a href="mailto:info@helptoknow.esy.es">info@helptoknow.esy.es</a>
+                            <h4><strong>Help to know</strong></h4>
+                            <p>P. SHERMAN, CALLE WALLABY 42,<br>SYDNEY, AU 90210</p>
+                            <a href="mailto:info@helptoknow.esy.es">info@helptoknow.esy.es</a>
                         </body>
                         </html>';
                         

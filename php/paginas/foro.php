@@ -147,8 +147,11 @@
                         <?php
                         if($sesionIsla == $isla){
                             echo'<a href="./crearactividad.php" class="btn btn-lg btn-dark" type="submit">Publicar Actividad</a>';
+                        }else{
+                            echo'<button class="btn btn-lg btn-dark">Debe registrarse en '.$nombreIsla.' para publicar una actividad</button>';
                         }
                         ?>
+                    <hr class="small">
                     </div>
                     <div class="row">
                         <hr>
