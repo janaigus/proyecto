@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 06-06-2015 a las 15:00:54
+-- Tiempo de generación: 12-06-2015 a las 19:47:46
 -- Versión del servidor: 5.5.43-MariaDB-1ubuntu0.14.04.2
 -- Versión de PHP: 5.5.9-1ubuntu4.9
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `actividades` (
   KEY `idcategoria` (`idcategoria`),
   KEY `idmunicipio` (`idmunicipio`),
   KEY `idisla` (`idisla`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=17 ;
 
 --
 -- Volcado de datos para la tabla `actividades`
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `auxcategorias` (
   `nombre` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `auxcategorias`
@@ -102,9 +102,6 @@ CREATE TABLE IF NOT EXISTS `auxislas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(140) COLLATE utf8_spanish_ci NOT NULL,
   `avatar` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `longitud` double NOT NULL,
-  `latitud` double NOT NULL,
-  `zoom` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
 
@@ -112,14 +109,14 @@ CREATE TABLE IF NOT EXISTS `auxislas` (
 -- Volcado de datos para la tabla `auxislas`
 --
 
-INSERT INTO `auxislas` (`id`, `nombre`, `avatar`, `longitud`, `latitud`, `zoom`) VALUES
-(1, 'Fuerteventura', 'img/img_pagina/islas/fuerteventura.png', -14.012113, 28.417463, 9),
-(2, 'Gran Canaria', 'img/img_pagina/islas/gran-canaria.png', -15.600339, 27.96234, 10),
-(3, 'Lanzarote', 'img/img_pagina/islas/lanzarote.png', -13.634458, 29.033449, 9),
-(4, 'La Gomera', 'img/img_pagina/islas/la-gomera.png', -17.235721, 28.118658, 10),
-(5, 'El Hierro', 'img/img_pagina/islas/el-hierro.png', -17.995843, 27.746808, 10),
-(6, 'La Palma', 'img/img_pagina/islas/la-palma.png', -17.850734, 28.663933, 10),
-(7, 'Tenerife', 'img/img_pagina/islas/tenerife.png', -16.574138, 28.288092, 9);
+INSERT INTO `auxislas` (`id`, `nombre`, `avatar`) VALUES
+(1, 'Fuerteventura', 'img/img_pagina/islas/fuerteventura.png'),
+(2, 'Gran Canaria', 'img/img_pagina/islas/gran-canaria.png'),
+(3, 'Lanzarote', 'img/img_pagina/islas/lanzarote.png'),
+(4, 'La Gomera', 'img/img_pagina/islas/la-gomera.png'),
+(5, 'El Hierro', 'img/img_pagina/islas/el-hierro.png'),
+(6, 'La Palma', 'img/img_pagina/islas/la-palma.png'),
+(7, 'Tenerife', 'img/img_pagina/islas/tenerife.png');
 
 -- --------------------------------------------------------
 
@@ -265,16 +262,22 @@ CREATE TABLE IF NOT EXISTS `centroseducativos` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `idisla` (`idisla`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `centroseducativos`
 --
 
 INSERT INTO `centroseducativos` (`id`, `nombre`, `longitud`, `latitud`, `informacion`, `idisla`, `created`) VALUES
-(1, 'IES Puerto de la Cruz (Telesforo Bravo)', -16.5503413, 28.412001, 'Tel: 922 38 01 12\r\nTelegram: 610 285 167 \r\n\r\nCalle las Cabezas, 7\r\n38400 Puerto de la Cruz\r\nSanta Cruz de Tenerife\r\nEspaña', 7, '2015-06-06 09:14:17'),
+(1, 'IES Puerto de la Cruz (Telesforo Bravo)', -16.5503413, 28.412001, 'Tel: 922 38 01 12\nTelegram: 610 285 167 \n\nCalle las Cabezas, 7\n38400 Puerto de la Cruz\nSanta Cruz de Tenerife\nEspaña', 7, '2015-06-06 09:14:17'),
 (2, 'IES Mencey Bencomo', -16.583146, 28.383485, 'Calle San Isidro, 40B\r\n38419 Los Realejos\r\nSanta Cruz de Tenerife, España', 7, '2015-06-06 09:16:07'),
-(3, 'IES Mesa y López', -15.4422778, 28.1205402, 'Av. José Mesa y López, 69\r\n35010 Las Palmas de Gran Canaria\r\nLas Palmas\r\nEspaña', 2, '2015-06-06 09:18:04');
+(3, 'IES Mesa y López', -15.4422778, 28.1205402, 'Av. José Mesa y López, 69\r\n35010 Las Palmas de Gran Canaria\r\nLas Palmas\r\nEspaña', 2, '2015-06-06 09:18:04'),
+(5, 'IES la Laboral de la Laguna', -16.313346, 28.478607, 'Av Lora Tamayo, 2\r\n38205 San Cristóbal de La Laguna, Santa Cruz de Tenerife\r\nSanta Cruz de Tenerife', 7, '2015-06-06 19:21:15'),
+(6, 'Ies Agustín Espinosa', -13.6504782, 29.0386277, 'Calle Coronel Bens, 5\r\n35500 Arrecife\r\nLas Palmas', 3, '2015-06-06 19:23:32'),
+(7, 'Instituto de Educación Secundaria Ies Roques de Salmor', -18.0218438, 27.743538, 'Calle de la Boca, 0\r\n38911 Frontera\r\nSanta Cruz de Tenerife', 5, '2015-06-06 19:24:16'),
+(8, 'Instituto de Educación Secundaria Ies Luis Cobiella Cuevas', -17.7621201, 28.6877087, 'Calle el Pilar, 12\r\n38700 Santa Cruz de la Palma\r\nSanta Cruz de Tenerife', 6, '2015-06-06 19:25:21'),
+(9, 'Instituto de Educación Secundaria Ies San Sebastián de la Gomera', -17.1180473, 28.0984666, 'Calle de Fernando Padilla\r\n38800 San Sebastián de La Gomera\r\nSanta Cruz de Tenerife', 4, '2015-06-06 19:26:08'),
+(10, 'IES Gran Tarajal', -14.1663093, 28.400446, 'Calle Pico de la Pila, 30\r\n35628 Pájara\r\nLas Palmas', 1, '2015-06-06 19:27:03');
 
 -- --------------------------------------------------------
 
@@ -307,10 +310,10 @@ INSERT INTO `comentarios` (`id`, `idactividad`, `idusuario`, `texto`, `created`)
 (9, 10, 3, 'Comentario de prueba', '2015-05-25 13:31:47'),
 (11, 2, 3, 'Comentario de prueba', '2015-05-25 13:31:47'),
 (12, 2, 4, 'Comentario de prueba', '2015-05-25 13:31:47'),
-(13, 6, 8, 'Comentario de prueba', '2015-05-25 13:31:47'),
 (14, 6, 5, 'Comentario de prueba', '2015-05-25 13:31:47'),
 (15, 10, 7, 'Comentario de prueba', '2015-05-25 13:31:47'),
-(16, 2, 5, 'Este comentario ha sido baneado por el adminsitrador', '2015-05-25 14:31:56');
+(16, 2, 5, 'Este comentario ha sido baneado por el adminsitrador', '2015-05-25 14:31:56'),
+(17, 10, 1, 'prueba comentario', '2015-06-11 19:20:20');
 
 -- --------------------------------------------------------
 
@@ -326,7 +329,7 @@ CREATE TABLE IF NOT EXISTS `recursos` (
   PRIMARY KEY (`id`),
   KEY `idactividad` (`idactividad`),
   KEY `idactividad_2` (`idactividad`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=17 ;
 
 --
 -- Volcado de datos para la tabla `recursos`
@@ -367,25 +370,25 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `idisla` int(11) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `avatar` varchar(150) COLLATE utf8_spanish_ci NOT NULL DEFAULT 'img/img_usuarios/avatares/default.png',
+  `social` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idmunicipio` (`idmunicipio`),
   KEY `idrol` (`idrol`),
   KEY `idisla` (`idisla`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=8 ;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `email`, `nick`, `nombre`, `apellidos`, `password`, `idrol`, `idmunicipio`, `idisla`, `created`, `avatar`) VALUES
-(1, 'janaigus@gmail.com', 'janai', 'Janai Gustavo', 'Expósito Bethencourt', '2e99bf4e42962410038bc6fa4ce40d97', 1, 38031, 7, '2015-05-15 21:39:36', 'img/img_usuarios/avatares/janaisavatar.png'),
-(2, 'jonaigus@gmail.com', 'admin', 'Administrador', 'Administrador', '2e99bf4e42962410038bc6fa4ce40d97', 1, 38041, 7, '2015-05-15 21:39:36', 'img/img_usuarios/avatares/default.png'),
-(3, 'janai_exposito@outlook.com', 'Usuario', 'Usuario', 'Usuario', '2e99bf4e42962410038bc6fa4ce40d97', 2, 35004, 3, '2015-05-15 21:40:41', 'img/img_usuarios/avatares/default.png'),
-(4, 'otrouser@otrouser.es', 'Otrouser', 'Otrouser', 'Otrouser', '2e99bf4e42962410038bc6fa4ce40d97', 2, 35015, 1, '2015-05-15 21:40:41', 'img/img_usuarios/avatares/default.png'),
-(5, 'pepe@benavente.com', 'pebe', 'Pepe', 'Benavente', '2e99bf4e42962410038bc6fa4ce40d97', 2, 38028, 7, '2015-05-23 21:58:05', 'img/img_usuarios/avatares/default.png'),
-(6, 'hely@clak.com', 'hecl', 'Hely', 'Clarckson', '2e99bf4e42962410038bc6fa4ce40d97', 2, 35016, 2, '2015-05-23 22:00:18', 'img/img_usuarios/avatares/default.png'),
-(7, 'metal@lovers.com', 'melo', 'Metal', 'Lovers', '2e99bf4e42962410038bc6fa4ce40d97', 2, 38901, 5, '2015-05-23 22:04:03', 'img/img_usuarios/avatares/default.png'),
-(8, 'datos@prueba.com', 'dapr', 'Datosde', 'Pruebas', '2e99bf4e42962410038bc6fa4ce40d97', 2, 35007, 1, '2015-05-23 22:05:41', 'img/img_usuarios/avatares/dapravatar.jpg');
+INSERT INTO `usuarios` (`id`, `email`, `nick`, `nombre`, `apellidos`, `password`, `idrol`, `idmunicipio`, `idisla`, `created`, `avatar`, `social`) VALUES
+(1, 'janaigus@gmail.com', 'janai', 'Janai Gustavo', 'Expósito Bethencourt', '2e99bf4e42962410038bc6fa4ce40d97', 1, 38031, 7, '2015-05-15 21:39:36', 'img/img_usuarios/avatares/janaisavatar.png', ''),
+(2, 'jonaigus@gmail.com', 'admin', 'Administrador', 'Administrador', '2e99bf4e42962410038bc6fa4ce40d97', 1, 38041, 7, '2015-05-15 21:39:36', 'img/img_usuarios/avatares/default.png', ''),
+(3, 'janai_exposito@outlook.com', 'Usuario', 'Usuario', 'Usuario', '2e99bf4e42962410038bc6fa4ce40d97', 2, 35004, 3, '2015-05-15 21:40:41', 'img/img_usuarios/avatares/default.png', ''),
+(4, 'otrouser@otrouser.es', 'Otrouser', 'Otrouser', 'Otrouser', '2e99bf4e42962410038bc6fa4ce40d97', 2, 35015, 1, '2015-05-15 21:40:41', 'img/img_usuarios/avatares/default.png', ''),
+(5, 'pepe@benavente.com', 'pebe', 'Pepe', 'Benavente', '2e99bf4e42962410038bc6fa4ce40d97', 2, 38028, 7, '2015-05-23 21:58:05', 'img/img_usuarios/avatares/default.png', ''),
+(6, 'hely@clak.com', 'hecl', 'Hely', 'Clarckson', '2e99bf4e42962410038bc6fa4ce40d97', 2, 35016, 2, '2015-05-23 22:00:18', 'img/img_usuarios/avatares/default.png', ''),
+(7, 'metal@lovers.com', 'melo', 'Metal', 'Lovers', '2e99bf4e42962410038bc6fa4ce40d97', 2, 38901, 5, '2015-05-23 22:04:03', 'img/img_usuarios/avatares/default.png', '');
 
 -- --------------------------------------------------------
 
@@ -412,7 +415,6 @@ INSERT INTO `votos` (`id`, `idactividad`, `idusuario`, `valoracion`, `created`) 
 (78, 5, 3, 5, '2015-05-24 09:21:57'),
 (79, 5, 3, 4, '2015-05-24 09:21:57'),
 (81, 2, 3, 2, '2015-05-24 09:21:57'),
-(82, 9, 8, 4, '2015-05-24 09:21:57'),
 (83, 7, 3, 2, '2015-05-24 09:21:57'),
 (84, 4, 7, 1, '2015-05-24 09:21:57'),
 (85, 2, 3, 2, '2015-05-24 09:21:57'),
@@ -425,7 +427,8 @@ INSERT INTO `votos` (`id`, `idactividad`, `idusuario`, `valoracion`, `created`) 
 (94, 10, 4, 4, '2015-05-24 09:21:57'),
 (95, 5, 3, 4, '2015-05-24 09:21:57'),
 (96, 4, 7, 2, '2015-05-24 09:21:57'),
-(97, 8, 6, 5, '2015-05-24 09:21:57');
+(97, 8, 6, 5, '2015-05-24 09:21:57'),
+(98, 10, 1, 4, '2015-06-11 19:20:20');
 
 --
 -- Restricciones para tablas volcadas
