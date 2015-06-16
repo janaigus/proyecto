@@ -132,7 +132,13 @@
                     <a href="../sesion/cerrarsesion.php">Cerrar Sesión</a>
                 </li>
                 ';
-            
+            if($sesionRol == "1"){
+                echo'
+                <hr>
+                <li>
+                    <a href="./administrador.php">Admnistrar Sitio</a>
+                </li>';
+            }
             ?>
         </ul>
     </nav>
