@@ -46,7 +46,7 @@
             $tmp_name = $_FILES["imagenActividad"]["tmp_name"];
             $name = $_FILES["imagenActividad"]["name"];
             $arrayNombre = explode(".", $name);
-            $rutaFinal = "img/img_actividades/".$titulo."avatar.".$arrayNombre[count($arrayNombre) - 1];
+            $rutaFinal = "img/img_actividades/".(str_replace(" ", "_",$titulo))."-".date("d-m-y_H_i_s.").$arrayNombre[count($arrayNombre) - 1];
             // Mover el archivo antes de realizar la consulta
             if(!move_uploaded_file($tmp_name, "../../".$rutaFinal)){
                 $error = 'No se ha añadido la imagen<br/>';

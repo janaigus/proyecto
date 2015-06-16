@@ -108,6 +108,7 @@ $(document).ready(function () {
                         if(respuesta == "OK"){
                             location.reload();
                         }
+                        alert(respuesta);
                     }
                 );
                 

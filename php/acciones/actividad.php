@@ -37,6 +37,21 @@
             $result->execute();
             
             // Borrar los recursos de esas actividades y luego las propias actividades
+            
+            // Borrar los archivos de los recursos de esa actividad
+            $consulta = "SELECT * FROM recursos WHERE idactividad = :actividad";
+            $result = $db->prepare($consulta);
+            $result->bindParam(":actividad", $_POST['idactividad'], PDO::PARAM_STR);
+            $result->execute();
+            $recursos = $result->fetchAll();
+            for($i=0;$i < count($recursos);$i++){
+                // Borrar los recursos fisicos del sitio web
+                if($recursos[$i]['ruta'] != "img/img_actividades/default.jpg"){
+                    unlink("../../".$recursos[$i]['ruta']);
+                }
+            }
+            
+            // Recorrer los recursos y eliminarlos del sitio web
             $consulta = "DELETE FROM recursos WHERE idactividad = :actividad";
             $result = $db->prepare($consulta);
             $result->bindParam(":actividad", $_POST['idactividad'], PDO::PARAM_STR);

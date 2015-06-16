@@ -11,7 +11,7 @@ $(document).ready(function () {
         }
         // Descripcion
         if($('#descripcion').val() == ""){
-            mensajesError += iconoError + "Introduzca unos apellidos</br>";
+            mensajesError += iconoError + "Introduzca una descripcion</br>";
             correcto = false;
         }
         // Municipio

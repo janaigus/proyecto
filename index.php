@@ -118,7 +118,7 @@
     <header id="top" class="header">
         <div class="text-vertical-center">
             <h1><img src="img/img_pagina/logo.png" height="200" width="350"></h1>
-            <h3>¿No encuentras esa actividad que siempre deseaste hacer?</br>Aquí la encontrarás</h3>
+            <h3 style="color: white;">¿No encuentras esa actividad que siempre deseaste hacer?</br>Aquí la encontrarás</h3>
             <br>
             <a href="#about" class="btn btn-dark btn-lg">Saber más</a>
         </div>

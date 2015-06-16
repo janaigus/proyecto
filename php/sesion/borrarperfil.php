@@ -39,6 +39,15 @@
         $result->execute();
         
         for($i=0;$i < count($arrayActividades);$i++){
+            // Borrar los archivos de los recursos de esa actividad
+            // Borrar los recursos de esas actividades y luego las propias actividades
+            $consulta = "SELECT * FROM recursos WHERE idactividad = :actividad";
+            $result = $db->prepare($consulta);
+            $result->bindParam(":actividad", $arrayActividades[$i]['id'], PDO::PARAM_STR);
+            $result->execute();
+            $recursos = $result->fetchAll();
+            // Recorrer los recursos y eliminarlos del sitio web
+            
             // Borrar los recursos de esas actividades y luego las propias actividades
             $consulta = "DELETE FROM recursos WHERE idactividad = :actividad";
             $result = $db->prepare($consulta);
@@ -53,6 +62,10 @@
             $result->bindParam(":actividad", $arrayActividades[$i]['id'], PDO::PARAM_STR);
             $result->execute(); 
         }
+        
+        // Borrar el avatar del usuario del sistema
+        
+        
         // Borrar el usuario del sistema
         $consulta = "DELETE FROM usuarios WHERE id = :usuario";
         $result = $db->prepare($consulta);
